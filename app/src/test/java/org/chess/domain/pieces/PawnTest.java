@@ -1,10 +1,10 @@
-package org.chess.domain.piece;
+package org.chess.domain.pieces;
 
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.chess.domain.piece.Pawn.BLACK_COLOR;
-import static org.chess.domain.piece.Pawn.WHITE_COLOR;
+import static org.chess.domain.pieces.Pawn.BLACK_COLOR;
+import static org.chess.domain.pieces.Pawn.WHITE_COLOR;
 
 public class PawnTest {
 

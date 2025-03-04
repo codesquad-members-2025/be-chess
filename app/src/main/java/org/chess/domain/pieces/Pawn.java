@@ -1,4 +1,4 @@
-package org.chess.domain.piece;
+package org.chess.domain.pieces;
 
 public class Pawn {
 

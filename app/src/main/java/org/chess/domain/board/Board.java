@@ -1,6 +1,6 @@
 package org.chess.domain.board;
 
-import org.chess.domain.piece.Pawn;
+import org.chess.domain.pieces.Pawn;
 
 import java.util.ArrayList;
 import java.util.List;
