@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import chess.pieces.Pawn;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class BoardTest {
@@ -16,6 +17,7 @@ public class BoardTest {
         colors = new String[]{Pawn.WHITE_COLOR, Pawn.BLACK_COLOR};
     }
     @Test
+    @DisplayName("폰이 추가될 Pawn의 수와 마지막에 추가된 폰이 맞는지 확인")
     public void create() throws Exception {
         for (int i = 0; i < colors.length; i++) {
             verifyBoard(i);
