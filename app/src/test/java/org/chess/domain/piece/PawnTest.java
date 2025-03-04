@@ -18,4 +18,10 @@ public class PawnTest {
         assertThat(pawn.getColor()).isEqualTo(color);
     }
 
+    @Test
+    public void create_기본생성자() throws Exception {
+        Pawn pawn = new Pawn();
+        assertThat("white").isEqualTo(pawn.getColor());
+    }
+
 }
