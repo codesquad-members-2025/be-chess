@@ -2,10 +2,12 @@ package org.chess.domain.piece;
 
 public class Pawn {
 
+    private static final String DEFAULT_COLOR = "white";
+
     private final String color;
 
     public Pawn() {
-        this.color = "white";
+        this.color = DEFAULT_COLOR;
     }
 
     public Pawn(String color) {
