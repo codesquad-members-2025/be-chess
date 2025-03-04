@@ -8,10 +8,8 @@
 /dataSources.local.xml
 
 # IDE 관련 설정 파일 제외
-.idea/gradle.xml
-.idea/material_theme.xml
-.idea/mlsc.xml
-.idea/vcs.xml
+gradle.xml
+vcs.xml
 .name
-.idea/misc.xml
-.idea/material_theme_project_new.xml
+misc.xml
+material_theme_project_new.xml
