@@ -22,3 +22,24 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Gradle 빌드 디렉토리
+/build/
+.gradle/
+out/
+
+# IDE 관련 파일 (IntelliJ, Eclipse 등)
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS별 불필요한 파일
+.DS_Store
+Thumbs.db
