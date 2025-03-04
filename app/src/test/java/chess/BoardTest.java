@@ -6,18 +6,23 @@ import static org.junit.jupiter.api.Assertions.*;
 import pieces.Pawn;
 
 public class BoardTest {
+    private Board board;
+
+    @BeforeEach
+    void init(){
+        board = new Board();
+    }
+
     @Test
     public void create() throws Exception {
-        Board board = new Board();
+        addAndVerifyPawn(Pawn.WHITE_COLOR, 0);
+        addAndVerifyPawn(Pawn.BLACK_COLOR, 1);
+    }
 
-        Pawn white = new Pawn(Pawn.WHITE_COLOR);
-        board.add(white);
-        assertEquals(1, board.size());
-        assertEquals(white, board.findPawn(0));
-
-        Pawn black = new Pawn(Pawn.BLACK_COLOR);
-        board.add(black);
-        assertEquals(2, board.size());
-        assertEquals(black, board.findPawn(1));
+    private void addAndVerifyPawn(String color, int expectedNum){
+        Pawn pawn = new Pawn(color);
+        board.add(pawn);
+        assertEquals(expectedNum+1, board.size());
+        assertEquals(pawn, board.findPawn(expectedNum));
     }
 }
