@@ -1,4 +1,4 @@
-package chess;
+package pieces;
 
 import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.*;
