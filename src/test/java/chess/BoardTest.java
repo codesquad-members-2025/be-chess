@@ -1,5 +1,8 @@
+package chess;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import chess.pieces.Pawn;
 import org.junit.jupiter.api.Test;
 
 public class BoardTest {
