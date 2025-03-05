@@ -22,13 +22,13 @@ public class Board {
     }
 
     private void validatePawnSize() {
-        if (pawns.size() > 8) {
+        if (pawns.size() > 16) {
             throw new IllegalStateException("폰은 8개를 초과할 수 없습니다.");
         }
     }
 
     private void validateIndex(int index) {
-        if(1> index || index > 8){
+        if(1> index || index > 16){
             throw new IllegalStateException(index + "번의 폰은 없습니다. 0부터 7 중 골라주세요.");
         }
     }
