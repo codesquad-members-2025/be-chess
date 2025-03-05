@@ -51,4 +51,22 @@ public class Board {
     public String getBlackPawnsResult(){
         return getPawnsResult(blackPawnList);
     }
+
+    public String getBlankLine(){
+        return "........";
+    }
+
+    public String print(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(getBlankLine()).append("\n");
+        sb.append(getBlackPawnsResult()).append("\n");
+        sb.append(getBlankLine()).append("\n");
+        sb.append(getBlankLine()).append("\n");
+        sb.append(getBlankLine()).append("\n");
+        sb.append(getBlankLine()).append("\n");
+        sb.append(getWhitePawnsResult()).append("\n");
+        sb.append(getBlankLine()).append("\n");
+
+        return sb.toString();
+    }
 }
