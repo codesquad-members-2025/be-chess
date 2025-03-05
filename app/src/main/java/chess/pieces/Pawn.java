@@ -17,9 +17,11 @@ public class Pawn {
 
     public Pawn(String color) {
         this.color = color;
+        this.representation = color.equals(WHITE) ? WHITE_REPRESENTATION : BLACK_REPRESENTATION;
     }
     public Pawn() {
         this.color = WHITE;
+        this.representation = WHITE_REPRESENTATION;
     }
     public String getColor() {
         return color;
