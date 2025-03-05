@@ -1,9 +1,11 @@
 package chess.piece;
 
+
 public class Pawn {
 
     public static final Color WHITE = Color.WHITE;
     public static final Color BLACK = Color.BLACK;
+
 
     public enum Color {
         WHITE, BLACK
