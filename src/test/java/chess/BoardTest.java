@@ -1,5 +1,6 @@
 package chess;
 
+import static chess.utils.StringUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import chess.pieces.Piece;
@@ -17,13 +18,16 @@ class BoardTest {
         colors = new String[]{Piece.WHITE_COLOR, Piece.BLACK_COLOR};
     }
     @Test
-    @DisplayName("폰이 추가될 Pawn의 수와 마지막에 추가된 폰이 맞는지 확인")
+    @DisplayName("보드가 초기화 되면 모든 말들이 생성되어야 한다.")
     void create() throws Exception {
-        for (int i = 0; i < colors.length; i++) {
-            verifyBoard(i);
-        }
-
-//        board.add(new Integer(7));
+        board.initialize();
+        assertThat(board.pieceCount()).isEqualTo(32);
+        String blankRank = appendNewLine("........");
+        assertThat(appendNewLine("RNBQKBNR") +
+                appendNewLine("PPPPPPPP") +
+                blankRank + blankRank + blankRank + blankRank +
+                appendNewLine("pppppppp") +
+                appendNewLine("rnbqkbnr")).isEqualTo(board.showBoard());
     }
 
     @Test
@@ -35,11 +39,5 @@ class BoardTest {
         assertThat(board.getPawnResult(Piece.BLACK_COLOR)).isEqualTo("PPPPPPPP");
     }
 
-    private void verifyBoard(int i) {
-        Piece piece = new Piece(colors[i]);
-        board.add(piece);
 
-        assertThat(board.size()).isEqualTo(i+1);
-        assertThat(board.findPawn(i)).isEqualTo(piece);
-    }
 }
