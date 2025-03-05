@@ -7,11 +7,11 @@ public class PawnTest {
     @Test
     @DisplayName("흰색 또는 검은색 폰이 생성되어야 한다")
     public void create() {
-        variable("white");
-        variable("black");
+        verifyPawn("white");
+        verifyPawn("black");
     }
 
-    void variable(final String color) {
+    void verifyPawn(final String color) {
         Pawn pawn = new Pawn(color);
         assertThat(pawn.getColor().equals(color));
     }
