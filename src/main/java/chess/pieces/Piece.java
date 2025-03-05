@@ -9,7 +9,7 @@ public class Piece {
     public static final char BLACK_KNIGHT_REPRESENTATION = '♞';
     public static final char WHITE_ROOK_REPRESENTATION = '♖';
     public static final char BLACK_ROOK_REPRESENTATION = '♜';
-    public static final char WHITE_BISHOP_REPRESENTATION = '♘';
+    public static final char WHITE_BISHOP_REPRESENTATION = '♗';
     public static final char BLACK_BISHOP_REPRESENTATION = '♝';
     public static final char WHITE_QUEEN_REPRESENTATION = '♕';
     public static final char BLACK_QUEEN_REPRESENTATION = '♛';
