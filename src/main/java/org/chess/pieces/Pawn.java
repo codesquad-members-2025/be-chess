@@ -1,4 +1,4 @@
-package org.chess;
+package org.chess.pieces;
 
 public class Pawn {
     private String color;
