@@ -16,5 +16,12 @@ public class PawnTest {
         Pawn pawn = new Pawn(color);
         assertThat(color).isEqualTo(pawn.getColor());
     }
+
+    @Test
+    public void create_기본생성자() throws Exception {
+        Pawn pawn = new Pawn();
+        assertEquals("white", pawn.getColor());
+    }
+
 }
 
