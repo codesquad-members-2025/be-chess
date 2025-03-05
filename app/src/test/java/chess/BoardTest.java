@@ -24,6 +24,13 @@ public class BoardTest {
         verifyBoard(BLACK, 2, 1);
     }
 
+    @Test
+    public void initialize() throws Exception {
+        board.initialize();
+        assertThat("♙♙♙♙♙♙♙♙").isEqualTo(board.getWhitePawnsResult());
+        assertThat("♟♟♟♟♟♟♟♟").isEqualTo(board.getBlackPawnsResult());
+    }
+
     private void verifyBoard(String color, int size, int index) {
         Pawn pawn = new Pawn(color);
         board.add(pawn);
