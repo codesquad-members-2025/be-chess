@@ -1,7 +1,6 @@
 package org.chess;
 
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class PawnTest {
@@ -20,7 +19,7 @@ public class PawnTest {
     @Test
     public void create_기본생성자() throws Exception {
         Pawn pawn = new Pawn();
-        assertEquals("white", pawn.getColor());
+        assertThat("white").isEqualTo(pawn.getColor());
     }
 
 }
