@@ -30,17 +30,17 @@ public class Board {
     }
 
     private Object SetUpBoard(int i){
-        if ( i == 1 ) return new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
-        if ( i == 6 ) return new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
-        return " . ";
+        if ( i == 1 ) return new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
+        if ( i == 6 ) return new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
+        return ".";
     }
 
     public String getWhitePawnsResult(){
-        return getPawnsResult(1);
+        return getPawnsResult(6);
     }
 
     public String getBlackPawnsResult(){
-        return getPawnsResult(6);
+        return getPawnsResult(1);
     }
 
     private String getPawnsResult(int index){
@@ -53,5 +53,21 @@ public class Board {
 
     Pawn findPawn(int num){
         return pawns.get(num);
+    }
+
+    public void print(){
+        StringBuilder result = new StringBuilder();
+
+        for (List<Object> row : board) {
+            for (Object obj : row) {
+                if (obj instanceof Pawn) {
+                    result.append(((Pawn)obj).getRepresentation());
+                } else {
+                    result.append(obj);
+                }
+            }
+            result.append("\n");
+        }
+        System.out.println(result);
     }
 }
