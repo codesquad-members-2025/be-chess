@@ -1,29 +1,29 @@
 package chess;
 
-import chess.pieces.Pawn;
+import chess.pieces.Piece;
 import chess.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private List<Pawn> pawnList;
+    private List<Piece> pieceList;
     private char[][] chessBoard;
 
     public Board() {
-        pawnList = new ArrayList<>();
+        pieceList = new ArrayList<>();
         chessBoard = new char[8][8];
     }
 
-    public void add(Pawn pawn) {
-        pawnList.add(pawn);
+    public void add(Piece piece) {
+        pieceList.add(piece);
     }
 
     public int size() {
-        return pawnList.size();
+        return pieceList.size();
     }
 
-    public Pawn findPawn(int index) {
-        return pawnList.get(index);
+    public Piece findPawn(int index) {
+        return pieceList.get(index);
     }
 
     public void initialize() {
@@ -34,8 +34,8 @@ public class Board {
 
     public String getPawnResult(String color){
         StringBuilder sb = new StringBuilder();
-        for (Pawn pawn : pawnList) {
-            if (pawn.getColor().equals(color)) sb.append(pawn.getRepresentation());
+        for (Piece piece : pieceList) {
+            if (piece.getColor().equals(color)) sb.append(piece.getRepresentation());
         }
         return sb.toString();
     }
@@ -53,15 +53,15 @@ public class Board {
 
     private void addPawnToBoard() {
         for (int i = 0; i < chessBoard.length; i++) {
-            chessBoard[1][i] = Pawn.BLACK_REPRESENTATION;
-            chessBoard[6][i] = Pawn.WHITE_REPRESENTATION;
+            chessBoard[1][i] = Piece.BLACK_REPRESENTATION;
+            chessBoard[6][i] = Piece.WHITE_REPRESENTATION;
         }
     }
 
     private void addPawnToList() {
         for (int i = 0; i < chessBoard.length; i++) {
-            pawnList.add(new Pawn());
-            pawnList.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+            pieceList.add(new Piece());
+            pieceList.add(new Piece(Piece.BLACK_COLOR, Piece.BLACK_REPRESENTATION));
         }
     }
 
