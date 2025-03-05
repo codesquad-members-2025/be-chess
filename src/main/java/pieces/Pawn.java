@@ -1,18 +1,17 @@
-public class Pawn {
+package pieces;
+
+public class Pawn implements Piece {
+    public static final String COLOR_W = "white";
+    public static final String COLOR_B = "black";
     private final String color;
-    final String COLOR_W = "white";
-    final String COLOR_B = "black";
 
     // 기본생성자
     public Pawn() {
-        this.color = "white";
+        this.color = COLOR_W;
     }
 
     public Pawn(String color) {
         this.color = color;
-    }
-
-    public void move() {
     }
 
     public String getColor() {
