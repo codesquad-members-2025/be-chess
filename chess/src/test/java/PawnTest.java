@@ -21,7 +21,6 @@ public class PawnTest {
 
         verifyPawn(white);
         verifyPawn(black);
-
     }
 
     //중복 코드 제거를 위한 verifyPawn(final String color)
