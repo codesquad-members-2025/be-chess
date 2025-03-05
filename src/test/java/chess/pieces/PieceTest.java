@@ -29,6 +29,19 @@ public class PieceTest {
 
     }
 
+    @Test
+    @DisplayName("말이 검은색인지 흰색인지 확인한다.")
+    void checkColor() {
+        Piece whitePawn = Piece.createWhitePawn();
+        Piece blackPawn = Piece.createBlackPawn();
+
+        assertThat(whitePawn.isWhite()).isTrue();
+        assertThat(whitePawn.isBlack()).isFalse();
+
+        assertThat(blackPawn.isBlack()).isTrue();
+        assertThat(blackPawn.isWhite()).isFalse();
+    }
+
     void verifyPiece(final Piece piece, final String color, final char representation) {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(piece.getRepresentation()).isEqualTo(representation);
