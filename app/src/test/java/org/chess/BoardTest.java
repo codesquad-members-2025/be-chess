@@ -1,5 +1,6 @@
-package org.example;
+package org.chess;
 
+import org.chess.pieces.Pawn;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
