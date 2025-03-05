@@ -90,15 +90,25 @@ public class Board {
 
     private void addPieceToList() {
         pieceList.add(Piece.createWhiteKnight());
+        pieceList.add(Piece.createWhiteKnight());
         pieceList.add(Piece.createBlackKnight());
+        pieceList.add(Piece.createBlackKnight());
+
+        pieceList.add(Piece.createWhiteBishop());
         pieceList.add(Piece.createWhiteBishop());
         pieceList.add(Piece.createBlackBishop());
+        pieceList.add(Piece.createBlackBishop());
+
+        pieceList.add(Piece.createWhiteRook());
         pieceList.add(Piece.createWhiteRook());
         pieceList.add(Piece.createBlackRook());
+        pieceList.add(Piece.createBlackRook());
+
         pieceList.add(Piece.createWhiteQueen());
         pieceList.add(Piece.createBlackQueen());
         pieceList.add(Piece.createWhiteKing());
         pieceList.add(Piece.createBlackKing());
+
     }
 
     private void addPawnToBoard() {
