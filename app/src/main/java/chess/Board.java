@@ -8,7 +8,7 @@ public class Board {
     private List<Pawn> pawns = new ArrayList<>();
     public final static int MAX_ROW = 8;
     public final static int MAX_CAL = 8;
-    private List<List<Object>> board;
+    private Object[][] board = new Object[MAX_ROW][MAX_CAL];
 
     public void add(Pawn pawn) {
         pawns.add(pawn);
@@ -19,13 +19,10 @@ public class Board {
     }
 
     public void initialize(){
-        board = new ArrayList<>();
         for (int i = 0; i < MAX_ROW; i++) {
-            List<Object> row = new ArrayList<>();
             for (int j = 0; j < MAX_CAL; j++) {
-                row.add(SetUpBoard(i));
+                board[i][j] = SetUpBoard(i);
             }
-            board.add(row);
         }
     }
 
@@ -45,7 +42,7 @@ public class Board {
 
     private String getPawnsResult(int index){
         StringBuilder result = new StringBuilder();
-        for (Object obj : board.get(index)) {
+        for (Object obj : board[index]) {
             result.append(((Pawn)obj).getRepresentation());
         }
         return result.toString();
@@ -58,7 +55,7 @@ public class Board {
     public void print(){
         StringBuilder result = new StringBuilder();
 
-        for (List<Object> row : board) {
+        for (Object[] row : board) {
             for (Object obj : row) {
                 if (obj instanceof Pawn) {
                     result.append(((Pawn)obj).getRepresentation());
