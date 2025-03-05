@@ -1,7 +1,7 @@
 package chess.piece;
 
-public class Pawn {
 
+public class Pawn {
 
     public enum Color {
         WHITE, BLACK
