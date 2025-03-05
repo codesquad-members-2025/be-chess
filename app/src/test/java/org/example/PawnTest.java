@@ -18,6 +18,7 @@ public class PawnTest {
      * -> 기본 생성자를 명시적으로 만들어 인자에 color를 넣지 않았다면 기본으로 white를 가지게 하면 됨.
      */
     @Test
+    @DisplayName("인자에 color를 넣지 않을 경우 white 색상의 pawn이 만들어져야 한다.")
     public void create_기본생성자() throws Exception {
         Pawn pawn = new Pawn();
         assertThat(pawn.getColor()).isEqualTo(WHITE);
