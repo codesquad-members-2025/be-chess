@@ -1,0 +1,28 @@
+# OS 별 줄바꿈 처리 규칙
+
+# 모든 텍스트 파일은 LF로 통일 (리눅스, 맥 호환성 유지)
+* text=auto
+
+# Gradle Wrapper 관련 파일은 강제 LF (Cross-platform compatibility 보장)
+gradlew text eol=lf
+gradlew.bat text eol=crlf
+gradle/wrapper/gradle-wrapper.properties text eol=lf
+
+# IntelliJ 설정 파일은 CRLF로 (Windows 개발 편의)
+*.iml text eol=crlf
+
+# Markdown, YML 등은 LF 권장 (리눅스 서버 호환성)
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# 로그파일은 그대로 유지 (OS마다 다르게 쓰일 수도 있음)
+*.log -text
+
+# 이미지/바이너리 파일은 변환 금지
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.class binary
