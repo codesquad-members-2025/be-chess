@@ -1,6 +1,6 @@
 package org.chess;
 
-import org.chess.pieces.Pawn;
+import org.pieces.Pawn;
 import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.*;
 

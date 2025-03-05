@@ -1,6 +1,6 @@
 package org.chess;
 
-import org.chess.pieces.Pawn;
+import org.pieces.Pawn;
 import java.util.*;
 
 public class Board {

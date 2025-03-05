@@ -1,4 +1,4 @@
-package org.chess.pieces;
+package org.pieces;
 
 public class Pawn {
     public static final String WHITE_COLOR = "white";

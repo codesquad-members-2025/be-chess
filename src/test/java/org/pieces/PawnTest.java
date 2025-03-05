@@ -1,6 +1,8 @@
-package org.chess.pieces;
+package org.pieces;
 
 import org.junit.jupiter.api.*;
+import org.pieces.Pawn;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class PawnTest {
