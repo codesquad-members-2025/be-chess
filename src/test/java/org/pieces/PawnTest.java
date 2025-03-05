@@ -9,8 +9,8 @@ public class PawnTest {
     @Test
     public void create_기본생성자() throws Exception {
         Pawn pawn = new Pawn();
-        assertThat(Pawn.WHITE_COLOR).isEqualTo(pawn.getColor());
-        assertThat(Pawn.WHITE_REPRESENTATION).isEqualTo(pawn.getRepresentation());
+        assertThat(pawn.getColor()).isEqualTo(Pawn.WHITE_COLOR);
+        assertThat(pawn.getRepresentation()).isEqualTo(Pawn.WHITE_REPRESENTATION);
     }
 
     @Test
@@ -22,8 +22,8 @@ public class PawnTest {
 
     void verifyPawn(final String color, final char representation) {
         Pawn pawn = new Pawn(color);
-        assertThat(color).isEqualTo(pawn.getColor());
-        assertThat(representation).isEqualTo(pawn.getRepresentation());
+        assertThat(pawn.getColor()).isEqualTo(color);
+        assertThat(pawn.getRepresentation()).isEqualTo(representation);
     }
 }
 

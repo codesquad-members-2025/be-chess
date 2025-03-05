@@ -15,8 +15,8 @@ public class BoardTest {
     @Test
     public void initialize() throws Exception {
         board.initialize();
-        assertThat("pppppppp").isEqualTo(board.getWhitePawnsResult());
-        assertThat("PPPPPPPP").isEqualTo(board.getBlackPawnsResult());
+        assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
+        assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
     }
 
     @Test
@@ -25,8 +25,8 @@ public class BoardTest {
         Pawn black = new Pawn(Pawn.BLACK_COLOR);
 
         board.add(white);
-        assertThat(1).isEqualTo(board.size());
-        assertThat(white).isEqualTo(board.findPawn(0));
+        assertThat(board.size()).isEqualTo(1);
+        assertThat(board.findPawn(0)).isEqualTo(white);
 
 //        board.add(black);
 //        assertThat(2).isEqualTo(board.size());
