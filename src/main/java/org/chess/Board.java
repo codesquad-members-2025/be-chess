@@ -36,19 +36,19 @@ public class Board {
         }
     }
 
-    public String getWhitePawnsResult(){
+    public String getPawnsResult(List<Pawn> pawnList){
         StringBuilder sb = new StringBuilder();
-        for(Pawn pawn : whitePawnList){
+        for(Pawn pawn : pawnList){
             sb.append(pawn.getRepresentation());
         }
         return sb.toString();
     }
 
+    public String getWhitePawnsResult(){
+        return getPawnsResult(whitePawnList);
+    }
+
     public String getBlackPawnsResult(){
-        StringBuilder sb = new StringBuilder();
-        for(Pawn pawn : blackPawnList){
-            sb.append(pawn.getRepresentation());
-        }
-        return sb.toString();
+        return getPawnsResult(blackPawnList);
     }
 }
