@@ -1,25 +1,37 @@
 package chess;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pieces.Pawn;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BoardTest {
+    private Pawn[] pawns;
+    private Board board;
+
+    @BeforeEach
+    void setUp() {
+        String[] colors = {Pawn.WHITE_COLOR, Pawn.BLACK_COLOR};
+        pawns = new Pawn[colors.length];
+
+        for (int i = 0; i < pawns.length; ++i) {
+            pawns[i] = new Pawn(colors[i]);
+        }
+    }
 
     @Test
     public void create() {
-        Board board = new Board();
+        board = new Board();
+        for (int i = 0; i < pawns.length; ++i) {
+            board.add(pawns[i]);
+            verifyBoard(i);
+        }
+    }
 
-        Pawn white = new Pawn(Pawn.WHITE_COLOR);
-        Pawn black = new Pawn(Pawn.BLACK_COLOR);
-
-        board.add(white);
-        assertEquals(1, board.size());
-        assertEquals(white, board.findPawn(0));
-
-        board.add(black);
-        assertEquals(2, board.size());
-        assertEquals(black, board.findPawn(1));
+    // Pawn이 Board에 정상적으로 추가되는지 확인한다.
+    void verifyBoard(int i) {
+        assertEquals(i + 1, board.size());
+        assertEquals(pawns[i], board.findPawn(i));
     }
 }
