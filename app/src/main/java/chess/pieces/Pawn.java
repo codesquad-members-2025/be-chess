@@ -1,4 +1,4 @@
-package org.chess.pieces;
+package chess.pieces;
 
 public class Pawn {
 
