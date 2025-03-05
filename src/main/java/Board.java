@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Board {
 
-    //    private final Piece[][] CHESS_BOARD = new Piece[8][8];
+//    private final Piece[][] CHESS_BOARD = new Piece[8][8];
     private final List<Piece> board = new ArrayList<>();
 
     public void add(Piece piece) {
@@ -31,5 +31,4 @@ public class Board {
         }
         return answer;
     }
-
 }
