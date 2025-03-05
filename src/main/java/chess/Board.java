@@ -1,6 +1,7 @@
 package chess;
 
 import chess.pieces.Pawn;
+import chess.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class Board {
             for (int j = 0; j < chessBoard.length; j++) {
                 sb.append(chessBoard[i][j]);
             }
-            sb.append("\n");
+            sb.append(StringUtils.appendNewLine(""));
         }
         System.out.println(sb);
     }
