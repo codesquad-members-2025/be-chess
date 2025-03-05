@@ -45,14 +45,7 @@ public class Board {
     }
 
     public void print() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < chessBoard.length; i++) {
-            for (int j = 0; j < chessBoard.length; j++) {
-                sb.append(chessBoard[i][j]);
-            }
-            sb.append(StringUtils.appendNewLine(""));
-        }
-        System.out.println(sb);
+        System.out.println(showBoard());
     }
 
     public String showBoard() {
