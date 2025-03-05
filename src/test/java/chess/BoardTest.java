@@ -23,11 +23,11 @@ class BoardTest {
         board.initialize();
         assertThat(board.pieceCount()).isEqualTo(32);
         String blankRank = appendNewLine("........");
-        assertThat(appendNewLine("RNBQKBNR") +
-                appendNewLine("PPPPPPPP") +
+        assertThat(appendNewLine("♜♞♝♛♚♝♞♜") +
+                appendNewLine("♟♟♟♟♟♟♟♟") +
                 blankRank + blankRank + blankRank + blankRank +
-                appendNewLine("pppppppp") +
-                appendNewLine("rnbqkbnr")).isEqualTo(board.showBoard());
+                appendNewLine("♗♗♗♗♗♗♗♗") +
+                appendNewLine("♖♘♗♕♔♗♘♖")).isEqualTo(board.showBoard());
     }
 
     @Test
