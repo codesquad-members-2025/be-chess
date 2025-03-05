@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
+
+    private static final int MIN_PAWN_INDEX = 0;
+    private static final int MAX_PAWN_INDEX = 15;
+    private static final int MAX_PAWN_SIZE = 16;
+
     private final List<Pawn> pawns = new ArrayList<>();
 
     public void add(Pawn pawn) {
@@ -22,13 +27,13 @@ public class Board {
     }
 
     private void validatePawnSize() {
-        if (pawns.size() > 16) {
-            throw new IllegalStateException("폰은 8개를 초과할 수 없습니다.");
+        if (pawns.size() > MAX_PAWN_SIZE) {
+            throw new IllegalStateException("폰은 " + MAX_PAWN_SIZE + "을 초과할 수 없습니다.");
         }
     }
 
     private void validateIndex(int index) {
-        if(1> index || index > 16){
+        if(MIN_PAWN_INDEX> index || index > MAX_PAWN_INDEX){
             throw new IllegalStateException(index + "번의 폰은 없습니다. 0부터 7 중 골라주세요.");
         }
     }
