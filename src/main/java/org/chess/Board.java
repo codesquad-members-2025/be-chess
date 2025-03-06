@@ -85,4 +85,11 @@ public class Board {
         }
         return count;
     }
+
+    public Piece getPieceByCoordinate(String coordinate){
+        int col = coordinate.charAt(0)-'a';
+        int rankIndex = Character.getNumericValue(coordinate.charAt(1))-1;
+        return rankList.get(rankIndex).getPieceByIndex(col);
+    }
+
 }

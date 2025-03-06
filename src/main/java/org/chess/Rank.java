@@ -41,4 +41,8 @@ public class Rank {
         }
         return count;
     }
+
+    public Piece getPieceByIndex(int index){
+        return pieceList.get(index);
+    }
 }
