@@ -7,9 +7,11 @@ import java.util.List;
 
 public class Board {
     private List<Pawn> pawns;
+    private char[][] board;
 
     public Board() {
         this.pawns = new ArrayList<>();
+        this.board = new char[8][8];
     }
 
     public void add(Pawn pawn) {
@@ -22,5 +24,20 @@ public class Board {
 
     public Pawn findPawn(int pawnNumber) {
         return pawns.get(pawnNumber);
+    }
+
+    public void initialize() {
+        for (int i = 0; i < board.length; ++i) {
+            pawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
+            pawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+        }
+
+        int pawnsIndex = 0; // Pawn 리스트 전체를 순회하기 위한 인덱스 값
+
+        for (int i = 0; i < board.length; ++i) {
+            board[1][i] = pawns.get(pawnsIndex).getRepresentation();
+            board[6][i] = pawns.get(pawnsIndex + 1).getRepresentation();
+            pawnsIndex += 2;
+        }
     }
 }
