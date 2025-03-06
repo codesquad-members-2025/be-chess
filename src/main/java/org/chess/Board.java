@@ -8,8 +8,6 @@ import static org.utils.StringUtils.appendNewLine;
 
 public class Board {
     private final List<Rank> rankList = new ArrayList<>();
-    private List<Piece> whitePieceList = new ArrayList<>();
-    private List<Piece> blackPieceList = new ArrayList<>();
 
     public Board() {
     }
@@ -60,8 +58,8 @@ public class Board {
         rankList.add(new Rank(rank8));
     }
 
-    public void initializeEmpty(){
-        for(int i = 0 ; i<8;i++){
+    public void initializeEmpty() {
+        for (int i = 0; i < 8; i++) {
             rankList.add(new Rank());
         }
     }
@@ -94,70 +92,62 @@ public class Board {
         return count;
     }
 
-    public Piece findPiece(String location){
+    public Piece findPiece(String location) {
         Coordinate coordinate = parseCoordinate(location);
         int fileIndex = coordinate.getFileIndex();
         int rankIndex = coordinate.getRankIndex();
         return rankList.get(rankIndex).getPieceByFileIndex(fileIndex);
     }
 
-    public void move(String location,Piece piece){
+    public void move(String location, Piece piece) {
         Coordinate coordinate = parseCoordinate(location);
         int fileIndex = coordinate.getFileIndex();
         int rankIndex = coordinate.getRankIndex();
-        rankList.get(rankIndex).putPieceByFileIndex(fileIndex,piece);
+        rankList.get(rankIndex).putPieceByFileIndex(fileIndex, piece);
     }
 
-    private Coordinate parseCoordinate(String location){
-        try{
+    private Coordinate parseCoordinate(String location) {
+        try {
             return new Coordinate(location);
-        } catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("좌표 오류 : ");
             return null;
         }
     }
 
-    public double calculatePoint(Piece.Color color){
-        int[] pawnLocation = {0,0,0,0,0,0,0,0};
+    public double calculatePoint(Piece.Color color) {
+        int[] pawnLocation = {0, 0, 0, 0, 0, 0, 0, 0};
         double point = 0.0;
-        for(Rank rank : rankList){
-            for(int i=0;i<8;i++){
+        for (Rank rank : rankList) {
+            for (int i = 0; i < 8; i++) {
                 Piece piece = rank.getPieceByFileIndex(i);
-                if(piece.getColor()==color) point += piece.getPoint();
+                if (piece.getColor() == color) point += piece.getPoint();
                 // 폰이 같은 열에 있으면 감점되기 때문에 폰의 위치만 따로 관리
-                if(piece.getColor()==color && piece.getType()==Piece.Type.PAWN) pawnLocation[i]+=1;
+                if (piece.getColor() == color && piece.getType() == Piece.Type.PAWN) pawnLocation[i] += 1;
             }
         }
-        for(int pawnCount : pawnLocation){
-            if(pawnCount>1) point -= (double) pawnCount/2;
+        for (int pawnCount : pawnLocation) {
+            if (pawnCount > 1) point -= (double) pawnCount / 2;
         }
 
         return point;
     }
 
-    public List<Piece> makePieceList(Piece.Color color){
+    public List<Piece> makePieceList(Piece.Color color) {
         List<Piece> sameColorPieces = new ArrayList<>();
-        for(Rank rank : rankList){
-            for(int i = 0 ; i<8;i++){
+        for (Rank rank : rankList) {
+            for (int i = 0; i < 8; i++) {
                 Piece piece = rank.getPieceByFileIndex(i);
-                if(piece.getColor()==color) sameColorPieces.add(piece);
+                if (piece.getColor() == color) sameColorPieces.add(piece);
             }
         }
         return sameColorPieces;
     }
 
-    public List<Piece> makeAndSortWhitePieceList(boolean isAscending){
-        List<Piece> whiteList = makePieceList(Piece.Color.WHITE);
-        Collections.sort(whiteList);
-        if(!isAscending) Collections.reverse(whiteList);
-        return whiteList;
+    public List<Piece> makeAndSortPieceList(Piece.Color color, boolean isAscending) {
+        List<Piece> sortedPieceList = makePieceList(color);
+        Collections.sort(sortedPieceList);
+        if (!isAscending) Collections.reverse(sortedPieceList);
+        return sortedPieceList;
     }
-
-    public List<Piece> makeAndSortBlackPieceList(boolean isAscending){
-        List<Piece> blackList = makePieceList(Piece.Color.BLACK);
-        Collections.sort(blackList);
-        if(!isAscending) Collections.reverse(blackList);
-        return blackList;
-    }
-
 }

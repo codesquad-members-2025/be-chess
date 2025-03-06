@@ -105,8 +105,8 @@ public class BoardTest {
         addPiece("b6", piece1);
         addPiece("a7", piece3);
 
-        assertThat(board.makeAndSortBlackPieceList(true)).isEqualTo(new ArrayList<Piece>(List.of(piece1,piece2,piece3,piece4)));
-        assertThat(board.makeAndSortBlackPieceList(false)).isEqualTo(new ArrayList<Piece>(List.of(piece4,piece3,piece2,piece1)));
+        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<Piece>(List.of(piece1,piece2,piece3,piece4)));
+        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<Piece>(List.of(piece4,piece3,piece2,piece1)));
         System.out.println(board.showBoard());
     }
 
