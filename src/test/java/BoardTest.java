@@ -1,3 +1,4 @@
+import static utils.StringUtils.appendNewLine;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,9 +14,16 @@ public class BoardTest {
     }
 
     @Test
-    public void initialize() throws Exception {
+    public void create() throws Exception {
         board.initialize();
-        assertEquals("pppppppp", board.getWhitePawnResult());
-        assertEquals("PPPPPPPP", board.getBlackPawnResult());
+        assertEquals(32, board.pieceCount());
+        String blackRank = appendNewLine("........");
+        assertEquals(
+                appendNewLine("RNBQKBNR") +
+                        appendNewLine("PPPPPPPP") +
+                        blackRank + blackRank + blackRank + blackRank +
+                        appendNewLine("pppppppp") +
+                        appendNewLine("rnbqkbnr"),
+                board.showBoard());
     }
 }
