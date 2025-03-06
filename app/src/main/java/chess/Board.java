@@ -1,75 +1,95 @@
 package chess;
 
 import pieces.Piece;
-import utils.StringUtils;
+
 import java.util.*;
+
+import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private List<Piece> pieces = new ArrayList<>();
     public final static int MAX_ROW = 8;
     public final static int MAX_CAL = 8;
     private Object[][] board = new Object[MAX_ROW][MAX_CAL];
-
-    public void add(Piece piece) {
-        pieces.add(piece);
-    }
-
-    public int size(){
-        return pieces.size();
-    }
+    private int pieceNum = 0;
 
     public void initialize(){
-        for (int i = 0; i < MAX_ROW; i++) {
-            for (int j = 0; j < MAX_CAL; j++) {
-//                board[i][j] = SetUpBoard(i);
+        addBlackPieces();
+        addBlackPawns();
+        addBlankLanks();
+        addWhitePawns();
+        addWhitePieces();
+    }
+
+    public void addBlackPieces(){
+        Object[] indexZero = board[0];
+        indexZero[0] = Piece.createBlackRook();
+        indexZero[1] = Piece.createBlackKnight();
+        indexZero[2] = Piece.createBlackBishop();
+        indexZero[3] = Piece.createBlackQueen();
+        indexZero[4] = Piece.createBlackKing();
+        indexZero[5] = Piece.createBlackBishop();
+        indexZero[6] = Piece.createBlackKnight();
+        indexZero[7] = Piece.createBlackRook();
+        pieceNum+=8;
+    }
+
+    public void addBlackPawns(){
+        Object[] indexZero = board[1];
+        for(int i = 0; i < MAX_CAL; i++){
+            indexZero[i] = Piece.createBlackPawn();
+            pieceNum++;
+        }
+    }
+
+    public void addBlankLanks(){
+        for (int i = 2; i < 6; i++){
+            for (int j = 0; j < MAX_CAL; j++){
+                board[i][j] = '.';
             }
         }
     }
 
-    public void pieceCount(){
-
-    }
-
-//    private Object SetUpBoard(int i){
-//        if ( i == 1 ) return new Piece(Piece.BLACK_COLOR, Piece.BLACK_REPRESENTATION);
-//        if ( i == 6 ) return new Piece(Piece.WHITE_COLOR, Piece.WHITE_REPRESENTATION);
-//        return ".";
-//    }
-
-    public String getWhitePawnsResult(){
-        return getPawnsResult(6);
-    }
-
-    public String getBlackPawnsResult(){
-        return getPawnsResult(1);
-    }
-
-    private String getPawnsResult(int index){
-        StringBuilder result = new StringBuilder();
-        for (Object obj : board[index]) {
-            result.append(((Piece)obj).getRepresentation());
+    public void addWhitePawns(){
+        Object[] indexZero = board[6];
+        for(int i = 0; i < MAX_CAL; i++){
+            indexZero[i] = Piece.createWhitePawn();
+            pieceNum++;
         }
-        return result.toString();
     }
 
-    Piece findPawn(int num){
-        return pieces.get(num);
+    public void addWhitePieces(){
+        Object[] indexZero = board[7];
+        indexZero[0] = Piece.createWhiteRook();
+        indexZero[1] = Piece.createWhiteKnight();
+        indexZero[2] = Piece.createWhiteBishop();
+        indexZero[3] = Piece.createWhiteQueen();
+        indexZero[4] = Piece.createWhiteKing();
+        indexZero[5] = Piece.createWhiteBishop();
+        indexZero[6] = Piece.createWhiteKnight();
+        indexZero[7] = Piece.createWhiteRook();
+        pieceNum+=8;
     }
 
-    public void print(){
-        StringBuilder result = new StringBuilder();
+    public int pieceCount(){
+        return pieceNum;
+    }
+
+    public String showBoard(){
+        StringBuilder answer = new StringBuilder();
 
         for (Object[] row : board) {
+            String result = "";
             for (Object obj : row) {
                 if (obj instanceof Piece) {
-                    result.append(((Piece)obj).getRepresentation());
+                    result += ((Piece)obj).getRepresentation();
                 } else {
-                    result.append(obj);
+                    result += obj;
                 }
             }
-            result.append(StringUtils.NEWLINE);
+            answer.append(appendNewLine(result));
         }
-        System.out.println(result);
+        return answer.toString();
     }
 
 
