@@ -13,37 +13,41 @@ public class Board {
     }
 
     public void initialize() {
+        // 중요!
+        // rankList는 rank에 따라 관리
+        // 즉 rankList.get(0)을 하면 rank1번이 나오도록 관리함
+        // 따라서 출력할 때 rank8부터 출력하도록 변경하면 됨
         List<Piece> rank1 = new ArrayList<>();
-        rank1.add(Piece.createBlackRook());
-        rank1.add(Piece.createBlackKnight());
-        rank1.add(Piece.createBlackBishop());
-        rank1.add(Piece.createBlackQueen());
-        rank1.add(Piece.createBlackKing());
-        rank1.add(Piece.createBlackBishop());
-        rank1.add(Piece.createBlackKnight());
-        rank1.add(Piece.createBlackRook());
+        rank1.add(Piece.createWhiteRook());
+        rank1.add(Piece.createWhiteKnight());
+        rank1.add(Piece.createWhiteBishop());
+        rank1.add(Piece.createWhiteQueen());
+        rank1.add(Piece.createWhiteKing());
+        rank1.add(Piece.createWhiteBishop());
+        rank1.add(Piece.createWhiteKnight());
+        rank1.add(Piece.createWhiteRook());
 
         List<Piece> rank2 = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            Piece piece = Piece.createBlackPawn();
+            Piece piece = Piece.createWhitePawn();
             rank2.add(piece);
         }
 
         List<Piece> rank7 = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            Piece piece = Piece.createWhitePawn();
+            Piece piece = Piece.createBlackPawn();
             rank7.add(piece);
         }
 
         List<Piece> rank8 = new ArrayList<>();
-        rank8.add(Piece.createWhiteRook());
-        rank8.add(Piece.createWhiteKnight());
-        rank8.add(Piece.createWhiteBishop());
-        rank8.add(Piece.createWhiteQueen());
-        rank8.add(Piece.createWhiteKing());
-        rank8.add(Piece.createWhiteBishop());
-        rank8.add(Piece.createWhiteKnight());
-        rank8.add(Piece.createWhiteRook());
+        rank8.add(Piece.createBlackRook());
+        rank8.add(Piece.createBlackKnight());
+        rank8.add(Piece.createBlackBishop());
+        rank8.add(Piece.createBlackQueen());
+        rank8.add(Piece.createBlackKing());
+        rank8.add(Piece.createBlackBishop());
+        rank8.add(Piece.createBlackKnight());
+        rank8.add(Piece.createBlackRook());
 
         rankList.add(new Rank(rank1));
         rankList.add(new Rank(rank2));
@@ -63,9 +67,13 @@ public class Board {
     }
 
     public String showBoard() {
+        // 중요!
+        // rankList는 rank에 따라 관리
+        // 즉 rankList.get(0)을 하면 rank1번이 나오도록 관리함
+        // 따라서 출력할 때 rank8부터 출력하도록 변경하면 됨
         StringBuilder sb = new StringBuilder();
-        for (Rank rank : rankList) {
-            sb.append(appendNewLine(rank.print()));
+        for (int i = rankList.size() - 1; i >= 0; i--) {
+            sb.append(appendNewLine(rankList.get(i).print()));
         }
         return sb.toString();
     }
