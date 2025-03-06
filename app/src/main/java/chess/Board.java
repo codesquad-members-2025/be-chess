@@ -6,22 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    //List<PAWN> 객체를 사용하고 있기 때문에 Pawn 이외의 객체를 추가하면 오류 발생
-    private final List<Pawn> board; // 체스판에 있는 Pawn 리스트
+    private final char[][] board =  new char[8][8];
     
     public Board() {
-        this.board = new ArrayList<>();
+        for  (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                board[i][j] = '.';
+            }
+        }
     }
 
-    public void add(Pawn pawn) {
-        board.add(pawn);
+    public void initialize() {
+        for (int i = 0; i < 8; i++) {
+            board[1][i] = Pawn.BLACK_REPRESENTATION;
+            board[6][i] = Pawn.WHITE_REPRESENTATION;
+        }
     }
-    
-    public int size() {
-        return board.size();
+
+    public String getWhitePawnsResult() {
+        return new String(board[6]);
     }
-    
-    public Pawn findPawn(int index) {
-        return board.get(index);
+
+    public String getBlackPawnsResult() {
+        return new String(board[1]);
     }
 }
