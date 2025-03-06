@@ -135,4 +135,10 @@ public class Board {
         }
         return rank;
     }
+
+    public double calculatePoint(Color color) {
+        return chessBoard.stream()
+                .mapToDouble(rank -> rank.getPointByColor(color))
+                .sum();
+    }
 }

@@ -49,4 +49,11 @@ public class Rank {
     public void movePiece(int pos, Piece piece) {
         rank.set(pos, piece);
     }
+
+    public double getPointByColor(Color color) {
+        return rank.stream()
+                .filter(piece -> piece.getColor().equals(color))
+                .mapToDouble(piece -> piece.getName().getDefaultPoint())
+                .sum();
+    }
 }
