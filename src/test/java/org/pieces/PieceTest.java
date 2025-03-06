@@ -7,14 +7,14 @@ import static org.assertj.core.api.Assertions.*;
 public class PieceTest {
     @Test
     @DisplayName("representation 확인")
-    public void getRepresentationPerPiece() throws Exception {
+    void getRepresentationPerPiece() throws Exception {
         assertThat(Piece.Type.PAWN.getWhiteRepresentation()).isEqualTo('p');
         assertThat(Piece.Type.PAWN.getBlackRepresentation()).isEqualTo('P');
     }
 
     @Test
     @DisplayName("기물 색,타입 확인, blank 잘 생성하는지 확인")
-    public void create_piece() {
+    void create_piece() {
         verifyPiece(Piece.createWhitePawn(), Piece.createBlackPawn(), Piece.Type.PAWN);
         verifyPiece(Piece.createWhiteKnight(), Piece.createBlackKnight(), Piece.Type.KNIGHT);
         verifyPiece(Piece.createWhiteRook(), Piece.createBlackRook(), Piece.Type.ROOK);
@@ -30,7 +30,7 @@ public class PieceTest {
 
     @Test
     @DisplayName("색상 테스트")
-    public void check_color(){
+    void check_color(){
         assertThat(Piece.createWhitePawn().isWhite()).isEqualTo(true);
         assertThat(Piece.createWhitePawn().isBlack()).isEqualTo(false);
         assertThat(Piece.createBlackPawn().isWhite()).isEqualTo(false);

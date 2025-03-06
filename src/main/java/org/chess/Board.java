@@ -8,6 +8,8 @@ import static org.utils.StringUtils.appendNewLine;
 
 public class Board {
     private final List<Rank> rankList = new ArrayList<>();
+    private List<Piece> whitePieceList = new ArrayList<>();
+    private List<Piece> blackPieceList = new ArrayList<>();
 
     public Board() {
     }
@@ -132,4 +134,30 @@ public class Board {
 
         return point;
     }
+
+    public List<Piece> makePieceList(Piece.Color color){
+        List<Piece> sameColorPieces = new ArrayList<>();
+        for(Rank rank : rankList){
+            for(int i = 0 ; i<8;i++){
+                Piece piece = rank.getPieceByFileIndex(i);
+                if(piece.getColor()==color) sameColorPieces.add(piece);
+            }
+        }
+        return sameColorPieces;
+    }
+
+    public List<Piece> makeAndSortWhitePieceList(boolean isAscending){
+        List<Piece> whiteList = makePieceList(Piece.Color.WHITE);
+        Collections.sort(whiteList);
+        if(!isAscending) Collections.reverse(whiteList);
+        return whiteList;
+    }
+
+    public List<Piece> makeAndSortBlackPieceList(boolean isAscending){
+        List<Piece> blackList = makePieceList(Piece.Color.BLACK);
+        Collections.sort(blackList);
+        if(!isAscending) Collections.reverse(blackList);
+        return blackList;
+    }
+
 }

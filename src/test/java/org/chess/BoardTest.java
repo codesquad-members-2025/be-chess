@@ -3,6 +3,9 @@ package org.chess;
 import org.junit.jupiter.api.*;
 import org.pieces.Piece;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.utils.StringUtils.appendNewLine;
 
@@ -10,13 +13,13 @@ public class BoardTest {
     Board board;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         board = new Board();
     }
 
     @Test
     @DisplayName("체스 보드 생성 테스트")
-    public void create() throws Exception {
+    void create() throws Exception {
         board.initialize();
         assertThat(board.pieceCount()).isEqualTo(32);
         String blankRank = appendNewLine("........");
@@ -30,7 +33,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("원하는 위치에 기물 추가할 수 있는지 확인")
-    public void move() throws Exception {
+    void move() throws Exception {
         board.initializeEmpty();
 
         String position = "b5";
@@ -43,7 +46,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("기본적인 Point 계산하는 테스트")
-    public void caculcatePoint() throws Exception {
+    void caculcatePoint() throws Exception {
         board.initializeEmpty();
 
         addPiece("b6", Piece.createBlackPawn());
@@ -63,7 +66,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("좀 더 많은 Point 계산하는 테스트")
-    public void caculcatePoint2() throws Exception {
+    void caculcatePoint2() throws Exception {
         board.initializeEmpty();
 
         addPiece("b6", Piece.createBlackPawn());
@@ -85,6 +88,25 @@ public class BoardTest {
 
         assertThat(board.calculatePoint(Piece.Color.BLACK)).isCloseTo(20.0, within(0.01));
         assertThat(board.calculatePoint(Piece.Color.WHITE)).isCloseTo(19.5, within(0.01));
+        System.out.println(board.showBoard());
+    }
+
+    @Test
+    @DisplayName("기물 리스트 만들고 정렬되었는지 확인하는 테스트")
+    void sortTest() throws Exception {
+        board.initializeEmpty();
+        Piece piece2 = Piece.createBlackKnight();
+        Piece piece1 = Piece.createBlackPawn();
+        Piece piece4 = Piece.createBlackRook();
+        Piece piece3 = Piece.createBlackBishop();
+
+        addPiece("e6", piece2);
+        addPiece("c7", piece4);
+        addPiece("b6", piece1);
+        addPiece("a7", piece3);
+
+        assertThat(board.makeAndSortBlackPieceList(true)).isEqualTo(new ArrayList<Piece>(List.of(piece1,piece2,piece3,piece4)));
+        assertThat(board.makeAndSortBlackPieceList(false)).isEqualTo(new ArrayList<Piece>(List.of(piece4,piece3,piece2,piece1)));
         System.out.println(board.showBoard());
     }
 

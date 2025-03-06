@@ -1,6 +1,6 @@
 package org.pieces;
 
-public class Piece {
+public class Piece implements Comparable<Piece>{
     public enum Color {
         WHITE, BLACK, NOCOLOR
     }
@@ -53,6 +53,11 @@ public class Piece {
 
     public double getPoint(){
         return type.getDefaultPoint();
+    }
+
+    @Override
+    public int compareTo(Piece other){
+        return Double.compare(this.getPoint(),other.getPoint());
     }
 
     public char getRepresentation() {
