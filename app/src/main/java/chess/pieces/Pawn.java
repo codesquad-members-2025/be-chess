@@ -7,6 +7,7 @@ public class Pawn {
     public static final char WHITE_REPRESENTATION = '♙';
     public static final char BLACK_REPRESENTATION = '♟';
 
+
     private final String color;
     private final char representation;
 
@@ -31,3 +32,4 @@ public class Pawn {
         return representation;
     }
 }
+
