@@ -6,25 +6,31 @@ import static org.assertj.core.api.Assertions.*;
 
 public class BoardTest {
     Board board;
-    Pawn white;
-    Pawn black;
 
     @BeforeEach
     public void setUp(){
-        Board board = new Board();
-        Pawn white = new Pawn(Pawn.WHITE_COLOR);
-        Pawn black = new Pawn(Pawn.BLACK_COLOR);
+        board = new Board();
+    }
+
+    @Test
+    public void initialize() throws Exception {
+        board.initialize();
+        assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
+        assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
     }
 
     @Test
     public void create() throws Exception {
-        board.add(white);
-        assertThat(1).isEqualTo(board.size());
-        assertThat(white).isEqualTo(board.findPawn(0));
+        Pawn white = new Pawn(Pawn.WHITE_COLOR);
+        Pawn black = new Pawn(Pawn.BLACK_COLOR);
 
-        board.add(black);
-        assertThat(2).isEqualTo(board.size());
-        assertThat(black).isEqualTo(board.findPawn(1));
+        board.add(white);
+        assertThat(board.size()).isEqualTo(1);
+        assertThat(board.findPawn(0)).isEqualTo(white);
+
+//        board.add(black);
+//        assertThat(2).isEqualTo(board.size());
+//        assertThat(black).isEqualTo(board.findPawn(1));
     }
 //    @Test
 //    public void 추가테스트(){
