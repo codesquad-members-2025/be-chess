@@ -3,8 +3,9 @@ package org.pieces;
 public class Piece {
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
-    public static final char WHITE_REPRESENTATION = 'p';
-    public static final char BLACK_REPRESENTATION = 'P';
+    public static final char WHITE_PAWN_REPRESENTATION = 'p';
+    public static final char BLACK_PAWN_REPRESENTATION = 'P';
+
 
     private final String color;
     private final String name;
@@ -13,8 +14,8 @@ public class Piece {
     private Piece(String color,String name){
         this.color = color;
         this.name = name;
-        if(color.equals(WHITE_COLOR)) representation = WHITE_REPRESENTATION;
-        else representation = BLACK_REPRESENTATION;
+        if(color.equals(WHITE_COLOR)) representation = WHITE_PAWN_REPRESENTATION;
+        else representation = BLACK_PAWN_REPRESENTATION;
     }
 
     public String getColor(){
