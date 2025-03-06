@@ -108,4 +108,11 @@ public class Board {
             chessBoard.add(new Rank(blank));
         }
     }
+
+    //보드 위에 존재하는 특정 색, 종류의 기물 갯수 리턴
+    public int pieceCountOnBoard(Color color, Type type) {
+        return chessBoard.stream()
+                .mapToInt(rank -> rank.pieceCountPerColorAndType(color, type))
+                .sum();
+    }
 }
