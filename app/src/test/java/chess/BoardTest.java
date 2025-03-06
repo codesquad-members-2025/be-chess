@@ -26,9 +26,22 @@ public class BoardTest {
     @Test
     @DisplayName("체스판 출력")
     public void print() throws Exception{
+        String expectResult =
+                """
+                ........
+                ♟♟♟♟♟♟♟♟
+                ........
+                ........
+                ........
+                ........
+                ♙♙♙♙♙♙♙♙
+                ........
+                """;
         board.initialize();
         String result = board.print();
         System.out.println(result);
+        assertThat(result).isEqualTo(expectResult);
+
     }
 }
 
