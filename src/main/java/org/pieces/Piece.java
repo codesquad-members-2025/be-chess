@@ -82,4 +82,12 @@ public class Piece {
     public static Piece createBlackKing() {
         return new Piece(Piece.BLACK_COLOR, "king", Piece.BLACK_KING_REPRESENTATION);
     }
+
+    public boolean isBlack(){
+        return color.equals(Piece.BLACK_COLOR);
+    }
+
+    public boolean isWhite(){
+        return color.equals(Piece.WHITE_COLOR);
+    }
 }

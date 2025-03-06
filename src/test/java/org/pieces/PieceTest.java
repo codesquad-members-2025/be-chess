@@ -22,6 +22,13 @@ public class PieceTest {
         verifyPiece(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION);
     }
 
+    public void check_color(){
+        assertThat(Piece.createWhitePawn().isWhite()).isEqualTo(true);
+        assertThat(Piece.createWhitePawn().isBlack()).isEqualTo(false);
+        assertThat(Piece.createBlackPawn().isWhite()).isEqualTo(false);
+        assertThat(Piece.createBlackPawn().isBlack()).isEqualTo(true);
+    }
+
     private void verifyPiece(final Piece piece, final String color, final char representation) {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(piece.getRepresentation()).isEqualTo(representation);
