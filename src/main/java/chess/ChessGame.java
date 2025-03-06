@@ -11,7 +11,7 @@ public class ChessGame {
             String userRequest = requestUserCommand();
             if(userRequest.equals("start")){
                 Board board = new Board();
-                board.print();
+                System.out.println(board.showBoard());
             }
             else if(userRequest.equals("end")){
                 System.exit(0);
