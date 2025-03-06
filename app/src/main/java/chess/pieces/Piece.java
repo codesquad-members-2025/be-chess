@@ -7,7 +7,7 @@ public class Piece {
     public static final char WHITE_REPRESENTATION = '♙';
     public static final char BLACK_REPRESENTATION = '♟';
 
-
+    private final String name;
     private final String color;
     private final char representation;
 
