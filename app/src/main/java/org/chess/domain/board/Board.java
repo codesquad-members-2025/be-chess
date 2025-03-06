@@ -85,6 +85,13 @@ public class Board {
         whitePieces.add(piece);
     }
 
+    public void move(String position, Piece piece) {
+        int col = position.charAt(0) - 'a';
+        int rank = position.charAt(1) - '1';
+
+        board.get(BOARD_SIZE - rank - 1).getPieces().set(col, piece);
+    }
+
     public int pieceCount() {
         return whitePieces.size() + blackPieces.size();
     }
