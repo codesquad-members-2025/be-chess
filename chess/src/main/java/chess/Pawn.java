@@ -1,4 +1,4 @@
-package org.example;
+package chess;
 
 public class Pawn {
     String color;
