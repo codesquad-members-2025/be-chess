@@ -7,6 +7,7 @@ import java.util.*;
 import static org.utils.StringUtils.appendNewLine;
 
 public class Board {
+    private List<Rank> rankList = new ArrayList<>();
     private List<Piece> whitePieceList = new ArrayList<>();
     private List<Piece> blackPieceList = new ArrayList<>();
     private List<Piece> whitePawnList = new ArrayList<>();
@@ -16,35 +17,53 @@ public class Board {
     }
 
     public void initialize() {
-        for (int i = 0; i < 8; i++) {
-            Piece piece = Piece.createWhitePawn();
-            whitePawnList.add(piece);
-        }
+        List<Piece> rank1 = new ArrayList<>();
+        rank1.add(Piece.createBlackRook());
+        rank1.add(Piece.createBlackKnight());
+        rank1.add(Piece.createBlackBishop());
+        rank1.add(Piece.createBlackQueen());
+        rank1.add(Piece.createBlackKing());
+        rank1.add(Piece.createBlackBishop());
+        rank1.add(Piece.createBlackKnight());
+        rank1.add(Piece.createBlackRook());
+
+        List<Piece> rank2 = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             Piece piece = Piece.createBlackPawn();
-            blackPawnList.add(piece);
+            rank2.add(piece);
         }
-        whitePieceList.add(Piece.createWhiteRook());
-        whitePieceList.add(Piece.createWhiteKnight());
-        whitePieceList.add(Piece.createWhiteBishop());
-        whitePieceList.add(Piece.createWhiteQueen());
-        whitePieceList.add(Piece.createWhiteKing());
-        whitePieceList.add(Piece.createWhiteBishop());
-        whitePieceList.add(Piece.createWhiteKnight());
-        whitePieceList.add(Piece.createWhiteRook());
 
-        blackPieceList.add(Piece.createBlackRook());
-        blackPieceList.add(Piece.createBlackKnight());
-        blackPieceList.add(Piece.createBlackBishop());
-        blackPieceList.add(Piece.createBlackQueen());
-        blackPieceList.add(Piece.createBlackKing());
-        blackPieceList.add(Piece.createBlackBishop());
-        blackPieceList.add(Piece.createBlackKnight());
-        blackPieceList.add(Piece.createBlackRook());
+        List<Piece> rank7 = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            Piece piece = Piece.createWhitePawn();
+            rank7.add(piece);
+        }
+
+        List<Piece> rank8 = new ArrayList<>();
+        rank8.add(Piece.createWhiteRook());
+        rank8.add(Piece.createWhiteKnight());
+        rank8.add(Piece.createWhiteBishop());
+        rank8.add(Piece.createWhiteQueen());
+        rank8.add(Piece.createWhiteKing());
+        rank8.add(Piece.createWhiteBishop());
+        rank8.add(Piece.createWhiteKnight());
+        rank8.add(Piece.createWhiteRook());
+
+        rankList.add(new Rank(rank1));
+        rankList.add(new Rank(rank2));
+        for (int i = 0; i < 4; i++) {
+            rankList.add(new Rank());
+        }
+        rankList.add(new Rank(rank7));
+        rankList.add(new Rank(rank8));
     }
 
     public int pieceCount() {
-        return blackPieceList.size() + blackPawnList.size() + whitePieceList.size() + whitePawnList.size();
+        int count = 0 ;
+        for(Rank rank : rankList){
+            count+=rank.getCount();
+        }
+        return count;
     }
 
     public String getPawnsResult(List<Piece> pawnList) {
@@ -61,28 +80,9 @@ public class Board {
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        String blank = appendNewLine(getBlankLine());
-        for (Piece piece : blackPieceList) {
-            sb.append(piece.getRepresentation());
+        for(Rank rank : rankList){
+            sb.append(appendNewLine(rank.print()));
         }
-        sb.append(appendNewLine(""));
-        for (Piece piece : blackPawnList) {
-            sb.append(piece.getRepresentation());
-        }
-        sb.append(appendNewLine(""));
-
-        for (int i = 0; i < 4; i++) {
-            sb.append(blank);
-        }
-
-        for (Piece piece : whitePawnList) {
-            sb.append(piece.getRepresentation());
-        }
-        sb.append(appendNewLine(""));
-        for (Piece piece : whitePieceList) {
-            sb.append(piece.getRepresentation());
-        }
-        sb.append(appendNewLine(""));
         return sb.toString();
     }
 }
