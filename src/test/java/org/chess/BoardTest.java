@@ -1,41 +1,30 @@
 package org.chess;
 
-import org.pieces.Pawn;
+import org.pieces.Piece;
 import org.junit.jupiter.api.*;
+
 import static org.assertj.core.api.Assertions.*;
+import static org.utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     Board board;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         board = new Board();
     }
 
     @Test
-    public void initialize() throws Exception {
-        board.initialize();
-        assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
-        assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
-    }
-
-    @Test
+    @DisplayName("체스 보드 생성 테스트")
     public void create() throws Exception {
-        Pawn white = new Pawn(Pawn.WHITE_COLOR);
-        Pawn black = new Pawn(Pawn.BLACK_COLOR);
-
-        board.add(white);
-        assertThat(board.size()).isEqualTo(1);
-        assertThat(board.findPawn(0)).isEqualTo(white);
-
-//        board.add(black);
-//        assertThat(2).isEqualTo(board.size());
-//        assertThat(black).isEqualTo(board.findPawn(1));
+        board.initialize();
+        assertThat(board.pieceCount()).isEqualTo(32);
+        String blankRank = appendNewLine("........");
+        assertThat(board.showBoard())
+                .isEqualTo(appendNewLine("RNBQKBNR") +
+                        appendNewLine("PPPPPPPP") +
+                        blankRank + blankRank + blankRank + blankRank +
+                        appendNewLine("pppppppp") +
+                        appendNewLine("rnbqkbnr"));
     }
-//    @Test
-//    public void 추가테스트(){
-//        Board board = new Board();
-//        board.add(new Integer(7));
-//    }
-//    에러 발생
 }
