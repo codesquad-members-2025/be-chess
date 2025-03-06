@@ -1,7 +1,6 @@
 package chess;
 
 public class Pawn {
-
     String color;
     char representation;
     public static final String BLACK_COLOR = "black";

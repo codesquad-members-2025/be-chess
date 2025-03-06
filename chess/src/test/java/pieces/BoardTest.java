@@ -54,5 +54,4 @@ public class BoardTest {
         System.out.println(board.print());
     }
 
-
 }
