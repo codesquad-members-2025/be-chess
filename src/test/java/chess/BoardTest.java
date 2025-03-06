@@ -62,6 +62,19 @@ class BoardTest {
         assertThat(board.findPiece("h1").getName()).isEqualTo(Type.ROOK);
     }
 
+    @Test
+    @DisplayName("임의의 위치에 기물이 추가 되어야한다.")
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        String position = "b5";
+        Piece piece = Piece.createBlack(Type.ROOK);
+        board.move(position, piece);
+
+        assertThat(board.findPiece(position)).isEqualTo(piece);
+        System.out.println(board.showBoard());
+    }
+
     private void initializeBoardByString() {
         String boardText = ".♚♜.....\n"
                 + "♟.♟♝....\n"
