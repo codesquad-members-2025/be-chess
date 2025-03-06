@@ -2,6 +2,7 @@ package chess;
 
 import static chess.utils.StringUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 import chess.pieces.Piece;
 import chess.pieces.Piece.Color;
@@ -74,6 +75,29 @@ class BoardTest {
         assertThat(board.findPiece(position)).isEqualTo(piece);
         System.out.println(board.showBoard());
     }
+    @Test
+    public void calculatePoint() {
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlack(Type.PAWN));
+        addPiece("e6", Piece.createBlack(Type.QUEEN));
+        addPiece("b8", Piece.createBlack(Type.KING));
+        addPiece("c8", Piece.createBlack(Type.ROOK));
+
+        addPiece("f2", Piece.createWhite(Type.PAWN));
+        addPiece("g2", Piece.createWhite(Type.PAWN));
+        addPiece("e1", Piece.createWhite(Type.ROOK));
+        addPiece("f1", Piece.createWhite(Type.KING));
+
+        assertThat(board.calculatePoint(Color.BLACK)).isCloseTo(15.0, within(0.01));
+        assertThat(board.calculatePoint(Color.WHITE)).isCloseTo(7.0, within(0.01));
+
+        System.out.println(board.showBoard());
+    }
+
+    private void addPiece(String position, Piece piece) {
+        board.move(position, piece);
+    }
 
     private void initializeBoardByString() {
         String boardText = ".♚♜.....\n"
@@ -95,4 +119,5 @@ class BoardTest {
             board.addPiece(new Rank(rank));
         }
     }
+
 }
