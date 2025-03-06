@@ -18,6 +18,12 @@ public class Rank {
                 .filter(piece -> !piece.getName().equals(Type.NO_PIECE))
                 .count();
     }
+    public int pieceCountPerColorAndType(Color color, Type type) {
+        return (int) rank.stream()
+                .filter(piece -> piece.getColor().equals(color))
+                .filter(piece -> piece.getName().equals(type))
+                .count();
+    }
     public String getPawnString(Color color) {
         StringBuilder sb = new StringBuilder();
         for (Piece piece : rank) {
