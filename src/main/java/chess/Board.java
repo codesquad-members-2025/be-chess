@@ -21,6 +21,9 @@ public class Board {
                 .sum();
     }
 
+    public void addPiece(Rank rank) {
+        chessBoard.add(rank);
+    }
     public void initialize() {
         addBlackPiecesToBoard();
         addBlackPawnToBoard();
