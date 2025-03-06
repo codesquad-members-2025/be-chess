@@ -35,7 +35,10 @@ public class Board {
             pawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
             pawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
         }
+        placePawn();
+    }
 
+    public void placePawn() {
         int pawnsIndex = 0; // Pawn 리스트 전체를 순회하기 위한 인덱스 값
 
         for (int i = 0; i < board.length; ++i) {
