@@ -20,6 +20,7 @@ public class PawnTest {
     public void create_default_constructor() {
         Pawn pawn = new Pawn();
         assertEquals(Pawn.WHITE_COLOR, pawn.getColor());
+        assertEquals(Pawn.WHITE_REPRESENTATION, pawn.getRepresentation);
     }
 
     void verifyPawn(final String color, final char representation) {
