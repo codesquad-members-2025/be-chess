@@ -100,6 +100,13 @@ public class Board {
         return whitePieces.get(index);
     }
 
+    public Piece findPiece(String pos) {
+        int col = pos.charAt(0) - 'a';
+        int rank = pos.charAt(1) - '1';
+
+        return board.get(BOARD_SIZE - rank - 1).getPieces().get(col);
+    }
+
     public String getPawnsResultWith(int row) {
         return board.get(row).toString();
     }

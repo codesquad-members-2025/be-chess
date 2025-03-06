@@ -1,5 +1,7 @@
 package org.chess.domain.pieces;
 
+import java.util.Objects;
+
 public class Piece {
 
     public enum Color {
