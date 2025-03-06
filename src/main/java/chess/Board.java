@@ -5,7 +5,9 @@ import chess.pieces.Piece.Color;
 import chess.pieces.Piece.Type;
 import chess.utils.StringUtils;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board {
     public static final int MAX_BOARD = 8;
@@ -150,5 +152,13 @@ public class Board {
             if (count >= 2) pawnCount += count;
         }
         return sum - (pawnCount * 0.5);
+    }
+
+    public List<Piece> sortPiece(Color color) {
+        return chessBoard.stream()
+                .flatMap(rank -> rank.sortByScore(color).stream())
+                .sorted(Comparator.comparingDouble(Piece::getScore).reversed())
+                .collect(Collectors.toList());
+
     }
 }
