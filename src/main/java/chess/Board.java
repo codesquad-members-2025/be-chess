@@ -66,7 +66,7 @@ public class Board {
         whitePieces.add(Piece.createWhite(Type.KNIGHT));
         whitePieces.add(Piece.createWhite(Type.ROOK));
 
-        addRankToChessBoard(1, whitePieces);
+        chessBoard.add(new Rank(whitePieces));
     }
 
     private void addBlackPiecesToBoard() {
@@ -80,28 +80,19 @@ public class Board {
         blackPieces.add(Piece.createBlack(Type.KNIGHT));
         blackPieces.add(Piece.createBlack(Type.ROOK));
 
-        addRankToChessBoard(1, blackPieces);
+        chessBoard.add(new Rank(blackPieces));
     }
 
     private void addBlackPawnToBoard() {
-        List<Piece> blackPawns = new ArrayList<>();
-        addPieceToList(blackPawns, Piece.createBlack(Type.PAWN));
-
-        addRankToChessBoard(1, blackPawns);
+        addRankToChessBoard(1, Piece.createBlack(Type.PAWN));
     }
 
     private void addWhitePawnToBoard() {
-        List<Piece> whitePawns = new ArrayList<>();
-        addPieceToList(whitePawns, Piece.createWhite(Type.PAWN));
-
-        addRankToChessBoard(1, whitePawns);
+        addRankToChessBoard(1, Piece.createWhite(Type.PAWN));
     }
 
     private void addBlankToBoard() {
-        List<Piece> blank = new ArrayList<>();
-        addPieceToList(blank, Piece.createBlank());
-
-        addRankToChessBoard(4, blank);
+        addRankToChessBoard(4, Piece.createBlank());
     }
 
     //보드 위에 존재하는 특정 색, 종류의 기물 갯수 리턴
@@ -122,20 +113,32 @@ public class Board {
     }
 
     public void initializeEmpty() {
-        List<Piece> blank = new ArrayList<>();
-        addPieceToList(blank, Piece.createBlank());
-        addRankToChessBoard(MAX_BOARD, blank);
+        addRankToChessBoard(MAX_BOARD, Piece.createBlank());
     }
 
-    private void addRankToChessBoard(int maxBoard, List<Piece> blank) {
+    public void move(String position, Piece piece) {
+        char x = position.charAt(0);
+        int xPos = x - 'a';
+        char y = position.charAt(1);
+        int yPos = Character.getNumericValue(y);
+
+        Rank rank = chessBoard.get(MAX_BOARD - yPos);
+        rank.movePiece(xPos, piece);
+
+    }
+
+    private void addRankToChessBoard(int maxBoard, Piece piece) {
         for (int i = 0; i < maxBoard; i++) {
-            chessBoard.add(new Rank(blank));
+            List<Piece> pieces = addPieceToList(piece);
+            chessBoard.add(new Rank(pieces));
         }
     }
 
-    private void addPieceToList(List<Piece> rank, Piece piece) {
+    private List<Piece> addPieceToList(Piece piece) {
+        List<Piece> rank = new ArrayList<>();
         for (int i = 0; i < MAX_BOARD; i++) {
             rank.add(piece);
         }
+        return rank;
     }
 }
