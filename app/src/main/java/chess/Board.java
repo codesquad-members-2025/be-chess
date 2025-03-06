@@ -2,8 +2,8 @@ package chess;
 
 import pieces.Pawn;
 
-import java.util.ArrayList;
-import java.util.List;
+import static utils.StringUtils.appendNewLine;
+
 
 public class Board {
     private final char[][] board =  new char[8][8];
@@ -37,7 +37,7 @@ public class Board {
             for (int j = 0; j < 8; j++) {
                 sb.append(board[i][j]);
             }
-            sb.append("\n");
+            sb.append(appendNewLine(""));
         }
         return sb.toString();
     }
