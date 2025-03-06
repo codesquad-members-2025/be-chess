@@ -45,4 +45,8 @@ public class Rank {
     public Piece getPieceByPosition(int pos) {
         return rank.get(pos);
     }
+
+    public void movePiece(int pos, Piece piece) {
+        rank.set(pos, piece);
+    }
 }
