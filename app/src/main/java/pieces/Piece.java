@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.Objects;
+
 public class Piece {
 
     private final Color color;
@@ -11,27 +13,29 @@ public class Piece {
     }
 
     public enum Type {
-        PAWN('p'),
-        ROOK('r'),
-        KNIGHT('n'),
-        BISHOP('b'),
-        QUEEN('q'),
-        KING('k'),
-        NO_PIECE('.');
+        PAWN('p', 1.0),
+        ROOK('r', 5.0),
+        KNIGHT('n', 2.5),
+        BISHOP('b', 3.0),
+        QUEEN('q', 9.0),
+        KING('k',0.0),
+        NO_PIECE('.', 0.0);
 
         private char representation;
+        private double defaultPoint;
 
-        Type(char representation) {
+        Type(char representation, double defaultPoint) {
             this.representation = representation;
+            this.defaultPoint = defaultPoint;
         }
 
         public char getWhiteRepresentation(){
             return representation;
         }
-
         public char getBlackRepresentation(){
             return Character.toUpperCase(representation);
         }
+        public double getdefaultPoint(){ return defaultPoint; }
     }
 
     private Piece(Color color, Type type) {
@@ -46,11 +50,9 @@ public class Piece {
     private static Piece createWhite(Type type) {
         return new Piece(Color.WHITE, type);
     }
-
     private static Piece createBlack(Type type) {
         return new Piece(Color.BLACK, type);
     }
-
     public static Piece createWhitePawn(){ return createWhite(Type.PAWN); }
     public static Piece createBlackPawn(){ return createBlack(Type.PAWN);}
     public static Piece createWhiteRook(){ return createWhite(Type.ROOK); }
@@ -70,12 +72,27 @@ public class Piece {
     public boolean isWhite(){
         return color == Color.WHITE;
     }
-
     public boolean isBlack(){
         return color == Color.BLACK;
     }
 
     public Type getType(){
         return type;
+    }
+    public Color getColor() { return color;}
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return color == piece.color && type == piece.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, type);
     }
 }
