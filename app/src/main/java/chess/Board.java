@@ -1,6 +1,7 @@
 package chess;
 
 import chess.pieces.Pawn;
+import chess.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static chess.pieces.Pawn.*;
+import static chess.utils.StringUtils.*;
 
 public class Board {
     private static final int WHITE_PAWN_RANK = 6;
@@ -71,7 +73,7 @@ public class Board {
             for (int file = 0; file < FILE_SIZE; file++) {
                 sb.append(board[rank][file]);
             }
-            sb.append("\n");
+            sb = new StringBuilder(StringUtils.appendNewLine(sb.toString()));
         }
         return sb.toString();
     }
