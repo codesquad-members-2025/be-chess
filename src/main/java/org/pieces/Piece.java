@@ -1,21 +1,19 @@
 package org.pieces;
 
-public class Pawn {
+public class Piece {
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
     public static final char WHITE_REPRESENTATION = 'p';
     public static final char BLACK_REPRESENTATION = 'P';
 
     private final String color;
+    private final String name;
     private final char representation;
 
-    public Pawn(){
-        this(Pawn.WHITE_COLOR);
-    }
-
-    public Pawn(String color){
+    private Piece(String color,String name){
         this.color = color;
-        if(color == WHITE_COLOR) representation = WHITE_REPRESENTATION;
+        this.name = name;
+        if(color.equals(WHITE_COLOR)) representation = WHITE_REPRESENTATION;
         else representation = BLACK_REPRESENTATION;
     }
 
@@ -27,4 +25,11 @@ public class Pawn {
         return representation;
     }
 
+    public static Piece createWhitePawn(){
+        return new Piece(Piece.WHITE_COLOR,"pawn");
+    }
+
+    public static Piece createBlackPawn(){
+        return new Piece(Piece.BLACK_COLOR,"pawn");
+    }
 }

@@ -1,23 +1,23 @@
 package org.chess;
 
-import org.pieces.Pawn;
+import org.pieces.Piece;
 
 import java.util.*;
 
 public class Board {
-    private List<Pawn> pieceList = new ArrayList<>();
-    private List<Pawn> whitePawnList = new ArrayList<>();
-    private List<Pawn> blackPawnList = new ArrayList<>();
+    private List<Piece> pieceList = new ArrayList<>();
+    private List<Piece> whitePawnList = new ArrayList<>();
+    private List<Piece> blackPawnList = new ArrayList<>();
 
     public Board() {
         pieceList = new ArrayList<>();
     }
 
-    public void add(Pawn pawn) {
-        pieceList.add(pawn);
+    public void add(Piece piece) {
+        pieceList.add(piece);
     }
 
-    public Pawn findPawn(int number) {
+    public Piece findPawn(int number) {
         return pieceList.get(number);
     }
 
@@ -27,19 +27,19 @@ public class Board {
 
     public void initialize() {
         for(int i = 0 ; i<8; i++){
-            Pawn pawn = new Pawn(Pawn.WHITE_COLOR);
-            whitePawnList.add(pawn);
+            Piece piece = Piece.createWhitePawn();
+            whitePawnList.add(piece);
         }
         for(int i = 0 ; i<8; i++){
-            Pawn pawn = new Pawn(Pawn.BLACK_COLOR);
-            blackPawnList.add(pawn);
+            Piece piece = Piece.createBlackPawn();
+            blackPawnList.add(piece);
         }
     }
 
-    public String getPawnsResult(List<Pawn> pawnList){
+    public String getPawnsResult(List<Piece> pawnList){
         StringBuilder sb = new StringBuilder();
-        for(Pawn pawn : pawnList){
-            sb.append(pawn.getRepresentation());
+        for(Piece piece : pawnList){
+            sb.append(piece.getRepresentation());
         }
         return sb.toString();
     }
