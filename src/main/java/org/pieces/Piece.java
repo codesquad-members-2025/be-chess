@@ -1,6 +1,33 @@
 package org.pieces;
 
 public class Piece {
+    public enum Color{
+        WHITE,BLACK,NOCOLOR;
+    }
+    public enum Type{
+        PAWN('p'),
+        ROOK('r'),
+        KNIGHT('n'),
+        BISHOP('b'),
+        QUEEN('q'),
+        KING('k'),
+        NO_PIECE('e');
+
+        private char representation;
+
+        Type(char representation){
+            this.representation = representation;
+        }
+
+        public char getWhiteRepresentation(){
+            return representation;
+        }
+
+        public char getBlackRepresentation(){
+            return Character.toUpperCase(representation);
+        }
+    }
+
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
     public static final char WHITE_PAWN_REPRESENTATION = 'p';

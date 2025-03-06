@@ -6,6 +6,13 @@ import static org.assertj.core.api.Assertions.*;
 
 public class PieceTest {
     @Test
+    public void getRepresentationPerPiece() throws Exception {
+        assertThat(Piece.Type.PAWN.getWhiteRepresentation()).isEqualTo('p');
+        assertThat(Piece.Type.PAWN.getBlackRepresentation()).isEqualTo('P');
+    }
+
+
+    @Test
     @DisplayName("모든 기물 생성 테스트")
     public void create_piece() {
         verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
