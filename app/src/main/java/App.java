@@ -14,7 +14,7 @@ public class App {
             if (num == 1) {
                 System.out.println("체스게임을 시작합니다.");
                 board.initialize();
-                board.print();
+                System.out.println(board.showBoard());
             } else if (num == 2) {
                 System.out.println("체스게임을 종료합니다.");
                 break;
