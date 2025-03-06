@@ -34,6 +34,8 @@ public class Piece {
             //폰을 제외한 문자들은 하얀색 + 6 -> 검은색
             return (char) (defaultRepresentation + 6);
         }
+
+
     }
 
     private Type name;
@@ -56,6 +58,17 @@ public class Piece {
     }
     public static Piece createBlack(Type type) {
         return new Piece(type, Color.BLACK);
+    }
+    public static Piece createPieceByRepresentation(char representation) {
+        for (Type value : Type.values()) {
+            if (value.getRepresentation(Color.WHITE) == representation){
+                return Piece.createWhite(value);
+            }
+            if (value.getRepresentation(Color.BLACK) == representation){
+                return Piece.createBlack(value);
+            }
+        }
+        return Piece.createBlank();
     }
     public Type getName() {
         return name;
