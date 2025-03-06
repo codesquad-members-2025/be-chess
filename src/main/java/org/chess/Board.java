@@ -7,11 +7,7 @@ import java.util.*;
 import static org.utils.StringUtils.appendNewLine;
 
 public class Board {
-    private List<Rank> rankList = new ArrayList<>();
-    private List<Piece> whitePieceList = new ArrayList<>();
-    private List<Piece> blackPieceList = new ArrayList<>();
-    private List<Piece> whitePawnList = new ArrayList<>();
-    private List<Piece> blackPawnList = new ArrayList<>();
+    private final List<Rank> rankList = new ArrayList<>();
 
     public Board() {
     }
@@ -64,18 +60,6 @@ public class Board {
             count+=rank.getCount();
         }
         return count;
-    }
-
-    public String getPawnsResult(List<Piece> pawnList) {
-        StringBuilder sb = new StringBuilder();
-        for (Piece piece : pawnList) {
-            sb.append(piece.getRepresentation());
-        }
-        return sb.toString();
-    }
-
-    public String getBlankLine() {
-        return "........";
     }
 
     public String showBoard() {

@@ -2,7 +2,7 @@ package org.pieces;
 
 public class Piece {
     public enum Color {
-        WHITE, BLACK, NOCOLOR;
+        WHITE, BLACK, NOCOLOR
     }
 
     public enum Type {
@@ -14,7 +14,7 @@ public class Piece {
         KING('k'),
         NO_PIECE('.');
 
-        private char representation;
+        private final char representation;
 
         Type(char representation) {
             this.representation = representation;
