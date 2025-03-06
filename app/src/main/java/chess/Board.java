@@ -30,4 +30,15 @@ public class Board {
     public String getBlackPawnsResult() {
         return new String(board[1]);
     }
+
+    public String print() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                sb.append(board[i][j]);
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
