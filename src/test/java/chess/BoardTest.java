@@ -54,7 +54,7 @@ class BoardTest {
 
     @Test
     @DisplayName("초기화 후 특정위치에 기물이 존재하는지 확인합니다.")
-    public void findPiece() {
+    void findPiece() {
         board.initialize();
 
         assertThat(board.findPiece("a8").getName()).isEqualTo(Type.ROOK);
@@ -69,7 +69,7 @@ class BoardTest {
 
     @Test
     @DisplayName("임의의 위치에 기물이 추가 되어야한다.")
-    public void move(){
+    void move(){
         board.initializeEmpty();
 
         String position = "b5";
@@ -80,7 +80,8 @@ class BoardTest {
         System.out.println(board.showBoard());
     }
     @Test
-    public void calculatePoint() {
+    @DisplayName("보드 위에 있는 기물들의 점수를 구한다.")
+    void calculatePoint() {
         board.initializeEmpty();
 
         addPiece("b6", Piece.createBlack(Type.PAWN));
@@ -97,6 +98,28 @@ class BoardTest {
         assertThat(board.calculatePoint(Color.WHITE)).isCloseTo(6.0, within(0.01));
 
         System.out.println(board.showBoard());
+    }
+
+    @Test
+    @DisplayName("보드 위에 남아있는 기물들을 점수 순으로 내림차순한다.")
+    void sortPieces() {
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlack(Type.PAWN));
+        addPiece("e6", Piece.createBlack(Type.QUEEN));
+        addPiece("b8", Piece.createBlack(Type.KING));
+        addPiece("c8", Piece.createBlack(Type.ROOK));
+
+        addPiece("g2", Piece.createWhite(Type.PAWN));
+        addPiece("g3", Piece.createWhite(Type.PAWN));
+        addPiece("e1", Piece.createWhite(Type.ROOK));
+        addPiece("f1", Piece.createWhite(Type.KING));
+
+        List<Piece> sortedBlack = board.sortPiece(Color.BLACK);
+        List<Piece> sortedWhite = board.sortPiece(Color.WHITE);
+
+        assertThat(sortedBlack).extracting(Piece::getName).containsExactly(Type.QUEEN, Type.ROOK, Type.PAWN, Type.KING);
+        assertThat(sortedWhite).extracting(Piece::getName).containsExactly(Type.ROOK, Type.PAWN, Type.PAWN, Type.KING);
     }
 
     private void addPiece(String position, Piece piece) {
