@@ -14,10 +14,13 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 // AssertJ 의존성 추가
     testImplementation 'org.assertj:assertj-core:3.23.1'  // 최신 버전으로 사용 가능
+    // JUnit 4 사용 - cannot find symbol class Test 에러 해결
+    testImplementation 'junit:junit:4.13.2'
 }
 
 test {
-    useJUnitPlatform()
+    //useJUnitPlatform() JUnit 5와 충돌이 날 수 있기 때문에 useJUnit을 사용해줘야 한다.
+    useJUnit()  // JUnit 4 사용 - No matching tests found in any candidate test task. 에러 해결
 }
 
 tasks.withType(JavaCompile) {
