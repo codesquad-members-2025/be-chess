@@ -2,6 +2,7 @@ package pieces;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PieceTest {
     @Test
@@ -23,5 +24,21 @@ public class PieceTest {
     private void verifyPiece(final Piece piece, final String color, final char representation) {
         assertEquals(color, piece.getColor());
         assertEquals(representation, piece.getRepresentation());
+    }
+
+    @Test
+    public void verifyColor() {
+        Piece WhitePawn = Piece.createWhitePawn();
+        Piece BlackPawn = Piece.createBlackPawn();
+        Piece WhiteRook = Piece.createWhiteRook();
+        Piece BlackRook = Piece.createBlackRook();
+        Piece WhiteKnight = Piece.createWhiteKnight();
+        Piece BlackKnight = Piece.createBlackKnight();
+        assertTrue(WhitePawn.isWhite());
+        assertTrue(BlackPawn.isBlack());
+        assertTrue(WhiteRook.isWhite());
+        assertTrue(BlackRook.isBlack());
+        assertTrue(WhiteKnight.isWhite());
+        assertTrue(BlackKnight.isBlack());
     }
 }
