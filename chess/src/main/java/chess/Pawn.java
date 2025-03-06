@@ -2,7 +2,6 @@ package chess;
 
 public class Pawn {
     String color;
-
     public static final String BLACK_COLOR = "black";
     public static final String WHITE_COLOR = "white";
 

@@ -3,7 +3,6 @@ package chess;
 import java.util.ArrayList;
 
 public class Board {
-
     ArrayList<Pawn> boardList = new ArrayList<>();
 
     public void add(Pawn pawn) {
