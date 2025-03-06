@@ -40,4 +40,15 @@ public class Board {
             pawnsIndex += 2;
         }
     }
+
+    public String getWhitePawnResult() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < board.length; ++i) {
+            sb.append(board[1][i]);
+        }
+
+        return sb.toString();
+    }
+
 }
