@@ -115,4 +115,14 @@ public class Board {
                 .mapToInt(rank -> rank.pieceCountPerColorAndType(color, type))
                 .sum();
     }
+
+    public Piece findPiece(String position) {
+        char x = position.charAt(0);
+        int xPos = x - 'a';
+        char y = position.charAt(1);
+        int yPos = Character.getNumericValue(y);
+
+        Rank rank = chessBoard.get(MAX_BOARD - yPos);
+        return rank.getPieceByPosition(xPos);
+    }
 }

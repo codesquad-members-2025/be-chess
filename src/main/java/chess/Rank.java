@@ -41,4 +41,8 @@ public class Rank {
 
         return name.getRepresentation(color);
     }
+
+    public Piece getPieceByPosition(int pos) {
+        return rank.get(pos);
+    }
 }
