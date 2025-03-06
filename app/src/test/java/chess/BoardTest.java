@@ -1,9 +1,8 @@
 package chess;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pieces.Pawn;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BoardTest {
     private Board board;
@@ -11,22 +10,22 @@ public class BoardTest {
     private Pawn black;
 
     @BeforeEach
-    public void setUp(Board board) {
+    public void setUp() {
         board = new Board();
-        white = new Pawn(Pawn.BLACK);
+        white = new Pawn(Pawn.WHITE);
         black = new Pawn(Pawn.BLACK);
     }
 
     @Test
     public void create() {
         board.add(white);
-        Assertions.assertEquals(1, board.size());
-        Assertions.assertEquals(white, board.findPawn(0));
+        assertEquals(1, board.size());
+        assertEquals(white, board.findPawn(0));
 
 
         board.add(black);
-        Assertions.assertEquals(2, board.size());
-        Assertions.assertEquals(black, board.findPawn(1));
+        assertEquals(2, board.size());
+        assertEquals(black, board.findPawn(1));
 
 
     }
