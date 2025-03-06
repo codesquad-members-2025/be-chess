@@ -7,82 +7,161 @@ import java.util.*;
 import static org.utils.StringUtils.appendNewLine;
 
 public class Board {
-    private List<Piece> whitePieceList = new ArrayList<>();
-    private List<Piece> blackPieceList = new ArrayList<>();
-    private List<Piece> whitePawnList = new ArrayList<>();
-    private List<Piece> blackPawnList = new ArrayList<>();
+    private final List<Rank> rankList = new ArrayList<>();
 
     public Board() {
     }
 
     public void initialize() {
-        for (int i = 0; i < 8; i++) {
-            Piece piece = Piece.createWhitePawn();
-            whitePawnList.add(piece);
+        // 중요!
+        // rankList는 rank에 따라 관리
+        // 즉 rankList.get(0)을 하면 rank1번이 나오도록 관리함
+        // 따라서 출력할 때 rank8부터 출력하도록 변경하면 됨
+        rankList.add(makeWhitePieceRank());
+        rankList.add(makeWhitePawnPieceRank());
+        for (int i = 0; i < 4; i++) {
+            rankList.add(new Rank());
         }
+        rankList.add(makeBlackPawnPieceRank());
+        rankList.add(makeBlackPieceRank());
+    }
+
+    private Rank makeBlackPieceRank(){
+        List<Piece> rank = new ArrayList<>();
+        rank.add(Piece.createBlackRook());
+        rank.add(Piece.createBlackKnight());
+        rank.add(Piece.createBlackBishop());
+        rank.add(Piece.createBlackQueen());
+        rank.add(Piece.createBlackKing());
+        rank.add(Piece.createBlackBishop());
+        rank.add(Piece.createBlackKnight());
+        rank.add(Piece.createBlackRook());
+        return new Rank(rank);
+    }
+
+    private Rank makeWhitePieceRank(){
+        List<Piece> rank = new ArrayList<>();
+        rank.add(Piece.createWhiteRook());
+        rank.add(Piece.createWhiteKnight());
+        rank.add(Piece.createWhiteBishop());
+        rank.add(Piece.createWhiteQueen());
+        rank.add(Piece.createWhiteKing());
+        rank.add(Piece.createWhiteBishop());
+        rank.add(Piece.createWhiteKnight());
+        rank.add(Piece.createWhiteRook());
+        return new Rank(rank);
+    }
+
+    private Rank makeBlackPawnPieceRank(){
+        List<Piece> rank = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             Piece piece = Piece.createBlackPawn();
-            blackPawnList.add(piece);
+            rank.add(piece);
         }
-        whitePieceList.add(Piece.createWhiteRook());
-        whitePieceList.add(Piece.createWhiteKnight());
-        whitePieceList.add(Piece.createWhiteBishop());
-        whitePieceList.add(Piece.createWhiteQueen());
-        whitePieceList.add(Piece.createWhiteKing());
-        whitePieceList.add(Piece.createWhiteBishop());
-        whitePieceList.add(Piece.createWhiteKnight());
-        whitePieceList.add(Piece.createWhiteRook());
 
-        blackPieceList.add(Piece.createBlackRook());
-        blackPieceList.add(Piece.createBlackKnight());
-        blackPieceList.add(Piece.createBlackBishop());
-        blackPieceList.add(Piece.createBlackQueen());
-        blackPieceList.add(Piece.createBlackKing());
-        blackPieceList.add(Piece.createBlackBishop());
-        blackPieceList.add(Piece.createBlackKnight());
-        blackPieceList.add(Piece.createBlackRook());
+        return new Rank(rank);
+    }
+
+    private Rank makeWhitePawnPieceRank(){
+        List<Piece> rank = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            Piece piece = Piece.createWhitePawn();
+            rank.add(piece);
+        }
+
+        return new Rank(rank);
+    }
+
+    public void initializeEmpty() {
+        for (int i = 0; i < 8; i++) {
+            rankList.add(new Rank());
+        }
     }
 
     public int pieceCount() {
-        return blackPieceList.size() + blackPawnList.size() + whitePieceList.size() + whitePawnList.size();
-    }
-
-    public String getPawnsResult(List<Piece> pawnList) {
-        StringBuilder sb = new StringBuilder();
-        for (Piece piece : pawnList) {
-            sb.append(piece.getRepresentation());
+        int count = 0;
+        for (Rank rank : rankList) {
+            count += rank.getTotalPieceCount();
         }
-        return sb.toString();
-    }
-
-    public String getBlankLine() {
-        return "........";
+        return count;
     }
 
     public String showBoard() {
+        // 중요!
+        // rankList는 rank에 따라 관리
+        // 즉 rankList.get(0)을 하면 rank1번이 나오도록 관리함
+        // 따라서 출력할 때 rank8부터 출력하도록 변경하면 됨
         StringBuilder sb = new StringBuilder();
-        String blank = appendNewLine(getBlankLine());
-        for (Piece piece : blackPieceList) {
-            sb.append(piece.getRepresentation());
+        for (int i = rankList.size() - 1; i >= 0; i--) {
+            sb.append(appendNewLine(rankList.get(i).print()));
         }
-        sb.append(appendNewLine(""));
-        for (Piece piece : blackPawnList) {
-            sb.append(piece.getRepresentation());
-        }
-        sb.append(appendNewLine(""));
-
-        for (int i = 0; i < 4; i++) {
-            sb.append(blank);
-        }
-
-        for (Piece piece : whitePawnList) {
-            sb.append(piece.getRepresentation());
-        }
-        sb.append(appendNewLine(""));
-        for (Piece piece : whitePieceList) {
-            sb.append(piece.getRepresentation());
-        }
-        sb.append(appendNewLine(""));
         return sb.toString();
+    }
+
+    public int getPieceCount(Piece.Color color, Piece.Type type) {
+        int count = 0;
+        for (Rank rank : rankList) {
+            count += rank.getPieceCount(color, type);
+        }
+        return count;
+    }
+
+    public Piece findPiece(String location) {
+        Coordinate coordinate = parseCoordinate(location);
+        int fileIndex = coordinate.getFileIndex();
+        int rankIndex = coordinate.getRankIndex();
+        return rankList.get(rankIndex).getPieceByFileIndex(fileIndex);
+    }
+
+    public void move(String location, Piece piece) {
+        Coordinate coordinate = parseCoordinate(location);
+        int fileIndex = coordinate.getFileIndex();
+        int rankIndex = coordinate.getRankIndex();
+        rankList.get(rankIndex).putPieceByFileIndex(fileIndex, piece);
+    }
+
+    private Coordinate parseCoordinate(String location) {
+        try {
+            return new Coordinate(location);
+        } catch (IllegalArgumentException e) {
+            System.out.println("좌표 오류 : ");
+            return null;
+        }
+    }
+
+    public double calculatePoint(Piece.Color color) {
+        int[] pawnLocation = {0, 0, 0, 0, 0, 0, 0, 0};
+        double point = 0.0;
+        for (Rank rank : rankList) {
+            for (int i = 0; i < 8; i++) {
+                Piece piece = rank.getPieceByFileIndex(i);
+                if (piece.getColor() == color) point += piece.getPoint();
+                // 폰이 같은 열에 있으면 감점되기 때문에 폰의 위치만 따로 관리
+                if (piece.getColor() == color && piece.getType() == Piece.Type.PAWN) pawnLocation[i] += 1;
+            }
+        }
+        for (int pawnCount : pawnLocation) {
+            if (pawnCount > 1) point -= (double) pawnCount / 2;
+        }
+
+        return point;
+    }
+
+    public List<Piece> makePieceList(Piece.Color color) {
+        List<Piece> sameColorPieces = new ArrayList<>();
+        for (Rank rank : rankList) {
+            for (int i = 0; i < 8; i++) {
+                Piece piece = rank.getPieceByFileIndex(i);
+                if (piece.getColor() == color) sameColorPieces.add(piece);
+            }
+        }
+        return sameColorPieces;
+    }
+
+    public List<Piece> makeAndSortPieceList(Piece.Color color, boolean isAscending) {
+        List<Piece> sortedPieceList = makePieceList(color);
+        Collections.sort(sortedPieceList);
+        if (!isAscending) Collections.reverse(sortedPieceList);
+        return sortedPieceList;
     }
 }
