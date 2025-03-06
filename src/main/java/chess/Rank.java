@@ -56,4 +56,11 @@ public class Rank {
                 .mapToDouble(piece -> piece.getName().getDefaultPoint())
                 .sum();
     }
+
+    public int checkPawnCount(int index, Color color) {
+        int count = 0;
+        if (rank.get(index).getName() == Type.PAWN && rank.get(index).getColor().equals(color))
+            count++;
+        return count;
+    }
 }
