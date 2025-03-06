@@ -4,59 +4,70 @@ import org.pieces.Piece;
 
 import java.util.*;
 
+import static org.utils.StringUtils.appendNewLine;
+
 public class Board {
-    private List<Piece> pieceList = new ArrayList<>();
+    private List<Piece> whitePieceList = new ArrayList<>();
+    private List<Piece> blackPieceList = new ArrayList<>();
     private List<Piece> whitePawnList = new ArrayList<>();
     private List<Piece> blackPawnList = new ArrayList<>();
 
     public Board() {
-        pieceList = new ArrayList<>();
-    }
-
-    public void add(Piece piece) {
-        pieceList.add(piece);
-    }
-
-    public Piece findPawn(int number) {
-        return pieceList.get(number);
-    }
-
-    public int size() {
-        return pieceList.size();
     }
 
     public void initialize() {
-        for(int i = 0 ; i<8; i++){
+        for (int i = 0; i < 8; i++) {
             Piece piece = Piece.createWhitePawn();
             whitePawnList.add(piece);
         }
-        for(int i = 0 ; i<8; i++){
+        for (int i = 0; i < 8; i++) {
             Piece piece = Piece.createBlackPawn();
             blackPawnList.add(piece);
         }
+        whitePieceList.add(Piece.createWhiteRook());
+        whitePieceList.add(Piece.createWhiteKnight());
+        whitePieceList.add(Piece.createWhiteBishop());
+        whitePieceList.add(Piece.createWhiteQueen());
+        whitePieceList.add(Piece.createWhiteKing());
+        whitePieceList.add(Piece.createWhiteBishop());
+        whitePieceList.add(Piece.createWhiteKnight());
+        whitePieceList.add(Piece.createWhiteRook());
+
+        blackPieceList.add(Piece.createBlackRook());
+        blackPieceList.add(Piece.createBlackKnight());
+        blackPieceList.add(Piece.createBlackBishop());
+        blackPieceList.add(Piece.createBlackQueen());
+        blackPieceList.add(Piece.createBlackKing());
+        blackPieceList.add(Piece.createBlackBishop());
+        blackPieceList.add(Piece.createBlackKnight());
+        blackPieceList.add(Piece.createBlackRook());
     }
 
-    public String getPawnsResult(List<Piece> pawnList){
+    public int pieceCount() {
+        return blackPieceList.size() + blackPawnList.size() + whitePieceList.size() + whitePawnList.size();
+    }
+
+    public String getPawnsResult(List<Piece> pawnList) {
         StringBuilder sb = new StringBuilder();
-        for(Piece piece : pawnList){
+        for (Piece piece : pawnList) {
             sb.append(piece.getRepresentation());
         }
         return sb.toString();
     }
 
-    public String getWhitePawnsResult(){
+    public String getWhitePawnsResult() {
         return getPawnsResult(whitePawnList);
     }
 
-    public String getBlackPawnsResult(){
+    public String getBlackPawnsResult() {
         return getPawnsResult(blackPawnList);
     }
 
-    public String getBlankLine(){
+    public String getBlankLine() {
         return "........";
     }
 
-    public String print(){
+    public String print() {
         StringBuilder sb = new StringBuilder();
         sb.append(getBlankLine()).append("\n");
         sb.append(getBlackPawnsResult()).append("\n");
@@ -67,6 +78,33 @@ public class Board {
         sb.append(getWhitePawnsResult()).append("\n");
         sb.append(getBlankLine()).append("\n");
 
+        return sb.toString();
+    }
+
+    public String showBoard() {
+        StringBuilder sb = new StringBuilder();
+        String blank = appendNewLine("........");
+        for (Piece piece : blackPieceList) {
+            sb.append(piece.getRepresentation());
+        }
+        sb.append(appendNewLine(""));
+        for (Piece piece : blackPawnList) {
+            sb.append(piece.getRepresentation());
+        }
+        sb.append(appendNewLine(""));
+
+        for (int i = 0; i < 4; i++) {
+            sb.append(blank);
+        }
+
+        for (Piece piece : whitePawnList) {
+            sb.append(piece.getRepresentation());
+        }
+        sb.append(appendNewLine(""));
+        for (Piece piece : whitePieceList) {
+            sb.append(piece.getRepresentation());
+        }
+        sb.append(appendNewLine(""));
         return sb.toString();
     }
 }

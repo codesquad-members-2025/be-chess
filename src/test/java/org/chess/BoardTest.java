@@ -2,30 +2,29 @@ package org.chess;
 
 import org.pieces.Piece;
 import org.junit.jupiter.api.*;
+
 import static org.assertj.core.api.Assertions.*;
+import static org.utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     Board board;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         board = new Board();
     }
 
     @Test
-    public void initialize() throws Exception {
-        board.initialize();
-        assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
-        assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
-    }
-
-    @Test
+    @DisplayName("체스 보드 생성 테스트")
     public void create() throws Exception {
-        Piece white = Piece.createWhitePawn();
-        Piece black = Piece.createBlackPawn();
-
-        board.add(white);
-        assertThat(board.size()).isEqualTo(1);
-        assertThat(board.findPawn(0)).isEqualTo(white);
+        board.initialize();
+        assertThat(board.pieceCount()).isEqualTo(32);
+        String blankRank = appendNewLine("........");
+        assertThat(board.showBoard())
+                .isEqualTo(appendNewLine("RNBQKBNR") +
+                        appendNewLine("PPPPPPPP") +
+                        blankRank + blankRank + blankRank + blankRank +
+                        appendNewLine("pppppppp") +
+                        appendNewLine("rnbqkbnr"));
     }
 }
