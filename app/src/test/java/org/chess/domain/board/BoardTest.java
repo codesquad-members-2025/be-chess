@@ -116,4 +116,18 @@ class BoardTest {
                 .containsExactly(Piece.Color.WHITE, Piece.Type.ROOK);
     }
 
+    @Test
+    @DisplayName("임의의 기물을 체스판위에 추가할 수 있어야 한다")
+    void 기물_추가_테스트() {
+        // given
+        Board board = new Board();
+        board.initializeEmptyBoard();
+
+        String position = "b5";
+        Piece piece = Piece.createWhite(Piece.Type.ROOK);
+        board.move(position, piece);
+
+        assertThat(piece).isEqualTo(board.findPiece(position));
+    }
+
 }
