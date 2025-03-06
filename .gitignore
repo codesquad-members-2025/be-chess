@@ -4,7 +4,9 @@
 
 # Gradle 관련
 .gradle/
-build/
+# Gradle build 결과물 제외
+/build/
+
 !gradle/wrapper/gradle-wrapper.jar
 
 # OS 불필요 파일
