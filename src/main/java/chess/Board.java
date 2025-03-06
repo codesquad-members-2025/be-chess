@@ -137,8 +137,18 @@ public class Board {
     }
 
     public double calculatePoint(Color color) {
-        return chessBoard.stream()
+        double sum = chessBoard.stream()
                 .mapToDouble(rank -> rank.getPointByColor(color))
                 .sum();
+
+        int pawnCount = 0;
+        for (int i = 0; i < MAX_BOARD; i++) {
+            int count = 0;
+            for (Rank rank : chessBoard) {
+                count += rank.checkPawnCount(i, color);
+            }
+            if (count >= 2) pawnCount += count;
+        }
+        return sum - (pawnCount * 0.5);
     }
 }
