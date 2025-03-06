@@ -21,7 +21,7 @@ class BoardTest {
     }
     @Test
     @DisplayName("보드가 초기화 되면 모든 말들이 생성되어야 한다.")
-    void create() throws Exception {
+    void create() {
         board.initialize();
         assertThat(board.pieceCount()).isEqualTo(32);
         String blankRank = appendNewLine("........");
@@ -34,7 +34,7 @@ class BoardTest {
 
     @Test
     @DisplayName("보드초기화시 같은 색의 폰들이 한줄에 있어야한다.")
-    void initialize() throws Exception {
+    void initialize() {
         board.initialize();
         assertThat(board.getPawnResult(Color.WHITE)).isEqualTo("♙♙♙♙♙♙♙♙");
         assertThat(board.getPawnResult(Color.BLACK)).isEqualTo("♟♟♟♟♟♟♟♟");
@@ -64,7 +64,7 @@ class BoardTest {
 
     @Test
     @DisplayName("임의의 위치에 기물이 추가 되어야한다.")
-    public void move() throws Exception {
+    public void move(){
         board.initializeEmpty();
 
         String position = "b5";
