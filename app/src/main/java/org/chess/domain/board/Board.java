@@ -27,7 +27,7 @@ public class Board {
 
     public void initialize() {
         setupPieces();
-        initializeBoard();
+        initializeEmptyBoard();
         placePiecesOnBoard();
     }
 
@@ -51,7 +51,7 @@ public class Board {
 
     }
 
-    private void initializeBoard() {
+    public void initializeEmptyBoard() {
         List<Piece> emptyPieces = new ArrayList<>();
         for (int i = 0; i < BOARD_SIZE; i++) {
             emptyPieces.add(Piece.createBlankPiece());
@@ -63,10 +63,10 @@ public class Board {
     }
 
     private void placePiecesOnBoard() {
-        board.set(6, Rank.of(whitePieces.subList(0, 8)));
-        board.set(7, Rank.of(whitePieces.subList(8, 16)));
-        board.set(0, Rank.of(blackPieces.subList(0, 8)));
-        board.set(1, Rank.of(blackPieces.subList(8, 16)));
+        board.set(WHITE_PAWN_ROW, Rank.of(whitePieces.subList(0, 8)));
+        board.set(WHITE_MAIN_ROW, Rank.of(whitePieces.subList(8, 16)));
+        board.set(BLACK_MAIN_ROW, Rank.of(blackPieces.subList(0, 8)));
+        board.set(BLACK_PAWN_ROW, Rank.of(blackPieces.subList(8, 16)));
     }
 
     public void print() {
