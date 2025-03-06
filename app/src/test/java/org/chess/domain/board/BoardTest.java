@@ -13,8 +13,8 @@ class BoardTest {
 
     @BeforeEach
     void setUp() {
-        this.whitePawn = Piece.createWhitePawn();
-        this.blackPawn = Piece.createBlackPawn();
+        this.whitePawn = Piece.createWhite(Piece.Type.PAWN);
+        this.blackPawn = Piece.createBlack(Piece.Type.PAWN);
     }
 
     @Test

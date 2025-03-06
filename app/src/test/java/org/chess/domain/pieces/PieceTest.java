@@ -58,23 +58,23 @@ class PieceTest {
 
     static Stream<Piece> whitePiecesProvider() {
         return Stream.of(
-                Piece.createWhitePawn(),
-                Piece.createWhiteQueen(),
-                Piece.createWhiteKing(),
-                Piece.createWhiteRook(),
-                Piece.createWhiteBishop(),
-                Piece.createWhiteKnight()
+                Piece.createWhite(Piece.Type.PAWN),
+                Piece.createWhite(Piece.Type.QUEEN),
+                Piece.createWhite(Piece.Type.KING),
+                Piece.createWhite(Piece.Type.ROOK),
+                Piece.createWhite(Piece.Type.BISHOP),
+                Piece.createWhite(Piece.Type.KNIGHT)
         );
     }
 
     static Stream<Piece> blackPiecesProvider() {
         return Stream.of(
-                Piece.createBlackPawn(),
-                Piece.createBlackQueen(),
-                Piece.createBlackKing(),
-                Piece.createBlackRook(),
-                Piece.createBlackBishop(),
-                Piece.createBlackKnight()
+                Piece.createBlack(Piece.Type.PAWN),
+                Piece.createBlack(Piece.Type.QUEEN),
+                Piece.createBlack(Piece.Type.KING),
+                Piece.createBlack(Piece.Type.ROOK),
+                Piece.createBlack(Piece.Type.BISHOP),
+                Piece.createBlack(Piece.Type.KNIGHT)
         );
     }
 

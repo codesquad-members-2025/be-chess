@@ -33,20 +33,20 @@ public class Board {
 
     private void setupPieces() {
         blackPieces.addAll(List.of(
-                Piece.createBlackRook(), Piece.createBlackKnight(), Piece.createBlackBishop(),
-                Piece.createBlackQueen(), Piece.createBlackKing(), Piece.createBlackBishop(),
-                Piece.createBlackKnight(), Piece.createBlackRook()
+                Piece.createBlack(Piece.Type.ROOK), Piece.createBlack(Piece.Type.KNIGHT), Piece.createBlack(Piece.Type.BISHOP),
+                Piece.createBlack(Piece.Type.QUEEN), Piece.createBlack(Piece.Type.KING), Piece.createBlack(Piece.Type.BISHOP),
+                Piece.createBlack(Piece.Type.KNIGHT), Piece.createBlack(Piece.Type.ROOK)
         ));
 
         for (int i = 0; i < BOARD_SIZE; i++) {
-            whitePieces.add(Piece.createWhitePawn());
-            blackPieces.add(Piece.createBlackPawn());
+            whitePieces.add(Piece.createWhite(Piece.Type.PAWN));
+            blackPieces.add(Piece.createBlack(Piece.Type.PAWN));
         }
 
         whitePieces.addAll(List.of(
-                Piece.createWhiteRook(), Piece.createWhiteKnight(), Piece.createWhiteBishop(),
-                Piece.createWhiteQueen(), Piece.createWhiteKing(), Piece.createWhiteBishop(),
-                Piece.createWhiteKnight(), Piece.createWhiteRook()
+                Piece.createWhite(Piece.Type.ROOK), Piece.createWhite(Piece.Type.KNIGHT), Piece.createWhite(Piece.Type.BISHOP),
+                Piece.createWhite(Piece.Type.QUEEN), Piece.createWhite(Piece.Type.KING), Piece.createWhite(Piece.Type.BISHOP),
+                Piece.createWhite(Piece.Type.KNIGHT), Piece.createWhite(Piece.Type.ROOK)
         ));
 
     }
