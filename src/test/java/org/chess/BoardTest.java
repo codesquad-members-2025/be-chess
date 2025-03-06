@@ -45,6 +45,26 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("주어진 위치의 기물 조회하기")
+    public void findPiece() throws Exception {
+        board.initialize();
+        Piece piece1 = Piece.createBlackRook();
+        Piece piece2 = Piece.createBlackRook();
+        Piece piece3 = Piece.createWhiteRook();
+        Piece piece4 = Piece.createWhiteRook();
+
+        addPiece("a8",piece1);
+        addPiece("h8",piece2);
+        addPiece("a1",piece3);
+        addPiece("h1",piece4);
+
+        assertThat(board.findPiece("a8")).isEqualTo(piece1);
+        assertThat(board.findPiece("h8")).isEqualTo(piece2);
+        assertThat(board.findPiece("a1")).isEqualTo(piece3);
+        assertThat(board.findPiece("h1")).isEqualTo(piece4);
+    }
+
+    @Test
     @DisplayName("기본적인 Point 계산하는 테스트")
     void caculcatePoint() throws Exception {
         board.initializeEmpty();
@@ -105,8 +125,8 @@ public class BoardTest {
         addPiece("b6", piece1);
         addPiece("a7", piece3);
 
-        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<Piece>(List.of(piece1,piece2,piece3,piece4)));
-        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<Piece>(List.of(piece4,piece3,piece2,piece1)));
+        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<>(List.of(piece1,piece2,piece3,piece4)));
+        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<>(List.of(piece4,piece3,piece2,piece1)));
         System.out.println(board.showBoard());
     }
 
