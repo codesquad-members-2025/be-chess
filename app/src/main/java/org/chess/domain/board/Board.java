@@ -61,10 +61,10 @@ public class Board {
 
     private void placePiecesOnBoard() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board[BLACK_MAIN_ROW][i] = blackPieces.get(i).getRepresentation();
-            board[BLACK_PAWN_ROW][i] = blackPieces.get(i + BOARD_SIZE).getRepresentation();
-            board[WHITE_PAWN_ROW][i] = whitePieces.get(i).getRepresentation();
-            board[WHITE_MAIN_ROW][i] = whitePieces.get(i + BOARD_SIZE).getRepresentation();
+            board[BLACK_MAIN_ROW][i] = blackPieces.get(i).getType().getBlackType();
+            board[BLACK_PAWN_ROW][i] = blackPieces.get(i + BOARD_SIZE).getType().getBlackType();
+            board[WHITE_PAWN_ROW][i] = whitePieces.get(i).getType().getWhiteType();
+            board[WHITE_MAIN_ROW][i] = whitePieces.get(i + BOARD_SIZE).getType().getWhiteType();
         }
     }
 
