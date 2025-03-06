@@ -34,7 +34,7 @@ public class Board {
     private void setupPieces() {
         blackPieces.addAll(List.of(
                 Piece.createBlackRook(), Piece.createBlackKnight(), Piece.createBlackBishop(),
-                Piece.createBlackQuenn(), Piece.createBlackKing(), Piece.createBlackBishop(),
+                Piece.createBlackQueen(), Piece.createBlackKing(), Piece.createBlackBishop(),
                 Piece.createBlackKnight(), Piece.createBlackRook()
         ));
 
@@ -45,7 +45,7 @@ public class Board {
 
         whitePieces.addAll(List.of(
                 Piece.createWhiteRook(), Piece.createWhiteKnight(), Piece.createWhiteBishop(),
-                Piece.createWhiteQuenn(), Piece.createWhiteKing(), Piece.createWhiteBishop(),
+                Piece.createWhiteQueen(), Piece.createWhiteKing(), Piece.createWhiteBishop(),
                 Piece.createWhiteKnight(), Piece.createWhiteRook()
         ));
 

@@ -6,7 +6,7 @@ public class Piece {
     public static final String BLACK_COLOR = "black";
 
     public static final String PAWN_NAME = "pawn";
-    public static final String QUENN_NAME = "queen";
+    public static final String QUEEN_NAME = "queen";
     public static final String KING_NAME = "king";
     public static final String ROOK_NAME = "rook";
     public static final String BISHOP_NAME = "bishop";
@@ -43,12 +43,12 @@ public class Piece {
         return new Piece(PAWN_NAME, BLACK_COLOR, BLACK_PAWN_REPRESENTATION);
     }
 
-    public static Piece createWhiteQuenn() {
-        return new Piece(QUENN_NAME, WHITE_COLOR, WHITE_QUEEN_REPRESENTATION);
+    public static Piece createWhiteQueen() {
+        return new Piece(QUEEN_NAME, WHITE_COLOR, WHITE_QUEEN_REPRESENTATION);
     }
 
-    public static Piece createBlackQuenn() {
-        return new Piece(QUENN_NAME, BLACK_COLOR, BLACK_QUEEN_REPRESENTATION);
+    public static Piece createBlackQueen() {
+        return new Piece(QUEEN_NAME, BLACK_COLOR, BLACK_QUEEN_REPRESENTATION);
     }
 
     public static Piece createWhiteKing() {

@@ -15,8 +15,8 @@ class PieceTest {
     void Piece_생성_테스트() {
         verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
-        verifyPiece(Piece.createWhiteQuenn(), Piece.WHITE_COLOR, Piece.WHITE_QUEEN_REPRESENTATION);
-        verifyPiece(Piece.createBlackQuenn(), Piece.BLACK_COLOR, Piece.BLACK_QUEEN_REPRESENTATION);
+        verifyPiece(Piece.createWhiteQueen(), Piece.WHITE_COLOR, Piece.WHITE_QUEEN_REPRESENTATION);
+        verifyPiece(Piece.createBlackQueen(), Piece.BLACK_COLOR, Piece.BLACK_QUEEN_REPRESENTATION);
         verifyPiece(Piece.createWhiteKing(), Piece.WHITE_COLOR, Piece.WHITE_KING_REPRESENTATION);
         verifyPiece(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION);
         verifyPiece(Piece.createWhiteRook(), Piece.WHITE_COLOR, Piece.WHITE_ROOK_REPRESENTATION);
@@ -49,7 +49,7 @@ class PieceTest {
     static Stream<Piece> whitePiecesProvider() {
         return Stream.of(
                 Piece.createWhitePawn(),
-                Piece.createWhiteQuenn(),
+                Piece.createWhiteQueen(),
                 Piece.createWhiteKing(),
                 Piece.createWhiteRook(),
                 Piece.createWhiteBishop(),
@@ -60,7 +60,7 @@ class PieceTest {
     static Stream<Piece> blackPiecesProvider() {
         return Stream.of(
                 Piece.createBlackPawn(),
-                Piece.createBlackQuenn(),
+                Piece.createBlackQueen(),
                 Piece.createBlackKing(),
                 Piece.createBlackRook(),
                 Piece.createBlackBishop(),
