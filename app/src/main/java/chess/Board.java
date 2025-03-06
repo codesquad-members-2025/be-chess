@@ -3,6 +3,7 @@ package chess;
 import pieces.Pawn;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Board {
@@ -12,6 +13,9 @@ public class Board {
     public Board() {
         this.pawns = new ArrayList<>();
         this.board = new char[8][8];
+        for (char[] chars : board) {
+            Arrays.fill(chars, '.' );
+        }
     }
 
     public void add(Pawn pawn) {
