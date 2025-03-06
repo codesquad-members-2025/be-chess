@@ -1,6 +1,7 @@
 package org.chess;
 
 import org.junit.jupiter.api.*;
+import org.pieces.Piece;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.utils.StringUtils.appendNewLine;
@@ -25,5 +26,17 @@ public class BoardTest {
                         blankRank + blankRank + blankRank + blankRank +
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"));
+    }
+
+    @Test
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        String position = "b5";
+        Piece piece = Piece.createBlackRook();
+        board.move(position, piece);
+
+        assertThat(board.findPiece(position)).isEqualTo(piece);
+        System.out.println(board.showBoard());
     }
 }

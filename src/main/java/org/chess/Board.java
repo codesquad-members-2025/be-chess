@@ -58,6 +58,12 @@ public class Board {
         rankList.add(new Rank(rank8));
     }
 
+    public void initializeEmpty(){
+        for(int i = 0 ; i<8;i++){
+            rankList.add(new Rank());
+        }
+    }
+
     public int pieceCount() {
         int count = 0;
         for (Rank rank : rankList) {
@@ -86,10 +92,23 @@ public class Board {
         return count;
     }
 
-    public Piece getPieceByCoordinate(String coordinate){
-        int col = coordinate.charAt(0)-'a';
-        int rankIndex = Character.getNumericValue(coordinate.charAt(1))-1;
-        return rankList.get(rankIndex).getPieceByIndex(col);
+    private int getFileIndex(String coordinate){
+        return coordinate.charAt(0)-'a';
     }
 
+    private int getRankIndex(String coordinate){
+        return Character.getNumericValue(coordinate.charAt(1))-1;
+    }
+
+    public Piece findPiece(String coordinate){
+        int fileIndex = getFileIndex(coordinate);
+        int rankIndex = getRankIndex(coordinate);
+        return rankList.get(rankIndex).getPieceByFileIndex(fileIndex);
+    }
+
+    public void move(String coordinate,Piece piece){
+        int fileIndex = getFileIndex(coordinate);
+        int rankIndex = getRankIndex(coordinate);
+        rankList.get(rankIndex).putPieceByFileIndex(fileIndex,piece);
+    }
 }

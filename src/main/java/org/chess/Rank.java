@@ -18,7 +18,7 @@ public class Rank {
         pieceList = pieces;
     }
 
-    public int getTotalPieceCount() {
+    int getTotalPieceCount() {
         int count = 0;
         for (Piece piece : pieceList) {
             if (piece.getType() != Piece.Type.NO_PIECE) count++;
@@ -26,7 +26,7 @@ public class Rank {
         return count;
     }
 
-    public String print() {
+    String print() {
         StringBuilder sb = new StringBuilder();
         for (Piece piece : pieceList) {
             sb.append(piece.getRepresentation());
@@ -34,7 +34,7 @@ public class Rank {
         return sb.toString();
     }
 
-    public int getPieceCount(Piece.Color color, Piece.Type type) {
+    int getPieceCount(Piece.Color color, Piece.Type type) {
         int count = 0;
         for (Piece piece : pieceList) {
             if (piece.getColor() == color && piece.getType() == type) count++;
@@ -42,7 +42,11 @@ public class Rank {
         return count;
     }
 
-    public Piece getPieceByIndex(int index){
+    Piece getPieceByFileIndex(int index){
         return pieceList.get(index);
+    }
+
+    void putPieceByFileIndex(int index,Piece piece){
+        pieceList.set(index,piece);
     }
 }
