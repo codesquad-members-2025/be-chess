@@ -65,4 +65,16 @@ public class Board {
         return sb.toString();
     }
 
+    public void print() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < board.length; ++i) {
+            for (int j = 0; j < board.length; ++j) {
+                sb.append(board[i][j]);
+            }
+            sb.append("\n");
+        }
+
+        System.out.println(sb);
+    }
 }
