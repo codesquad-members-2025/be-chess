@@ -55,7 +55,7 @@ public class BoardTest {
     @Test
     public void testSortWhiteAscending() {
         board.initialize();
-        ArrayList<Piece> sortWhite = board.sortByScore(Color.WHITE, true);
+        ArrayList<Piece> sortWhite = board.sortByScore(Color.WHITE, false);
         assertEquals(Type.QUEEN, sortWhite.get(0).getType());
         assertEquals(Type.ROOK, sortWhite.get(1).getType());
         assertEquals(Type.ROOK, sortWhite.get(2).getType());
