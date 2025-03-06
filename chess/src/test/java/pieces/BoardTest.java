@@ -42,7 +42,6 @@ public class BoardTest {
         //Board board = new Board();
        // board.add(new Integer("7")); -> compile 에러 발생
     }
-
     @Test
     public void initialize() throws Exception {
         Board board = new Board();

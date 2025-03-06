@@ -16,7 +16,6 @@ public class PawnTest {
         assertEquals(Pawn.WHITE_COLOR, pawn.getColor());
         assertEquals(Pawn.WHITE_REPRESENTATION, pawn.getRepresentation());
     }
-
     @Test
     public void create() {
         verifyPawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);

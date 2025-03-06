@@ -66,7 +66,6 @@ public class Board {
     public String getBlackPawnsResult() {
         return getPawnsResult(blackPawns);
     }
-
     public String print() {
         StringBuilder board_sb = new StringBuilder();
         for (int i = 0; i < BOARD_SIZE; i++) {
