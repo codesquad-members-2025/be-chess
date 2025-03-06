@@ -44,6 +44,29 @@ public class PieceTest {
         assertThat(blackPawn.isWhite()).isFalse();
     }
 
+    @Test
+    @DisplayName("각 기물의 출력문자를 검사한다.")
+    public void getRepresentationPerPiece() {
+        assertThat(Type.PAWN.getRepresentation(Color.WHITE)).isEqualTo('♙');
+        assertThat(Type.PAWN.getRepresentation(Color.BLACK)).isEqualTo('♟');
+
+        assertThat(Type.KNIGHT.getRepresentation(Color.WHITE)).isEqualTo('♘');
+        assertThat(Type.KNIGHT.getRepresentation(Color.BLACK)).isEqualTo('♞');
+
+        assertThat(Type.ROOK.getRepresentation(Color.WHITE)).isEqualTo('♖');
+        assertThat(Type.ROOK.getRepresentation(Color.BLACK)).isEqualTo('♜');
+
+        assertThat(Type.BISHOP.getRepresentation(Color.WHITE)).isEqualTo('♗');
+        assertThat(Type.BISHOP.getRepresentation(Color.BLACK)).isEqualTo('♝');
+
+        assertThat(Type.QUEEN.getRepresentation(Color.WHITE)).isEqualTo('♕');
+        assertThat(Type.QUEEN.getRepresentation(Color.BLACK)).isEqualTo('♛');
+
+        assertThat(Type.KING.getRepresentation(Color.WHITE)).isEqualTo('♔');
+        assertThat(Type.KING.getRepresentation(Color.BLACK)).isEqualTo('♚');
+
+        assertThat(Type.NO_PIECE.getRepresentation(Color.WHITE)).isEqualTo('.');
+    }
     void verifyPiece(final Piece piece, final Color color, final char representation) {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(piece.getName().getRepresentation(color)).isEqualTo(representation);
