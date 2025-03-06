@@ -8,6 +8,7 @@ public class Piece {
     public static final String ROOK_NAME = "rook";
     public static final String BISHOP_NAME = "bishop";
     public static final String KNIGHT_NAME = "knight";
+    public static final String BLANK_NAME = "blank";
 
     public enum Color {
         WHITE("white"), BLACK("black"), NOCOLOR("null");
@@ -107,6 +108,10 @@ public class Piece {
 
     public static Piece createBlackKnight() {
         return new Piece(KNIGHT_NAME, Color.BLACK, Type.KNIGHT);
+    }
+
+    public static Piece createBlankPiece() {
+        return new Piece(BLANK_NAME, Color.NOCOLOR, Type.NO_PIECE);
     }
 
     public boolean isWhite() {
