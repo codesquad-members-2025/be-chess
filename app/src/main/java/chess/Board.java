@@ -1,6 +1,6 @@
 package chess;
 
-import pieces.Pawn;
+import pieces.Piece;
 
 import static utils.StringUtils.appendNewLine;
 
@@ -18,8 +18,8 @@ public class Board {
 
     public void initialize() {
         for (int i = 0; i < 8; i++) {
-            board[1][i] = Pawn.BLACK_REPRESENTATION;
-            board[6][i] = Pawn.WHITE_REPRESENTATION;
+            board[1][i] = Piece.BLACK_PAWN_REPRESENTATION;
+            board[6][i] = Piece.WHITE_PAWN_REPRESENTATION;
         }
     }
 
