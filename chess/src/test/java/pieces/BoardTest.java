@@ -8,7 +8,6 @@ import chess.Pawn;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class BoardTest {
 
     private Board board;
@@ -47,7 +46,8 @@ public class BoardTest {
     @Test
     public void initialize() throws Exception {
         Board board = new Board();
-        board.initialize();
+        board.initializePawns();
+        board.initializeBoard();
         assertEquals("pppppppp", board.getWhitePawnsResult());
         assertEquals("PPPPPPPP", board.getBlackPawnsResult());
 

@@ -10,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 import static org.assertj.core.api.Assertions.*;
 
 
-
 public class PawnTest {
     @Test
     public void create_기본생성자() throws Exception {
