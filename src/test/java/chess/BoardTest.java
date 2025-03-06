@@ -3,19 +3,17 @@ package chess;
 import static chess.utils.StringUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import chess.pieces.Piece;
+import chess.pieces.Piece.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BoardTest {
     private Board board;
-    private String[] colors;
 
     @BeforeEach
     void init() {
         board = new Board();
-        colors = new String[]{Piece.WHITE_COLOR, Piece.BLACK_COLOR};
     }
     @Test
     @DisplayName("보드가 초기화 되면 모든 말들이 생성되어야 한다.")
@@ -26,7 +24,7 @@ class BoardTest {
         assertThat(appendNewLine("♜♞♝♛♚♝♞♜") +
                 appendNewLine("♟♟♟♟♟♟♟♟") +
                 blankRank + blankRank + blankRank + blankRank +
-                appendNewLine("♗♗♗♗♗♗♗♗") +
+                appendNewLine("♙♙♙♙♙♙♙♙") +
                 appendNewLine("♖♘♗♕♔♗♘♖")).isEqualTo(board.showBoard());
     }
 
@@ -35,8 +33,8 @@ class BoardTest {
     public void initialize() throws Exception {
         Board board = new Board();
         board.initialize();
-        assertThat(board.getPawnResult(Piece.WHITE_COLOR)).isEqualTo("pppppppp");
-        assertThat(board.getPawnResult(Piece.BLACK_COLOR)).isEqualTo("PPPPPPPP");
+        assertThat(board.getPawnResult(Color.WHITE)).isEqualTo("♙♙♙♙♙♙♙♙");
+        assertThat(board.getPawnResult(Color.BLACK)).isEqualTo("♟♟♟♟♟♟♟♟");
     }
 
 
