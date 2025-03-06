@@ -27,15 +27,5 @@ public class BoardTest {
         board.add(white);
         assertThat(board.size()).isEqualTo(1);
         assertThat(board.findPawn(0)).isEqualTo(white);
-
-//        board.add(black);
-//        assertThat(2).isEqualTo(board.size());
-//        assertThat(black).isEqualTo(board.findPawn(1));
     }
-//    @Test
-//    public void 추가테스트(){
-//        Board board = new Board();
-//        board.add(new Integer(7));
-//    }
-//    에러 발생
 }
