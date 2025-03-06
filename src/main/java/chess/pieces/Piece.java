@@ -6,25 +6,27 @@ public class Piece {
     }
 
     public enum Type {
-        PAWN('♙'),
-        ROOK('♖'),
-        KNIGHT('♘'),
-        BISHOP('♗'),
-        QUEEN('♕'),
-        KING('♔'),
-        NO_PIECE('.');
+        PAWN('♙', 1.0),
+        ROOK('♖', 5.0),
+        KNIGHT('♘', 2.5),
+        BISHOP('♗', 3.0),
+        QUEEN('♕', 9.0),
+        KING('♔', 0.0),
+        NO_PIECE('.', 0.0);
 
-        private char defaultRepresentation;
+        private char representation;
+        private double defaultPoint;
 
-        Type(char defaultRepresentation) {
-            this.defaultRepresentation = defaultRepresentation;
+        Type(char representation, double defaultPoint) {
+            this.representation = representation;
+            this.defaultPoint = defaultPoint;
         }
 
         public char getRepresentation(Color color) {
             if (color.equals(Color.BLACK)) {
                 return getBlackRepresentation();
             }
-            return defaultRepresentation;
+            return representation;
         }
 
         private char getBlackRepresentation() {
@@ -32,10 +34,12 @@ public class Piece {
                 return '♟';  // U+265F (검은색 폰)
             }
             //폰을 제외한 문자들은 하얀색 + 6 -> 검은색
-            return (char) (defaultRepresentation + 6);
+            return (char) (representation + 6);
         }
 
-
+        public double getDefaultPoint() {
+            return defaultPoint;
+        }
     }
 
     private Type name;
