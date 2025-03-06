@@ -86,25 +86,25 @@ public class Board {
     }
 
     private void addPieceToList() {
-        pieceList.add(Piece.createWhiteKnight());
-        pieceList.add(Piece.createWhiteKnight());
-        pieceList.add(Piece.createBlackKnight());
-        pieceList.add(Piece.createBlackKnight());
+        pieceList.add(Piece.createWhite(Type.KNIGHT));
+        pieceList.add(Piece.createWhite(Type.KNIGHT));
+        pieceList.add(Piece.createBlack(Type.KNIGHT));
+        pieceList.add(Piece.createBlack(Type.KNIGHT));
 
-        pieceList.add(Piece.createWhiteBishop());
-        pieceList.add(Piece.createWhiteBishop());
-        pieceList.add(Piece.createBlackBishop());
-        pieceList.add(Piece.createBlackBishop());
+        pieceList.add(Piece.createWhite(Type.BISHOP));
+        pieceList.add(Piece.createWhite(Type.BISHOP));
+        pieceList.add(Piece.createBlack(Type.BISHOP));
+        pieceList.add(Piece.createBlack(Type.BISHOP));
 
-        pieceList.add(Piece.createWhiteRook());
-        pieceList.add(Piece.createWhiteRook());
-        pieceList.add(Piece.createBlackRook());
-        pieceList.add(Piece.createBlackRook());
+        pieceList.add(Piece.createWhite(Type.ROOK));
+        pieceList.add(Piece.createWhite(Type.ROOK));
+        pieceList.add(Piece.createBlack(Type.ROOK));
+        pieceList.add(Piece.createBlack(Type.ROOK));
 
-        pieceList.add(Piece.createWhiteQueen());
-        pieceList.add(Piece.createBlackQueen());
-        pieceList.add(Piece.createWhiteKing());
-        pieceList.add(Piece.createBlackKing());
+        pieceList.add(Piece.createWhite(Type.QUEEN));
+        pieceList.add(Piece.createBlack(Type.QUEEN));
+        pieceList.add(Piece.createWhite(Type.KING));
+        pieceList.add(Piece.createBlack(Type.KING));
 
     }
 
@@ -117,8 +117,8 @@ public class Board {
 
     private void addPawnToList() {
         for (int i = 0; i < chessBoard.length; i++) {
-            pieceList.add(Piece.createWhitePawn());
-            pieceList.add(Piece.createBlackPawn());
+            pieceList.add(Piece.createWhite(Type.PAWN));
+            pieceList.add(Piece.createBlack(Type.PAWN));
         }
     }
 
