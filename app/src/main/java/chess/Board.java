@@ -65,6 +65,17 @@ public class Board {
         return getResult(BLACK_PAWN_RANK);
     }
 
+    public String print() {
+        StringBuilder sb = new StringBuilder();
+        for (int rank = 0; rank < RANK_SIZE; rank++) {
+            for (int file = 0; file < FILE_SIZE; file++) {
+                sb.append(board[rank][file]);
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     private String getResult(int rank) {
         StringBuilder sb = new StringBuilder();
         for (int file = 0; file < FILE_SIZE; file++) {
@@ -84,5 +95,6 @@ public class Board {
             throw new IllegalStateException(index + "번의 폰은 없습니다. " + MIN_PAWN_INDEX + "부터 " + MAX_PAWN_INDEX + " 중 골라주세요.");
         }
     }
+
 }
 
