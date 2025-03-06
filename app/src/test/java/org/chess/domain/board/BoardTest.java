@@ -99,21 +99,14 @@ class BoardTest {
         board.initialize();
 
         // then
-        // Black Rook at a8 and h8
-        assertThat(board.findPiece("a8"))
-                .extracting("color", "type")
-                .containsExactly(Piece.Color.BLACK, Piece.Type.ROOK);
-        assertThat(board.findPiece("h8"))
-                .extracting("color", "type")
-                .containsExactly(Piece.Color.BLACK, Piece.Type.ROOK);
-
-        // White Rook at a1 and h1
-        assertThat(board.findPiece("a1"))
-                .extracting("color", "type")
-                .containsExactly(Piece.Color.WHITE, Piece.Type.ROOK);
-        assertThat(board.findPiece("h1"))
-                .extracting("color", "type")
-                .containsExactly(Piece.Color.WHITE, Piece.Type.ROOK);
+        assertThat(Piece.createBlack(Piece.Type.ROOK))
+                .isEqualTo(board.findPiece("h8"));
+        assertThat(Piece.createWhite(Piece.Type.ROOK))
+                .isEqualTo(board.findPiece("h1"));
+        assertThat(Piece.createBlack(Piece.Type.ROOK))
+                .isEqualTo(board.findPiece("a8"));
+        assertThat(Piece.createWhite(Piece.Type.ROOK))
+                .isEqualTo(board.findPiece("a1"));
     }
 
     @Test

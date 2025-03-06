@@ -82,4 +82,17 @@ public class Piece {
         return representation;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return color.equals(piece.color) && representation == piece.representation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, representation);
+    }
+
 }
