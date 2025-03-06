@@ -28,6 +28,10 @@ java {
     }
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 application {
     // Define the main class for the application.
     mainClass = 'Main'
@@ -38,5 +42,14 @@ testing {
         test {
             useJUnitJupiter('5.10.3')
         }
+    }
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed" // 테스트 실행 결과 로그 표시
+        showStandardStreams = true // 테스트 실행 중 System.out 출력 보이게 설정
+        exceptionFormat = 'full' // 예외 발생 시 전체 스택 트레이스 출력
     }
 }
