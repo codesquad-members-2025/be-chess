@@ -16,7 +16,6 @@ public class Piece {
     public static final char WHITE_KING_REPRESENTATION = 'k';
     public static final char BLACK_KING_REPRESENTATION = 'K';
 
-
     private final String color;
     private final String name;
     private final char representation;
@@ -83,11 +82,11 @@ public class Piece {
         return new Piece(Piece.BLACK_COLOR, "king", Piece.BLACK_KING_REPRESENTATION);
     }
 
-    public boolean isBlack(){
+    public boolean isBlack() {
         return color.equals(Piece.BLACK_COLOR);
     }
 
-    public boolean isWhite(){
+    public boolean isWhite() {
         return color.equals(Piece.WHITE_COLOR);
     }
 }
