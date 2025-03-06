@@ -55,18 +55,26 @@ public class Board {
     }
 
     public int pieceCount() {
-        int count = 0 ;
-        for(Rank rank : rankList){
-            count+=rank.getCount();
+        int count = 0;
+        for (Rank rank : rankList) {
+            count += rank.getTotalPieceCount();
         }
         return count;
     }
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for(Rank rank : rankList){
+        for (Rank rank : rankList) {
             sb.append(appendNewLine(rank.print()));
         }
         return sb.toString();
+    }
+
+    public int getPieceCount(Piece.Color color, Piece.Type type) {
+        int count = 0;
+        for (Rank rank : rankList) {
+            count += rank.getPieceCount(color, type);
+        }
+        return count;
     }
 }

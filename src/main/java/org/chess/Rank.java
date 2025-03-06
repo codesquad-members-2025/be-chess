@@ -8,29 +8,37 @@ import java.util.List;
 public class Rank {
     private List<Piece> pieceList = new ArrayList<>();
 
-    Rank(){
-        for(int i = 0 ; i<8;i++){
+    Rank() {
+        for (int i = 0; i < 8; i++) {
             pieceList.add(Piece.createBlank());
         }
     }
-    Rank(List<Piece> pieces){
+
+    Rank(List<Piece> pieces) {
         pieceList = pieces;
     }
 
-    public int getCount(){
+    public int getTotalPieceCount() {
         int count = 0;
-        for(Piece piece : pieceList){
-            if(piece.getType()!=Piece.Type.NO_PIECE) count++;
+        for (Piece piece : pieceList) {
+            if (piece.getType() != Piece.Type.NO_PIECE) count++;
         }
         return count;
     }
 
-    public String print(){
+    public String print() {
         StringBuilder sb = new StringBuilder();
-        for(Piece piece : pieceList){
+        for (Piece piece : pieceList) {
             sb.append(piece.getRepresentation());
         }
         return sb.toString();
     }
 
+    public int getPieceCount(Piece.Color color, Piece.Type type) {
+        int count = 0;
+        for (Piece piece : pieceList) {
+            if (piece.getColor() == color && piece.getType() == type) count++;
+        }
+        return count;
+    }
 }
