@@ -13,10 +13,11 @@ public class BoardTest {
     @BeforeEach
     void setUp() {
         String[] colors = {Pawn.WHITE_COLOR, Pawn.BLACK_COLOR};
+        char[] representation = {Pawn.WHITE_REPRESENTATION, Pawn.BLACK_REPRESENTATION};
         pawns = new Pawn[colors.length];
 
         for (int i = 0; i < pawns.length; ++i) {
-            pawns[i] = new Pawn(colors[i]);
+            pawns[i] = new Pawn(colors[i], representation[i]);
         }
     }
 
