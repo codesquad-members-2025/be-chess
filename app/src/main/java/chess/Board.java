@@ -31,11 +31,15 @@ public class Board {
     }
 
     public void initialize() {
+       addPawns();
+       placePawn();
+    }
+
+    public void addPawns() {
         for (int i = 0; i < board.length; ++i) {
             pawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
             pawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
         }
-        placePawn();
     }
 
     public void placePawn() {
