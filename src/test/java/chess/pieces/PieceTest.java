@@ -11,23 +11,23 @@ public class PieceTest {
     @Test
     @DisplayName("모든 체스말의 색과 출력문자를 검증한다.")
     void create_piece() {
-        verifyPiece(Piece.createWhitePawn(), Color.WHITE, Type.PAWN.getRepresentation(Color.WHITE));
-        verifyPiece(Piece.createBlackPawn(), Color.BLACK, Type.PAWN.getRepresentation(Color.BLACK));
+        verifyPiece(Piece.createWhite(Type.PAWN), Color.WHITE, Type.PAWN.getRepresentation(Color.WHITE));
+        verifyPiece(Piece.createBlack(Type.PAWN), Color.BLACK, Type.PAWN.getRepresentation(Color.BLACK));
 
-        verifyPiece(Piece.createWhiteKnight(), Color.WHITE, Type.KNIGHT.getRepresentation(Color.WHITE));
-        verifyPiece(Piece.createBlackKnight(), Color.BLACK, Type.KNIGHT.getRepresentation(Color.BLACK));
+        verifyPiece(Piece.createWhite(Type.KNIGHT), Color.WHITE, Type.KNIGHT.getRepresentation(Color.WHITE));
+        verifyPiece(Piece.createBlack(Type.KNIGHT), Color.BLACK, Type.KNIGHT.getRepresentation(Color.BLACK));
 
-        verifyPiece(Piece.createWhiteRook(), Color.WHITE, Type.ROOK.getRepresentation(Color.WHITE));
-        verifyPiece(Piece.createBlackRook(), Color.BLACK, Type.ROOK.getRepresentation(Color.BLACK));
+        verifyPiece(Piece.createWhite(Type.ROOK), Color.WHITE, Type.ROOK.getRepresentation(Color.WHITE));
+        verifyPiece(Piece.createBlack(Type.ROOK), Color.BLACK, Type.ROOK.getRepresentation(Color.BLACK));
 
-        verifyPiece(Piece.createWhiteBishop(), Color.WHITE, Type.BISHOP.getRepresentation(Color.WHITE));
-        verifyPiece(Piece.createBlackBishop(), Color.BLACK, Type.BISHOP.getRepresentation(Color.BLACK));
+        verifyPiece(Piece.createWhite(Type.BISHOP), Color.WHITE, Type.BISHOP.getRepresentation(Color.WHITE));
+        verifyPiece(Piece.createBlack(Type.BISHOP), Color.BLACK, Type.BISHOP.getRepresentation(Color.BLACK));
 
-        verifyPiece(Piece.createWhiteQueen(), Color.WHITE, Type.QUEEN.getRepresentation(Color.WHITE));
-        verifyPiece(Piece.createBlackQueen(), Color.BLACK, Type.QUEEN.getRepresentation(Color.BLACK));
+        verifyPiece(Piece.createWhite(Type.QUEEN), Color.WHITE, Type.QUEEN.getRepresentation(Color.WHITE));
+        verifyPiece(Piece.createBlack(Type.QUEEN), Color.BLACK, Type.QUEEN.getRepresentation(Color.BLACK));
 
-        verifyPiece(Piece.createWhiteKing(), Color.WHITE, Type.KING.getRepresentation(Color.WHITE));
-        verifyPiece(Piece.createBlackKing(), Color.BLACK, Type.KING.getRepresentation(Color.BLACK));
+        verifyPiece(Piece.createWhite(Type.KING), Color.WHITE, Type.KING.getRepresentation(Color.WHITE));
+        verifyPiece(Piece.createBlack(Type.KING), Color.BLACK, Type.KING.getRepresentation(Color.BLACK));
 
         verifyPiece(Piece.createBlank(), Color.NOCOLOR, Type.NO_PIECE.getRepresentation(Color.NOCOLOR));
 
@@ -36,8 +36,8 @@ public class PieceTest {
     @Test
     @DisplayName("말이 검은색인지 흰색인지 확인한다.")
     void checkColor() {
-        Piece whitePawn = Piece.createWhitePawn();
-        Piece blackPawn = Piece.createBlackPawn();
+        Piece whitePawn = Piece.createWhite(Type.PAWN);
+        Piece blackPawn = Piece.createBlack(Type.PAWN);
 
         assertThat(whitePawn.isWhite()).isTrue();
         assertThat(whitePawn.isBlack()).isFalse();
