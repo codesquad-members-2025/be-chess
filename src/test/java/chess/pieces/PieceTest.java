@@ -29,6 +29,8 @@ public class PieceTest {
         verifyPiece(Piece.createWhiteKing(), Color.WHITE, Type.KING.getRepresentation(Color.WHITE));
         verifyPiece(Piece.createBlackKing(), Color.BLACK, Type.KING.getRepresentation(Color.BLACK));
 
+        verifyPiece(Piece.createBlank(), Color.NOCOLOR, Type.NO_PIECE.getRepresentation(Color.NOCOLOR));
+
     }
 
     @Test
@@ -66,6 +68,15 @@ public class PieceTest {
         assertThat(Type.KING.getRepresentation(Color.BLACK)).isEqualTo('♚');
 
         assertThat(Type.NO_PIECE.getRepresentation(Color.WHITE)).isEqualTo('.');
+    }
+
+    @Test
+    @DisplayName("공백 문자는 어떤 색도 가지지 않는다")
+    void blankColorTest() {
+        Piece blank = Piece.createBlank();
+
+        assertThat(blank.isWhite()).isFalse();
+        assertThat(blank.isBlack()).isFalse();
     }
     void verifyPiece(final Piece piece, final Color color, final char representation) {
         assertThat(piece.getColor()).isEqualTo(color);
