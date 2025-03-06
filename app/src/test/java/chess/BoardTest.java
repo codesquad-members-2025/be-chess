@@ -18,9 +18,8 @@ public class BoardTest {
     @Test
     @DisplayName("흑/백의 값을 잘 가져오는지 테스트")
     public void initialize() throws Exception {
-        board.initialize();
-        assertThat("♙♙♙♙♙♙♙♙").isEqualTo(board.getWhitePawnsResult());
-        assertThat("♟♟♟♟♟♟♟♟").isEqualTo(board.getBlackPawnsResult());
+        assertThat("pppppppp").isEqualTo(board.getWhitePawnsResult());
+        assertThat("PPPPPPPP").isEqualTo(board.getBlackPawnsResult());
     }
 
     @Test
@@ -29,15 +28,14 @@ public class BoardTest {
         String expectResult =
                 """
                 ........
-                ♟♟♟♟♟♟♟♟
+                PPPPPPPP
                 ........
                 ........
                 ........
                 ........
-                ♙♙♙♙♙♙♙♙
+                pppppppp
                 ........
                 """;
-        board.initialize();
         String result = board.print();
         System.out.println(result);
         assertThat(result).isEqualTo(expectResult);

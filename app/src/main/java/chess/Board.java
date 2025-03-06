@@ -18,11 +18,11 @@ public class Board {
     private static final int RANK_SIZE = 8;
     private final List<Piece> pieces = new ArrayList<>();
     private final char[][] board = new char[RANK_SIZE][FILE_SIZE];
-    public void initialize() {
+    /*public void initialize() {
         addPawns();
         initializeEmptyBoard();
         initializeBoard();
-    }
+    }*/
 
     private void initializeBoard() {
         for (int file = 0; file < FILE_SIZE; file++) {
@@ -37,12 +37,12 @@ public class Board {
         }
     }
 
-    private void addPawns() {
+/*    private void addPawns() {
         for (int i = 0; i < 8; i++) {
             pieces.add(new Piece()); // 백
-            pieces.add(new Piece(BLACK)); // 흑
+            pieces.add(new Piece(BLACK_COLOR)); // 흑
         }
-    }
+    }*/
 
     public void add(Piece piece) {
         validatePawnSize();

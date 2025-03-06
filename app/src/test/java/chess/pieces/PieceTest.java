@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class PieceTest {
     @Test
+    @DisplayName("각 기물의 생성 테스트")
     public void create_piece() {
         verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
