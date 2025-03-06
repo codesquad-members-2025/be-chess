@@ -1,10 +1,9 @@
-package org.example;
+package chess;
 
 public class Pawn {
     String color;
-
-    public static final String BLACK = "black";
-    public static final String WHITE = "white";
+    public static final String BLACK_COLOR = "black";
+    public static final String WHITE_COLOR = "white";
 
     public Pawn(String color) {
         this.color=color;
