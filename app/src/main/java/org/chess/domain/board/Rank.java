@@ -20,4 +20,13 @@ public class Rank {
         return pieces;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Piece piece : pieces) {
+            sb.append(piece.getColor() == Piece.Color.WHITE ? piece.getType().getWhiteType() : piece.getType().getBlackType());
+        }
+        return sb.toString();
+    }
+
 }

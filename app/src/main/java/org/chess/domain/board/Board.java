@@ -15,12 +15,12 @@ public class Board {
     private static final int BLACK_MAIN_ROW = 0;
     private static final int BLACK_PAWN_ROW = 1;
 
-    private final char[][] board;
+    private final List<Rank> board;
     private final List<Piece> whitePieces;
     private final List<Piece> blackPieces;
 
     public Board() {
-        this.board = new char[BOARD_SIZE][BOARD_SIZE];
+        this.board = new ArrayList<>();
         this.whitePieces = new ArrayList<>();
         this.blackPieces = new ArrayList<>();
     }
@@ -52,20 +52,21 @@ public class Board {
     }
 
     private void initializeBoard() {
+        List<Piece> emptyPieces = new ArrayList<>();
         for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                board[i][j] = EMPTY;
-            }
+            emptyPieces.add(Piece.createBlankPiece());
+        }
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            board.add(Rank.of(emptyPieces));
         }
     }
 
     private void placePiecesOnBoard() {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            board[BLACK_MAIN_ROW][i] = blackPieces.get(i).getType().getBlackType();
-            board[BLACK_PAWN_ROW][i] = blackPieces.get(i + BOARD_SIZE).getType().getBlackType();
-            board[WHITE_PAWN_ROW][i] = whitePieces.get(i).getType().getWhiteType();
-            board[WHITE_MAIN_ROW][i] = whitePieces.get(i + BOARD_SIZE).getType().getWhiteType();
-        }
+        board.set(6, Rank.of(whitePieces.subList(0, 8)));
+        board.set(7, Rank.of(whitePieces.subList(8, 16)));
+        board.set(0, Rank.of(blackPieces.subList(0, 8)));
+        board.set(1, Rank.of(blackPieces.subList(8, 16)));
     }
 
     public void print() {
@@ -74,8 +75,8 @@ public class Board {
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for (char[] row : board) {
-            sb.append(row).append(StringUtils.NEWLINE);
+        for (Rank rank : board) {
+            sb.append(rank).append(StringUtils.NEWLINE);
         }
         return sb.toString();
     }
@@ -93,7 +94,7 @@ public class Board {
     }
 
     public String getPawnsResultWith(int row) {
-        return new String(board[row]);
+        return board.get(row).toString();
     }
 
 }
