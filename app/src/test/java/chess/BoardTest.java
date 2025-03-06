@@ -2,35 +2,33 @@ package chess;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-
-import pieces.Pawn;
+import static utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     private Board board;
 
     @BeforeEach
-    void init(){
+    void setup(){
         board = new Board();
     }
 
     @Test
     public void create() throws Exception {
-        addAndVerifyPawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION, 0);
-        addAndVerifyPawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION, 1);
+        board.initialize();
+        assertEquals(32, board.pieceCount());
+        String blankRank = appendNewLine("........");
+        assertEquals(
+            appendNewLine("RNBQKBNR") +
+            appendNewLine("PPPPPPPP") +
+            blankRank + blankRank + blankRank + blankRank +
+            appendNewLine("pppppppp") +
+            appendNewLine("rnbqkbnr"),
+            board.showBoard());
     }
 
     @Test
-    public void initialize() throws Exception {
-        Board board = new Board();
+    public void print() throws Exception {
         board.initialize();
-        assertEquals("pppppppp", board.getWhitePawnsResult());
-        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
-    }
-
-    private void addAndVerifyPawn(final String color, final char representation, int expectedNum){
-        Pawn pawn = new Pawn(color, representation);
-        board.add(pawn);
-        assertEquals(expectedNum+1, board.size());
-        assertEquals(pawn, board.findPawn(expectedNum));
+        System.out.println(board.showBoard());
     }
 }

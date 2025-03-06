@@ -1,73 +1,96 @@
 package chess;
 
-import pieces.Pawn;
+import pieces.Piece;
 
 import java.util.*;
 
+import static utils.StringUtils.appendNewLine;
+
 public class Board {
-    private List<Pawn> pawns = new ArrayList<>();
+    private List<Piece> pieces = new ArrayList<>();
     public final static int MAX_ROW = 8;
     public final static int MAX_CAL = 8;
-    private List<List<Object>> board;
-
-    public void add(Pawn pawn) {
-        pawns.add(pawn);
-    }
-
-    public int size(){
-        return pawns.size();
-    }
+    private Object[][] board = new Object[MAX_ROW][MAX_CAL];
+    private int pieceNum = 0;
 
     public void initialize(){
-        board = new ArrayList<>();
-        for (int i = 0; i < MAX_ROW; i++) {
-            List<Object> row = new ArrayList<>();
-            for (int j = 0; j < MAX_CAL; j++) {
-                row.add(SetUpBoard(i));
+        addBlackPieces();
+        addBlackPawns();
+        addBlankLanks();
+        addWhitePawns();
+        addWhitePieces();
+    }
+
+    public void addBlackPieces(){
+        Object[] indexZero = board[0];
+        indexZero[0] = Piece.createBlackRook();
+        indexZero[1] = Piece.createBlackKnight();
+        indexZero[2] = Piece.createBlackBishop();
+        indexZero[3] = Piece.createBlackQueen();
+        indexZero[4] = Piece.createBlackKing();
+        indexZero[5] = Piece.createBlackBishop();
+        indexZero[6] = Piece.createBlackKnight();
+        indexZero[7] = Piece.createBlackRook();
+        pieceNum+=8;
+    }
+
+    public void addBlackPawns(){
+        Object[] indexZero = board[1];
+        for(int i = 0; i < MAX_CAL; i++){
+            indexZero[i] = Piece.createBlackPawn();
+            pieceNum++;
+        }
+    }
+
+    public void addBlankLanks(){
+        for (int i = 2; i < 6; i++){
+            for (int j = 0; j < MAX_CAL; j++){
+                board[i][j] = '.';
             }
-            board.add(row);
         }
     }
 
-    private Object SetUpBoard(int i){
-        if ( i == 1 ) return new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
-        if ( i == 6 ) return new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
-        return ".";
-    }
-
-    public String getWhitePawnsResult(){
-        return getPawnsResult(6);
-    }
-
-    public String getBlackPawnsResult(){
-        return getPawnsResult(1);
-    }
-
-    private String getPawnsResult(int index){
-        StringBuilder result = new StringBuilder();
-        for (Object obj : board.get(index)) {
-            result.append(((Pawn)obj).getRepresentation());
+    public void addWhitePawns(){
+        Object[] indexZero = board[6];
+        for(int i = 0; i < MAX_CAL; i++){
+            indexZero[i] = Piece.createWhitePawn();
+            pieceNum++;
         }
-        return result.toString();
     }
 
-    Pawn findPawn(int num){
-        return pawns.get(num);
+    public void addWhitePieces(){
+        Object[] indexZero = board[7];
+        indexZero[0] = Piece.createWhiteRook();
+        indexZero[1] = Piece.createWhiteKnight();
+        indexZero[2] = Piece.createWhiteBishop();
+        indexZero[3] = Piece.createWhiteQueen();
+        indexZero[4] = Piece.createWhiteKing();
+        indexZero[5] = Piece.createWhiteBishop();
+        indexZero[6] = Piece.createWhiteKnight();
+        indexZero[7] = Piece.createWhiteRook();
+        pieceNum+=8;
     }
 
-    public void print(){
-        StringBuilder result = new StringBuilder();
+    public int pieceCount(){
+        return pieceNum;
+    }
 
-        for (List<Object> row : board) {
+    public String showBoard(){
+        StringBuilder answer = new StringBuilder();
+
+        for (Object[] row : board) {
+            String result = "";
             for (Object obj : row) {
-                if (obj instanceof Pawn) {
-                    result.append(((Pawn)obj).getRepresentation());
+                if (obj instanceof Piece) {
+                    result += ((Piece)obj).getRepresentation();
                 } else {
-                    result.append(obj);
+                    result += obj;
                 }
             }
-            result.append("\n");
+            answer.append(appendNewLine(result));
         }
-        System.out.println(result);
+        return answer.toString();
     }
+
+
 }
