@@ -3,7 +3,9 @@ package chess;
 import chess.pieces.Piece;
 import chess.pieces.Piece.Color;
 import chess.pieces.Piece.Type;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Rank {
     private final List<Piece> rank;
@@ -62,5 +64,12 @@ public class Rank {
         if (rank.get(index).getName() == Type.PAWN && rank.get(index).getColor().equals(color))
             count++;
         return count;
+    }
+
+    public List<Piece> sortByScore(Color color) {
+        return rank.stream()
+                .filter(piece -> piece.getColor().equals(color))
+                .sorted(Comparator.comparingDouble(Piece::getScore).reversed())
+                .collect(Collectors.toList());
     }
 }
