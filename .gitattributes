@@ -11,6 +11,8 @@ gradle/wrapper/gradle-wrapper.properties text eol=lf
 # IntelliJ 설정 파일은 CRLF로 (Windows 개발 편의)
 *.iml text eol=crlf
 
+*.xml text=auto eol=lf
+
 # Markdown, YML 등은 LF 권장 (리눅스 서버 호환성)
 *.md text eol=lf
 *.yml text eol=lf

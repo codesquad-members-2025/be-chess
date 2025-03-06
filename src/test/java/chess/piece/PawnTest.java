@@ -1,33 +1,27 @@
 package chess.piece;
 
-import org.junit.jupiter.api.DisplayName;
+
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-class PawnTest {
-    // 중복 제거를 위해 로컬 변수로 색상 정의
-    final Pawn.Color white = Pawn.Color.WHITE;
-    final Pawn.Color black = Pawn.Color.BLACK;
-
+public class PawnTest {
     @Test
-    @DisplayName("흰색과 검은색 폰이 정상적으로 생성되어야 한다")
-    void create() {
-
-
-        // verifyPawn 메서드로 중복 제거
-        verifyPawn(white);
-        verifyPawn(black);
-    }
-    @Test
-    public void create_defaultConstructor() throws Exception {
+    public void create_기본생성자() throws Exception {
         Pawn pawn = new Pawn();
-        assertThat(pawn.getColor()).isEqualTo(white);
+        assertEquals(Piece.Color.WHITE, pawn.getColor());
+        assertEquals("p", pawn.getSymbol());
     }
 
-    private void verifyPawn(final Pawn.Color color) {
+    @Test
+    public void create() {
+        verifyPawn(Piece.Color.BLACK, 'P');
+        verifyPawn(Piece.Color.WHITE, 'p');
+    }
+
+    void verifyPawn(Piece.Color color , final char representation) {
         Pawn pawn = new Pawn(color);
-        assertThat(pawn.getColor()).isEqualTo(color);
+        assertEquals(color, pawn.getColor());
+        assertEquals(representation, pawn.getSymbol());
     }
 }

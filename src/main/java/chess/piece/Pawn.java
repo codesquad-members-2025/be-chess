@@ -1,28 +1,25 @@
 package chess.piece;
 
+public class Pawn extends Piece {
 
-public class Pawn {
-
-    public static final Color WHITE = Color.WHITE;
-    public static final Color BLACK = Color.BLACK;
-
-
-    public enum Color {
-        WHITE, BLACK
+    public Pawn(Color color){
+        super(color);
     }
 
-    private final Color color;
-
-    public Pawn(Color color) {
-        this.color=color;
+    @Override
+    public char getSymbol() {
+        if(getColor()==Color.WHITE){
+            return 'p';
+        } else  {
+            return  'P';
+        }
     }
+
 
     public Pawn() {
-        this.color = WHITE;
+        super(Piece.Color.WHITE);
     }
 
-    public Color getColor() {
-        return color;
-    }
+
 }
 
