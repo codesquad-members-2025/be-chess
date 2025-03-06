@@ -51,4 +51,14 @@ public class Board {
         return sb.toString();
     }
 
+    public String getBlackPawnResult() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < board.length; ++i) {
+            sb.append(board[6][i]);
+        }
+
+        return sb.toString();
+    }
+
 }
