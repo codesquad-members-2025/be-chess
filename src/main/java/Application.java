@@ -20,7 +20,7 @@ public class Application {
 
         String input = application.getInput();
         if (input.equalsIgnoreCase("start")) {
-            board.startGame();
+            board.initialize();
         } else {
             System.out.println("게임을 종료합니다.");
         }
