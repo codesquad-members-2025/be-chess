@@ -74,4 +74,15 @@ class BoardTest {
                 .isEqualTo(board.showBoard());
     }
 
+    @Test
+    @DisplayName("Piece 의 색과 종류를 반환할 수 있어야 한다")
+    void 기물의_개수_반환_테스트() {
+        Board board = new Board();
+        board.initialize();
+
+        assertThat(8).isEqualTo(board.countPieces(Piece.Color.WHITE, Piece.Type.PAWN));
+        assertThat(2).isEqualTo(board.countPieces(Piece.Color.WHITE, Piece.Type.ROOK));
+        assertThat(2).isEqualTo(board.countPieces(Piece.Color.WHITE, Piece.Type.KNIGHT));
+    }
+
 }
