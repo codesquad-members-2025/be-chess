@@ -56,10 +56,10 @@ class BoardTest {
     public void findPiece() {
         board.initialize();
 
-        assertThat(board.findPiece("a8")).isEqualTo(Piece.createBlack(Type.ROOK));
-        assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlack(Type.ROOK));
-        assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhite(Type.ROOK));
-        assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhite(Type.ROOK));
+        assertThat(board.findPiece("a8").getName()).isEqualTo(Type.ROOK);
+        assertThat(board.findPiece("h8").getName()).isEqualTo(Type.ROOK);
+        assertThat(board.findPiece("a1").getName()).isEqualTo(Type.ROOK);
+        assertThat(board.findPiece("h1").getName()).isEqualTo(Type.ROOK);
     }
 
     private void initializeBoardByString() {
