@@ -51,6 +51,17 @@ class BoardTest {
         assertThat(knightCount).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("초기화 후 특정위치에 기물이 존재하는지 확인합니다.")
+    public void findPiece() {
+        board.initialize();
+
+        assertThat(board.findPiece("a8")).isEqualTo(Piece.createBlack(Type.ROOK));
+        assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlack(Type.ROOK));
+        assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhite(Type.ROOK));
+        assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhite(Type.ROOK));
+    }
+
     private void initializeBoardByString() {
         String boardText = ".♚♜.....\n"
                 + "♟.♟♝....\n"
