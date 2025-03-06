@@ -3,6 +3,7 @@ package pieces;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import chess.Board;
+import chess.Main;
 import chess.Pawn;
 import org.junit.Before;
 import org.junit.Test;
