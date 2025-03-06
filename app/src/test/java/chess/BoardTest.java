@@ -1,6 +1,7 @@
 package chess;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pieces.Pawn;
 
@@ -13,11 +14,21 @@ public class BoardTest {
     @BeforeEach
     void setUp() {
         String[] colors = {Pawn.WHITE_COLOR, Pawn.BLACK_COLOR};
+        char[] representation = {Pawn.WHITE_REPRESENTATION, Pawn.BLACK_REPRESENTATION};
         pawns = new Pawn[colors.length];
 
         for (int i = 0; i < pawns.length; ++i) {
-            pawns[i] = new Pawn(colors[i]);
+            pawns[i] = new Pawn(colors[i], representation[i]);
         }
+    }
+
+    @Test
+    @DisplayName("체스판에 흰색, 검은색 폰이 각각 8개가 추가되어야한다.")
+    public void initialize() throws Exception{
+        board = new Board();
+        board.initialize();
+        assertEquals("♙♙♙♙♙♙♙♙", board.getWhitePawnResult());
+        assertEquals("♟♟♟♟♟♟♟♟", board.getBlackPawnResult());
     }
 
     @Test
