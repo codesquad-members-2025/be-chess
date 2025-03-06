@@ -8,42 +8,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private List<Piece> pieceList;
-    private char[][] chessBoard;
+    private List<List<Piece>> chessBoard;
 
     public Board() {
-        pieceList = new ArrayList<>();
-        chessBoard = new char[8][8];
-    }
-
-    public void add(Piece piece) {
-        pieceList.add(piece);
+        chessBoard = new ArrayList<>();
     }
 
     public int pieceCount() {
-        return pieceList.size();
-    }
+        return (int) chessBoard.stream()
+                .flatMap(List::stream)
+                .filter(piece -> !piece.getName().equals(Type.NO_PIECE))
+                .count();
 
-    public Piece findPawn(int index) {
-        return pieceList.get(index);
     }
 
     public void initialize() {
         initializeEmptyBoard();
-        addPawnToList();
-        addPieceToList();
-        addPawnToBoard();
         addBlackPiecesToBoard();
+        addBlackPawnToBoard();
+        addWhitePawnToBoard();
         addWhitePiecesToBoard();
 
     }
 
     public String getPawnResult(Color color){
         StringBuilder sb = new StringBuilder();
-        for (Piece piece : pieceList) {
-            if (sb.length() == 8) break;
-            if (piece.getColor().equals(color) && piece.getName().equals(Type.PAWN))
-                sb.append(piece.getName().getRepresentation(color));
+        for (List<Piece> pieces : chessBoard) {
+            for (Piece piece : pieces) {
+                if (sb.length() == 8) break;
+                if (piece.getColor().equals(color) && piece.getName().equals(Type.PAWN))
+                    sb.append(piece.getName().getRepresentation(color));
+            }
         }
         return sb.toString();
     }
@@ -54,9 +49,9 @@ public class Board {
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < chessBoard.length; i++) {
-            for (int j = 0; j < chessBoard.length; j++) {
-                sb.append(chessBoard[i][j]);
+        for (int i = 0; i < chessBoard.size(); i++) {
+            for (int j = 0; j < chessBoard.get(i).size(); j++) {
+                sb.append(chessBoard.get(i).get(j).getName().getRepresentation(chessBoard.get(i).get(j).getColor()));
             }
             sb.append(StringUtils.appendNewLine(""));
         }
@@ -64,69 +59,59 @@ public class Board {
     }
 
     private void addWhitePiecesToBoard() {
-        chessBoard[7][0] = Type.ROOK.getRepresentation(Color.WHITE);
-        chessBoard[7][1] = Type.KNIGHT.getRepresentation(Color.WHITE);
-        chessBoard[7][2] = Type.BISHOP.getRepresentation(Color.WHITE);
-        chessBoard[7][3] = Type.QUEEN.getRepresentation(Color.WHITE);
-        chessBoard[7][4] = Type.KING.getRepresentation(Color.WHITE);
-        chessBoard[7][5] = Type.BISHOP.getRepresentation(Color.WHITE);
-        chessBoard[7][6] = Type.KNIGHT.getRepresentation(Color.WHITE);
-        chessBoard[7][7] = Type.ROOK.getRepresentation(Color.WHITE);
+        List<Piece> whitePieces = new ArrayList<>();
+        whitePieces.add(Piece.createWhite(Type.ROOK));
+        whitePieces.add(Piece.createWhite(Type.KNIGHT));
+        whitePieces.add(Piece.createWhite(Type.BISHOP));
+        whitePieces.add(Piece.createWhite(Type.QUEEN));
+        whitePieces.add(Piece.createWhite(Type.KING));
+        whitePieces.add(Piece.createWhite(Type.BISHOP));
+        whitePieces.add(Piece.createWhite(Type.KNIGHT));
+        whitePieces.add(Piece.createWhite(Type.ROOK));
+
+        chessBoard.getLast().clear();
+        chessBoard.getLast().addAll(whitePieces);
     }
 
     private void addBlackPiecesToBoard() {
-        chessBoard[0][0] = Type.ROOK.getRepresentation(Color.BLACK);
-        chessBoard[0][1] = Type.KNIGHT.getRepresentation(Color.BLACK);
-        chessBoard[0][2] = Type.BISHOP.getRepresentation(Color.BLACK);
-        chessBoard[0][3] = Type.QUEEN.getRepresentation(Color.BLACK);
-        chessBoard[0][4] = Type.KING.getRepresentation(Color.BLACK);
-        chessBoard[0][5] = Type.BISHOP.getRepresentation(Color.BLACK);
-        chessBoard[0][6] = Type.KNIGHT.getRepresentation(Color.BLACK);
-        chessBoard[0][7] = Type.ROOK.getRepresentation(Color.BLACK);
+        List<Piece> blackPieces = new ArrayList<>();
+        blackPieces.add(Piece.createBlack(Type.ROOK));
+        blackPieces.add(Piece.createBlack(Type.KNIGHT));
+        blackPieces.add(Piece.createBlack(Type.BISHOP));
+        blackPieces.add(Piece.createBlack(Type.QUEEN));
+        blackPieces.add(Piece.createBlack(Type.KING));
+        blackPieces.add(Piece.createBlack(Type.BISHOP));
+        blackPieces.add(Piece.createBlack(Type.KNIGHT));
+        blackPieces.add(Piece.createBlack(Type.ROOK));
+
+        chessBoard.getFirst().clear();
+        chessBoard.getFirst().addAll(blackPieces);
     }
 
-    private void addPieceToList() {
-        pieceList.add(Piece.createWhite(Type.KNIGHT));
-        pieceList.add(Piece.createWhite(Type.KNIGHT));
-        pieceList.add(Piece.createBlack(Type.KNIGHT));
-        pieceList.add(Piece.createBlack(Type.KNIGHT));
-
-        pieceList.add(Piece.createWhite(Type.BISHOP));
-        pieceList.add(Piece.createWhite(Type.BISHOP));
-        pieceList.add(Piece.createBlack(Type.BISHOP));
-        pieceList.add(Piece.createBlack(Type.BISHOP));
-
-        pieceList.add(Piece.createWhite(Type.ROOK));
-        pieceList.add(Piece.createWhite(Type.ROOK));
-        pieceList.add(Piece.createBlack(Type.ROOK));
-        pieceList.add(Piece.createBlack(Type.ROOK));
-
-        pieceList.add(Piece.createWhite(Type.QUEEN));
-        pieceList.add(Piece.createBlack(Type.QUEEN));
-        pieceList.add(Piece.createWhite(Type.KING));
-        pieceList.add(Piece.createBlack(Type.KING));
-
-    }
-
-    private void addPawnToBoard() {
-        for (int i = 0; i < chessBoard.length; i++) {
-            chessBoard[1][i] = Type.PAWN.getRepresentation(Color.BLACK);;
-            chessBoard[6][i] = Type.PAWN.getRepresentation(Color.WHITE);
+    private void addBlackPawnToBoard() {
+        List<Piece> blackPawns = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            blackPawns.add(Piece.createBlack(Type.PAWN));
         }
+        chessBoard.get(1).clear();
+        chessBoard.get(1).addAll(blackPawns);
     }
-
-    private void addPawnToList() {
-        for (int i = 0; i < chessBoard.length; i++) {
-            pieceList.add(Piece.createWhite(Type.PAWN));
-            pieceList.add(Piece.createBlack(Type.PAWN));
+    private void addWhitePawnToBoard() {
+        List<Piece> whitePawns = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            whitePawns.add(Piece.createWhite(Type.PAWN));
         }
+        chessBoard.get(6).clear();
+        chessBoard.get(6).addAll(whitePawns);
     }
 
     private void initializeEmptyBoard() {
-        for (int i = 0; i < chessBoard.length; i++) {
-            for (int j = 0; j < chessBoard.length; j++) {
-                chessBoard[i][j] = Type.NO_PIECE.getRepresentation(Color.NOCOLOR);
+        for (int i = 0; i < 8; i++) {
+            List<Piece> emptyRank = new ArrayList<>();
+            for (int j = 0; j < 8; j++) {
+                emptyRank.add(Piece.createBlank());
             }
+            chessBoard.add(emptyRank);
         }
     }
 }
