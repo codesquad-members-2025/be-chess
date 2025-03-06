@@ -1,20 +1,20 @@
 package pieces;
 
 public class Piece {
-    private static final String COLOR_WHITE = "white";
-    private static final String COLOR_BLACK = "black";
-    private static final char PAWN_WHITE = 'p';
-    private static final char PAWN_BLACK = 'P';
-    private static final char KNIGHT_WHITE = 'n';
-    private static final char KNIGHT_BLACK = 'N';
-    private static final char ROOK_WHITE = 'r';
-    private static final char ROOK_BLACK = 'R';
-    private static final char BISHOP_WHITE = 'b';
-    private static final char BISHOP_BLACK = 'B';
-    private static final char QUEEN_WHITE = 'q';
-    private static final char QUEEN_BLACK = 'Q';
-    private static final char KING_WHITE = 'k';
-    private static final char KING_BLACK = 'K';
+    public static final String COLOR_WHITE = "white";
+    public static final String COLOR_BLACK = "black";
+    public static final char PAWN_WHITE = 'p';
+    public static final char PAWN_BLACK = 'P';
+    public static final char KNIGHT_WHITE = 'n';
+    public static final char KNIGHT_BLACK = 'N';
+    public static final char ROOK_WHITE = 'r';
+    public static final char ROOK_BLACK = 'R';
+    public static final char BISHOP_WHITE = 'b';
+    public static final char BISHOP_BLACK = 'B';
+    public static final char QUEEN_WHITE = 'q';
+    public static final char QUEEN_BLACK = 'Q';
+    public static final char KING_WHITE = 'k';
+    public static final char KING_BLACK = 'K';
 
     private final String color;
     private final char type;
@@ -71,7 +71,7 @@ public class Piece {
     public static Piece createBlackKing() {
         return new Piece(COLOR_BLACK, KING_BLACK);
     }
-    
+
     public String getColor() {
         return color;
     }
