@@ -114,4 +114,22 @@ public class Board {
             return null;
         }
     }
+
+    public double calculatePoint(Piece.Color color){
+        int[] pawnLocation = {0,0,0,0,0,0,0,0};
+        double point = 0.0;
+        for(Rank rank : rankList){
+            for(int i=0;i<8;i++){
+                Piece piece = rank.getPieceByFileIndex(i);
+                if(piece.getColor()==color) point += piece.getPoint();
+                // 폰이 같은 열에 있으면 감점되기 때문에 폰의 위치만 따로 관리
+                if(piece.getColor()==color && piece.getType()==Piece.Type.PAWN) pawnLocation[i]+=1;
+            }
+        }
+        for(int pawnCount : pawnLocation){
+            if(pawnCount>1) point -= (double) pawnCount/2;
+        }
+
+        return point;
+    }
 }

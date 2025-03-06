@@ -13,7 +13,7 @@ public class Coordinate {
     private boolean isValid(String location){
         char file =location.charAt(0);
         char rank =location.charAt(1);
-        if(!(file>='a' && file<='g')) return false;
+        if(!(file>='a' && file<='h')) return false;
         if(!(rank>='1' && rank<='8')) return false;
         return true;
     }
