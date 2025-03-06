@@ -84,13 +84,13 @@ class BoardTest {
         addPiece("b8", Piece.createBlack(Type.KING));
         addPiece("c8", Piece.createBlack(Type.ROOK));
 
-        addPiece("f2", Piece.createWhite(Type.PAWN));
         addPiece("g2", Piece.createWhite(Type.PAWN));
+        addPiece("g3", Piece.createWhite(Type.PAWN));
         addPiece("e1", Piece.createWhite(Type.ROOK));
         addPiece("f1", Piece.createWhite(Type.KING));
 
         assertThat(board.calculatePoint(Color.BLACK)).isCloseTo(15.0, within(0.01));
-        assertThat(board.calculatePoint(Color.WHITE)).isCloseTo(7.0, within(0.01));
+        assertThat(board.calculatePoint(Color.WHITE)).isCloseTo(6.0, within(0.01));
 
         System.out.println(board.showBoard());
     }
