@@ -89,6 +89,13 @@ public class Board {
         return whitePieces.size() + blackPieces.size();
     }
 
+    public int countPieces(Piece.Color color, Piece.Type type) {
+        return (int) board.stream()
+                .flatMap(rank -> rank.getPieces().stream())
+                .filter(piece -> piece.getColor() == color && piece.getType() == type)
+                .count();
+    }
+
     public Piece findPawn(int index) {
         return whitePieces.get(index);
     }
