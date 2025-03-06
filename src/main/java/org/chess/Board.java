@@ -92,23 +92,26 @@ public class Board {
         return count;
     }
 
-    private int getFileIndex(String coordinate){
-        return coordinate.charAt(0)-'a';
-    }
-
-    private int getRankIndex(String coordinate){
-        return Character.getNumericValue(coordinate.charAt(1))-1;
-    }
-
-    public Piece findPiece(String coordinate){
-        int fileIndex = getFileIndex(coordinate);
-        int rankIndex = getRankIndex(coordinate);
+    public Piece findPiece(String location){
+        Coordinate coordinate = parseCoordinate(location);
+        int fileIndex = coordinate.getFileIndex();
+        int rankIndex = coordinate.getRankIndex();
         return rankList.get(rankIndex).getPieceByFileIndex(fileIndex);
     }
 
-    public void move(String coordinate,Piece piece){
-        int fileIndex = getFileIndex(coordinate);
-        int rankIndex = getRankIndex(coordinate);
+    public void move(String location,Piece piece){
+        Coordinate coordinate = parseCoordinate(location);
+        int fileIndex = coordinate.getFileIndex();
+        int rankIndex = coordinate.getRankIndex();
         rankList.get(rankIndex).putPieceByFileIndex(fileIndex,piece);
+    }
+
+    private Coordinate parseCoordinate(String location){
+        try{
+            return new Coordinate(location);
+        } catch(IllegalArgumentException e){
+            System.out.println("좌표 오류 : ");
+            return null;
+        }
     }
 }
