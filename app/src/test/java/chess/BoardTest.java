@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 public class BoardTest {
 
     private Board board;
+
     @BeforeEach
     public void setUp() {
         board = new Board();
@@ -20,6 +21,14 @@ public class BoardTest {
         board.initialize();
         assertThat("♙♙♙♙♙♙♙♙").isEqualTo(board.getWhitePawnsResult());
         assertThat("♟♟♟♟♟♟♟♟").isEqualTo(board.getBlackPawnsResult());
+    }
+
+    @Test
+    @DisplayName("체스판 출력")
+    public void print() throws Exception{
+        board.initialize();
+        String result = board.print();
+        System.out.println(result);
     }
 }
 
