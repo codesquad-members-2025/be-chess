@@ -58,9 +58,13 @@ class BoardTest {
         board.initialize();
 
         assertThat(board.findPiece("a8").getName()).isEqualTo(Type.ROOK);
+        assertThat(board.findPiece("a8").getColor()).isEqualTo(Color.BLACK);
         assertThat(board.findPiece("h8").getName()).isEqualTo(Type.ROOK);
+        assertThat(board.findPiece("h8").getColor()).isEqualTo(Color.BLACK);
         assertThat(board.findPiece("a1").getName()).isEqualTo(Type.ROOK);
+        assertThat(board.findPiece("a1").getColor()).isEqualTo(Color.WHITE);
         assertThat(board.findPiece("h1").getName()).isEqualTo(Type.ROOK);
+        assertThat(board.findPiece("h1").getColor()).isEqualTo(Color.WHITE);
     }
 
     @Test
