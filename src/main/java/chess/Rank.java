@@ -12,17 +12,7 @@ public class Rank {
         this.rank = rank;
     }
 
-    public int getSize() {
-        return rank.size();
-    }
-
-    public Color getColor(int index) {
-        return rank.get(index).getColor();
-    }
-    public Type getName(int index) {
-        return rank.get(index).getName();
-    }
-
+    //랭크 당 기물의 갯수 리턴
     public int pieceCountPerRank() {
         return (int) rank.stream()
                 .filter(piece -> !piece.getName().equals(Type.NO_PIECE))
@@ -36,5 +26,13 @@ public class Rank {
                 sb.append(piece.getName().getRepresentation(color));
         }
         return sb.toString();
+    }
+
+    //랭크 특정 위치의 출력문자를 리턴
+    public char getRepresentationByRank(int index) {
+        Color color = rank.get(index).getColor();
+        Type name = rank.get(index).getName();
+
+        return name.getRepresentation(color);
     }
 }

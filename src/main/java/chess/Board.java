@@ -8,39 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private List<List<Piece>> chessBoard;
+    public static final int MAX_BOARD = 8;
+    private final List<Rank> chessBoard;
 
     public Board() {
         chessBoard = new ArrayList<>();
     }
 
     public int pieceCount() {
-        return (int) chessBoard.stream()
-                .flatMap(List::stream)
-                .filter(piece -> !piece.getName().equals(Type.NO_PIECE))
-                .count();
-
+        return chessBoard.stream()
+                .mapToInt(Rank::pieceCountPerRank)
+                .sum();
     }
 
     public void initialize() {
-        initializeEmptyBoard();
         addBlackPiecesToBoard();
         addBlackPawnToBoard();
+        addBlankToBoard();
         addWhitePawnToBoard();
         addWhitePiecesToBoard();
-
     }
 
     public String getPawnResult(Color color){
-        StringBuilder sb = new StringBuilder();
-        for (List<Piece> pieces : chessBoard) {
-            for (Piece piece : pieces) {
-                if (sb.length() == 8) break;
-                if (piece.getColor().equals(color) && piece.getName().equals(Type.PAWN))
-                    sb.append(piece.getName().getRepresentation(color));
-            }
+        StringBuilder result = new StringBuilder();
+        for (Rank rank : chessBoard) {
+            result.append(rank.getPawnString(color));
         }
-        return sb.toString();
+        return result.toString();
     }
 
     public void print() {
@@ -49,9 +43,9 @@ public class Board {
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < chessBoard.size(); i++) {
-            for (int j = 0; j < chessBoard.get(i).size(); j++) {
-                sb.append(chessBoard.get(i).get(j).getName().getRepresentation(chessBoard.get(i).get(j).getColor()));
+        for (Rank rank : chessBoard) {
+            for (int j = 0; j < MAX_BOARD; j++) {
+                sb.append(rank.getRepresentationByRank(j));
             }
             sb.append(StringUtils.appendNewLine(""));
         }
@@ -69,8 +63,7 @@ public class Board {
         whitePieces.add(Piece.createWhite(Type.KNIGHT));
         whitePieces.add(Piece.createWhite(Type.ROOK));
 
-        chessBoard.getLast().clear();
-        chessBoard.getLast().addAll(whitePieces);
+        chessBoard.add(new Rank(whitePieces));
     }
 
     private void addBlackPiecesToBoard() {
@@ -84,34 +77,32 @@ public class Board {
         blackPieces.add(Piece.createBlack(Type.KNIGHT));
         blackPieces.add(Piece.createBlack(Type.ROOK));
 
-        chessBoard.getFirst().clear();
-        chessBoard.getFirst().addAll(blackPieces);
+        chessBoard.add(new Rank(blackPieces));
     }
 
     private void addBlackPawnToBoard() {
         List<Piece> blackPawns = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < MAX_BOARD; i++) {
             blackPawns.add(Piece.createBlack(Type.PAWN));
         }
-        chessBoard.get(1).clear();
-        chessBoard.get(1).addAll(blackPawns);
-    }
-    private void addWhitePawnToBoard() {
-        List<Piece> whitePawns = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            whitePawns.add(Piece.createWhite(Type.PAWN));
-        }
-        chessBoard.get(6).clear();
-        chessBoard.get(6).addAll(whitePawns);
+        chessBoard.add(new Rank(blackPawns));
     }
 
-    private void initializeEmptyBoard() {
-        for (int i = 0; i < 8; i++) {
-            List<Piece> emptyRank = new ArrayList<>();
-            for (int j = 0; j < 8; j++) {
-                emptyRank.add(Piece.createBlank());
-            }
-            chessBoard.add(emptyRank);
+    private void addWhitePawnToBoard() {
+        List<Piece> whitePawns = new ArrayList<>();
+        for (int i = 0; i < MAX_BOARD; i++) {
+            whitePawns.add(Piece.createWhite(Type.PAWN));
+        }
+        chessBoard.add(new Rank(whitePawns));
+    }
+
+    private void addBlankToBoard() {
+        List<Piece> blank = new ArrayList<>();
+        for (int i = 0; i < MAX_BOARD; i++) {
+            blank.add(Piece.createBlank());
+        }
+        for (int i = 2; i <= 5; i++) {
+            chessBoard.add(new Rank(blank));
         }
     }
 }
