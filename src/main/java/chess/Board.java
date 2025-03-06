@@ -103,13 +103,10 @@ public class Board {
     }
 
     public Piece findPiece(String position) {
-        char x = position.charAt(0);
-        int xPos = x - 'a';
-        char y = position.charAt(1);
-        int yPos = Character.getNumericValue(y);
+        Position pos= new Position(position);
 
-        Rank rank = chessBoard.get(MAX_BOARD - yPos);
-        return rank.getPieceByPosition(xPos);
+        Rank rank = chessBoard.get(MAX_BOARD - pos.getYPos());
+        return rank.getPieceByPosition(pos.getXPos());
     }
 
     public void initializeEmpty() {
@@ -117,13 +114,10 @@ public class Board {
     }
 
     public void move(String position, Piece piece) {
-        char x = position.charAt(0);
-        int xPos = x - 'a';
-        char y = position.charAt(1);
-        int yPos = Character.getNumericValue(y);
+        Position pos= new Position(position);
 
-        Rank rank = chessBoard.get(MAX_BOARD - yPos);
-        rank.movePiece(xPos, piece);
+        Rank rank = chessBoard.get(MAX_BOARD - pos.getYPos());
+        rank.movePiece(pos.getXPos(), piece);
 
     }
 
