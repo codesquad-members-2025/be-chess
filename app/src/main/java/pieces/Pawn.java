@@ -8,13 +8,16 @@ public class Pawn {
     public static final char BLACK_REPRESENTATION = '♟';
 
     private final String color;
+    private final char representation;
 
     public Pawn() {
         this.color = WHITE_COLOR;
+        this.representation = WHITE_REPRESENTATION;
     }
 
-    public Pawn(String color) {
+    public Pawn(String color, char representation) {
         this.color = color;
+        this.representation = representation;
     }
 
     public String getColor() {
