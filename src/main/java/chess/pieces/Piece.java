@@ -81,6 +81,9 @@ public class Piece {
     public Color getColor() {
         return color;
     }
+    public double getScore(){
+        return name.getDefaultPoint();
+    }
 
     public boolean isWhite() {
         return color.equals(Color.WHITE);
