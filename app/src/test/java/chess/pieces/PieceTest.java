@@ -1,5 +1,6 @@
 package chess.pieces;
 import org.junit.jupiter.api.*;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class PieceTest {
@@ -23,6 +24,30 @@ public class PieceTest {
 
         verifyPiece(Piece.createWhiteKnight(), Piece.WHITE_COLOR, Piece.WHITE_KNIGHT_REPRESENTATION);
         verifyPiece(Piece.createBlackKnight(), Piece.BLACK_COLOR, Piece.BLACK_KNIGHT_REPRESENTATION);
+    }
+
+    @Test
+    @DisplayName("흰색 말 테스트")
+    public void whiteColor() throws Exception{
+        Piece whiteBishop = Piece.createWhiteBishop();
+        Piece whitePawn = Piece.createWhitePawn();
+
+        assertThat(whiteBishop.isWhite()).isTrue();
+        assertThat(whitePawn.isWhite()).isTrue();
+        assertThat(whiteBishop.isBlack()).isFalse();
+        assertThat(whitePawn.isBlack()).isFalse();
+    }
+
+    @Test
+    @DisplayName("검은 말 테스트")
+    public void blackColor() throws Exception{
+        Piece blackBishop = Piece.createBlackBishop();
+        Piece blackPawn = Piece.createBlackPawn();
+
+        assertThat(blackBishop.isBlack()).isTrue();
+        assertThat(blackPawn.isBlack()).isTrue();
+        assertThat(blackBishop.isWhite()).isFalse();
+        assertThat(blackPawn.isWhite()).isFalse();
     }
 
     private void verifyPiece(final Piece piece, final String color, final char representation) {
