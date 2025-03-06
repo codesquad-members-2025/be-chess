@@ -7,7 +7,7 @@ public class Piece {
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
     public static final char WHITE_PAWN_REPRESENTATION = 'p';
-    public static final char BLACK_PAWN_REPRESENTATION = 'p';
+    public static final char BLACK_PAWN_REPRESENTATION = 'P';
     public static final char WHITE_ROOK_REPRESENTATION = 'r';
     public static final char BLACK_ROOK_REPRESENTATION = 'R';
     public static final char WHITE_KNIGHT_REPRESENTATION = 'n';
@@ -64,4 +64,12 @@ public class Piece {
 
     public String getColor(){ return color; }
     public char getRepresentation(){ return shape; }
+
+    public boolean isWhite() {
+        return this.color.equals(WHITE_COLOR);
+    }
+
+    public boolean isBlack() {
+        return this.color.equals(BLACK_COLOR);
+    }
 }
