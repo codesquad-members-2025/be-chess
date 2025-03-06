@@ -84,6 +84,10 @@ public class Piece {
         return new Piece(Type.KING, Color.BLACK);
     }
 
+    public static Piece createBlank() {
+        return new Piece(Type.NO_PIECE, Color.NOCOLOR);
+    }
+
     public Type getName() {
         return name;
     }
