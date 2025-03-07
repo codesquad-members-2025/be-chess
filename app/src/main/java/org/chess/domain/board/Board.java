@@ -4,6 +4,7 @@ import org.chess.domain.pieces.Piece;
 import org.chess.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Board {
@@ -122,6 +123,28 @@ public class Board {
                 .filter(piece -> piece.getColor() == color)
                 .mapToDouble(Piece::getPoint)
                 .sum();
+    }
+
+    public List<Piece> sortPiecesByAscending(Piece.Color color) {
+        List<Piece> sortedPieces = new ArrayList<>();
+        board.stream()
+                .flatMap(rank -> rank.getPieces().stream())
+                .filter(piece -> piece.getColor() == color)
+                .sorted(Comparator.comparingDouble(Piece::getPoint))
+                .forEach(sortedPieces::add);
+
+        return sortedPieces;
+    }
+
+    public List<Piece> sortPiecesByDescending(Piece.Color color) {
+        List<Piece> sortedPieces = new ArrayList<>();
+        board.stream()
+                .flatMap(rank -> rank.getPieces().stream())
+                .filter(piece -> piece.getColor() == color)
+                .sorted((p1, p2) -> Double.compare(p2.getPoint(), p1.getPoint()))
+                .forEach(sortedPieces::add);
+
+        return sortedPieces;
     }
 
 }
