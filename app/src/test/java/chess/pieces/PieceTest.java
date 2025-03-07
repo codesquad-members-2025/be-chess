@@ -1,36 +1,39 @@
 package chess.pieces;
 import org.junit.jupiter.api.*;
 
+import static chess.pieces.Piece.*;
+import static chess.pieces.Piece.Color.*;
+import static chess.pieces.Piece.Type.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class PieceTest {
     @Test
     @DisplayName("각 기물의 생성 테스트")
     public void create_piece() {
-        verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
-        verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
+        verifyPiece(createWhitePawn(), WHITE, PAWN.getWhiteRepresentation());
+        verifyPiece(createBlackPawn(), BLACK, PAWN.getBlackRepresentation());
 
-        verifyPiece(Piece.createWhiteKing(), Piece.WHITE_COLOR, Piece.WHITE_KING_REPRESENTATION);
-        verifyPiece(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION);
+        verifyPiece(createWhiteKing(), WHITE, KING.getWhiteRepresentation());
+        verifyPiece(createBlackKing(), BLACK, KING.getBlackRepresentation());
 
-        verifyPiece(Piece.createWhiteQueen(), Piece.WHITE_COLOR, Piece.WHITE_QUEEN_REPRESENTATION);
-        verifyPiece(Piece.createBlackQueen(), Piece.BLACK_COLOR, Piece.BLACK_QUEEN_REPRESENTATION);
+        verifyPiece(createWhiteQueen(), WHITE, QUEEN.getWhiteRepresentation());
+        verifyPiece(createBlackQueen(), BLACK, QUEEN.getBlackRepresentation());
 
-        verifyPiece(Piece.createWhiteRook(), Piece.WHITE_COLOR, Piece.WHITE_ROOK_REPRESENTATION);
-        verifyPiece(Piece.createBlackRook(), Piece.BLACK_COLOR, Piece.BLACK_ROOK_REPRESENTATION);
+        verifyPiece(createWhiteRook(), WHITE, ROOK.getWhiteRepresentation());
+        verifyPiece(createBlackRook(), BLACK, ROOK.getBlackRepresentation());
 
-        verifyPiece(Piece.createWhiteBishop(), Piece.WHITE_COLOR, Piece.WHITE_BISHOP_REPRESENTATION);
-        verifyPiece(Piece.createBlackBishop(), Piece.BLACK_COLOR, Piece.BLACK_BISHOP_REPRESENTATION);
+        verifyPiece(createWhiteBishop(), WHITE, BISHOP.getWhiteRepresentation());
+        verifyPiece(createBlackBishop(), BLACK, BISHOP.getBlackRepresentation());
 
-        verifyPiece(Piece.createWhiteKnight(), Piece.WHITE_COLOR, Piece.WHITE_KNIGHT_REPRESENTATION);
-        verifyPiece(Piece.createBlackKnight(), Piece.BLACK_COLOR, Piece.BLACK_KNIGHT_REPRESENTATION);
+        verifyPiece(createWhiteKnight(), WHITE, KNIGHT.getWhiteRepresentation());
+        verifyPiece(createBlackKnight(), BLACK, KNIGHT.getBlackRepresentation());
     }
 
     @Test
     @DisplayName("흰색 말 테스트")
     public void whiteColor() throws Exception{
-        Piece whiteBishop = Piece.createWhiteBishop();
-        Piece whitePawn = Piece.createWhitePawn();
+        Piece whiteBishop = createWhiteBishop();
+        Piece whitePawn = createWhitePawn();
 
         assertThat(whiteBishop.isWhite()).isTrue();
         assertThat(whitePawn.isWhite()).isTrue();
@@ -41,8 +44,8 @@ public class PieceTest {
     @Test
     @DisplayName("검은 말 테스트")
     public void blackColor() throws Exception{
-        Piece blackBishop = Piece.createBlackBishop();
-        Piece blackPawn = Piece.createBlackPawn();
+        Piece blackBishop = createBlackBishop();
+        Piece blackPawn = createBlackPawn();
 
         assertThat(blackBishop.isBlack()).isTrue();
         assertThat(blackPawn.isBlack()).isTrue();
@@ -53,11 +56,11 @@ public class PieceTest {
     @Test
     @DisplayName("기물의 representation이 잘 할당 되었는지 테스트")
     public void getRepresentationPerPiece() throws Exception {
-        assertThat(Piece.Type.PAWN.getWhiteRepresentation()).isEqualTo('p');
-        assertThat(Piece.Type.PAWN.getBlackRepresentation()).isEqualTo('P');
+        assertThat(PAWN.getWhiteRepresentation()).isEqualTo('p');
+        assertThat(PAWN.getBlackRepresentation()).isEqualTo('P');
     }
 
-    private void verifyPiece(final Piece piece, final String color, final char representation) {
+    private void verifyPiece(final Piece piece, final Color color, final char representation) {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(piece.getRepresentation()).isEqualTo(representation);
     }
