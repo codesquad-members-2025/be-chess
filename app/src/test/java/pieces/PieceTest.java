@@ -8,42 +8,42 @@ public class PieceTest {
 
     @Test
     @DisplayName("흰색, 검은색 폰이 생성되어야 한다")
-    public void create_piece() {
+    public void create_pawn() {
         verifyPawn(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPawn(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
     }
 
     @Test
     @DisplayName("흰색, 검은색 룩이 생성되어야 한다")
-    public void create_piece() {
+    public void create_rook() {
         verifyPawn(Piece.createWhiteRook(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPawn(Piece.createBlackRook(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
     }
 
     @Test
     @DisplayName("흰색, 검은색 나이트가 생성되어야 한다")
-    public void create_piece() {
+    public void create_knight() {
         verifyPawn(Piece.createWhiteKnight(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPawn(Piece.createBlackKnight(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
     }
 
     @Test
     @DisplayName("흰색, 검은색 비숍이 생성되어야 한다")
-    public void create_piece() {
+    public void create_bishop() {
         verifyPawn(Piece.createWhiteBishop(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPawn(Piece.createBlackBishop(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
     }
 
     @Test
     @DisplayName("흰색, 검은색 퀸이 생성되어야 한다")
-    public void create_piece() {
+    public void create_queen() {
         verifyPawn(Piece.createWhiteQueen(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPawn(Piece.createBlackQueen(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
     }
 
     @Test
     @DisplayName("흰색, 검은색 킹이 생성되어야 한다")
-    public void create_piece() {
+    public void create_king() {
         verifyPawn(Piece.createWhiteKing(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPawn(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
     }
