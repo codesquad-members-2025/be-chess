@@ -79,6 +79,12 @@ public class Piece {
     public char getRepresentation() {
         return type;
     }
-}
 
-// 객체의 생성은 팩토리 메소드만 할 수 있다.
+    public boolean isBlack() {
+        return color.equals("black");
+    }
+
+    public boolean isWhite() {
+        return color.equals("white");
+    }
+}
