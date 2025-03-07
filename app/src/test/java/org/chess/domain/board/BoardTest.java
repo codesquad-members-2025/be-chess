@@ -123,4 +123,33 @@ class BoardTest {
         assertThat(piece).isEqualTo(board.findPiece(position));
     }
 
+    @Test
+    @DisplayName("현재까지 남아있는 기물에 따라 점수를 계산할 수 있어야 한다")
+    void 점수_계산_테스트() {
+        // given
+        Board board = new Board();
+        board.initializeEmptyBoard();
+
+        // when
+        addPiece(board, "b6", Piece.createBlack(Piece.Type.PAWN));
+        addPiece(board, "e6", Piece.createBlack(Piece.Type.QUEEN));
+        addPiece(board, "b8", Piece.createBlack(Piece.Type.KING));
+        addPiece(board, "c8", Piece.createBlack(Piece.Type.ROOK));
+
+        addPiece(board, "f2", Piece.createWhite(Piece.Type.PAWN));
+        addPiece(board, "g2", Piece.createWhite(Piece.Type.PAWN));
+        addPiece(board, "e1", Piece.createWhite(Piece.Type.ROOK));
+        addPiece(board, "f1", Piece.createWhite(Piece.Type.KING));
+
+        // then
+        assertThat(board.caculatePoint(Piece.Color.BLACK), 0.01).isEqualTo(15.0);
+        assertThat(board.caculatePoint(Piece.Color.WHITE), 0.01).isEqualTo(7.0);
+
+        System.out.println(board.showBoard());
+    }
+
+    private void addPiece(Board board, String Position, Piece piece) {
+        board.move(Position, piece);
+    }
+
 }
