@@ -12,11 +12,13 @@ import static org.utils.StringUtils.appendNewLine;
 public class BoardTest {
     Board board;
     BoardStatus boardStatus;
+    GameController gameController;
 
     @BeforeEach
     void setUp() {
         board = new Board();
         boardStatus = new BoardStatus(board);
+        gameController = new GameController(board);
     }
 
     @Test
@@ -25,9 +27,9 @@ public class BoardTest {
         board.initialize();
         String sourcePosition = "b2";
         String targetPosition = "b3";
-        board.move(sourcePosition, targetPosition);
-        assertThat(Piece.createBlank()).isEqualTo(board.findPiece(sourcePosition));
-        assertThat(Piece.createWhitePawn()).isEqualTo(board.findPiece(targetPosition));
+        gameController.move(sourcePosition, targetPosition);
+        assertThat(Piece.createBlank()).isEqualTo(gameController.findPiece(sourcePosition));
+        assertThat(Piece.createWhitePawn()).isEqualTo(gameController.findPiece(targetPosition));
     }
 
 
@@ -52,9 +54,9 @@ public class BoardTest {
 
         String position = "b5";
         Piece piece = Piece.createBlackRook();
-        board.putPiece(position, piece);
+        gameController.putPiece(position, piece);
 
-        assertThat(board.findPiece(position)).isEqualTo(piece);
+        assertThat(gameController.findPiece(position)).isEqualTo(piece);
         System.out.println(boardStatus.showBoard());
     }
 
@@ -72,10 +74,10 @@ public class BoardTest {
         addPiece("a1",piece3);
         addPiece("h1",piece4);
 
-        assertThat(board.findPiece("a8")).isEqualTo(piece1);
-        assertThat(board.findPiece("h8")).isEqualTo(piece2);
-        assertThat(board.findPiece("a1")).isEqualTo(piece3);
-        assertThat(board.findPiece("h1")).isEqualTo(piece4);
+        assertThat(gameController.findPiece("a8")).isEqualTo(piece1);
+        assertThat(gameController.findPiece("h8")).isEqualTo(piece2);
+        assertThat(gameController.findPiece("a1")).isEqualTo(piece3);
+        assertThat(gameController.findPiece("h1")).isEqualTo(piece4);
     }
 
     @Test
@@ -145,6 +147,6 @@ public class BoardTest {
     }
 
     private void addPiece(String position, Piece piece) {
-        board.putPiece(position, piece);
+        gameController.putPiece(position, piece);
     }
 }
