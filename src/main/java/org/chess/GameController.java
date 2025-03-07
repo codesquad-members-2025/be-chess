@@ -12,22 +12,23 @@ public class GameController {
     }
 
     public void move(String sourcePosition, String targetPosition) {
-        Piece source = findPiece(sourcePosition);
+        Coordinate sourceCoordinate = new Coordinate(sourcePosition);
+        Coordinate targetCoordinate = new Coordinate(targetPosition);
+
+        Piece source = findPiece(sourceCoordinate);
         // target에 기물 추가
-        putPiece(targetPosition, source);
+        putPiece(targetCoordinate, source);
         // 원래 자리에 blank 추가
-        putPiece(sourcePosition, Piece.createBlank());
+        putPiece(sourceCoordinate, Piece.createBlank());
     }
 
-    public Piece findPiece(String location) {
-        Coordinate coordinate = parseCoordinate(location);
+    public Piece findPiece(Coordinate coordinate) {
         int fileIndex = coordinate.getFileIndex();
         int rankIndex = coordinate.getRankIndex();
         return rankList().get(rankIndex).getPieceByFileIndex(fileIndex);
     }
 
-    public void putPiece(String location, Piece piece) {
-        Coordinate coordinate = parseCoordinate(location);
+    public void putPiece(Coordinate coordinate, Piece piece) {
         int fileIndex = coordinate.getFileIndex();
         int rankIndex = coordinate.getRankIndex();
         rankList().get(rankIndex).putPieceByFileIndex(fileIndex, piece);
