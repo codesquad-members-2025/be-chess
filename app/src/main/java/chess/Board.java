@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-
     private List<Pawn> chessPiecesList;
 
     private List<Pawn> whitePawnsList;
@@ -37,6 +36,22 @@ public class Board {
 
         initializeWhitePawnsResult();
         initializeBlackPawnsResult();
+    }
+
+    public String print(){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < 8; i++){
+            if(i == 1) {
+                sb.append(blackPawnsResult).append("\n");
+                continue;
+            }
+            if(i == 6) {
+                sb.append(whitePawnsResult).append("\n");
+                continue;
+            }
+            sb.append("........").append("\n");
+        }
+        return sb.toString();
     }
 
 

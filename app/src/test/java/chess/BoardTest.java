@@ -49,5 +49,12 @@ public class BoardTest {
         assertEquals("PPPPPPPP", board.getBlackPawnsResult());
     }
 
+    @Test
+    public void print(){
+        Board board = new Board();
+        board.initialize();
+        System.out.println(board.print());
+    }
+
 
 }
