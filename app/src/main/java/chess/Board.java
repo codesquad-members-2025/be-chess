@@ -36,11 +36,11 @@ public class Board {
 
     public void initialize() {
        addPawns();
-       addWhitePieces();
        addBlackPieces();
+       addWhitePieces();
        placePawn();
-       placeWhitePieces();
        placeBlackPieces();
+       placeWhitePieces();
     }
 
     public void addPawns() {
@@ -74,22 +74,22 @@ public class Board {
 
     public void placePawn() {
         for (int i = 0; i < board.length; ++i) {
-            board[1][i] = pieces.get(piecesIndex).getRepresentation();
-            board[6][i] = pieces.get(piecesIndex + 1).getRepresentation();
+            board[6][i] = pieces.get(piecesIndex).getRepresentation();
+            board[1][i] = pieces.get(piecesIndex + 1).getRepresentation();
             piecesIndex += 2;
         }
     }
 
     public void placeWhitePieces() {
         for (int i = 0; i < board.length; ++i) {
-            board[0][i] = pieces.get(piecesIndex).getRepresentation();
+            board[7][i] = pieces.get(piecesIndex).getRepresentation();
             ++piecesIndex;
         }
     }
 
     public void placeBlackPieces() {
         for (int i = 0; i < board.length; ++i) {
-            board[7][i] = pieces.get(piecesIndex).getRepresentation();
+            board[0][i] = pieces.get(piecesIndex).getRepresentation();
             ++piecesIndex;
         }
     }
