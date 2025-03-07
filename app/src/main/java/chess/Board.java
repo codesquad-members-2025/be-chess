@@ -39,9 +39,20 @@ public class Board {
 
     public void addPawns() {
         for (int i = 0; i < board.length; ++i) {
-            pieces.add(new Piece(Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION));
-            pieces.add(new Piece(Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION));
+            pieces.add(Piece.createWhitePawn());
+            pieces.add(Piece.createBlackPawn());
         }
+    }
+
+    public void addWhitePieces() {
+        pieces.add(Piece.createWhiteRook());
+        pieces.add(Piece.createWhiteKnight());
+        pieces.add(Piece.createWhiteBishop());
+        pieces.add(Piece.createWhiteQueen());
+        pieces.add(Piece.createWhiteKing());
+        pieces.add(Piece.createWhiteBishop());
+        pieces.add(Piece.createWhiteKnight());
+        pieces.add(Piece.createWhiteRook());
     }
 
     public void placePawn() {
