@@ -94,4 +94,16 @@ public class Piece {
         whitePawn.name = "queen";
         return whitePawn;
     }
+
+    public static Piece createWhiteKing() {
+        Piece whitePawn = new Piece(WHITE_COLOR, WHITE_KING_REPRESENTATION);
+        whitePawn.name = "king";
+        return whitePawn;
+    }
+
+    public static Piece createBlackKing() {
+        Piece whitePawn = new Piece(BLACK_COLOR, BLACK_KING_REPRESENTATION);
+        whitePawn.name = "king";
+        return whitePawn;
+    }
 }
