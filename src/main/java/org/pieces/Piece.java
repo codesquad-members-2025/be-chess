@@ -4,7 +4,7 @@ import java.util.*;
 
 import org.chess.Coordinate;
 
-public class Piece implements Comparable<Piece>{
+public abstract class Piece implements Comparable<Piece>{
     public enum Color {
         WHITE, BLACK, NOCOLOR
     }
@@ -102,7 +102,7 @@ public class Piece implements Comparable<Piece>{
     private final Color color;
     private final Type type;
 
-    private Piece(Color color, Type type) {
+    protected Piece(Color color, Type type) {
         this.color = color;
         this.type = type;
     }
@@ -141,67 +141,58 @@ public class Piece implements Comparable<Piece>{
         return color.equals(Color.WHITE) ? type.getWhiteRepresentation() : type.getBlackRepresentation();
     }
 
-    public boolean canMoveKing(Coordinate sourcePosition, Coordinate targetPosition){
-        Set<Coordinate> coordinateSet = new HashSet<>();
-        for(Direction direction : Direction.everyDirection()){
-            int fileDegree = direction.getFileDegree();
-            int rankDegree = direction.getRankDegree();
-            Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree,rankDegree);
-            if(movedCoordinate.isCoordinateOnBoard()) coordinateSet.add(movedCoordinate);
-        }
-        return coordinateSet.contains(targetPosition);
-    }
+    public abstract boolean verifyMovePosition(Coordinate sourcePosition, Coordinate targetPosition);
 
     public static Piece createWhitePawn() {
-        return createWhite(Type.PAWN);
+        return new Pawn(Color.WHITE);
     }
 
     public static Piece createBlackPawn() {
-        return createBlack(Type.PAWN);
+        return new Pawn(Color.BLACK);
     }
 
     public static Piece createWhiteRook() {
-        return createWhite(Type.ROOK);
+        return new Rook(Color.WHITE);
     }
 
     public static Piece createBlackRook() {
-        return createBlack(Type.ROOK);
+        return new Rook(Color.BLACK);
     }
 
     public static Piece createWhiteKnight() {
-        return createWhite(Type.KNIGHT);
+        return new Knight(Color.WHITE);
     }
 
     public static Piece createBlackKnight() {
-        return createBlack(Type.KNIGHT);
+        return new Knight(Color.BLACK);
     }
 
     public static Piece createWhiteBishop() {
-        return createWhite(Type.BISHOP);
+        return new Bishop(Color.WHITE);
     }
 
     public static Piece createBlackBishop() {
-        return createBlack(Type.BISHOP);
+        return new Bishop(Color.BLACK);
     }
 
     public static Piece createWhiteQueen() {
-        return createWhite(Type.QUEEN);
+        return new Queen(Color.WHITE);
     }
 
     public static Piece createBlackQueen() {
-        return createBlack(Type.QUEEN);
+        return new Queen(Color.BLACK);
     }
 
     public static Piece createWhiteKing() {
-        return createWhite(Type.KING);
+        return new King(Color.WHITE);
     }
 
     public static Piece createBlackKing() {
-        return createBlack(Type.KING);
+        return new King(Color.BLACK);
     }
 
     public static Piece createBlank() {
-        return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+        return new Blank(Color.NOCOLOR);
     }
 
     public boolean isBlack() {
@@ -210,13 +201,5 @@ public class Piece implements Comparable<Piece>{
 
     public boolean isWhite() {
         return color.equals(Color.WHITE);
-    }
-
-    private static Piece createWhite(Type type) {
-        return new Piece(Color.WHITE, type);
-    }
-
-    private static Piece createBlack(Type type) {
-        return new Piece(Color.BLACK, type);
     }
 }

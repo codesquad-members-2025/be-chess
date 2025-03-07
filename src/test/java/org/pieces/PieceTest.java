@@ -54,16 +54,16 @@ public class PieceTest {
         Coordinate position8 = new Coordinate(7,5);
         Coordinate position9 = new Coordinate(7,7);
         // 이동 가능
-        assertThat(king.canMoveKing(sourcePosition,position1)).isEqualTo(true);
-        assertThat(king.canMoveKing(sourcePosition,position2)).isEqualTo(true);
-        assertThat(king.canMoveKing(sourcePosition,position3)).isEqualTo(true);
-        assertThat(king.canMoveKing(sourcePosition,position4)).isEqualTo(true);
-        assertThat(king.canMoveKing(sourcePosition,position5)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(sourcePosition,position1)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(sourcePosition,position2)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(sourcePosition,position3)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(sourcePosition,position4)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(sourcePosition,position5)).isEqualTo(true);
         //이동 불가
-        assertThat(king.canMoveKing(sourcePosition,position6)).isEqualTo(false);
-        assertThat(king.canMoveKing(sourcePosition,position7)).isEqualTo(false);
-        assertThat(king.canMoveKing(sourcePosition,position8)).isEqualTo(false);
-        assertThat(king.canMoveKing(sourcePosition,position9)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(sourcePosition,position6)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(sourcePosition,position7)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(sourcePosition,position8)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(sourcePosition,position9)).isEqualTo(false);
 
     }
 
