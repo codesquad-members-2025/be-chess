@@ -6,6 +6,8 @@ import org.chess.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Board {
 
@@ -54,11 +56,9 @@ public class Board {
 
     public void initializeEmptyBoard() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            List<Piece> emptyPieces = new ArrayList<>();
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                emptyPieces.add(Piece.createBlankPiece());
-            }
-
+            List<Piece> emptyPieces = IntStream.range(0, BOARD_SIZE)
+                    .mapToObj(j -> Piece.createBlankPiece())
+                    .collect(Collectors.toList());
             board.add(Rank.of(emptyPieces));
         }
     }
@@ -126,25 +126,19 @@ public class Board {
     }
 
     public List<Piece> sortPiecesByAscending(Piece.Color color) {
-        List<Piece> sortedPieces = new ArrayList<>();
-        board.stream()
+        return board.stream()
                 .flatMap(rank -> rank.getPieces().stream())
                 .filter(piece -> piece.getColor() == color)
                 .sorted(Comparator.comparingDouble(Piece::getPoint))
-                .forEach(sortedPieces::add);
-
-        return sortedPieces;
+                .collect(Collectors.toList());
     }
 
     public List<Piece> sortPiecesByDescending(Piece.Color color) {
-        List<Piece> sortedPieces = new ArrayList<>();
-        board.stream()
+        return board.stream()
                 .flatMap(rank -> rank.getPieces().stream())
                 .filter(piece -> piece.getColor() == color)
-                .sorted((p1, p2) -> Double.compare(p2.getPoint(), p1.getPoint()))
-                .forEach(sortedPieces::add);
-
-        return sortedPieces;
+                .sorted(Comparator.comparingDouble(Piece::getPoint).reversed())
+                .collect(Collectors.toList());
     }
 
 }
