@@ -83,4 +83,15 @@ public class Piece {
         return whitePawn;
     }
 
+    public static Piece createWhiteQueen() {
+        Piece whitePawn = new Piece(WHITE_COLOR, WHITE_QUEEN_REPRESENTATION);
+        whitePawn.name = "queen";
+        return whitePawn;
+    }
+
+    public static Piece createBlackQueen() {
+        Piece whitePawn = new Piece(BLACK_COLOR, BLACK_QUEEN_REPRESENTATION);
+        whitePawn.name = "queen";
+        return whitePawn;
+    }
 }
