@@ -97,6 +97,13 @@ public class Piece {
         Type(char representation) {
             this.representation = representation;
         }
+
+        public char getWhiteRepresentation() {
+            return representation;
+        }
+        public char getBlackRepresentation() {
+            return Character.toUpperCase(representation);
+        }
     }
 }
 
