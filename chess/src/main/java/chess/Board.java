@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    ArrayList<Pawn> boardList = new ArrayList<>();
+    private final ArrayList<Pawn> boardList = new ArrayList<>();
     private final List<Pawn> whitePawns = new ArrayList<>();
     private final List<Pawn> blackPawns = new ArrayList<>();
-    static final int BOARD_SIZE = 8;
+    private static final int BOARD_SIZE = 8; // 캡슐화 및 OOP 준수를 위해 private 적용
     char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
 
     public void add(Pawn pawn) {
