@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
+
     private List<Pawn> chessPiecesList;
 
     private List<Pawn> whitePawnsList;
@@ -14,6 +15,10 @@ public class Board {
 
     private String whitePawnsResult;
     private String blackPawnsResult;
+
+
+
+    private List<Pawn> chessPiecesList;
 
 
     public void add(Pawn pawn){
