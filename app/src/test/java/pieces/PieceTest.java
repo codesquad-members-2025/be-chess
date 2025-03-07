@@ -13,7 +13,7 @@ public class PieceTest {
         verifyPawn(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
     }
 
-    void verifyPawn(final Piece piece, final String color, final char representation) {
+    private void verifyPawn(final Piece piece, final String color, final char representation) {
         assertEquals(color, piece.getColor());
         assertEquals(representation, piece.getRepresentation());
     }
