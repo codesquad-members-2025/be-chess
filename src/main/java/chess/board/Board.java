@@ -1,7 +1,10 @@
 package chess.board;
 
 import chess.piece.Piece;
+import chess.piece.Piece.Type;
 import chess.util.StringUtils;
+
+import static chess.piece.Piece.*;
 
 public class Board {
 
@@ -13,42 +16,48 @@ public class Board {
     }
 
     private void initialize() {
-        //검은색 폰 추가하는 ㅁ로직
-        for (int col = 0; col < BOARD_SIZE; col++) {
-            board[1][col] = Piece.createBlackPawn();
+        //빈칸으로 초기화
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
+                board[row][col] = Piece.createBlank();
+            }
         }
 
-        //하얀색 폰 추가하는 로직
         for (int col = 0; col < BOARD_SIZE; col++) {
-            board[6][col] = Piece.createWhitePawn();
+            board[1][col] = createBlack(Type.PAWN);  // 검은색 폰배치
+            board[6][col] = createWhite(Type.PAWN);  // 하얀색 폰배치
         }
 
-        //  블랙 나머지 말들 배치
-        board[0][0] = Piece.createBlackRook();
-        board[0][1] = Piece.createBlackKnight();
-        board[0][2] = Piece.createBlackBishop();
-        board[0][3] = Piece.createBlackQueen();
-        board[0][4] = Piece.createBlackKing();
-        board[0][5] = Piece.createBlackBishop();
-        board[0][6] = Piece.createBlackKnight();
-        board[0][7] = Piece.createBlackRook();
+        // 검은색 체스 말 배치
+        setPieceRow(0, Color.BLACK);
 
-        // 화이트 나머지 말들 배치
-        board[7][0] = Piece.createWhiteRook();
-        board[7][1] = Piece.createWhiteKnight();
-        board[7][2] = Piece.createWhiteBishop();
-        board[7][3] = Piece.createWhiteQueen();
-        board[7][4] = Piece.createWhiteKing();
-        board[7][5] = Piece.createWhiteBishop();
-        board[7][6] = Piece.createWhiteKnight();
-        board[7][7] = Piece.createWhiteRook();
+        // 하얀색 체스 말 배치
+        setPieceRow(7, Color.WHITE);
     }
 
-    public int pieceCount(){
+    private void setPieceRow(int row, Piece.Color color) {
+        Piece[] pieces = new Piece[]{
+                create(color, Type.ROOK),
+                create(color, Type.KNIGHT),
+                create(color, Type.BISHOP),
+                create(color, Type.QUEEN),
+                create(color, Type.KING),
+                create(color, Type.BISHOP),
+                create(color, Type.KNIGHT),
+                create(color, Type.ROOK)
+        };
+        System.arraycopy(pieces, 0, board[row], 0, BOARD_SIZE);
+    }
+
+    private Piece create(Piece.Color color, Piece.Type type) {
+        return color == Color.WHITE ? createWhite(type) : createBlack(type);
+    }
+
+    public int pieceCount() {
         int count = 0;
-        for(int i=0; i<BOARD_SIZE; i++){
-            for(int j=0; j<BOARD_SIZE; j++){
-                if(board[i][j]!= null){
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (board[i][j].getType() != Type.NO_PIECE) {
                     count++;
                 }
             }
@@ -56,21 +65,86 @@ public class Board {
         return count;
     }
 
-
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for (int i=0; i<BOARD_SIZE; i++){
-            for (int j=0; j<BOARD_SIZE; j++){
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 Piece piece = board[i][j];
-                if (piece==null){
+                if (piece.getType() == Type.NO_PIECE) {
                     sb.append(".");
-                }else{
+                } else {
                     sb.append(piece.getSymbol());
                 }
             }
-            sb=new StringBuilder(StringUtils.appendNewLine(sb.toString()));
+            sb.append(StringUtils.appendNewLine(""));
         }
         return sb.toString();
+    }
+
+    public int getSpecificPiece(Type type,Color color){
+        int count = 0;
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (board[i][j].getType() == type && board[i][j].getColor() == color) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public Piece findPiece(String location){
+        Position position = getPosition(location);
+
+        return board[position.yPos()][position.xPos()];
+    }
+
+    private static Position getPosition(String location) {
+        int xPos= location.charAt(0)-'a';
+        int y=Character.getNumericValue(location.charAt(1));
+        int yPos=BOARD_SIZE-y;
+        Position position = new Position(xPos, yPos);
+        return position;
+    }
+
+    private record Position(int xPos, int yPos) {
+    }
+
+    public void move(String location,Piece piece){
+        Position position = getPosition(location);
+        board[position.yPos()][position.xPos()] = piece;
+    }
+
+    public void initializeEmpty(){
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
+                board[row][col] = Piece.createBlank();
+            }
+        }
+    }
+
+    public double calculatePoint(Color color){
+        double point = 0;
+        for (int col=0; col < BOARD_SIZE; col++) {
+            for(int row = 0; row < BOARD_SIZE; row++) {
+                int count=0;
+                if(board[row][col].getColor() == color && board[row][col].getType()==Type.PAWN){
+                    count++;
+                }
+                if (count>=2) point+=count*0.5;
+                else{
+                    point+=count;
+                }
+            }
+        }
+        for(int row = 0; row < BOARD_SIZE; row++) {
+            for(int col = 0; col < BOARD_SIZE; col++) {
+                if(board[row][col].getColor() == color && board[row][col].getType()!=Type.PAWN){
+                    point+=board[row][col].getPoint();
+                }
+            }
+        }
+        return point;
     }
 
 }
