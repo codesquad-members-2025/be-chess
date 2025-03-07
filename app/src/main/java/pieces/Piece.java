@@ -60,7 +60,7 @@ public class Piece {
     }
 
     public static Piece createWhiteKnight() {
-        Piece whitePawn = new Piece(WHITE_COLOR, WHITE_KING_REPRESENTATION);
+        Piece whitePawn = new Piece(WHITE_COLOR, WHITE_KNIGHT_REPRESENTATION);
         whitePawn.name = "knight";
         return whitePawn;
     }
