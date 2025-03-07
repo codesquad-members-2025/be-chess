@@ -35,4 +35,15 @@ public class Piece {
         return representation;
     }
 
+    public static Piece createWhitePawn() {
+        Piece whitePawn = new Piece(WHITE_COLOR, WHITE_PAWN_REPRESENTATION);
+        whitePawn.name = "pawn";
+        return whitePawn;
+    }
+
+    public static Piece createBlackPawn() {
+        Piece whitePawn = new Piece(BLACK_COLOR, BLACK_PAWN_REPRESENTATION);
+        whitePawn.name = "pawn";
+        return whitePawn;
+    }
 }
