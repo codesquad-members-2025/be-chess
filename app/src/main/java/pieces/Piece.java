@@ -2,23 +2,28 @@ package pieces;
 
 
 public class Piece {
-    public static final String WHITE_COLOR = "white";
-    public static final String BLACK_COLOR = "black";
-    public static char WHITE_PAWN_REPRESENTATION = 'p';
-    public static char BLACK_PAWN_REPRESENTATION = 'P';
-    public static char WHITE_KNIGHT_REPRESENTATION = 'n';
-    public static char BLACK_KNIGHT_REPRESENTATION = 'N';
-    public static char WHITE_ROOK_REPRESENTATION = 'r';
-    public static char BLACK_ROOK_REPRESENTATION = 'R';
-    public static char WHITE_BISHOP_REPRESENTATION = 'b';
-    public static char BLACK_BISHOP_REPRESENTATION = 'B';
-    public static char WHITE_QUEEN_REPRESENTATION = 'q';
-    public static char BLACK_QUEEN_REPRESENTATION = 'Q';
-    public static char WHITE_KING_REPRESENTATION = 'k';
-    public static char BLACK_KING_REPRESENTATION = 'K';
+    public enum Color {
+        WHITE, BLACK, NOCOLOR;
+    }
 
-    private final String color;
-    private final char representation;
+    public enum Type {
+        PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
+
+        private final char representation;
+
+        Type(char representation) {
+            this.representation = representation;
+        }
+
+        public char getWhiteRepresentation() {
+            return representation;
+        }
+
+        public char getBlackRepresentation() {
+            return Character.toUpperCase(representation);
+        }
+    }
+
 
     private Piece(String color, char representation) {
         this.color = color;

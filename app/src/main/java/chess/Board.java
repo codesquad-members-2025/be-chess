@@ -18,8 +18,8 @@ public class Board {
 
     public void initialize() {
         for (int i = 0; i < 8; i++) {
-            board[1][i] = Piece.BLACK_PAWN_REPRESENTATION;
-            board[6][i] = Piece.WHITE_PAWN_REPRESENTATION;
+            board[1][i] = Piece.Type.PAWN.getBlackRepresentation();
+            board[6][i] = Piece.Type.PAWN.getWhiteRepresentation();
         }
         board[0][0] = Piece.createBlackRook().getRepresentation();
         board[7][0] = Piece.createWhiteRook().getRepresentation();
