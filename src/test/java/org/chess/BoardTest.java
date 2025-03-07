@@ -11,10 +11,12 @@ import static org.utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     Board board;
+    BoardStatus boardStatus;
 
     @BeforeEach
     void setUp() {
         board = new Board();
+        boardStatus = new BoardStatus(board);
     }
 
     @Test
@@ -33,9 +35,9 @@ public class BoardTest {
     @DisplayName("체스 보드 생성 테스트")
     void create() throws Exception {
         board.initialize();
-        assertThat(board.pieceCount()).isEqualTo(32);
+        assertThat(boardStatus.pieceCount()).isEqualTo(32);
         String blankRank = appendNewLine("........");
-        assertThat(board.showBoard())
+        assertThat(boardStatus.showBoard())
                 .isEqualTo(appendNewLine("RNBQKBNR") +
                         appendNewLine("PPPPPPPP") +
                         blankRank + blankRank + blankRank + blankRank +
@@ -53,7 +55,7 @@ public class BoardTest {
         board.putPiece(position, piece);
 
         assertThat(board.findPiece(position)).isEqualTo(piece);
-        System.out.println(board.showBoard());
+        System.out.println(boardStatus.showBoard());
     }
 
     @Test
@@ -91,9 +93,9 @@ public class BoardTest {
         addPiece("e1", Piece.createWhiteRook());
         addPiece("f1", Piece.createWhiteKing());
 
-        assertThat(board.calculatePoint(Piece.Color.BLACK)).isCloseTo(15.0, within(0.01));
-        assertThat(board.calculatePoint(Piece.Color.WHITE)).isCloseTo(7.0, within(0.01));
-        System.out.println(board.showBoard());
+        assertThat(boardStatus.calculatePoint(Piece.Color.BLACK)).isCloseTo(15.0, within(0.01));
+        assertThat(boardStatus.calculatePoint(Piece.Color.WHITE)).isCloseTo(7.0, within(0.01));
+        System.out.println(boardStatus.showBoard());
     }
 
     @Test
@@ -118,9 +120,9 @@ public class BoardTest {
         addPiece("e1", Piece.createWhiteRook());
         addPiece("f1", Piece.createWhiteKing());
 
-        assertThat(board.calculatePoint(Piece.Color.BLACK)).isCloseTo(20.0, within(0.01));
-        assertThat(board.calculatePoint(Piece.Color.WHITE)).isCloseTo(19.5, within(0.01));
-        System.out.println(board.showBoard());
+        assertThat(boardStatus.calculatePoint(Piece.Color.BLACK)).isCloseTo(20.0, within(0.01));
+        assertThat(boardStatus.calculatePoint(Piece.Color.WHITE)).isCloseTo(19.5, within(0.01));
+        System.out.println(boardStatus.showBoard());
     }
 
     @Test
@@ -137,9 +139,9 @@ public class BoardTest {
         addPiece("b6", piece1);
         addPiece("a7", piece3);
 
-        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<>(List.of(piece1,piece2,piece3,piece4)));
-        assertThat(board.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<>(List.of(piece4,piece3,piece2,piece1)));
-        System.out.println(board.showBoard());
+        assertThat(boardStatus.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<>(List.of(piece1,piece2,piece3,piece4)));
+        assertThat(boardStatus.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<>(List.of(piece4,piece3,piece2,piece1)));
+        System.out.println(boardStatus.showBoard());
     }
 
     private void addPiece(String position, Piece piece) {
