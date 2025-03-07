@@ -34,14 +34,26 @@ public class Board {
             whitePawnsList.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
             blackPawnsList.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
         }
+
+        initializeWhitePawnsResult();
+        initializeBlackPawnsResult();
+    }
+
+
+
+    private void initializeWhitePawnsResult() {
         StringBuilder whitePawnSb = new StringBuilder();
+
         for (int i = 0; i < whitePawnsList.size(); i++){
             whitePawnSb.append(whitePawnsList.get(i).getRepresentation());
         }
 
         whitePawnsResult = whitePawnSb.toString();
+    }
 
+    private void initializeBlackPawnsResult() {
         StringBuilder blackPawnSb = new StringBuilder();
+
         for (int i = 0; i < blackPawnsList.size(); i++){
             blackPawnSb.append(blackPawnsList.get(i).getRepresentation());
         }
