@@ -9,7 +9,7 @@ public class Coordinate {
     public Coordinate(int fileIndex, int rankIndex) {
         this.fileIndex = fileIndex;
         this.rankIndex = rankIndex;
-        if (!isCoordinateOnBoard()) throw new IllegalArgumentException();
+//        if (!isCoordinateOnBoard()) throw new IllegalArgumentException();
     }
 
     public Coordinate(String location) {
@@ -44,5 +44,4 @@ public class Coordinate {
     int getFileIndex() {
         return fileIndex;
     }
-
 }
