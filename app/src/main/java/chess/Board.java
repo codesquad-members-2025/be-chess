@@ -1,6 +1,6 @@
 package chess;
 
-import pieces.Pawn;
+import pieces.Piece;
 import utils.StringUtils;
 
 import java.util.ArrayList;
@@ -8,27 +8,27 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    private List<Pawn> pawns;
+    private List<Piece> pieces;
     private char[][] board;
 
     public Board() {
-        this.pawns = new ArrayList<>();
+        this.pieces = new ArrayList<>();
         this.board = new char[8][8];
         for (char[] chars : board) {
             Arrays.fill(chars, '.' );
         }
     }
 
-    public void add(Pawn pawn) {
-        pawns.add(pawn);
+    public void add(Piece piece) {
+        pieces.add(piece);
     }
 
     public int size() {
-        return pawns.size();
+        return pieces.size();
     }
 
-    public Pawn findPawn(int pawnNumber) {
-        return pawns.get(pawnNumber);
+    public Piece findPawn(int pawnNumber) {
+        return pieces.get(pawnNumber);
     }
 
     public void initialize() {
@@ -38,8 +38,8 @@ public class Board {
 
     public void addPawns() {
         for (int i = 0; i < board.length; ++i) {
-            pawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
-            pawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+            pieces.add(new Piece(Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION));
+            pieces.add(new Piece(Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION));
         }
     }
 
@@ -47,8 +47,8 @@ public class Board {
         int pawnsIndex = 0; // Pawn 리스트 전체를 순회하기 위한 인덱스 값
 
         for (int i = 0; i < board.length; ++i) {
-            board[1][i] = pawns.get(pawnsIndex).getRepresentation();
-            board[6][i] = pawns.get(pawnsIndex + 1).getRepresentation();
+            board[1][i] = pieces.get(pawnsIndex).getRepresentation();
+            board[6][i] = pieces.get(pawnsIndex + 1).getRepresentation();
             pawnsIndex += 2;
         }
     }
