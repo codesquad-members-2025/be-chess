@@ -1,11 +1,13 @@
 package pieces;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PieceTest {
     @Test
+    @DisplayName("모든 기물의 색과 출력문자를 검증한다")
     public void create_piece() {
         verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
@@ -22,23 +24,20 @@ public class PieceTest {
     }
 
     private void verifyPiece(final Piece piece, final String color, final char representation) {
-        assertEquals(color, piece.getColor());
-        assertEquals(representation, piece.getRepresentation());
+        assertThat(piece.getColor()).isEqualTo(color);
+        assertThat(piece.getRepresentation()).isEqualTo(representation);
     }
 
     @Test
+    @DisplayName("기물의 색을 검증한다(흰/검)")
     public void verifyColor() {
         Piece WhitePawn = Piece.createWhitePawn();
         Piece BlackPawn = Piece.createBlackPawn();
-        Piece WhiteRook = Piece.createWhiteRook();
-        Piece BlackRook = Piece.createBlackRook();
-        Piece WhiteKnight = Piece.createWhiteKnight();
-        Piece BlackKnight = Piece.createBlackKnight();
-        assertTrue(WhitePawn.isWhite());
-        assertTrue(BlackPawn.isBlack());
-        assertTrue(WhiteRook.isWhite());
-        assertTrue(BlackRook.isBlack());
-        assertTrue(WhiteKnight.isWhite());
-        assertTrue(BlackKnight.isBlack());
+
+        assertThat(WhitePawn.isWhite()).isTrue();
+        assertThat(BlackPawn.isBlack()).isTrue();
+        assertThat(WhitePawn.isBlack()).isFalse();
+        assertThat(BlackPawn.isWhite()).isFalse();
+
     }
 }
