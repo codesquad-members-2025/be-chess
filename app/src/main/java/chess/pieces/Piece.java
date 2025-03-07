@@ -44,6 +44,8 @@ public class Piece {
         return new Piece(KNIGHT, BLACK);
     }
 
+    public static Piece createBlank() {return new Piece(NO_PIECE,NOCOLOR);}
+
     public Color getColor() {
         return color;
     }
@@ -63,7 +65,7 @@ public class Piece {
     }
 
     public enum Type {
-        PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE(' ');
+        PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
 
         private final char representation;
 
