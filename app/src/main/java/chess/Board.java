@@ -29,6 +29,9 @@ public class Board {
     }
 
     public void initialize(){
+        whitePawnsList = new ArrayList<>();
+        blackPawnsList = new ArrayList<>();
+
         for(int i = 0; i < 8; i++){
             whitePawnsList.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
             blackPawnsList.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
@@ -36,6 +39,28 @@ public class Board {
 
         initializeWhitePawnsResult();
         initializeBlackPawnsResult();
+    }
+
+
+    private void initializeWhitePawnsResult() {
+        StringBuilder whitePawnSb = new StringBuilder();
+
+        for (int i = 0; i < whitePawnsList.size(); i++){
+            whitePawnSb.append(whitePawnsList.get(i).getRepresentation());
+        }
+
+        whitePawnsResult = whitePawnSb.toString();
+    }
+
+
+    private void initializeBlackPawnsResult() {
+        StringBuilder blackPawnSb = new StringBuilder();
+
+        for (int i = 0; i < blackPawnsList.size(); i++){
+            blackPawnSb.append(blackPawnsList.get(i).getRepresentation());
+        }
+
+        blackPawnsResult = blackPawnSb.toString();
     }
 
     public String print(){
@@ -55,32 +80,8 @@ public class Board {
     }
 
 
-
-    private void initializeWhitePawnsResult() {
-        StringBuilder whitePawnSb = new StringBuilder();
-
-        for (int i = 0; i < whitePawnsList.size(); i++){
-            whitePawnSb.append(whitePawnsList.get(i).getRepresentation());
-        }
-
-        whitePawnsResult = whitePawnSb.toString();
-    }
-
-    private void initializeBlackPawnsResult() {
-        StringBuilder blackPawnSb = new StringBuilder();
-
-        for (int i = 0; i < blackPawnsList.size(); i++){
-            blackPawnSb.append(blackPawnsList.get(i).getRepresentation());
-        }
-
-        blackPawnsResult = blackPawnSb.toString();
-    }
-
-
     public Board() {
         chessPiecesList = new ArrayList<>();
-        whitePawnsList = new ArrayList<>();
-        blackPawnsList = new ArrayList<>();
     }
 
     public String getWhitePawnsResult() {
