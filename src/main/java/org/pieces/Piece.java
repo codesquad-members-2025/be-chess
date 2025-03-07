@@ -1,6 +1,8 @@
 package org.pieces;
 
-import java.util.Objects;
+import java.util.*;
+
+import org.chess.Coordinate;
 
 public class Piece implements Comparable<Piece>{
     public enum Color {
@@ -34,6 +36,66 @@ public class Piece implements Comparable<Piece>{
 
         public double getDefaultPoint() {
             return defaultPoint;
+        }
+    }
+
+    public enum Direction {
+        NORTH(0, 1),
+        NORTHEAST(1, 1),
+        EAST(1, 0),
+        SOUTHEAST(1, -1),
+        SOUTH(0, -1),
+        SOUTHWEST(-1, -1),
+        WEST(-1, 0),
+        NORTHWEST(-1, 1),
+
+        NNE(1, 2),
+        NNW(-1, 2),
+        SSE(1, -2),
+        SSW(-1, -2),
+        EEN(2, 1),
+        EES(2, -1),
+        WWN(-2, 1),
+        WWS(-2, -1);
+
+        private final int file;
+        private final int rank;
+
+        Direction(int file, int rank) {
+            this.file = file;
+            this.rank = rank;
+        }
+
+        public int getFileDegree() {
+            return file;
+        }
+
+        public int getRankDegree() {
+            return rank;
+        }
+
+        public static List<Direction> linearDirection() {
+            return Arrays.asList(NORTH, EAST, SOUTH, WEST);
+        }
+
+        public static List<Direction> diagonalDirection() {
+            return Arrays.asList(NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST);
+        }
+
+        public static List<Direction> everyDirection() {
+            return Arrays.asList(NORTH, EAST, SOUTH, WEST, NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST);
+        }
+
+        public static List<Direction> knightDirection() {
+            return Arrays.asList(NNE, NNW, SSE, SSW, EEN, EES, WWN, WWS);
+        }
+
+        public static List<Direction> whitePawnDirection() {
+            return Arrays.asList(NORTH, NORTHEAST, NORTHWEST);
+        }
+
+        public static List<Direction> blackPawnDirection() {
+            return Arrays.asList(SOUTH, SOUTHEAST, SOUTHWEST);
         }
     }
 
@@ -77,6 +139,17 @@ public class Piece implements Comparable<Piece>{
 
     public char getRepresentation() {
         return color.equals(Color.WHITE) ? type.getWhiteRepresentation() : type.getBlackRepresentation();
+    }
+
+    public boolean canMoveKing(Coordinate sourcePosition, Coordinate targetPosition){
+        Set<Coordinate> coordinateSet = new HashSet<>();
+        for(Direction direction : Direction.everyDirection()){
+            int fileDegree = direction.getFileDegree();
+            int rankDegree = direction.getRankDegree();
+            Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree,rankDegree);
+            if(movedCoordinate.isCoordinateOnBoard()) coordinateSet.add(movedCoordinate);
+        }
+        return coordinateSet.contains(targetPosition);
     }
 
     public static Piece createWhitePawn() {

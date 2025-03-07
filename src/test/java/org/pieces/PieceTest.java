@@ -1,5 +1,6 @@
 package org.pieces;
 
+import org.chess.Coordinate;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.*;
@@ -35,6 +36,35 @@ public class PieceTest {
         assertThat(Piece.createWhitePawn().isBlack()).isEqualTo(false);
         assertThat(Piece.createBlackPawn().isWhite()).isEqualTo(false);
         assertThat(Piece.createBlackPawn().isBlack()).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("King 움직이기 테스트")
+    void move_king(){
+        Piece king = Piece.createWhiteKing();
+        Coordinate sourcePosition = new Coordinate(4,4);
+        Coordinate position1 = new Coordinate(4,5);
+        Coordinate position2 = new Coordinate(5,4);
+        Coordinate position3 = new Coordinate(5,5);
+        Coordinate position4 = new Coordinate(3,3);
+        Coordinate position5 = new Coordinate(3,4);
+
+        Coordinate position6 = new Coordinate(1,3);
+        Coordinate position7 = new Coordinate(1,2);
+        Coordinate position8 = new Coordinate(7,5);
+        Coordinate position9 = new Coordinate(7,7);
+        // 이동 가능
+        assertThat(king.canMoveKing(sourcePosition,position1)).isEqualTo(true);
+        assertThat(king.canMoveKing(sourcePosition,position2)).isEqualTo(true);
+        assertThat(king.canMoveKing(sourcePosition,position3)).isEqualTo(true);
+        assertThat(king.canMoveKing(sourcePosition,position4)).isEqualTo(true);
+        assertThat(king.canMoveKing(sourcePosition,position5)).isEqualTo(true);
+        //이동 불가
+        assertThat(king.canMoveKing(sourcePosition,position6)).isEqualTo(false);
+        assertThat(king.canMoveKing(sourcePosition,position7)).isEqualTo(false);
+        assertThat(king.canMoveKing(sourcePosition,position8)).isEqualTo(false);
+        assertThat(king.canMoveKing(sourcePosition,position9)).isEqualTo(false);
+
     }
 
     private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Piece.Type type) {
