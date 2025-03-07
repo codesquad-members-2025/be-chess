@@ -9,9 +9,10 @@ import java.util.List;
 public class Board {
     private static final int WHITE_PAWN_RANK = 6;
     private static final int BLACK_PAWN_RANK = 1;
-    private static final int MIN_PAWN_INDEX = 0;
-    private static final int MAX_PAWN_INDEX = 15;
     private static final int MAX_PAWN_SIZE = 16;
+    private static final int MIN_PIECE_INDEX = 0;
+    private static final int MAX_PIECE_INDEX = 31;
+    private static final int MAX_PIECE_SIZE = 32;
     private static final int FILE_SIZE = 8;
     private static final int RANK_SIZE = 8;
     private final List<Piece> pieces = new ArrayList<>();
@@ -50,53 +51,43 @@ public class Board {
 
     private void addPieces() {
         for (int i = 0; i < 8; i++) { // 폰
-            pieces.add(Piece.createWhitePawn());
-            pieces.add(Piece.createBlackPawn());
+            add(Piece.createWhitePawn());
+            add(Piece.createBlackPawn());
         }
 
-
-        pieces.add(Piece.createBlackRook());
-        pieces.add(Piece.createBlackRook());
-        pieces.add(Piece.createWhiteRook());
-        pieces.add(Piece.createWhiteRook());
-
-
-        pieces.add(Piece.createBlackKnight());
-        pieces.add(Piece.createBlackKnight());
-        pieces.add(Piece.createWhiteKnight());
-        pieces.add(Piece.createWhiteKnight());
+        add(Piece.createBlackRook());
+        add(Piece.createBlackRook());
+        add(Piece.createWhiteRook());
+        add(Piece.createWhiteRook());
 
 
-        pieces.add(Piece.createBlackBishop());
-        pieces.add(Piece.createBlackBishop());
-        pieces.add(Piece.createWhiteBishop());
-        pieces.add(Piece.createWhiteBishop());
+        add(Piece.createBlackKnight());
+        add(Piece.createBlackKnight());
+        add(Piece.createWhiteKnight());
+        add(Piece.createWhiteKnight());
 
+        add(Piece.createBlackBishop());
+        add(Piece.createBlackBishop());
+        add(Piece.createWhiteBishop());
+        add(Piece.createWhiteBishop());
 
-        pieces.add(Piece.createBlackQueen());
-        pieces.add(Piece.createBlackKing());
-        pieces.add(Piece.createWhiteQueen());
-        pieces.add(Piece.createWhiteKing());
+        add(Piece.createBlackQueen());
+        add(Piece.createBlackKing());
+        add(Piece.createWhiteQueen());
+        add(Piece.createWhiteKing());
     }
 
     public void add(Piece piece) {
-        validatePawnSize();
+        validatePieceSize();
         pieces.add(piece);
     }
     public int pieceCount() {
         return pieces.size();
     }
 
-    public Piece findPawn(int index) {
+    public Piece findPiece(int index) {
         validateIndex(index);
         return pieces.get(index);
-    }
-
-    public String getWhitePawnsResult() {
-        return getResult(WHITE_PAWN_RANK);
-    }
-    public String getBlackPawnsResult() {
-        return getResult(BLACK_PAWN_RANK);
     }
 
     public String showBoard() {
@@ -110,23 +101,15 @@ public class Board {
         return sb.toString();
     }
 
-    private String getResult(int rank) {
-        StringBuilder sb = new StringBuilder();
-        for (int file = 0; file < FILE_SIZE; file++) {
-            sb.append(board[rank][file]);
-        }
-        return sb.toString();
-    }
-
-    private void validatePawnSize() {
-        if (pieces.size() > MAX_PAWN_SIZE) {
-            throw new IllegalStateException("폰은 " + MAX_PAWN_SIZE + "개를 초과할 수 없습니다.");
+    private void validatePieceSize() {
+        if (pieces.size() > MAX_PIECE_SIZE) {
+            throw new IllegalStateException("폰은 " + MAX_PIECE_SIZE + "개를 초과할 수 없습니다.");
         }
     }
 
     private void validateIndex(int index) {
-        if(MIN_PAWN_INDEX> index || index > MAX_PAWN_INDEX){
-            throw new IllegalStateException(index + "번의 폰은 없습니다. " + MIN_PAWN_INDEX + "부터 " + MAX_PAWN_INDEX + " 중 골라주세요.");
+        if(MIN_PIECE_INDEX> index || index > MAX_PIECE_INDEX){
+            throw new IllegalStateException(index + "번의 폰은 없습니다. " + MIN_PIECE_INDEX + "부터 " + MAX_PIECE_INDEX + " 중 골라주세요.");
         }
     }
 }
