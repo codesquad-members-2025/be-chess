@@ -75,6 +75,8 @@ public class Board {
         }
         BOARD.add(whitePawnString);
         BOARD.add(whitePiecesString);
+
+        System.out.println(showBoard());
     }
 
     public String showBoard() {
