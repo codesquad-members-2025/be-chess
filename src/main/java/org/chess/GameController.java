@@ -16,6 +16,17 @@ public class GameController {
         Coordinate targetCoordinate = new Coordinate(targetPosition);
 
         Piece source = findPiece(sourceCoordinate);
+        // 그 기물의 이동범위가 아님!
+        if (!source.verifyMovePosition(sourceCoordinate,targetCoordinate)) {
+            System.out.println("이동 범위가 아닙니다.");
+            return;
+        }
+        // 도착 지점이 같은 색의 기물이라면 이동 불가!
+        if(findPiece(targetCoordinate).getColor()==source.getColor()) {
+            System.out.println("도착지점이 같은 색의 기물입니다.");
+            return;
+        }
+        // 이동 가능하면 이동!
         // target에 기물 추가
         putPiece(targetCoordinate, source);
         // 원래 자리에 blank 추가
