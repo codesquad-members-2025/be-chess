@@ -18,6 +18,18 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("기본 이동 테스트")
+    public void move() throws Exception {
+        board.initialize();
+        String sourcePosition = "b2";
+        String targetPosition = "b3";
+        board.move(sourcePosition, targetPosition);
+        assertThat(Piece.createBlank()).isEqualTo(board.findPiece(sourcePosition));
+        assertThat(Piece.createWhitePawn()).isEqualTo(board.findPiece(targetPosition));
+    }
+
+
+    @Test
     @DisplayName("체스 보드 생성 테스트")
     void create() throws Exception {
         board.initialize();
@@ -33,12 +45,12 @@ public class BoardTest {
 
     @Test
     @DisplayName("원하는 위치에 기물 추가할 수 있는지 확인")
-    void move() throws Exception {
+    void 기물추가() throws Exception {
         board.initializeEmpty();
 
         String position = "b5";
         Piece piece = Piece.createBlackRook();
-        board.move(position, piece);
+        board.putPiece(position, piece);
 
         assertThat(board.findPiece(position)).isEqualTo(piece);
         System.out.println(board.showBoard());
@@ -131,6 +143,6 @@ public class BoardTest {
     }
 
     private void addPiece(String position, Piece piece) {
-        board.move(position, piece);
+        board.putPiece(position, piece);
     }
 }

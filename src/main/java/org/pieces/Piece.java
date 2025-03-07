@@ -1,5 +1,7 @@
 package org.pieces;
 
+import java.util.Objects;
+
 public class Piece implements Comparable<Piece>{
     public enum Color {
         WHITE, BLACK, NOCOLOR
@@ -58,6 +60,19 @@ public class Piece implements Comparable<Piece>{
     @Override
     public int compareTo(Piece other){
         return Double.compare(this.getPoint(),other.getPoint());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return Objects.equals(color, piece.color) && Objects.equals(type, piece.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, type); // color와 type이 같으면 같은 hashCode 반환
     }
 
     public char getRepresentation() {

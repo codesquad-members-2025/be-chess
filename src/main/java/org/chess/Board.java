@@ -113,7 +113,15 @@ public class Board {
         return rankList.get(rankIndex).getPieceByFileIndex(fileIndex);
     }
 
-    public void move(String location, Piece piece) {
+    public void move(String sourcePosition, String targetPosition){
+        Piece source = findPiece(sourcePosition);
+        // target에 기물 추가
+        putPiece(targetPosition,source);
+        // 원래 자리에 blank 추가
+        putPiece(sourcePosition,Piece.createBlank());
+    }
+
+    public void putPiece(String location, Piece piece) {
         Coordinate coordinate = parseCoordinate(location);
         int fileIndex = coordinate.getFileIndex();
         int rankIndex = coordinate.getRankIndex();
