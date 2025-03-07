@@ -38,7 +38,25 @@ public class BoardTest {
     public void add(){
         Board board = new Board();
 
-        board.add(new Integer("7"));
+
+//        board.add(new Integer("7"));
     }
 
+    @Test
+    public void initialize() throws Exception {
+        Board board = new Board();
+        board.initialize();
+        assertEquals("pppppppp", board.getWhitePawnsResult());
+        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+    }
+
+    @Test
+    public void print(){
+        Board board = new Board();
+        board.initialize();
+        System.out.println(board.print());
+    }
+
+  
+  
 }
