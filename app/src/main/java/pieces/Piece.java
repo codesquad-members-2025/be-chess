@@ -46,4 +46,16 @@ public class Piece {
         whitePawn.name = "pawn";
         return whitePawn;
     }
+
+    public static Piece createWhiteRook() {
+        Piece whitePawn = new Piece(WHITE_COLOR, WHITE_ROOK_REPRESENTATION);
+        whitePawn.name = "rook";
+        return whitePawn;
+    }
+
+    public static Piece createBlackRook() {
+        Piece whitePawn = new Piece(BLACK_COLOR, BLACK_ROOK_REPRESENTATION);
+        whitePawn.name = "rook";
+        return whitePawn;
+    }
 }
