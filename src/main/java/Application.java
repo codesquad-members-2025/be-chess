@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class Application {
 
+    private Scanner scanner = new Scanner(System.in);
+
     public String getInput() {
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("start") || input.equalsIgnoreCase("end")) {
