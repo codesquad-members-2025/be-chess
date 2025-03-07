@@ -1,13 +1,10 @@
 package chess;
 
-import chess.pieces.Pawn;
+import chess.pieces.Piece;
+import chess.utils.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static chess.pieces.Pawn.*;
 
 public class Board {
     private static final int WHITE_PAWN_RANK = 6;
@@ -17,19 +14,32 @@ public class Board {
     private static final int MAX_PAWN_SIZE = 16;
     private static final int FILE_SIZE = 8;
     private static final int RANK_SIZE = 8;
-    private final List<Pawn> pawns = new ArrayList<>();
+    private final List<Piece> pieces = new ArrayList<>();
     private final char[][] board = new char[RANK_SIZE][FILE_SIZE];
     public void initialize() {
-        addPawns();
+        addPieces();
         initializeEmptyBoard();
         initializeBoard();
     }
 
     private void initializeBoard() {
         for (int file = 0; file < FILE_SIZE; file++) {
-            board[BLACK_PAWN_RANK][file] = pawns.get(file*2+1).getRepresentation();
-            board[WHITE_PAWN_RANK][file] = pawns.get(file*2).getRepresentation();
+            board[BLACK_PAWN_RANK][file] = pieces.get(file*2+1).getRepresentation();
+            board[WHITE_PAWN_RANK][file] = pieces.get(file*2).getRepresentation();
         }
+        int temp = 7;
+        int cnt = MAX_PAWN_SIZE;
+        for (int file = 0; file < 3; file++) {
+            board[0][file] = pieces.get(cnt++).getRepresentation();
+            board[0][temp - file] = pieces.get(cnt++).getRepresentation();
+            board[7][file] = pieces.get(cnt++).getRepresentation();
+            board[7][temp - file] = pieces.get(cnt++).getRepresentation();
+        }
+
+            board[0][3] = pieces.get(cnt++).getRepresentation();
+            board[0][4] = pieces.get(cnt++).getRepresentation();
+            board[7][3] = pieces.get(cnt++).getRepresentation();
+            board[7][4] = pieces.get(cnt).getRepresentation();
     }
 
     private void initializeEmptyBoard() {
@@ -38,24 +48,48 @@ public class Board {
         }
     }
 
-    private void addPawns() {
-        for (int i = 0; i < 8; i++) {
-            pawns.add(new Pawn()); // 백
-            pawns.add(new Pawn(BLACK)); // 흑
+    private void addPieces() {
+        for (int i = 0; i < 8; i++) { // 폰
+            pieces.add(Piece.createWhitePawn());
+            pieces.add(Piece.createBlackPawn());
         }
+
+
+        pieces.add(Piece.createBlackRook());
+        pieces.add(Piece.createBlackRook());
+        pieces.add(Piece.createWhiteRook());
+        pieces.add(Piece.createWhiteRook());
+
+
+        pieces.add(Piece.createBlackKnight());
+        pieces.add(Piece.createBlackKnight());
+        pieces.add(Piece.createWhiteKnight());
+        pieces.add(Piece.createWhiteKnight());
+
+
+        pieces.add(Piece.createBlackBishop());
+        pieces.add(Piece.createBlackBishop());
+        pieces.add(Piece.createWhiteBishop());
+        pieces.add(Piece.createWhiteBishop());
+
+
+        pieces.add(Piece.createBlackQueen());
+        pieces.add(Piece.createBlackKing());
+        pieces.add(Piece.createWhiteQueen());
+        pieces.add(Piece.createWhiteKing());
     }
 
-    public void add(Pawn pawn) {
+    public void add(Piece piece) {
         validatePawnSize();
-        pawns.add(pawn);
+        pieces.add(piece);
     }
-    public int size() {
-        return pawns.size();
+    public int pieceCount() {
+        return pieces.size();
     }
 
-    public Pawn findPawn(int index) {
+    public Piece findPawn(int index) {
         validateIndex(index);
-        return pawns.get(index);
+        return pieces.get(index);
     }
 
     public String getWhitePawnsResult() {
@@ -65,13 +99,13 @@ public class Board {
         return getResult(BLACK_PAWN_RANK);
     }
 
-    public String print() {
+    public String showBoard() {
         StringBuilder sb = new StringBuilder();
         for (int rank = 0; rank < RANK_SIZE; rank++) {
             for (int file = 0; file < FILE_SIZE; file++) {
                 sb.append(board[rank][file]);
             }
-            sb.append("\n");
+            sb = new StringBuilder(StringUtils.appendNewLine(sb.toString()));
         }
         return sb.toString();
     }
@@ -85,7 +119,7 @@ public class Board {
     }
 
     private void validatePawnSize() {
-        if (pawns.size() > MAX_PAWN_SIZE) {
+        if (pieces.size() > MAX_PAWN_SIZE) {
             throw new IllegalStateException("폰은 " + MAX_PAWN_SIZE + "개를 초과할 수 없습니다.");
         }
     }
@@ -95,6 +129,5 @@ public class Board {
             throw new IllegalStateException(index + "번의 폰은 없습니다. " + MIN_PAWN_INDEX + "부터 " + MAX_PAWN_INDEX + " 중 골라주세요.");
         }
     }
-
 }
 
