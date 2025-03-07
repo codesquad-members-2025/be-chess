@@ -36,7 +36,11 @@ public class Board {
 
     public void initialize() {
        addPawns();
+       addWhitePieces();
+       addBlackPieces();
        placePawn();
+       placeWhitePieces();
+       placeBlackPieces();
     }
 
     public void addPawns() {
@@ -76,6 +80,20 @@ public class Board {
         }
     }
 
+    public void placeWhitePieces() {
+        for (int i = 0; i < board.length; ++i) {
+            board[0][i] = pieces.get(piecesIndex).getRepresentation();
+            ++piecesIndex;
+        }
+    }
+
+    public void placeBlackPieces() {
+        for (int i = 0; i < board.length; ++i) {
+            board[7][i] = pieces.get(piecesIndex).getRepresentation();
+            ++piecesIndex;
+        }
+    }
+
     public String getWhitePawnResult() {
         StringBuilder sb = new StringBuilder();
 
@@ -108,4 +126,5 @@ public class Board {
         }
         System.out.print(sb);
     }
+
 }
