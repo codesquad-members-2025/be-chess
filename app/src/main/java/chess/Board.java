@@ -55,6 +55,17 @@ public class Board {
         pieces.add(Piece.createWhiteRook());
     }
 
+    public void addBlackPieces() {
+        pieces.add(Piece.createBlackRook());
+        pieces.add(Piece.createBlackKnight());
+        pieces.add(Piece.createBlackBishop());
+        pieces.add(Piece.createBlackQueen());
+        pieces.add(Piece.createBlackKing());
+        pieces.add(Piece.createBlackBishop());
+        pieces.add(Piece.createBlackKnight());
+        pieces.add(Piece.createBlackRook());
+    }
+
     public void placePawn() {
         int pawnsIndex = 0; // Pawn 리스트 전체를 순회하기 위한 인덱스 값
 
