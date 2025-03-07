@@ -15,8 +15,11 @@ public class Queen extends Piece{
         for(Direction direction : Direction.everyDirection()){
             int fileDegree = direction.getFileDegree();
             int rankDegree = direction.getRankDegree();
-            Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree,rankDegree);
-            if(movedCoordinate.isCoordinateOnBoard()) coordinateSet.add(movedCoordinate);
+            for(int i = 1; i<8;i++){
+                Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree*i,rankDegree*i);
+                if(movedCoordinate.isCoordinateOnBoard()) coordinateSet.add(movedCoordinate);
+                else break;
+            }
         }
         return coordinateSet.contains(targetPosition);
     }
