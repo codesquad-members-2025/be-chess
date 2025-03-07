@@ -9,12 +9,12 @@ public class PieceTest {
     @Test
     @DisplayName("각 기물의 생성 테스트")
     public void create_piece() {
-        verifyPiece(Piece.createWhite(PAWN), Piece.createBlack(PAWN), PAWN);
-        verifyPiece(Piece.createWhite(KNIGHT), Piece.createBlack(KNIGHT), KNIGHT);
-        verifyPiece(Piece.createWhite(ROOK), Piece.createBlack(ROOK), ROOK);
-        verifyPiece(Piece.createWhite(BISHOP), Piece.createBlack(BISHOP), BISHOP);
-        verifyPiece(Piece.createWhite(QUEEN), Piece.createBlack(QUEEN), QUEEN);
-        verifyPiece(Piece.createWhite(KING), Piece.createBlack(KING), KING);
+        verifyPiece(Piece.createWhitePawn(), Piece.createBlackPawn(), PAWN);
+        verifyPiece(Piece.createWhiteKnight(), Piece.createBlackKnight(), KNIGHT);
+        verifyPiece(Piece.createWhiteRook(), Piece.createBlackRook(), ROOK);
+        verifyPiece(Piece.createWhiteBishop(), Piece.createBlackBishop(), BISHOP);
+        verifyPiece(Piece.createWhiteQueen(), Piece.createBlackQueen(), QUEEN);
+        verifyPiece(Piece.createWhiteKing(), Piece.createBlackKing(), KING);
 
         Piece blank = Piece.createBlank();
         assertThat(blank.isWhite()).isFalse();
@@ -26,8 +26,8 @@ public class PieceTest {
     @DisplayName("흰색 말 테스트")
     public void whiteColor() throws Exception{
 
-        Piece whiteBishop = createWhite(BISHOP);
-        Piece whitePawn = createWhite(PAWN);
+        Piece whiteBishop = createWhiteBishop();
+        Piece whitePawn = createWhitePawn();
 
         assertThat(whiteBishop.isWhite()).isTrue();
         assertThat(whitePawn.isWhite()).isTrue();
@@ -38,8 +38,8 @@ public class PieceTest {
     @Test
     @DisplayName("검은 말 테스트")
     public void blackColor() throws Exception{
-        Piece blackBishop = createBlack(BISHOP);
-        Piece blackPawn = createBlack(PAWN);
+        Piece blackBishop = createBlackBishop();
+        Piece blackPawn = createBlackPawn();
 
         assertThat(blackBishop.isBlack()).isTrue();
         assertThat(blackPawn.isBlack()).isTrue();

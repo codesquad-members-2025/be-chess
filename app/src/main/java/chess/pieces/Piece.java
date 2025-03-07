@@ -15,11 +15,48 @@ public class Piece {
 
     public static Piece createBlank() {return new Piece(NO_PIECE,NOCOLOR);}
 
-    public static Piece createWhite(Type type) {
+    private static Piece createWhite(Type type) {
         return new Piece(type, WHITE);
     }
-    public static Piece createBlack(Type type) {
+    private static Piece createBlack(Type type) {
         return new Piece(type, BLACK);
+    }
+
+    public static Piece createWhitePawn() {
+        return createWhite(PAWN);
+    }
+    public static Piece createWhiteRook() {
+        return createWhite(ROOK);
+    }
+    public static Piece createWhiteKnight() {
+        return createWhite(KNIGHT);
+    }
+    public static Piece createWhiteBishop() {
+        return createWhite(BISHOP);
+    }
+    public static Piece createWhiteQueen() {
+        return createWhite(QUEEN);
+    }
+    public static Piece createWhiteKing() {
+        return createWhite(KING);
+    }
+    public static Piece createBlackPawn() {
+        return createBlack(PAWN);
+    }
+    public static Piece createBlackRook() {
+        return createBlack(ROOK);
+    }
+    public static Piece createBlackKnight() {
+        return createBlack(KNIGHT);
+    }
+    public static Piece createBlackBishop() {
+        return createBlack(BISHOP);
+    }
+    public static Piece createBlackQueen() {
+        return createBlack(QUEEN);
+    }
+    public static Piece createBlackKing() {
+        return createBlack(KING);
     }
 
     public Color getColor() {

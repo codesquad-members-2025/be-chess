@@ -53,29 +53,29 @@ public class Board {
 
     private void addPieces() {
         for (int i = 0; i < 8; i++) { // 폰
-            add(Piece.createWhite(PAWN));
-            add(Piece.createBlack(PAWN));
+            add(Piece.createWhitePawn());
+            add(Piece.createBlackPawn());
         }
 
-        add(Piece.createBlack(ROOK));
-        add(Piece.createBlack(ROOK));
-        add(Piece.createWhite(ROOK));
-        add(Piece.createWhite(ROOK));
+        add(Piece.createBlackRook());
+        add(Piece.createBlackRook());
+        add(Piece.createWhiteRook());
+        add(Piece.createWhiteRook());
 
-        add(Piece.createBlack(KNIGHT));
-        add(Piece.createBlack(KNIGHT));
-        add(Piece.createWhite(KNIGHT));
-        add(Piece.createWhite(KNIGHT));
+        add(Piece.createBlackKnight());
+        add(Piece.createBlackKnight());
+        add(Piece.createWhiteKnight());
+        add(Piece.createWhiteKnight());
 
-        add(Piece.createBlack(BISHOP));
-        add(Piece.createBlack(BISHOP));
-        add(Piece.createWhite(BISHOP));
-        add(Piece.createWhite(BISHOP));
+        add(Piece.createBlackBishop());
+        add(Piece.createBlackBishop());
+        add(Piece.createWhiteBishop());
+        add(Piece.createWhiteBishop());
 
-        add(Piece.createBlack(QUEEN));
-        add(Piece.createBlack(KING));
-        add(Piece.createWhite(QUEEN));
-        add(Piece.createWhite(KING));
+        add(Piece.createBlackQueen());
+        add(Piece.createBlackKing());
+        add(Piece.createWhiteQueen());
+        add(Piece.createWhiteKing());
 
     }
 
