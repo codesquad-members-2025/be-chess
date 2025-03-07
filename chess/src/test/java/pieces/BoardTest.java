@@ -3,10 +3,10 @@ package pieces;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import chess.Board;
+import chess.Main;
 import chess.Pawn;
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class BoardTest {
 
@@ -42,4 +42,15 @@ public class BoardTest {
         //Board board = new Board();
        // board.add(new Integer("7")); -> compile 에러 발생
     }
+    @Test
+    public void initialize() throws Exception {
+        Board board = new Board();
+        board.initializePawns();
+        board.initializeBoard();
+        assertEquals("pppppppp", board.getWhitePawnsResult());
+        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+
+        System.out.println(board.print());
+    }
+
 }
