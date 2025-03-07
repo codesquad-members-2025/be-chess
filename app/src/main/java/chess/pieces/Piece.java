@@ -60,6 +60,11 @@ public class Piece {
         return this.color.equals(WHITE);
     }
 
+    public Type getType() {
+        return this.type;
+    }
+
+
     public enum Color {
         WHITE, BLACK, NOCOLOR;
     }
