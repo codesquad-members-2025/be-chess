@@ -51,7 +51,6 @@ public class Board {
 
     }
 
-    // @todo: 빈 값 하나 바꾸면 모든 Rank 줄이 바뀌는 문제 해결
     public void initializeEmptyBoard() {
         for (int i = 0; i < BOARD_SIZE; i++) {
             List<Piece> emptyPieces = new ArrayList<>();
