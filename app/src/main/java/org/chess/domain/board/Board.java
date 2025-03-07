@@ -51,13 +51,14 @@ public class Board {
 
     }
 
+    // @todo: 빈 값 하나 바꾸면 모든 Rank 줄이 바뀌는 문제 해결
     public void initializeEmptyBoard() {
-        List<Piece> emptyPieces = new ArrayList<>();
         for (int i = 0; i < BOARD_SIZE; i++) {
-            emptyPieces.add(Piece.createBlankPiece());
-        }
+            List<Piece> emptyPieces = new ArrayList<>();
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                emptyPieces.add(Piece.createBlankPiece());
+            }
 
-        for (int i = 0; i < BOARD_SIZE; i++) {
             board.add(Rank.of(emptyPieces));
         }
     }
