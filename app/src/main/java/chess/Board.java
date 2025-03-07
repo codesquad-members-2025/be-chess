@@ -26,7 +26,7 @@ public class Board {
         pieces.add(piece);
     }
 
-    public int size() {
+    public int pieceCount() {
         return pieces.size();
     }
 
