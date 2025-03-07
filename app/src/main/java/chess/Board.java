@@ -1,11 +1,12 @@
 package chess;
 
 import pieces.Piece;
-import utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private List<Piece> pieces;
@@ -80,7 +81,7 @@ public class Board {
             for (int j = 0; j < board.length; ++j) {
                 line += (board[i][j]);
             }
-            line = StringUtils.appendNewLine(line);
+            line = appendNewLine(line);
             sb.append(line);
         }
         System.out.print(sb);
