@@ -7,7 +7,7 @@ import java.util.*;
 import static org.utils.StringUtils.appendNewLine;
 
 public class Board {
-    private final List<Rank> rankList = new ArrayList<>();
+    private List<Rank> rankList = new ArrayList<>();
 
     public Board() {
     }
@@ -17,6 +17,7 @@ public class Board {
         // rankList는 rank에 따라 관리
         // 즉 rankList.get(0)을 하면 rank1번이 나오도록 관리함
         // 따라서 출력할 때 rank8부터 출력하도록 변경하면 됨
+        rankList = new ArrayList<>();
         rankList.add(makeWhitePieceRank());
         rankList.add(makeWhitePawnPieceRank());
         for (int i = 0; i < 4; i++) {
