@@ -13,38 +13,14 @@ public class Piece {
         this.color = color;
     }
 
-    public static Piece createWhitePawn() {return new Piece(PAWN, WHITE);}
-    public static Piece createBlackPawn() {
-        return new Piece(PAWN, BLACK);
-    }
-    public static Piece createWhiteKing() {
-        return new Piece(KING, WHITE);
-    }
-    public static Piece createBlackKing() {
-        return new Piece(KING, BLACK);
-    }
-    public static Piece createWhiteQueen() {
-        return new Piece(QUEEN, WHITE);
-    }
-    public static Piece createBlackQueen() {
-        return new Piece(QUEEN, BLACK);
-    }
-    public static Piece createWhiteRook() {
-        return new Piece(ROOK, WHITE);
-    }
-    public static Piece createBlackRook() {
-        return new Piece(ROOK, BLACK);
-    }
-    public static Piece createWhiteBishop() {return new Piece(BISHOP, WHITE);}
-    public static Piece createBlackBishop() {
-        return new Piece(BISHOP, BLACK);
-    }
-    public static Piece createWhiteKnight() {return new Piece(KNIGHT, WHITE);}
-    public static Piece createBlackKnight() {
-        return new Piece(KNIGHT, BLACK);
-    }
-
     public static Piece createBlank() {return new Piece(NO_PIECE,NOCOLOR);}
+
+    public static Piece createWhite(Type type) {
+        return new Piece(type, WHITE);
+    }
+    public static Piece createBlack(Type type) {
+        return new Piece(type, BLACK);
+    }
 
     public Color getColor() {
         return color;

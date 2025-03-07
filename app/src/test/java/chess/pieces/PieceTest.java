@@ -2,7 +2,6 @@ package chess.pieces;
 import org.junit.jupiter.api.*;
 
 import static chess.pieces.Piece.*;
-import static chess.pieces.Piece.Color.*;
 import static chess.pieces.Piece.Type.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -10,12 +9,12 @@ public class PieceTest {
     @Test
     @DisplayName("각 기물의 생성 테스트")
     public void create_piece() {
-        verifyPiece(Piece.createWhitePawn(), Piece.createBlackPawn(), Type.PAWN);
-        verifyPiece(Piece.createWhiteKnight(), Piece.createBlackKnight(), Type.KNIGHT);
-        verifyPiece(Piece.createWhiteRook(), Piece.createBlackRook(), Type.ROOK);
-        verifyPiece(Piece.createWhiteBishop(), Piece.createBlackBishop(), Type.BISHOP);
-        verifyPiece(Piece.createWhiteQueen(), Piece.createBlackQueen(), Type.QUEEN);
-        verifyPiece(Piece.createWhiteKing(), Piece.createBlackKing(), Type.KING);
+        verifyPiece(Piece.createWhite(PAWN), Piece.createBlack(PAWN), PAWN);
+        verifyPiece(Piece.createWhite(KNIGHT), Piece.createBlack(KNIGHT), KNIGHT);
+        verifyPiece(Piece.createWhite(ROOK), Piece.createBlack(ROOK), ROOK);
+        verifyPiece(Piece.createWhite(BISHOP), Piece.createBlack(BISHOP), BISHOP);
+        verifyPiece(Piece.createWhite(QUEEN), Piece.createBlack(QUEEN), QUEEN);
+        verifyPiece(Piece.createWhite(KING), Piece.createBlack(KING), KING);
 
         Piece blank = Piece.createBlank();
         assertThat(blank.isWhite()).isFalse();
@@ -26,8 +25,9 @@ public class PieceTest {
     @Test
     @DisplayName("흰색 말 테스트")
     public void whiteColor() throws Exception{
-        Piece whiteBishop = createWhiteBishop();
-        Piece whitePawn = createWhitePawn();
+
+        Piece whiteBishop = createWhite(BISHOP);
+        Piece whitePawn = createWhite(PAWN);
 
         assertThat(whiteBishop.isWhite()).isTrue();
         assertThat(whitePawn.isWhite()).isTrue();
@@ -38,8 +38,8 @@ public class PieceTest {
     @Test
     @DisplayName("검은 말 테스트")
     public void blackColor() throws Exception{
-        Piece blackBishop = createBlackBishop();
-        Piece blackPawn = createBlackPawn();
+        Piece blackBishop = createBlack(BISHOP);
+        Piece blackPawn = createBlack(PAWN);
 
         assertThat(blackBishop.isBlack()).isTrue();
         assertThat(blackPawn.isBlack()).isTrue();
