@@ -17,8 +17,10 @@ public class Piece {
     public static final char WHITE_KING_REPRESENTATION = '♔';
     public static final char BLACK_KING_REPRESENTATION = '♚';
 
+    private String name;
     private final String color;
     private final char representation;
+
 
     public Piece(String color, char representation) {
         this.color = color;
@@ -32,4 +34,5 @@ public class Piece {
     public char getRepresentation() {
         return representation;
     }
+
 }
