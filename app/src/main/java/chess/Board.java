@@ -127,4 +127,17 @@ public class Board {
         System.out.print(sb);
     }
 
+    public String showBoard() {
+        StringBuilder chessBoard = new StringBuilder();
+        for (char[] chars : board) {
+            StringBuilder line = new StringBuilder();
+            for (int j = 0; j < board.length; ++j) {
+                line.append(chars[j]);
+            }
+            line = new StringBuilder(appendNewLine(line.toString()));
+            chessBoard.append(line);
+        }
+        return chessBoard.toString();
+    }
+
 }
