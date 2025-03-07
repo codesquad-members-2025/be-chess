@@ -8,7 +8,9 @@
 # Gradle 관련
 # =======================
 .gradle/
-build/
+# Gradle build 결과물 제외
+/build/
+
 !gradle/wrapper/gradle-wrapper.jar
 # 추가: Gradle 캐시 경로까지 확실히 무시
 .gradle/
