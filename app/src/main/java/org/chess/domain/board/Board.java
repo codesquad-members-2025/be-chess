@@ -86,10 +86,9 @@ public class Board {
     }
 
     public void move(String position, Piece piece) {
-        int col = position.charAt(0) - 'a';
-        int rank = position.charAt(1) - '1';
+        Position pos = Position.of(position);
 
-        board.get(BOARD_SIZE - rank - 1).getPieces().set(col, piece);
+        board.get(pos.y()).getPieces().set(pos.x(), piece);
     }
 
     public int pieceCount() {
@@ -107,11 +106,10 @@ public class Board {
         return whitePieces.get(index);
     }
 
-    public Piece findPiece(String pos) {
-        int col = pos.charAt(0) - 'a';
-        int rank = pos.charAt(1) - '1';
+    public Piece findPiece(String position) {
+        Position pos = Position.of(position);
 
-        return board.get(BOARD_SIZE - rank - 1).getPieces().get(col);
+        return board.get(pos.y()).getPieces().get(pos.x());
     }
 
     public String getPawnsResultWith(int row) {
