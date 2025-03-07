@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PieceTest {
 
     @Test
-    @DisplayName("흰색 또는 검은색 폰이 생성되어야 한다")
+    @DisplayName("흰색, 검은색 폰이 생성되어야 한다")
     public void create_piece() {
         verifyPawn(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
         verifyPawn(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
