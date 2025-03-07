@@ -11,10 +11,12 @@ import static utils.StringUtils.appendNewLine;
 public class Board {
     private List<Piece> pieces;
     private char[][] board;
+    private int piecesIndex;
 
     public Board() {
         this.pieces = new ArrayList<>();
         this.board = new char[8][8];
+        this.piecesIndex = 0;
         for (char[] chars : board) {
             Arrays.fill(chars, '.' );
         }
@@ -67,12 +69,10 @@ public class Board {
     }
 
     public void placePawn() {
-        int pawnsIndex = 0; // Pawn 리스트 전체를 순회하기 위한 인덱스 값
-
         for (int i = 0; i < board.length; ++i) {
-            board[1][i] = pieces.get(pawnsIndex).getRepresentation();
-            board[6][i] = pieces.get(pawnsIndex + 1).getRepresentation();
-            pawnsIndex += 2;
+            board[1][i] = pieces.get(piecesIndex).getRepresentation();
+            board[6][i] = pieces.get(piecesIndex + 1).getRepresentation();
+            piecesIndex += 2;
         }
     }
 
