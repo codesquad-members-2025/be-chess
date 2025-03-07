@@ -70,4 +70,17 @@ public class Piece {
         whitePawn.name = "knight";
         return whitePawn;
     }
+
+    public static Piece createWhiteBishop() {
+        Piece whitePawn = new Piece(WHITE_COLOR, WHITE_BISHOP_REPRESENTATION);
+        whitePawn.name = "bishop";
+        return whitePawn;
+    }
+
+    public static Piece createBlackBishop() {
+        Piece whitePawn = new Piece(BLACK_COLOR, BLACK_BISHOP_REPRESENTATION);
+        whitePawn.name = "bishop";
+        return whitePawn;
+    }
+
 }
