@@ -92,7 +92,7 @@ public class Piece {
     public enum Type {
         PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE(' ');
 
-        private char representation;
+        final private char representation;
 
         Type(char representation) {
             this.representation = representation;

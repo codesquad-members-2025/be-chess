@@ -50,6 +50,13 @@ public class PieceTest {
         assertThat(blackPawn.isWhite()).isFalse();
     }
 
+    @Test
+    @DisplayName("기물의 representation이 잘 할당 되었는지 테스트")
+    public void getRepresentationPerPiece() throws Exception {
+        assertThat(Piece.Type.PAWN.getWhiteRepresentation()).isEqualTo('p');
+        assertThat(Piece.Type.PAWN.getBlackRepresentation()).isEqualTo('P');
+    }
+
     private void verifyPiece(final Piece piece, final String color, final char representation) {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(piece.getRepresentation()).isEqualTo(representation);
