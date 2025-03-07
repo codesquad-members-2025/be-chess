@@ -3,6 +3,8 @@ package org.chess.domain.board;
 import org.chess.domain.pieces.Piece;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.chess.utils.StringUtils.appendNewLine;
 
@@ -148,8 +150,73 @@ class BoardTest {
         System.out.println(board.showBoard());
     }
 
+    @Test
+    @DisplayName("검은색과 흰색 기물을 구분해서 점수가 높은 순으로 정렬할 수 있어야 한다")
+    void 기물_정렬_테스트() {
+        // given
+        Board board = new Board();
+        board.initializeEmptyBoard();
+
+        // when
+        addPiece(board, "b6", Piece.createBlack(Piece.Type.PAWN));
+        addPiece(board, "e6", Piece.createBlack(Piece.Type.QUEEN));
+        addPiece(board, "b8", Piece.createBlack(Piece.Type.KING));
+        addPiece(board, "c8", Piece.createBlack(Piece.Type.ROOK));
+
+        addPiece(board, "f2", Piece.createWhite(Piece.Type.PAWN));
+        addPiece(board, "g2", Piece.createWhite(Piece.Type.PAWN));
+        addPiece(board, "e1", Piece.createWhite(Piece.Type.ROOK));
+        addPiece(board, "f1", Piece.createWhite(Piece.Type.KING));
+
+        // then
+        List<Piece> actualBlackPiecesWithAsc = board.sortPiecesByAscending(Piece.Color.BLACK);
+        List<Piece> actualWhitePiecesWithDesc = board.sortPiecesByDescending(Piece.Color.WHITE);
+        List<Piece> actualBlackPiecesWithDesc = board.sortPiecesByDescending(Piece.Color.BLACK);
+        List<Piece> actualWhitePiecesWithAsc = board.sortPiecesByAscending(Piece.Color.WHITE);
+
+        List<Piece> expectedBlackPiecesWithAsc = List.of(
+                Piece.createBlack(Piece.Type.KING),   // 0.0
+                Piece.createBlack(Piece.Type.PAWN),   // 1.0
+                Piece.createBlack(Piece.Type.ROOK),   // 5.0
+                Piece.createBlack(Piece.Type.QUEEN)   // 9.0
+        );
+
+        List<Piece> expectedBlackPiecesWithDesc = List.of(
+                Piece.createBlack(Piece.Type.QUEEN),  // 9.0
+                Piece.createBlack(Piece.Type.ROOK),   // 5.0
+                Piece.createBlack(Piece.Type.PAWN),   // 1.0
+                Piece.createBlack(Piece.Type.KING)    // 0.0
+        );
+
+        List<Piece> expectedWhitePiecesWithAsc = List.of(
+                Piece.createWhite(Piece.Type.KING),   // 0.0
+                Piece.createWhite(Piece.Type.PAWN),   // 1.0
+                Piece.createWhite(Piece.Type.PAWN),   // 1.0
+                Piece.createWhite(Piece.Type.ROOK)    // 5.0
+        );
+
+        List<Piece> expectedWhitePiecesWithDesc = List.of(
+                Piece.createWhite(Piece.Type.ROOK),   // 5.0
+                Piece.createWhite(Piece.Type.PAWN),   // 1.0
+                Piece.createWhite(Piece.Type.PAWN),   // 1.0
+                Piece.createWhite(Piece.Type.KING)    // 0.0
+        );
+
+        compare(actualBlackPiecesWithAsc, expectedBlackPiecesWithAsc);
+        compare(actualWhitePiecesWithDesc, expectedWhitePiecesWithDesc);
+        compare(actualBlackPiecesWithDesc, expectedBlackPiecesWithDesc);
+        compare(actualWhitePiecesWithAsc, expectedWhitePiecesWithAsc);
+    }
+
     private void addPiece(Board board, String Position, Piece piece) {
         board.move(Position, piece);
+    }
+
+    private void compare(List<Piece> actual, List<Piece> expected) {
+        assertThat(actual.size()).isEqualTo(expected.size());
+        for (int i = 0; i < actual.size(); i++) {
+            assertThat(actual.get(i)).isEqualTo(expected.get(i));
+        }
     }
 
 }
