@@ -142,8 +142,8 @@ class BoardTest {
         addPiece(board, "f1", Piece.createWhite(Piece.Type.KING));
 
         // then
-        assertThat(board.caculatePoint(Piece.Color.BLACK), 0.01).isEqualTo(15.0);
-        assertThat(board.caculatePoint(Piece.Color.WHITE), 0.01).isEqualTo(7.0);
+        assertThat(board.calculatePoint(Piece.Color.BLACK)).isCloseTo(15.0, within(0.01));
+        assertThat(board.calculatePoint(Piece.Color.WHITE)).isCloseTo(7.0, within(0.01));
 
         System.out.println(board.showBoard());
     }

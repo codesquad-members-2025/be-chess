@@ -116,4 +116,12 @@ public class Board {
         return board.get(row).toString();
     }
 
+    public double calculatePoint(Piece.Color color) {
+        return board.stream()
+                .flatMap(rank -> rank.getPieces().stream())
+                .filter(piece -> piece.getColor() == color)
+                .mapToDouble(Piece::getPoint)
+                .sum();
+    }
+
 }
