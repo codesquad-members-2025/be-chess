@@ -54,4 +54,15 @@ public class BoardTest {
         assertThat(board.getSpecificPieceCount(KING, BLACK)).isEqualTo(1);
         assertThat(board.getSpecificPieceCount(KING, WHITE)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("주어진 좌표의 기물을 조회하는 테스트")
+    public void findPiece() throws Exception {
+        board.initialize();
+
+        assertThat(board.findPiece("a8")).isEqualTo(Piece.createBlackRook());
+        assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlackRook());
+        assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhiteRook());
+        assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhiteRook());
+    }
 }
