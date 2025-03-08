@@ -1,55 +1,20 @@
 package chess.piece;
 
-public class Piece {
+import chess.enums.Color;
+import chess.record.Position;
 
-    public enum Color {
-        WHITE, BLACK, NOCOLOR
-    }
+public abstract class Piece {
 
-    public enum Type {
-        PAWN('p', 1.0),
-        ROOK('r', 5.0),
-        KNIGHT('n', 2.5),
-        BISHOP('b', 3.0),
-        QUEEN('q', 9.0),
-        KING('k', 0.0),
-        NO_PIECE('.', 0.0);
 
-        private char representation;
-        private double defaultPoint;
+    protected final Color color;
+    protected Position currentPosition;
 
-        private Type(char representation, double defaultPoint) {
-            this.representation = representation;
-            this.defaultPoint = defaultPoint;
-        }
-
-        public char getWhiteRepresentation() {
-            return representation;
-        }
-
-        public char getBlackRepresentation() {
-            return Character.toUpperCase(representation);
-        }
-
-        public double getDefaultPoint() {
-            return defaultPoint;
-        }
-    }
-
-    private final Color color;
-    private final Type type;
-
-    private Piece(Color color, Type type) {
+    protected Piece(Color color) {
         this.color = color;
-        this.type = type;
     }
 
     public Color getColor() {
         return color;
-    }
-
-    public Type getType() {
-        return type;
     }
 
     public boolean isBlack() {
@@ -60,37 +25,44 @@ public class Piece {
         return color == Color.WHITE;
     }
 
-    public char getSymbol() {
-        if (color == Color.WHITE) {
-            return type.getWhiteRepresentation();
-        } else if (color == Color.BLACK) {
-            return type.getBlackRepresentation();
-        }
-        return ' ';
+    public Position getCurrentPosition() {
+        return currentPosition;
     }
 
-    public double getPoint(){
-        return type.getDefaultPoint();
+    public void setCurrentPosition(Position currentPosition) {
+        this.currentPosition = currentPosition;
     }
 
+    public static Piece createBlank(){
+        return new Piece(Color.NOCOLOR) {
+            @Override
+            public char getSymbol() {
+                return '.';
+            }
 
-    public static Piece createWhite(Type type) {
-        return new Piece(Color.WHITE, type);
+            @Override
+            public double getPoint() {
+                return 0;
+            }
+
+            @Override
+            public boolean canMove(Position position) {
+                return false;
+            }
+        };
     }
 
-    public static Piece createBlack(Type type) {
-        return new Piece(Color.BLACK, type);
-    }
+    public abstract char getSymbol();
 
-    public static Piece createBlank() {
-        return new Piece(Color.NOCOLOR, Type.NO_PIECE);
-    }
+    public abstract double getPoint();
+
+    public abstract boolean canMove(Position position);
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || getClass()!= obj.getClass()) return false;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Piece piece = (Piece) obj;
-        return color == piece.color && type == piece.type;
+        return color == piece.color;
     }
 }
