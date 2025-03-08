@@ -1,5 +1,7 @@
 package chess.pieces;
 
+import java.util.Objects;
+
 import static chess.pieces.Piece.Color.*;
 import static chess.pieces.Piece.Type.*;
 
@@ -40,9 +42,7 @@ public class Piece {
     public static Piece createWhiteKing() {
         return createWhite(KING);
     }
-    public static Piece createBlackPawn() {
-        return createBlack(PAWN);
-    }
+    public static Piece createBlackPawn() {return createBlack(PAWN);}
     public static Piece createBlackRook() {
         return createBlack(ROOK);
     }
@@ -97,6 +97,18 @@ public class Piece {
         public char getBlackRepresentation() {
             return Character.toUpperCase(representation);
         }
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return type == piece.type && color == piece.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, color);
     }
 }
 
