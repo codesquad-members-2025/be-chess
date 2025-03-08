@@ -48,10 +48,10 @@ public class BoardTest {
         assertThat(board.getSpecificPieceCount(KNIGHT, BLACK)).isEqualTo(2);
         assertThat(board.getSpecificPieceCount(KNIGHT, WHITE)).isEqualTo(2);
 
-        assertThat(board.getSpecificPieceCount(QUEEN, BLACK)).isEqualTo(2);
-        assertThat(board.getSpecificPieceCount(QUEEN, WHITE)).isEqualTo(2);
+        assertThat(board.getSpecificPieceCount(QUEEN, BLACK)).isEqualTo(1);
+        assertThat(board.getSpecificPieceCount(QUEEN, WHITE)).isEqualTo(1);
 
-        assertThat(board.getSpecificPieceCount(KING, BLACK)).isEqualTo(2);
-        assertThat(board.getSpecificPieceCount(KING, WHITE)).isEqualTo(2);
+        assertThat(board.getSpecificPieceCount(KING, BLACK)).isEqualTo(1);
+        assertThat(board.getSpecificPieceCount(KING, WHITE)).isEqualTo(1);
     }
 }
