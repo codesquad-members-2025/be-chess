@@ -39,6 +39,7 @@ public class Board {
         }
         return count;
     }
+
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
         for (int rank = 0; rank < RANK_SIZE; rank++) {
@@ -49,14 +50,15 @@ public class Board {
 
     private void initializeBoard() {
 
-        board.add(new Rank(createInitialEightRank()));
-        board.add(new Rank(createInitialSevenRank()));
+        board.add(new Rank(createInitialOneRank()));
+        board.add(new Rank(createInitialTwoRank()));
+
         for (int rank = 6; rank > 2; rank--) { // 6~3 랭크
             board.add(new Rank(createEmptyRank()));
         }
-        board.add(new Rank(createInitialTwoRank()));
-        board.add(new Rank(createInitialOneRank()));
 
+        board.add(new Rank(createInitialSevenRank()));
+        board.add(new Rank(createInitialEightRank()));
     }
 
 
@@ -133,10 +135,9 @@ public class Board {
     }
 
 
-    public Piece findPiece(int index) {
-        validateIndex(index);
-        return pieces.get(index);
-    }
+//    public Piece findPiece(String coordinate) {
+//
+//    }
 
     private void validateFileSize(int size) {
         if (size > FILE_SIZE) {
