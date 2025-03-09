@@ -31,7 +31,7 @@ public class QueenTest {
         assertThat(queen.verifyMovePosition(board, new Coordinate("e4"), target)).isTrue();
     }
 
-    @ParameterizedTest(name = "Queen can move from e4 to {0}")
+    @ParameterizedTest(name = "Queen can't move from e4 to {0}")
     @ValueSource(strings = {"c1","d1","f1","h5","b3"})
     @DisplayName("퀸이 이동할 수 없는 곳은 이동할 수 없는지 확인")
     void test_queen_invalid_move(String targetCoordinateStr) throws Exception {
