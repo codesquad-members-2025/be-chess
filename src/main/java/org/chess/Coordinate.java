@@ -37,11 +37,11 @@ public class Coordinate {
         return Objects.hash(fileIndex, rankIndex);
     }
 
-    int getRankIndex() {
+    public int getRankIndex() {
         return rankIndex;
     }
 
-    int getFileIndex() {
+    public int getFileIndex() {
         return fileIndex;
     }
 }

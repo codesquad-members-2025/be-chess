@@ -27,17 +27,4 @@ public class Game {
         // 원래 자리에 blank 추가
         board.putPiece(sourceCoordinate, Piece.createBlank());
     }
-
-    private Coordinate parseCoordinate(String location) {
-        try {
-            return new Coordinate(location);
-        } catch (IllegalArgumentException e) {
-            System.out.println("좌표 오류 : ");
-            return null;
-        }
-    }
-
-    private List<Rank> rankList() {
-        return board.getRankList();
-    }
 }

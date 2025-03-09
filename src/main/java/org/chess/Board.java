@@ -7,9 +7,6 @@ import java.util.*;
 public class Board {
     private List<Rank> rankList = new ArrayList<>();
 
-    public Board() {
-    }
-
     public void initialize() {
         // 중요!
         // rankList는 rank에 따라 관리
