@@ -23,6 +23,8 @@ public class Board {
         initializeBoard();
     }
 
+
+
     public int pieceCount() {
         return pieces.size();
     }
@@ -60,8 +62,9 @@ public class Board {
         board.add(new Rank(createInitialOneRank()));
         board.add(new Rank(createInitialTwoRank()));
 
+        Rank emptyRank = new Rank(createEmptyRank());
         for (int rank = 6; rank > 2; rank--) { // 6~3 랭크
-            board.add(new Rank(createEmptyRank()));
+            board.add(emptyRank);
         }
 
         board.add(new Rank(createInitialSevenRank()));
