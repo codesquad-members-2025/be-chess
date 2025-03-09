@@ -65,6 +65,7 @@ public class BoardTest {
         assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhiteRook());
         assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhiteRook());
     }
+
     @Test
     @DisplayName("기물 이동 테스트")
     public void move() throws Exception {
@@ -89,5 +90,20 @@ public class BoardTest {
                 .isEqualTo(board.findPiece("b8"));
 
         System.out.println(board.showBoard());
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 좌표값에 대한 예외 처리 테스트")
+    public void invalidCoordinate() throws Exception {
+        board.initialize();
+
+        assertThatThrownBy(() -> board.findPiece("z9"))
+                .isInstanceOf(IllegalStateException.class);
+
+        assertThatThrownBy(() -> board.findPiece("a0"))
+                .isInstanceOf(IllegalStateException.class);
+
+        assertThatThrownBy(() -> board.findPiece("z5"))
+                .isInstanceOf(IllegalStateException.class);
     }
 }
