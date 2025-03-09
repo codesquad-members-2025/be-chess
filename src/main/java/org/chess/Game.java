@@ -4,10 +4,10 @@ import org.pieces.Piece;
 
 import java.util.List;
 
-public class GameController {
+public class Game {
     private final Board board;
 
-    public GameController(Board board) {
+    public Game(Board board) {
         this.board = board;
     }
 

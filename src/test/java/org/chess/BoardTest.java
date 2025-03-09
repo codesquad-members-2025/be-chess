@@ -12,13 +12,13 @@ import static org.utils.StringUtils.appendNewLine;
 public class BoardTest {
     Board board;
     BoardStatus boardStatus;
-    GameController gameController;
+    Game game;
 
     @BeforeEach
     void setUp() {
         board = new Board();
         boardStatus = new BoardStatus(board);
-        gameController = new GameController(board);
+        game = new Game(board);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class BoardTest {
         board.initialize();
         String sourcePosition = "b2";
         String targetPosition = "b3";
-        gameController.move(sourcePosition, targetPosition);
+        game.move(sourcePosition, targetPosition);
         assertThat(Piece.createBlank()).isEqualTo(board.findPiece(new Coordinate(sourcePosition)));
         assertThat(Piece.createWhitePawn()).isEqualTo(board.findPiece(new Coordinate(targetPosition)));
     }

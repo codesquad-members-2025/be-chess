@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class PlayGame {
     public static Board board = new Board();
     public static BoardStatus boardStatus = new BoardStatus(board);
-    public static GameController gameController = new GameController(board);
+    public static Game game = new Game(board);
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -18,7 +18,7 @@ public class PlayGame {
                 break;
             } else if (input.startsWith("move")) {
                 String[] moveCommand = input.split(" ");
-                gameController.move(moveCommand[1], moveCommand[2]);
+                game.move(moveCommand[1], moveCommand[2]);
                 System.out.println(boardStatus.showBoard());
             }
         }
