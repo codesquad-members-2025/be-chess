@@ -1,12 +1,13 @@
 package chess.piece;
 
+import chess.enums.Color;
+import chess.record.Position;
+
 public abstract class Piece {
 
-    public enum Color {
-        WHITE, BLACK
-    }
 
-    private final Color color;
+    protected final Color color;
+    protected Position currentPosition;
 
     protected Piece(Color color) {
         this.color = color;
@@ -16,6 +17,52 @@ public abstract class Piece {
         return color;
     }
 
-    // 기물마다 다른 표시 문자 (P, R, N 등)를 반환하도록 추상 메소드
+    public boolean isBlack() {
+        return color == Color.BLACK;
+    }
+
+    public boolean isWhite() {
+        return color == Color.WHITE;
+    }
+
+    public Position getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(Position currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
+    public static Piece createBlank(){
+        return new Piece(Color.NOCOLOR) {
+            @Override
+            public char getSymbol() {
+                return '.';
+            }
+
+            @Override
+            public double getPoint() {
+                return 0;
+            }
+
+            @Override
+            public boolean canMove(Position position) {
+                return false;
+            }
+        };
+    }
+
     public abstract char getSymbol();
+
+    public abstract double getPoint();
+
+    public abstract boolean canMove(Position position);
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return color == piece.color;
+    }
 }

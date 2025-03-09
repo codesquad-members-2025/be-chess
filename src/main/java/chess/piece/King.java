@@ -6,40 +6,34 @@ import chess.record.Position;
 
 import java.util.List;
 
-public class Pawn extends Piece{
+public class King extends Piece {
 
 
-    public Pawn(Color color){
+    public King(Color color) {
         super(color);
     }
-
-    public List<Direction> getMovableDirections() {
-        if (isWhite()) {
-            return Direction.whitePawnDirection();
-        }
-        return Direction.blackPawnDirection();
-    }
-
 
 
     @Override
     public char getSymbol() {
-        if(color==Color.WHITE){
-            return 'p';
-        }
-        else{
-            return 'P';
-        }
+        return isWhite() ? 'k' : 'K';
     }
 
     @Override
     public double getPoint() {
-        return 1.0;
+        return 0.0;
+    }
+
+    private List<Direction> getMovableDirections(){
+        return Direction.everyDirection();
     }
 
     @Override
     public boolean canMove(Position target) {
-        isWithinBoard(target);
+        if (!isWithinBoard(target)) {
+            return false;
+        }
+
         int dx = target.xPos() - currentPosition.xPos();
         int dy = target.yPos() - currentPosition.yPos();
 
@@ -56,4 +50,5 @@ public class Pawn extends Piece{
         int y = position.yPos();
         return x >= 0 && x < 8 && y >= 0 && y < 8;
     }
+
 }

@@ -6,40 +6,28 @@ import chess.record.Position;
 
 import java.util.List;
 
-public class Pawn extends Piece{
+public class Knight extends Piece {
 
-
-    public Pawn(Color color){
+    public Knight(Color color) {
         super(color);
     }
 
-    public List<Direction> getMovableDirections() {
-        if (isWhite()) {
-            return Direction.whitePawnDirection();
-        }
-        return Direction.blackPawnDirection();
+    private List<Direction> getMovableDirections() {
+        return Direction.knightDirection(); // L자 이동 가능
     }
-
-
 
     @Override
     public char getSymbol() {
-        if(color==Color.WHITE){
-            return 'p';
-        }
-        else{
-            return 'P';
-        }
+        return isWhite() ? 'n' : 'N';
     }
 
     @Override
     public double getPoint() {
-        return 1.0;
+        return 2.5;
     }
 
     @Override
     public boolean canMove(Position target) {
-        isWithinBoard(target);
         int dx = target.xPos() - currentPosition.xPos();
         int dy = target.yPos() - currentPosition.yPos();
 
@@ -49,11 +37,5 @@ public class Pawn extends Piece{
             }
         }
         return false;
-    }
-
-    private boolean isWithinBoard(Position position) {
-        int x = position.xPos();
-        int y = position.yPos();
-        return x >= 0 && x < 8 && y >= 0 && y < 8;
     }
 }
