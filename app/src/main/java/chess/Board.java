@@ -42,12 +42,19 @@ public class Board {
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for (int rank = 0; rank < RANK_SIZE; rank++) {
-            sb.append(StringUtils.appendNewLine(board.get(rank).toString()));
+        for (int rank = RANK_SIZE; rank >= 1; rank--) {
+            sb.append(StringUtils.appendNewLine(board.get(rank-1).toString()));
         }
         return sb.toString();
     }
 
+    public Piece findPiece(String coordinate) {
+        int xPos = coordinate.charAt(0) - 'a';
+        int yPos = Character.getNumericValue(coordinate.charAt(1)-1) ;
+
+        return board.get(yPos).getPiece(xPos);
+    }
+    
     private void initializeBoard() {
 
         board.add(new Rank(createInitialOneRank()));
@@ -60,7 +67,6 @@ public class Board {
         board.add(new Rank(createInitialSevenRank()));
         board.add(new Rank(createInitialEightRank()));
     }
-
 
     private List<Piece> createInitialSevenRank() {
         List<Piece> initialSevenRank = new ArrayList<>();
@@ -80,7 +86,7 @@ public class Board {
     private List<Piece> createInitialTwoRank() {
         List<Piece> initialTwoRank = new ArrayList<>();
         for (int file = 0; file < FILE_SIZE; file++) {
-            initialTwoRank.add(pieces.get(24 + file));
+            initialTwoRank.add(pieces.get(24+file));
         }
         return initialTwoRank;
     }
@@ -134,32 +140,9 @@ public class Board {
         pieces.add(piece);
     }
 
-
-//    public Piece findPiece(String coordinate) {
-//
-//    }
-
-    private void validateFileSize(int size) {
-        if (size > FILE_SIZE) {
-            throw new IllegalStateException("사이즈는 "+FILE_SIZE +"를 넘을 수 없습니다. 현재 사이즈: " + size);
-        }
-    }
-    private void validateRankSize(int size) {
-        if (size > RANK_SIZE) {
-            throw new IllegalStateException("사이즈는 "+FILE_SIZE +"를 넘을 수 없습니다. 현재 사이즈: " + size);
-        }
-    }
-
-
     private void validatePieceSize() {
         if (pieces.size() > MAX_PIECE_SIZE) {
             throw new IllegalStateException("폰은 " + MAX_PIECE_SIZE + "개를 초과할 수 없습니다.");
-        }
-    }
-
-    private void validateIndex(int index) {
-        if(MIN_PIECE_INDEX> index || index > MAX_PIECE_INDEX){
-            throw new IllegalStateException(index + "번의 폰은 없습니다. " + MIN_PIECE_INDEX + "부터 " + MAX_PIECE_INDEX + " 중 골라주세요.");
         }
     }
 }
