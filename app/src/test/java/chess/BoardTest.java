@@ -97,13 +97,39 @@ public class BoardTest {
     public void invalidCoordinate() throws Exception {
         board.initialize();
 
-        assertThatThrownBy(() -> board.findPiece("z9"))
+        assertThatThrownBy(() -> board.findPiece("z9")) // x,y 유효하지 않은 값
                 .isInstanceOf(IllegalStateException.class);
 
-        assertThatThrownBy(() -> board.findPiece("a0"))
+        assertThatThrownBy(() -> board.findPiece("a0")) // y 유효하지 않은 값
                 .isInstanceOf(IllegalStateException.class);
 
-        assertThatThrownBy(() -> board.findPiece("z5"))
+        assertThatThrownBy(() -> board.findPiece("z5")) // x 유효하지 않은 값
                 .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    @DisplayName("흑/백 점수 계산 테스트")
+    public void calculatePoint() throws Exception {
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        // offset으로 부동소수점 오차 방지
+        assertThat(board.calculatePoint(BLACK)).isCloseTo(15.0, offset(0.01));
+        assertThat(board.calculatePoint(WHITE)).isCloseTo(7.0, offset(0.01));
+
+        System.out.println(board.showBoard());
+    }
+
+    private void addPiece(String position, Piece piece) {
+        board.move(position, piece);
     }
 }
