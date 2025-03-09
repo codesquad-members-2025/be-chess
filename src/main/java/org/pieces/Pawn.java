@@ -29,7 +29,7 @@ public class Pawn extends Piece{
             int rankDegree = direction.getRankDegree();
             Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree,rankDegree);
             // 공격은 다른 색일 때만 가능
-            if(movedCoordinate.isCoordinateOnBoard() && board.findPiece(movedCoordinate).getColor() != getColor()) coordinateSet.add(movedCoordinate);
+            if(movedCoordinate.isCoordinateOnBoard() && board.findPiece(movedCoordinate).getType() != Type.NO_PIECE && board.findPiece(movedCoordinate).getColor() != getColor()) coordinateSet.add(movedCoordinate);
         }
 
         return coordinateSet.contains(targetPosition);

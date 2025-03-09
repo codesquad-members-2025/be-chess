@@ -146,6 +146,41 @@ public class BoardTest {
         System.out.println(boardStatus.showBoard());
     }
 
+    @Test
+    @DisplayName("Game이 각 기물의 이동 법칙에 맞게 움직일 수 있다.")
+    void Game의Move확인() throws Exception {
+        board.initialize();
+        Game game = new Game(board);
+        Piece blackPawn = board.findPiece(new Coordinate(3,1));
+        Piece blackQueen = board.findPiece(new Coordinate(3,0));
+
+        // 폰 두칸전진
+        game.move("d2","d3");
+        game.move("d3","d4");
+        // 퀸 이동
+        game.move("d1","d3");
+        game.move("d3","a6");
+
+        //이동 안함
+        game.move("a6","a8");
+
+        // 이동함
+        game.move("a6","a7");
+        game.move("a7","a4");
+
+        //이동 안함
+        game.move("a4","a2");
+
+        //d4는 폰, a7은 빈칸, a4는 퀸, a2는 폰이어야함.
+        assertThat(board.findPiece(new Coordinate(3,3)).getType()).isEqualTo(Piece.Type.PAWN);
+        assertThat(board.findPiece(new Coordinate(0,6)).getType()).isEqualTo(Piece.Type.NO_PIECE);
+        assertThat(board.findPiece(new Coordinate(0,3)).getType()).isEqualTo(Piece.Type.QUEEN);
+        assertThat(board.findPiece(new Coordinate(0,1)).getType()).isEqualTo(Piece.Type.PAWN);
+
+        System.out.println(boardStatus.showBoard());
+        System.out.println(board.findPiece(new Coordinate(3,2)).getType());
+    }
+
     private void addPiece(String position, Piece piece) {
         board.putPiece(new Coordinate(position), piece);
     }

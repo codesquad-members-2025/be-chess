@@ -18,7 +18,7 @@ public class Game {
         Piece source = board.findPiece(sourceCoordinate);
         // 그 기물이 이동할 수 없음!
         if (!source.verifyMovePosition(board,sourceCoordinate,targetCoordinate)) {
-            System.out.println("이동할 수 없습니다.");
+            System.out.println(targetPosition+"으로 이동할 수 없습니다.");
             return;
         }
         // 이동 가능하면 이동!

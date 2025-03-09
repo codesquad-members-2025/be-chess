@@ -23,7 +23,7 @@ public class Bishop extends Piece{
                 if(!movedCoordinate.isCoordinateOnBoard() || board.findPiece(movedCoordinate).getColor() == getColor()) break;
                 coordinateSet.add(movedCoordinate);
                 // 만약 이동하려는 지점이 다른색의 기물이면 추가는 하지만 멈춤
-                if(board.findPiece(movedCoordinate).getColor() != getColor()) break;
+                if(board.findPiece(movedCoordinate).getType() != Type.NO_PIECE && board.findPiece(movedCoordinate).getColor() != getColor()) break;
             }
         }
         return coordinateSet.contains(targetPosition);
