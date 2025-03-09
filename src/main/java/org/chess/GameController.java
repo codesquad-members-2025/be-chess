@@ -16,9 +16,9 @@ public class GameController {
         Coordinate targetCoordinate = new Coordinate(targetPosition);
 
         Piece source = board.findPiece(sourceCoordinate);
-        // 그 기물의 이동범위가 아님!
+        // 그 기물이 이동할 수 없음!
         if (!source.verifyMovePosition(board,sourceCoordinate,targetCoordinate)) {
-            System.out.println("이동 범위가 아닙니다.");
+            System.out.println("이동할 수 없습니다.");
             return;
         }
         // 이동 가능하면 이동!
