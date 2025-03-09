@@ -189,8 +189,8 @@ public class BoardTest {
         sortedWhitePieces.add(Piece.createWhitePawn());
         sortedWhitePieces.add(Piece.createBlackKing());
 
-        assertThat(board.getSortedBlackPiecesByPoint()).isEqualTo(sortedBlackPieces);
-        assertThat(board.getSortedWhitePiecesByPoint()).isEqualTo(sortedWhitePieces);
+        assertThat(board.getSortedPiecesByPoint(BLACK)).isEqualTo(sortedBlackPieces);
+        assertThat(board.getSortedPiecesByPoint(WHITE)).isEqualTo(sortedWhitePieces);
 
         List<Piece> sortedBlackPiecesReversed = new ArrayList<>();
         sortedBlackPiecesReversed.add(Piece.createBlackKing());
@@ -204,11 +204,8 @@ public class BoardTest {
         sortedWhitePiecesReversed.add(Piece.createWhitePawn());
         sortedWhitePiecesReversed.add(Piece.createWhiteRook());
 
-        assertThat(board.getSortedBlackPiecesByPointReversed()).isEqualTo(sortedBlackPiecesReversed);
-        assertThat(board.getSortedWhitePiecesByPointReversed()).isEqualTo(sortedWhitePiecesReversed);
-
-
-
+        assertThat(board.getSortedPiecesByPointReversed(BLACK)).isEqualTo(sortedBlackPiecesReversed);
+        assertThat(board.getSortedPiecesByPointReversed(WHITE)).isEqualTo(sortedWhitePiecesReversed);
     }
 
     private void addPiece(String position, Piece piece) {
