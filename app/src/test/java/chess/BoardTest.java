@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static chess.pieces.Piece.Color.*;
 import static chess.pieces.Piece.Type.*;
 import static chess.utils.StringUtils.appendNewLine;
@@ -156,6 +159,56 @@ public class BoardTest {
         assertThat(board.calculatePoint(WHITE)).isCloseTo(19.5, offset(0.01));
 
         System.out.println(board.showBoard());
+    }
+
+    @Test
+    @DisplayName("기물의 점수가 높은 순으로 정렬 테스트")
+    public void sortPieceByPoint() {
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+
+        List<Piece> sortedBlackPieces = new ArrayList<>();
+        sortedBlackPieces.add(Piece.createBlackQueen());
+        sortedBlackPieces.add(Piece.createBlackRook());
+        sortedBlackPieces.add(Piece.createBlackPawn());
+        sortedBlackPieces.add(Piece.createBlackKing());
+
+        List<Piece> sortedWhitePieces = new ArrayList<>();
+        sortedWhitePieces.add(Piece.createWhiteRook());
+        sortedWhitePieces.add(Piece.createWhitePawn());
+        sortedWhitePieces.add(Piece.createWhitePawn());
+        sortedWhitePieces.add(Piece.createBlackKing());
+
+        assertThat(board.getSortedBlackPiecesByPoint()).isEqualTo(sortedBlackPieces);
+        assertThat(board.getSortedWhitePiecesByPoint()).isEqualTo(sortedWhitePieces);
+
+        List<Piece> sortedBlackPiecesReversed = new ArrayList<>();
+        sortedBlackPiecesReversed.add(Piece.createBlackKing());
+        sortedBlackPiecesReversed.add(Piece.createBlackPawn());
+        sortedBlackPiecesReversed.add(Piece.createBlackRook());
+        sortedBlackPiecesReversed.add(Piece.createBlackQueen());
+
+        List<Piece> sortedWhitePiecesReversed = new ArrayList<>();
+        sortedWhitePiecesReversed.add(Piece.createBlackKing());
+        sortedWhitePiecesReversed.add(Piece.createWhitePawn());
+        sortedWhitePiecesReversed.add(Piece.createWhitePawn());
+        sortedWhitePiecesReversed.add(Piece.createWhiteRook());
+
+        assertThat(board.getSortedBlackPiecesByPointReversed()).isEqualTo(sortedBlackPiecesReversed);
+        assertThat(board.getSortedWhitePiecesByPointReversed()).isEqualTo(sortedWhitePiecesReversed);
+
+
+
     }
 
     private void addPiece(String position, Piece piece) {
