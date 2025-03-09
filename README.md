@@ -35,3 +35,11 @@ Coordinate 클래스에서는 좌표를 받은 후, 유효한 좌표인지 확�
 Piece 클래스의 Type에서 관리하는 point로 점수 계산하는 메서드 구현함.  
 기물의 점수가 높고 낮은 순으로 정렬하기 위해 Piece 클래스에 Comparable 인터페이스 구현함.  
 또한 보드의 기물들을 가져와서 리스트로 만드는 메서드도 구현함.  
+
+## Feature 6
+Board 클래스에 move 메서드를 추가해 이제 기물을 움직일 수 있게 되었다.  
+main 메서드에서 입력받아 move 할 수 있도록 했다.  
+Board 클래스를 Board,Game,BoardStatus로 나누어 관리하기 시작했다.  
+각 기물들의 클래스를 만들고 Piece를 상속하게 했다.  
+각 기물들은 verifyMovePosition을 Override 하여 각 기물만의 이동범위를 나타낸다.  
+각 기물 클래스에 대한 테스트 클래스를 추가했다.
