@@ -79,13 +79,14 @@ public class BoardTest {
 
         assertThat(piece).isEqualTo(board.findPiece(position));
 
-        assertThat(blank).isEqualTo(board.findPiece("b1"));
-        assertThat(blank).isEqualTo(board.findPiece("b2"));
-        assertThat(blank).isEqualTo(board.findPiece("b3"));
-        assertThat(blank).isEqualTo(board.findPiece("b4"));
-        assertThat(blank).isEqualTo(board.findPiece("b6"));
-        assertThat(blank).isEqualTo(board.findPiece("b7"));
-        assertThat(blank).isEqualTo(board.findPiece("b8"));
+        assertThat(blank)
+                .isEqualTo(board.findPiece("b1"))
+                .isEqualTo(board.findPiece("b2"))
+                .isEqualTo(board.findPiece("b3"))
+                .isEqualTo(board.findPiece("b4"))
+                .isEqualTo(board.findPiece("b6"))
+                .isEqualTo(board.findPiece("b7"))
+                .isEqualTo(board.findPiece("b8"));
 
         System.out.println(board.showBoard());
     }
