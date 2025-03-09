@@ -91,12 +91,18 @@ public abstract class Piece implements Comparable<Piece>{
             return Arrays.asList(NNE, NNW, SSE, SSW, EEN, EES, WWN, WWS);
         }
 
-        public static List<Direction> whitePawnDirection() {
-            return Arrays.asList(NORTH, NORTHEAST, NORTHWEST);
+        public static List<Direction> whitePawnMoveDirection() {
+            return Arrays.asList(NORTH);
+        }
+        public static List<Direction> whitePawnAttackDirection() {
+            return Arrays.asList(NORTHEAST, NORTHWEST);
         }
 
-        public static List<Direction> blackPawnDirection() {
-            return Arrays.asList(SOUTH, SOUTHEAST, SOUTHWEST);
+        public static List<Direction> blackPawnMoveDirection() {
+            return Arrays.asList(SOUTH);
+        }
+        public static List<Direction> blackPawnAttackDirection() {
+            return Arrays.asList(SOUTHEAST, SOUTHWEST);
         }
     }
 
