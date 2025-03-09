@@ -54,7 +54,7 @@ public class Board {
 
         return board.get(yPos).getPiece(xPos);
     }
-    
+
     private void initializeBoard() {
 
         board.add(new Rank(createInitialOneRank()));
