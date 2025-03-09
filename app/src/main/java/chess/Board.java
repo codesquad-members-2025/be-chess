@@ -30,6 +30,15 @@ public class Board {
         }
     }
 
+    public void move(String position, Piece piece) {
+        int xPos = position.charAt(0) - 'a';
+        int yPos = Character.getNumericValue(position.charAt(1)-1) ;
+
+        Rank rank = board.get(yPos);
+        Rank updatedRank = rank.updatePiece(xPos, piece);
+        board.set(yPos, updatedRank);
+    }
+
     public int pieceCount() {
         return pieces.size();
     }
@@ -55,9 +64,9 @@ public class Board {
         return sb.toString();
     }
 
-    public Piece findPiece(String coordinate) {
-        int xPos = coordinate.charAt(0) - 'a';
-        int yPos = Character.getNumericValue(coordinate.charAt(1)-1) ;
+    public Piece findPiece(String position) {
+        int xPos = position.charAt(0) - 'a';
+        int yPos = Character.getNumericValue(position.charAt(1)-1) ;
 
         return board.get(yPos).getPiece(xPos);
     }
