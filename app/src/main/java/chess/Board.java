@@ -23,7 +23,12 @@ public class Board {
         initializeBoard();
     }
 
-
+    public void initializeEmpty() {
+        Rank emptyRank = new Rank(createEmptyRank());
+        for (int rank = 0; rank < RANK_SIZE; rank++) {
+            board.add(emptyRank);
+        }
+    }
 
     public int pieceCount() {
         return pieces.size();
