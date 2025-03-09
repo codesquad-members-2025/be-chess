@@ -77,6 +77,18 @@ public class Board {
         }
     }
 
+    public Piece findPiece(Coordinate coordinate) {
+        int fileIndex = coordinate.getFileIndex();
+        int rankIndex = coordinate.getRankIndex();
+        return rankList.get(rankIndex).getPieceByFileIndex(fileIndex);
+    }
+
+    public void putPiece(Coordinate coordinate, Piece piece) {
+        int fileIndex = coordinate.getFileIndex();
+        int rankIndex = coordinate.getRankIndex();
+        rankList.get(rankIndex).putPieceByFileIndex(fileIndex, piece);
+    }
+
     public List<Rank> getRankList() {
         return rankList;
     }
