@@ -108,7 +108,7 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("흑/백 점수 계산 테스트")
+    @DisplayName("흑/백 점수 계산 테스트 - 같은 세로줄 폰 경우 X")
     public void calculatePoint() throws Exception {
         board.initializeEmpty();
 
@@ -125,6 +125,35 @@ public class BoardTest {
         // offset으로 부동소수점 오차 방지
         assertThat(board.calculatePoint(BLACK)).isCloseTo(15.0, offset(0.01));
         assertThat(board.calculatePoint(WHITE)).isCloseTo(7.0, offset(0.01));
+
+        System.out.println(board.showBoard());
+    }
+
+    @Test
+    @DisplayName("흑/백 점수 계산 테스트 - 같은 세로줄 폰 경우 O")
+    public void calculatePoint2() throws Exception {
+        board.initializeEmpty();
+
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+        addPiece("a7", Piece.createBlackPawn());
+        addPiece("c7", Piece.createBlackPawn());
+        addPiece("d7", Piece.createBlackBishop());
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+
+        addPiece("f4", Piece.createWhiteKnight());
+        addPiece("g4", Piece.createWhiteQueen());
+        addPiece("f3", Piece.createWhitePawn());
+        addPiece("h3", Piece.createWhitePawn());
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        // offset으로 부동소수점 오차 방지
+        assertThat(board.calculatePoint(BLACK)).isCloseTo(20.0, offset(0.01));
+        assertThat(board.calculatePoint(WHITE)).isCloseTo(19.5, offset(0.01));
 
         System.out.println(board.showBoard());
     }
