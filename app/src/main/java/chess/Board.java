@@ -9,14 +9,11 @@ import java.util.List;
 import static chess.pieces.Piece.*;
 
 public class Board {
-    private static final int MIN_PIECE_INDEX = 0;
-    private static final int MAX_PIECE_INDEX = 31;
     private static final int MAX_PIECE_SIZE = 32;
     private static final int FILE_SIZE = 8;
     public static final int RANK_SIZE = 8;
     private final List<Piece> pieces = new ArrayList<>();
     private final List<Rank> board = new ArrayList<>();
-
 
     public void initialize() {
         addPieces();
@@ -68,6 +65,7 @@ public class Board {
         Position pos = new Position(position);
         return board.get(pos.getY()).getPiece(pos.getX());
     }
+
 
     private void initializeBoard() {
 
@@ -159,5 +157,19 @@ public class Board {
         if (pieces.size() > MAX_PIECE_SIZE) {
             throw new IllegalStateException("폰은 " + MAX_PIECE_SIZE + "개를 초과할 수 없습니다.");
         }
+    }
+
+
+    public double calculatePoint(Color color) {
+        double point = 0.0;
+        for (Rank rank : board) {
+            for (int file = 0; file < FILE_SIZE; file++) {
+                Piece piece = rank.getPiece(file);
+                if (piece.getColor().equals(color)) {
+                    point += piece.getType().getDefaultPoint();
+                }
+            }
+        }
+        return point;
     }
 }
