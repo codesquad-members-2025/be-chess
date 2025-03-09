@@ -26,10 +26,10 @@ public class BoardTest {
         String blankRank = appendNewLine("........");
         assertThat(board.showBoard()).isEqualTo(
                 appendNewLine("RNBQKBNR") +
-                appendNewLine("PPPPPPPP") +
-                blankRank + blankRank + blankRank + blankRank +
-                appendNewLine("pppppppp") +
-                appendNewLine("rnbqkbnr"));
+                        appendNewLine("PPPPPPPP") +
+                        blankRank + blankRank + blankRank + blankRank +
+                        appendNewLine("pppppppp") +
+                        appendNewLine("rnbqkbnr"));
     }
 
     @Test
@@ -64,5 +64,29 @@ public class BoardTest {
         assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlackRook());
         assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhiteRook());
         assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhiteRook());
+    }
+    @Test
+    @DisplayName("기물 이동 테스트")
+    public void move() throws Exception {
+        board.initializeEmpty();
+        System.out.println(board.showBoard());
+
+        String position = "b5";
+        Piece piece = Piece.createBlackRook();
+        board.move(position, piece);
+
+        Piece blank = Piece.createBlank();
+
+        assertThat(piece).isEqualTo(board.findPiece(position));
+
+        assertThat(blank).isEqualTo(board.findPiece("b1"));
+        assertThat(blank).isEqualTo(board.findPiece("b2"));
+        assertThat(blank).isEqualTo(board.findPiece("b3"));
+        assertThat(blank).isEqualTo(board.findPiece("b4"));
+        assertThat(blank).isEqualTo(board.findPiece("b6"));
+        assertThat(blank).isEqualTo(board.findPiece("b7"));
+        assertThat(blank).isEqualTo(board.findPiece("b8"));
+
+        System.out.println(board.showBoard());
     }
 }
