@@ -77,7 +77,6 @@ public class Piece {
         return this.type;
     }
 
-
     public enum Color {
         WHITE, BLACK, NOCOLOR;
     }

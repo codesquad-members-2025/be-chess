@@ -28,3 +28,8 @@ replay_pid*
 
 # Ignore Gradle build output directory
 build
+
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
