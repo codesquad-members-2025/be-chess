@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class PlayGame {
     public static Board board = new Board();
-    public static BoardStatus boardStatus = new BoardStatus(board);
+    public static ChessView chessView = new ChessView(board);
     public static Game game = new Game(board);
 
     public static void main(String[] args) {
@@ -13,13 +13,13 @@ public class PlayGame {
             String input = sc.nextLine();
             if(input.equals("start")){
                 board.initialize();
-                System.out.println(boardStatus.showBoard());
+                System.out.println(chessView.showBoard());
             } else if (input.equals("end")) {
                 break;
             } else if (input.startsWith("move")) {
                 String[] moveCommand = input.split(" ");
                 game.move(moveCommand[1], moveCommand[2]);
-                System.out.println(boardStatus.showBoard());
+                System.out.println(chessView.showBoard());
             }
         }
     }

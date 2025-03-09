@@ -11,13 +11,13 @@ import static org.utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     Board board;
-    BoardStatus boardStatus;
+    ChessView chessView;
     Game game;
 
     @BeforeEach
     void setUp() {
         board = new Board();
-        boardStatus = new BoardStatus(board);
+        chessView = new ChessView(board);
         game = new Game(board);
     }
 
@@ -37,9 +37,9 @@ public class BoardTest {
     @DisplayName("체스 보드 생성 테스트")
     void create() throws Exception {
         board.initialize();
-        assertThat(boardStatus.pieceCount()).isEqualTo(32);
+        assertThat(game.pieceCount()).isEqualTo(32);
         String blankRank = appendNewLine("........");
-        assertThat(boardStatus.showBoard())
+        assertThat(chessView.showBoard())
                 .isEqualTo(appendNewLine("RNBQKBNR") +
                         appendNewLine("PPPPPPPP") +
                         blankRank + blankRank + blankRank + blankRank +
@@ -57,7 +57,7 @@ public class BoardTest {
         board.putPiece(new Coordinate(position), piece);
 
         assertThat(board.findPiece(new Coordinate(position))).isEqualTo(piece);
-        System.out.println(boardStatus.showBoard());
+        System.out.println(chessView.showBoard());
     }
 
     @Test
@@ -95,9 +95,9 @@ public class BoardTest {
         addPiece("e1", Piece.createWhiteRook());
         addPiece("f1", Piece.createWhiteKing());
 
-        assertThat(boardStatus.calculatePoint(Piece.Color.BLACK)).isCloseTo(15.0, within(0.01));
-        assertThat(boardStatus.calculatePoint(Piece.Color.WHITE)).isCloseTo(7.0, within(0.01));
-        System.out.println(boardStatus.showBoard());
+        assertThat(game.calculatePoint(Piece.Color.BLACK)).isCloseTo(15.0, within(0.01));
+        assertThat(game.calculatePoint(Piece.Color.WHITE)).isCloseTo(7.0, within(0.01));
+        System.out.println(chessView.showBoard());
     }
 
     @Test
@@ -122,9 +122,9 @@ public class BoardTest {
         addPiece("e1", Piece.createWhiteRook());
         addPiece("f1", Piece.createWhiteKing());
 
-        assertThat(boardStatus.calculatePoint(Piece.Color.BLACK)).isCloseTo(20.0, within(0.01));
-        assertThat(boardStatus.calculatePoint(Piece.Color.WHITE)).isCloseTo(19.5, within(0.01));
-        System.out.println(boardStatus.showBoard());
+        assertThat(game.calculatePoint(Piece.Color.BLACK)).isCloseTo(20.0, within(0.01));
+        assertThat(game.calculatePoint(Piece.Color.WHITE)).isCloseTo(19.5, within(0.01));
+        System.out.println(chessView.showBoard());
     }
 
     @Test
@@ -141,9 +141,9 @@ public class BoardTest {
         addPiece("b6", piece1);
         addPiece("a7", piece3);
 
-        assertThat(boardStatus.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<>(List.of(piece1,piece2,piece3,piece4)));
-        assertThat(boardStatus.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<>(List.of(piece4,piece3,piece2,piece1)));
-        System.out.println(boardStatus.showBoard());
+        assertThat(game.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<>(List.of(piece1,piece2,piece3,piece4)));
+        assertThat(game.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<>(List.of(piece4,piece3,piece2,piece1)));
+        System.out.println(chessView.showBoard());
     }
 
     @Test
@@ -177,7 +177,7 @@ public class BoardTest {
         assertThat(board.findPiece(new Coordinate(0,3)).getType()).isEqualTo(Piece.Type.QUEEN);
         assertThat(board.findPiece(new Coordinate(0,1)).getType()).isEqualTo(Piece.Type.PAWN);
 
-        System.out.println(boardStatus.showBoard());
+        System.out.println(chessView.showBoard());
         System.out.println(board.findPiece(new Coordinate(3,2)).getType());
     }
 

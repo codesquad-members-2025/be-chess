@@ -2,6 +2,8 @@ package org.chess;
 
 import org.pieces.Piece;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Game {
@@ -27,4 +29,60 @@ public class Game {
         // 원래 자리에 blank 추가
         board.putPiece(sourceCoordinate, Piece.createBlank());
     }
+
+    public int pieceCount() {
+        int count = 0;
+        for (Rank rank : rankList()) {
+            count += rank.getTotalPieceCount();
+        }
+        return count;
+    }
+
+    public int getPieceCount(Piece.Color color, Piece.Type type) {
+        int count = 0;
+        for (Rank rank : rankList()) {
+            count += rank.getPieceCount(color, type);
+        }
+        return count;
+    }
+
+    public double calculatePoint(Piece.Color color) {
+        int[] pawnLocation = {0, 0, 0, 0, 0, 0, 0, 0};
+        double point = 0.0;
+        for (Rank rank : rankList()) {
+            for (int i = 0; i < 8; i++) {
+                Piece piece = rank.getPieceByFileIndex(i);
+                if (piece.getColor() == color) point += piece.getPoint();
+                // 폰이 같은 열에 있으면 감점되기 때문에 폰의 위치만 따로 관리
+                if (piece.getColor() == color && piece.getType() == Piece.Type.PAWN) pawnLocation[i] += 1;
+            }
+        }
+        for (int pawnCount : pawnLocation) {
+            if (pawnCount > 1) point -= (double) pawnCount / 2;
+        }
+        return point;
+    }
+
+    private List<Piece> makePieceList(Piece.Color color) {
+        List<Piece> sameColorPieces = new ArrayList<>();
+        for (Rank rank : rankList()) {
+            for (int i = 0; i < 8; i++) {
+                Piece piece = rank.getPieceByFileIndex(i);
+                if (piece.getColor() == color) sameColorPieces.add(piece);
+            }
+        }
+        return sameColorPieces;
+    }
+
+    public List<Piece> makeAndSortPieceList(Piece.Color color, boolean isAscending) {
+        List<Piece> sortedPieceList = makePieceList(color);
+        Collections.sort(sortedPieceList);
+        if (!isAscending) Collections.reverse(sortedPieceList);
+        return sortedPieceList;
+    }
+
+    private List<Rank> rankList(){
+        return board.getRankList();
+    }
+
 }
