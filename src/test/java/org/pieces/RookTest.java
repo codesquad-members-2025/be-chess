@@ -44,10 +44,12 @@ public class RookTest {
     @Test
     @DisplayName("룩이 같은 팀으로 이동할 수 없는지 확인")
     void test_rook_same_team_move() throws Exception {
-        board.putPiece(new Coordinate("e5"), Piece.createWhitePawn());
         // f5에 같은 색이 있다면 f5로 못가야 한다.
         Coordinate targetP1 = new Coordinate("e5");
         Coordinate targetP2 = new Coordinate("e6");
+
+        board.putPiece(targetP1, Piece.createWhitePawn());
+
         assertThat(rook.verifyMovePosition(board, source, targetP1)).isFalse();
         assertThat(rook.verifyMovePosition(board, source, targetP2)).isFalse();
     }
@@ -55,11 +57,13 @@ public class RookTest {
     @Test
     @DisplayName("룩이 다른 팀으로 이동할 수 있는지 확인")
     void test_rook_opposite_team_move() throws Exception {
-        board.putPiece(new Coordinate("e5"), Piece.createBlackPawn());
         // f5에 다른 색이 있다면 f5로 갈 수 있어야 한다.
         // f6은 못가야 한다.
         Coordinate targetP1 = new Coordinate("e5");
         Coordinate targetP2 = new Coordinate("e6");
+
+        board.putPiece(targetP1, Piece.createBlackPawn());
+
         assertThat(rook.verifyMovePosition(board, source, targetP1)).isTrue();
         assertThat(rook.verifyMovePosition(board, source, targetP2)).isFalse();
     }

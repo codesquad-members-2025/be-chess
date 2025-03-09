@@ -13,6 +13,7 @@ public class KnightTest {
     Board board;
     Game game;
     Piece knight;
+    Coordinate source;
 
     @BeforeEach
     void setUp() {
@@ -20,7 +21,8 @@ public class KnightTest {
         game = new Game(board);
         board.initializeEmpty();
         knight = Piece.createWhiteKnight();
-        board.putPiece(new Coordinate("e4"), knight);
+        source = new Coordinate("e4");
+        board.putPiece(source, knight);
     }
 
     @ParameterizedTest(name = "Knight can move from e4 to {0}")
@@ -28,32 +30,34 @@ public class KnightTest {
     @DisplayName("나이트가 모든 방향으로 이동할 수 있는지 확인")
     void test_knight_valid_move(String targetCoordinateStr) throws Exception {
         Coordinate target = new Coordinate(targetCoordinateStr);
-        assertThat(knight.verifyMovePosition(board, new Coordinate("e4"), target)).isTrue();
+        assertThat(knight.verifyMovePosition(board, source, target)).isTrue();
     }
 
     @ParameterizedTest(name = "Knight can't move from e4 to {0}")
     @ValueSource(strings = {"e4", "e5", "e3", "e2", "e1", "e6", "e7", "e8", "f4", "g4", "d4", "c4", "b4", "a4"})
     @DisplayName("나이트가 이동할 수 없는 곳으로 이동할 수 없는지 확인")
-    void test_queen_valid_move(String targetCoordinateStr) throws Exception {
+    void test_knight_invalid_move(String targetCoordinateStr) throws Exception {
         Coordinate target = new Coordinate(targetCoordinateStr);
-        assertThat(knight.verifyMovePosition(board, new Coordinate("e4"), target)).isFalse();
+        assertThat(knight.verifyMovePosition(board, source, target)).isFalse();
     }
 
     @Test
     @DisplayName("knight 같은 팀으로 이동할 수 없는지 확인")
     void test_knight_same_team_move() throws Exception {
-        board.putPiece(new Coordinate("f6"), Piece.createWhitePawn());
-
         Coordinate targetP = new Coordinate("f6");
-        assertThat(knight.verifyMovePosition(board, new Coordinate("e4"), targetP)).isFalse();
+
+        board.putPiece(targetP, Piece.createWhitePawn());
+
+        assertThat(knight.verifyMovePosition(board, source, targetP)).isFalse();
     }
 
     @Test
     @DisplayName("knight 다른 팀으로 이동할 수 있는지 확인")
     void test_knight_other_team_move() throws Exception {
-        board.putPiece(new Coordinate("f6"), Piece.createBlackPawn());
-
         Coordinate targetP = new Coordinate("f6");
-        assertThat(knight.verifyMovePosition(board, new Coordinate("e4"), targetP)).isTrue();
+
+        board.putPiece(targetP, Piece.createBlackPawn());
+
+        assertThat(knight.verifyMovePosition(board, source, targetP)).isTrue();
     }
 }

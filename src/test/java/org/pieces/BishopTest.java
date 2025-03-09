@@ -13,6 +13,7 @@ public class BishopTest {
     Board board;
     Game game;
     Piece bishop;
+    Coordinate source;
 
     @BeforeEach
     void setUp() {
@@ -20,7 +21,8 @@ public class BishopTest {
         game = new Game(board);
         board.initializeEmpty();
         bishop = Piece.createWhiteBishop();
-        board.putPiece(new Coordinate("e4"), bishop);
+        source = new Coordinate("e4");
+        board.putPiece(source, bishop);
     }
 
     @ParameterizedTest(name = "Bishop can move from e4 to {0}")
@@ -28,7 +30,7 @@ public class BishopTest {
     @DisplayName("비숍이 대각선 방향으로 이동할 수 있는지 확인")
     void test_bishop_valid_move(String targetCoordinateStr) throws Exception {
         Coordinate target = new Coordinate(targetCoordinateStr);
-        assertThat(bishop.verifyMovePosition(board, new Coordinate("e4"), target)).isTrue();
+        assertThat(bishop.verifyMovePosition(board, source, target)).isTrue();
     }
 
     @ParameterizedTest(name = "Bishop can't move from e4 to {0}")
@@ -36,29 +38,33 @@ public class BishopTest {
     @DisplayName("비숍이 이동할 수 없는 곳은 이동할 수 없는지 확인")
     void test_bishop_invalid_move(String targetCoordinateStr) throws Exception {
         Coordinate target = new Coordinate(targetCoordinateStr);
-        assertThat(bishop.verifyMovePosition(board, new Coordinate("e4"), target)).isFalse();
+        assertThat(bishop.verifyMovePosition(board, source, target)).isFalse();
     }
 
     @Test
     @DisplayName("비숍이 같은 팀으로 이동할 수 없는지 확인")
     void test_bishop_same_team_move() throws Exception {
-        board.putPiece(new Coordinate("f5"), Piece.createWhitePawn());
         // f5에 같은 색이 있다면 f5로 못가야 한다.
         Coordinate targetP1 = new Coordinate("f5");
         Coordinate targetP2 = new Coordinate("f6");
-        assertThat(bishop.verifyMovePosition(board, new Coordinate("e4"), targetP1)).isFalse();
-        assertThat(bishop.verifyMovePosition(board, new Coordinate("e4"), targetP2)).isFalse();
+
+        board.putPiece(targetP1, Piece.createWhitePawn());
+
+        assertThat(bishop.verifyMovePosition(board, source, targetP1)).isFalse();
+        assertThat(bishop.verifyMovePosition(board, source, targetP2)).isFalse();
     }
 
     @Test
     @DisplayName("비숍이 다른 팀으로 이동할 수 있는지 확인")
     void test_bishop_opposite_team_move() throws Exception {
-        board.putPiece(new Coordinate("f5"), Piece.createBlackPawn());
         // f5에 다른 색이 있다면 f5로 갈 수 있어야 한다.
         // f6은 못가야 한다.
         Coordinate targetP1 = new Coordinate("f5");
         Coordinate targetP2 = new Coordinate("f6");
-        assertThat(bishop.verifyMovePosition(board, new Coordinate("e4"), targetP1)).isTrue();
-        assertThat(bishop.verifyMovePosition(board, new Coordinate("e4"), targetP2)).isFalse();
+
+        board.putPiece(targetP1, Piece.createBlackPawn());
+
+        assertThat(bishop.verifyMovePosition(board, source, targetP1)).isTrue();
+        assertThat(bishop.verifyMovePosition(board, source, targetP2)).isFalse();
     }
 }
