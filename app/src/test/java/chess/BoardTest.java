@@ -176,36 +176,25 @@ public class BoardTest {
         addPiece("e1", Piece.createWhiteRook());
         addPiece("f1", Piece.createWhiteKing());
 
-
         List<Piece> sortedBlackPieces = new ArrayList<>();
-        sortedBlackPieces.add(Piece.createBlackQueen());
-        sortedBlackPieces.add(Piece.createBlackRook());
-        sortedBlackPieces.add(Piece.createBlackPawn());
         sortedBlackPieces.add(Piece.createBlackKing());
+        sortedBlackPieces.add( Piece.createBlackPawn());
+        sortedBlackPieces.add(Piece.createBlackRook());
+        sortedBlackPieces.add(Piece.createBlackQueen());
 
         List<Piece> sortedWhitePieces = new ArrayList<>();
+        sortedWhitePieces.add(Piece.createWhiteKing());
+        sortedWhitePieces.add(Piece.createWhitePawn());
+        sortedWhitePieces.add(Piece.createWhitePawn());
         sortedWhitePieces.add(Piece.createWhiteRook());
-        sortedWhitePieces.add(Piece.createWhitePawn());
-        sortedWhitePieces.add(Piece.createWhitePawn());
-        sortedWhitePieces.add(Piece.createBlackKing());
 
+        // 오름차순
         assertThat(board.getSortedPiecesByPoint(BLACK)).isEqualTo(sortedBlackPieces);
         assertThat(board.getSortedPiecesByPoint(WHITE)).isEqualTo(sortedWhitePieces);
 
-        List<Piece> sortedBlackPiecesReversed = new ArrayList<>();
-        sortedBlackPiecesReversed.add(Piece.createBlackKing());
-        sortedBlackPiecesReversed.add(Piece.createBlackPawn());
-        sortedBlackPiecesReversed.add(Piece.createBlackRook());
-        sortedBlackPiecesReversed.add(Piece.createBlackQueen());
-
-        List<Piece> sortedWhitePiecesReversed = new ArrayList<>();
-        sortedWhitePiecesReversed.add(Piece.createBlackKing());
-        sortedWhitePiecesReversed.add(Piece.createWhitePawn());
-        sortedWhitePiecesReversed.add(Piece.createWhitePawn());
-        sortedWhitePiecesReversed.add(Piece.createWhiteRook());
-
-        assertThat(board.getSortedPiecesByPointReversed(BLACK)).isEqualTo(sortedBlackPiecesReversed);
-        assertThat(board.getSortedPiecesByPointReversed(WHITE)).isEqualTo(sortedWhitePiecesReversed);
+        // 내림차순
+        assertThat(board.getSortedPiecesByPointReversed(BLACK)).isEqualTo(sortedBlackPieces.reversed());
+        assertThat(board.getSortedPiecesByPointReversed(WHITE)).isEqualTo(sortedWhitePieces.reversed());
     }
 
     private void addPiece(String position, Piece piece) {
