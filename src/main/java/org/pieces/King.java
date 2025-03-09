@@ -17,7 +17,8 @@ public class King extends Piece{
             int fileDegree = direction.getFileDegree();
             int rankDegree = direction.getRankDegree();
             Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree,rankDegree);
-            if(movedCoordinate.isCoordinateOnBoard()) coordinateSet.add(movedCoordinate);
+            // 보드 위에 있으며 이동할 자리가 같은 색이 아닐때 이동 가능
+            if(movedCoordinate.isCoordinateOnBoard() && board.findPiece(movedCoordinate).getColor() != getColor()) coordinateSet.add(movedCoordinate);
         }
         return coordinateSet.contains(targetPosition);
     }
