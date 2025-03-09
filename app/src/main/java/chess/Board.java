@@ -3,10 +3,7 @@ package chess;
 import chess.pieces.Piece;
 import chess.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static chess.pieces.Piece.*;
 
@@ -184,5 +181,30 @@ public class Board {
             }
         }
         return point;
+    }
+
+    public List<Piece> getSortedPiecesByPoint(Color color) {
+        List<Piece> specificColorPieces = getSpecificColorPieces(color);
+        specificColorPieces.sort(Comparator.comparingDouble(piece -> piece.getType().getDefaultPoint()));
+        return specificColorPieces;
+    }
+
+    public List<Piece> getSortedPiecesByPointReversed(Color color) {
+        List<Piece> specificColorPieces = getSpecificColorPieces(color);
+        specificColorPieces.sort(Comparator.comparingDouble(piece -> piece.getType().getDefaultPoint()));
+        return specificColorPieces.reversed();
+    }
+
+    private List<Piece> getSpecificColorPieces(Color color) {
+        List<Piece> specificColorPieces = new ArrayList<>();
+        for (Rank rank : board) {
+            for (int file = 0; file < FILE_SIZE; file++) {
+                Piece piece = rank.getPiece(file);
+                if (piece.getColor().equals(color)) {
+                    specificColorPieces.add(piece);
+                }
+            }
+        }
+        return specificColorPieces;
     }
 }
