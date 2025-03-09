@@ -27,7 +27,7 @@ public class GameController {
         // 원래 자리에 blank 추가
         board.putPiece(sourceCoordinate, Piece.createBlank());
     }
-    
+
     private Coordinate parseCoordinate(String location) {
         try {
             return new Coordinate(location);
