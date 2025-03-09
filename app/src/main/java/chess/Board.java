@@ -4,6 +4,8 @@ import chess.pieces.Piece;
 import chess.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import static chess.pieces.Piece.*;
@@ -162,12 +164,23 @@ public class Board {
 
     public double calculatePoint(Color color) {
         double point = 0.0;
-        for (Rank rank : board) {
+        List<Integer> pawnFileList = new ArrayList<>();
+        for (int rank = 0; rank < RANK_SIZE; rank++) {
             for (int file = 0; file < FILE_SIZE; file++) {
-                Piece piece = rank.getPiece(file);
+                Piece piece = board.get(rank).getPiece(file);
                 if (piece.getColor().equals(color)) {
+                    if(piece.getType().equals(Type.PAWN)){
+                        pawnFileList.add(file);
+                    }
                     point += piece.getType().getDefaultPoint();
                 }
+            }
+        }
+        // 같은 세로줄 Pawn 점수 후처리
+        for (Integer file : new HashSet<>(pawnFileList)) {
+            int frequency = Collections.frequency(pawnFileList, file);
+            if (frequency >= 2) {
+                point -= (0.5 * frequency);
             }
         }
         return point;
