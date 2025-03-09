@@ -2,6 +2,7 @@ package org.pieces;
 
 import java.util.*;
 
+import org.chess.Board;
 import org.chess.Coordinate;
 
 public abstract class Piece implements Comparable<Piece>{
@@ -141,7 +142,7 @@ public abstract class Piece implements Comparable<Piece>{
         return color.equals(Color.WHITE) ? type.getWhiteRepresentation() : type.getBlackRepresentation();
     }
 
-    public abstract boolean verifyMovePosition(Coordinate sourcePosition, Coordinate targetPosition);
+    public abstract boolean verifyMovePosition(Board board, Coordinate sourcePosition, Coordinate targetPosition);
 
     public static Piece createWhitePawn() {
         return new Pawn(Color.WHITE);

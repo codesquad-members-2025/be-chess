@@ -28,8 +28,8 @@ public class BoardTest {
         String sourcePosition = "b2";
         String targetPosition = "b3";
         gameController.move(sourcePosition, targetPosition);
-        assertThat(Piece.createBlank()).isEqualTo(gameController.findPiece(new Coordinate(sourcePosition)));
-        assertThat(Piece.createWhitePawn()).isEqualTo(gameController.findPiece(new Coordinate(targetPosition)));
+        assertThat(Piece.createBlank()).isEqualTo(board.findPiece(new Coordinate(sourcePosition)));
+        assertThat(Piece.createWhitePawn()).isEqualTo(board.findPiece(new Coordinate(targetPosition)));
     }
 
 
@@ -54,9 +54,9 @@ public class BoardTest {
 
         String position = "b5";
         Piece piece = Piece.createBlackRook();
-        gameController.putPiece(new Coordinate(position), piece);
+        board.putPiece(new Coordinate(position), piece);
 
-        assertThat(gameController.findPiece(new Coordinate(position))).isEqualTo(piece);
+        assertThat(board.findPiece(new Coordinate(position))).isEqualTo(piece);
         System.out.println(boardStatus.showBoard());
     }
 
@@ -74,10 +74,10 @@ public class BoardTest {
         addPiece("a1",piece3);
         addPiece("h1",piece4);
 
-        assertThat(gameController.findPiece(new Coordinate("a8"))).isEqualTo(piece1);
-        assertThat(gameController.findPiece(new Coordinate("h8"))).isEqualTo(piece2);
-        assertThat(gameController.findPiece(new Coordinate("a1"))).isEqualTo(piece3);
-        assertThat(gameController.findPiece(new Coordinate("h1"))).isEqualTo(piece4);
+        assertThat(board.findPiece(new Coordinate("a8"))).isEqualTo(piece1);
+        assertThat(board.findPiece(new Coordinate("h8"))).isEqualTo(piece2);
+        assertThat(board.findPiece(new Coordinate("a1"))).isEqualTo(piece3);
+        assertThat(board.findPiece(new Coordinate("h1"))).isEqualTo(piece4);
     }
 
     @Test
@@ -147,6 +147,6 @@ public class BoardTest {
     }
 
     private void addPiece(String position, Piece piece) {
-        gameController.putPiece(new Coordinate(position), piece);
+        board.putPiece(new Coordinate(position), piece);
     }
 }

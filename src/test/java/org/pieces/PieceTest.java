@@ -1,5 +1,6 @@
 package org.pieces;
 
+import org.chess.Board;
 import org.chess.Coordinate;
 import org.junit.jupiter.api.*;
 
@@ -42,7 +43,10 @@ public class PieceTest {
     @DisplayName("King 움직이기 테스트")
     void move_king(){
         Piece king = Piece.createWhiteKing();
+        Board board = new Board();
+        board.initialize();
         Coordinate sourcePosition = new Coordinate(4,4);
+        board.putPiece(sourcePosition, king);
         Coordinate position1 = new Coordinate(4,5);
         Coordinate position2 = new Coordinate(5,4);
         Coordinate position3 = new Coordinate(5,5);
@@ -54,16 +58,16 @@ public class PieceTest {
         Coordinate position8 = new Coordinate(7,5);
         Coordinate position9 = new Coordinate(7,7);
         // 이동 가능
-        assertThat(king.verifyMovePosition(sourcePosition,position1)).isEqualTo(true);
-        assertThat(king.verifyMovePosition(sourcePosition,position2)).isEqualTo(true);
-        assertThat(king.verifyMovePosition(sourcePosition,position3)).isEqualTo(true);
-        assertThat(king.verifyMovePosition(sourcePosition,position4)).isEqualTo(true);
-        assertThat(king.verifyMovePosition(sourcePosition,position5)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position1)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position2)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position3)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position4)).isEqualTo(true);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position5)).isEqualTo(true);
         //이동 불가
-        assertThat(king.verifyMovePosition(sourcePosition,position6)).isEqualTo(false);
-        assertThat(king.verifyMovePosition(sourcePosition,position7)).isEqualTo(false);
-        assertThat(king.verifyMovePosition(sourcePosition,position8)).isEqualTo(false);
-        assertThat(king.verifyMovePosition(sourcePosition,position9)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position6)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position7)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position8)).isEqualTo(false);
+        assertThat(king.verifyMovePosition(board, sourcePosition,position9)).isEqualTo(false);
 
     }
 
