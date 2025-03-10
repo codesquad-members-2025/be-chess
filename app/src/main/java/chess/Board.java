@@ -1,54 +1,96 @@
 package chess;
 
-import pieces.Pawn;
+import pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static utils.StringUtils.appendNewLine;
+
 public class Board {
-    private List<Pawn> pawns;
+    private List<Piece> pieces;
     private char[][] board;
+    private int piecesIndex;
 
     public Board() {
-        this.pawns = new ArrayList<>();
+        this.pieces = new ArrayList<>();
         this.board = new char[8][8];
+        this.piecesIndex = 0;
         for (char[] chars : board) {
             Arrays.fill(chars, '.' );
         }
     }
 
-    public void add(Pawn pawn) {
-        pawns.add(pawn);
+    public void add(Piece piece) {
+        pieces.add(piece);
     }
 
-    public int size() {
-        return pawns.size();
+    public int pieceCount() {
+        return pieces.size();
     }
 
-    public Pawn findPawn(int pawnNumber) {
-        return pawns.get(pawnNumber);
+    public Piece findPawn(int pawnNumber) {
+        return pieces.get(pawnNumber);
     }
 
     public void initialize() {
        addPawns();
+       addBlackPieces();
+       addWhitePieces();
        placePawn();
+       placeBlackPieces();
+       placeWhitePieces();
     }
 
     public void addPawns() {
         for (int i = 0; i < board.length; ++i) {
-            pawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
-            pawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+            pieces.add(Piece.createWhitePawn());
+            pieces.add(Piece.createBlackPawn());
         }
     }
 
-    public void placePawn() {
-        int pawnsIndex = 0; // Pawn 리스트 전체를 순회하기 위한 인덱스 값
+    public void addWhitePieces() {
+        pieces.add(Piece.createWhiteRook());
+        pieces.add(Piece.createWhiteKnight());
+        pieces.add(Piece.createWhiteBishop());
+        pieces.add(Piece.createWhiteQueen());
+        pieces.add(Piece.createWhiteKing());
+        pieces.add(Piece.createWhiteBishop());
+        pieces.add(Piece.createWhiteKnight());
+        pieces.add(Piece.createWhiteRook());
+    }
 
+    public void addBlackPieces() {
+        pieces.add(Piece.createBlackRook());
+        pieces.add(Piece.createBlackKnight());
+        pieces.add(Piece.createBlackBishop());
+        pieces.add(Piece.createBlackQueen());
+        pieces.add(Piece.createBlackKing());
+        pieces.add(Piece.createBlackBishop());
+        pieces.add(Piece.createBlackKnight());
+        pieces.add(Piece.createBlackRook());
+    }
+
+    public void placePawn() {
         for (int i = 0; i < board.length; ++i) {
-            board[1][i] = pawns.get(pawnsIndex).getRepresentation();
-            board[6][i] = pawns.get(pawnsIndex + 1).getRepresentation();
-            pawnsIndex += 2;
+            board[6][i] = pieces.get(piecesIndex).getRepresentation();
+            board[1][i] = pieces.get(piecesIndex + 1).getRepresentation();
+            piecesIndex += 2;
+        }
+    }
+
+    public void placeWhitePieces() {
+        for (int i = 0; i < board.length; ++i) {
+            board[7][i] = pieces.get(piecesIndex).getRepresentation();
+            ++piecesIndex;
+        }
+    }
+
+    public void placeBlackPieces() {
+        for (int i = 0; i < board.length; ++i) {
+            board[0][i] = pieces.get(piecesIndex).getRepresentation();
+            ++piecesIndex;
         }
     }
 
@@ -74,14 +116,28 @@ public class Board {
 
     public void print() {
         StringBuilder sb = new StringBuilder();
-
         for (int i = 0; i < board.length; ++i) {
+            String line = "";
             for (int j = 0; j < board.length; ++j) {
-                sb.append(board[i][j]);
+                line += (board[i][j]);
             }
-            sb.append("\n");
+            line = appendNewLine(line);
+            sb.append(line);
         }
-
-        System.out.println(sb);
+        System.out.print(sb);
     }
+
+    public String showBoard() {
+        StringBuilder chessBoard = new StringBuilder();
+        for (char[] chars : board) {
+            StringBuilder line = new StringBuilder();
+            for (int j = 0; j < board.length; ++j) {
+                line.append(chars[j]);
+            }
+            line = new StringBuilder(appendNewLine(line.toString()));
+            chessBoard.append(line);
+        }
+        return chessBoard.toString();
+    }
+
 }
