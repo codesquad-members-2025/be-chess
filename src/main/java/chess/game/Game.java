@@ -5,6 +5,7 @@ import chess.enums.Color;
 import chess.piece.Pawn;
 import chess.piece.Piece;
 import chess.record.Position;
+import chess.util.BoardPositionValidator;
 
 
 public class Game {
@@ -25,12 +26,16 @@ public class Game {
 
     public void move(String location, Piece piece){
         Position position = getPosition(location);
-        board[position.yPos()][position.xPos()] = piece;
+        if(BoardPositionValidator.isWithinBoard(position)){
+            board[position.yPos()][position.xPos()] = piece;
+        }
+        throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
     }
 
     public void move(String sourcePotion, String targetPotion){
         Position sourcePosition = getPosition(sourcePotion);
         Position targetPosition = getPosition(targetPotion);
+        if(BoardPositionValidator.isWithinBoard(targetPosition)) throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
         board[targetPosition.yPos()][targetPosition.xPos()] = board[sourcePosition.yPos()][sourcePosition.xPos()];
         board[sourcePosition.yPos()][sourcePosition.xPos()] = Piece.createBlank();
     }

@@ -3,7 +3,6 @@ package chess.board;
 import chess.enums.Color;
 import chess.piece.Pawn;
 import chess.piece.Piece;
-import chess.piece.PieceFactory;
 import chess.record.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

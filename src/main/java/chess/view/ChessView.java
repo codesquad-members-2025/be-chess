@@ -20,7 +20,7 @@ public class ChessView {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 Piece piece = pieces[row][col];
-                sb.append(piece.getColor()== Color.NOCOLOR? "." : piece.getSymbol());
+                sb.append(piece.getColor()== Color.NOCOLOR ? "." : piece.getSymbol());
             }
             sb.append(StringUtils.appendNewLine(""));
         }
