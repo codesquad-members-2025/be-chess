@@ -3,7 +3,7 @@ package chess;
 import org.junit.jupiter.api.*;
 import pieces.Piece;
 import pieces.Piece.*;
-
+import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,16 +17,17 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("기물마다 해당되는 위치에 초기화 되어야한다.")
     public void findPiece() throws Exception {
         board.initialize();
-
-        assertEquals(Piece.createBlackRook(), board.findPiece("a8"));
-        assertEquals(Piece.createBlackRook(), board.findPiece("h8"));
-        assertEquals(Piece.createWhiteRook(), board.findPiece("a1"));
-        assertEquals(Piece.createWhiteRook(), board.findPiece("h1"));
+        assertThat(board.findPiece("a8")).isEqualTo(Piece.createBlackRook());
+        assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlackRook());
+        assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhiteRook());
+        assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhiteRook());
     }
 
     @Test
+    @DisplayName("체스 판의 기물을 이동하려면 체스 판의 임의의 위치에 기물을 추가할 수 있어야 한다.")
     public void move() throws Exception {
         board.initializeEmpty();
 
@@ -34,39 +35,38 @@ public class BoardTest {
         Piece piece = Piece.createBlackRook();
         board.move(position, piece);
 
-        assertEquals(piece, board.findPiece(position));
+        assertThat(board.findPiece(position)).isEqualTo(piece);
         System.out.println(board.showBoard());
     }
 
     @Test
+    @DisplayName("검은색 말들의 순위를 출력할 수 있어야한다.")
     public void testSortBlackAscending() throws Exception {
         board.initialize();
         ArrayList<Piece> sortBlack = board.sortByScore(Color.BLACK, false);
-        assertEquals(Type.QUEEN, sortBlack.get(0).getType());
-        assertEquals(Type.ROOK, sortBlack.get(1).getType());
-        assertEquals(Type.ROOK, sortBlack.get(2).getType());
-        assertEquals(Type.BISHOP, sortBlack.get(3).getType());
-        assertEquals(Type.BISHOP, sortBlack.get(4).getType());
-        assertEquals(Type.KNIGHT, sortBlack.get(5).getType());
-        assertEquals(Type.KNIGHT, sortBlack.get(6).getType());
-        assertEquals(Type.PAWN, sortBlack.get(7).getType());
+        checkPieces(sortBlack);
     }
 
     @Test
+    @DisplayName("흰색 말들의 순위를 출력할 수 있어야한다.")
     public void testSortWhiteAscending() {
         board.initialize();
         ArrayList<Piece> sortWhite = board.sortByScore(Color.WHITE, false);
-        assertEquals(Type.QUEEN, sortWhite.get(0).getType());
-        assertEquals(Type.ROOK, sortWhite.get(1).getType());
-        assertEquals(Type.ROOK, sortWhite.get(2).getType());
-        assertEquals(Type.BISHOP, sortWhite.get(3).getType());
-        assertEquals(Type.BISHOP, sortWhite.get(4).getType());
-        assertEquals(Type.KNIGHT, sortWhite.get(5).getType());
-        assertEquals(Type.KNIGHT, sortWhite.get(6).getType());
-        assertEquals(Type.PAWN, sortWhite.get(7).getType());
+        checkPieces(sortWhite);
+    }
+
+    private void checkPieces(ArrayList<Piece> sortedPieces) {
+        Type[] expectedTypes = {
+                Type.QUEEN, Type.ROOK, Type.ROOK, Type.BISHOP, Type.BISHOP, Type.KNIGHT, Type.KNIGHT, Type.PAWN
+        };
+
+        for (int i = 0; i < expectedTypes.length; i++) {
+            assertThat(sortedPieces.get(i).getType()).isEqualTo(expectedTypes[i]);
+        }
     }
 
     @Test
+    @DisplayName("현재까지 남아 있는 기물에 따라 점수를 계산할 수 있어야 한다.")
     public void caculcatePoint() throws Exception {
         board.initializeEmpty();
 
