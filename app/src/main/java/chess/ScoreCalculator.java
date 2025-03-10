@@ -3,6 +3,8 @@ package chess;
 import pieces.Piece;
 import pieces.Piece.Type;
 
+import java.util.*;
+
 public class ScoreCalculator {
     private final Board board;
 
@@ -36,6 +38,27 @@ public class ScoreCalculator {
             }
         }
         return totalScore;
+    }
+
+    //체스판의 기물을 점수 순으로 정렬.
+    public List<Piece> sortByScore(Piece.Color color, boolean desending) {
+        List<Piece> sortedPieces = new ArrayList<>();
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                Piece piece = board.getRank(row).getPiece(col);
+                if (piece.getColor() == color) {
+                    sortedPieces.add(piece);
+                }
+            }
+        }
+
+        Collections.sort(sortedPieces);
+        if (!desending) {
+            Collections.reverse(sortedPieces);
+        }
+
+        return sortedPieces;
     }
 
 }

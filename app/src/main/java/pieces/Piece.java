@@ -1,7 +1,7 @@
 package pieces;
 
 
-public class Piece {
+public class Piece implements Comparable<Piece>  {
     private final Color color;
     private final Type type;
 
@@ -75,6 +75,10 @@ public class Piece {
         return color.equals(Color.BLACK);
     }
 
+    public double getDefaultPoint() {
+        return this.type.getDefaultPoint();
+    }
+
     @Override
     //Unit의 assertThat(A).isEqualTo(B)는 내부적으로 equals()를 자동 호출
     public boolean equals(Object obj) {
@@ -82,6 +86,11 @@ public class Piece {
         if (obj == null || getClass() != obj.getClass()) return false;
         Piece piece = (Piece) obj;
         return color == piece.color && type == piece.type;
+    }
+
+    @Override
+    public int compareTo(Piece other) {
+        return Double.compare(other.getDefaultPoint(), this.getDefaultPoint());
     }
 
 }
