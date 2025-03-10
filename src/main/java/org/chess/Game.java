@@ -14,18 +14,30 @@ public class Game {
     }
 
     public void move(String sourcePosition, String targetPosition) {
-        Coordinate sourceCoordinate = new Coordinate(sourcePosition);
-        Coordinate targetCoordinate = new Coordinate(targetPosition);
+        Coordinate sourceCoordinate;
+        Coordinate targetCoordinate;
+        try{
+            sourceCoordinate = new Coordinate(sourcePosition);
+            targetCoordinate = new Coordinate(targetPosition);
+        } catch(IllegalArgumentException e){
+            System.out.println("잘못된 입력입니다. "+e.getMessage());
+            return;
+        }
 
-        Piece source = board.findPiece(sourceCoordinate);
+        if(!sourceCoordinate.isCoordinateOnBoard() || !targetCoordinate.isCoordinateOnBoard()) {
+            System.out.println("잘못된 좌표 입니다.");
+            return;
+        }
+
+        Piece sourcePiece = board.findPiece(sourceCoordinate);
         // 그 기물이 이동할 수 없음!
-        if (!source.verifyMovePosition(board,sourceCoordinate,targetCoordinate)) {
+        if (!sourcePiece.verifyMovePosition(board,sourceCoordinate,targetCoordinate)) {
             System.out.println(targetPosition+"으로 이동할 수 없습니다.");
             return;
         }
         // 이동 가능하면 이동!
         // target에 기물 추가
-        board.putPiece(targetCoordinate, source);
+        board.putPiece(targetCoordinate, sourcePiece);
         // 원래 자리에 blank 추가
         board.putPiece(sourceCoordinate, Piece.createBlank());
     }
