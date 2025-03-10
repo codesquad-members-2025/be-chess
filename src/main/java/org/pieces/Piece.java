@@ -150,6 +150,39 @@ public abstract class Piece implements Comparable<Piece>{
 
     public abstract boolean verifyMovePosition(Board board, Coordinate sourcePosition, Coordinate targetPosition);
 
+    // 퀸, 룩, 비숍은 일직선으로 움직이기 때문에 이 메서드 사용
+    protected Set<Coordinate> getSlidingMoves(Board board, List<Direction> pieceDirection,Coordinate sourcePosition, Coordinate targetPosition){
+        // coordinateSet은 이동가능한 Coordinate의 모음
+        Set<Coordinate> coordinateSet = new HashSet<>();
+        for(Direction direction : pieceDirection){
+            int fileDegree = direction.getFileDegree();
+            int rankDegree = direction.getRankDegree();
+            for(int i = 1; i<8;i++){
+                Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree*i,rankDegree*i);
+                // 보드를 벗어나거나 같은 색의 기물이 있으면 멈춤
+                if(!movedCoordinate.isCoordinateOnBoard() || board.findPiece(movedCoordinate).getColor() == getColor()) break;
+                coordinateSet.add(movedCoordinate);
+                // 만약 이동하려는 지점이 다른색의 기물이면 추가는 하지만 멈춤
+                if(board.findPiece(movedCoordinate).getType() != Type.NO_PIECE && board.findPiece(movedCoordinate).getColor() != getColor()) break;
+            }
+        }
+        return coordinateSet;
+    }
+
+    // 킹, 나이트는 현재 좌표에 특정 offset을 더한 좌표로 움직임
+    protected Set<Coordinate> getOffsetMoves(Board board, List<Direction> pieceDirection, Coordinate sourcePosition, Coordinate targetPosition){
+        Set<Coordinate> coordinateSet = new HashSet<>();
+        for(Direction direction : pieceDirection){
+            int fileDegree = direction.getFileDegree();
+            int rankDegree = direction.getRankDegree();
+            Coordinate movedCoordinate = sourcePosition.shiftCoordinate(fileDegree,rankDegree);
+            // 보드 위에 있으며 이동할 자리가 같은 색이 아닐때 이동 가능
+            if(movedCoordinate.isCoordinateOnBoard() && board.findPiece(movedCoordinate).getColor() != getColor()) coordinateSet.add(movedCoordinate);
+        }
+        return coordinateSet;
+    }
+
+
     public static Piece createWhitePawn() {
         return new Pawn(Color.WHITE);
     }
