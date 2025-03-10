@@ -28,20 +28,20 @@ public class Piece {
 
     private String name;
     private final Color color;
-    private final Type representation;
+    private final Type type;
 
 
-    public Piece(Color color, Type representation) {
+    public Piece(Color color, Type type) {
         this.color = color;
-        this.representation = representation;
+        this.type = type;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public Type getRepresentation() {
-        return representation;
+    public char getType() {
+        return type.getRepresentation();
     }
 
     public static Piece createWhitePawn() {

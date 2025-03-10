@@ -10,15 +10,15 @@ import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private List<Piece> pieces;
-    private Piece.Type[][] board;
+    private char[][] board;
     private int piecesIndex;
 
     public Board() {
         this.pieces = new ArrayList<>();
-        this.board = new Piece.Type[8][8];
+        this.board = new char[8][8];
         this.piecesIndex = 0;
-        for (Piece.Type[] types : board) {
-            Arrays.fill(types, Piece.Type.NO_PIECE );
+        for (char[] types : board) {
+            Arrays.fill(types, Piece.Type.NO_PIECE.getRepresentation() );
         }
     }
 
@@ -74,22 +74,24 @@ public class Board {
 
     public void placePawn() {
         for (int i = 0; i < board.length; ++i) {
-            board[6][i] = pieces.get(piecesIndex).getRepresentation();
-            board[1][i] = pieces.get(piecesIndex + 1).getRepresentation();
+            Piece blackPiece = pieces.get(piecesIndex);
+            Piece whitePiece = pieces.get(piecesIndex + 1);
+            board[1][i] = Character.toUpperCase(blackPiece.getType());
+            board[6][i] = whitePiece.getType();
             piecesIndex += 2;
         }
     }
 
     public void placeWhitePieces() {
         for (int i = 0; i < board.length; ++i) {
-            board[7][i] = pieces.get(piecesIndex).getRepresentation();
+            board[7][i] = pieces.get(piecesIndex).getType();
             ++piecesIndex;
         }
     }
 
     public void placeBlackPieces() {
         for (int i = 0; i < board.length; ++i) {
-            board[0][i] = pieces.get(piecesIndex).getRepresentation();
+            board[0][i] = Character.toUpperCase(pieces.get(piecesIndex).getType());
             ++piecesIndex;
         }
     }
@@ -129,10 +131,10 @@ public class Board {
 
     public String showBoard() {
         StringBuilder chessBoard = new StringBuilder();
-        for (Piece.Type[] types : board) {
+        for (char[] chars : board) {
             StringBuilder line = new StringBuilder();
             for (int j = 0; j < board.length; ++j) {
-                line.append(types[j].getRepresentation());
+                line.append(chars[j]);
             }
             line = new StringBuilder(appendNewLine(line.toString()));
             chessBoard.append(line);
