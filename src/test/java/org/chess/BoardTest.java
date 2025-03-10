@@ -23,11 +23,11 @@ public class BoardTest {
 
     @Test
     @DisplayName("기본 이동 테스트")
-    public void move() throws Exception {
+    public void move() {
         board.initialize();
         String sourcePosition = "b2";
         String targetPosition = "b3";
-        game.move(sourcePosition, targetPosition);
+        game.move(Piece.Color.WHITE, sourcePosition, targetPosition);
         assertThat(Piece.createBlank()).isEqualTo(board.findPiece(new Coordinate(sourcePosition)));
         assertThat(Piece.createWhitePawn()).isEqualTo(board.findPiece(new Coordinate(targetPosition)));
     }
@@ -35,7 +35,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("체스 보드 생성 테스트")
-    void create() throws Exception {
+    void create() {
         board.initialize();
         assertThat(game.pieceCount()).isEqualTo(32);
         String blankRank = appendNewLine("........");
@@ -49,7 +49,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("원하는 위치에 기물 추가할 수 있는지 확인")
-    void 기물추가() throws Exception {
+    void 기물추가() {
         board.initializeEmpty();
 
         String position = "b5";
@@ -62,17 +62,17 @@ public class BoardTest {
 
     @Test
     @DisplayName("주어진 위치의 기물 조회하기")
-    public void findPiece() throws Exception {
+    public void findPiece() {
         board.initialize();
         Piece piece1 = Piece.createBlackRook();
         Piece piece2 = Piece.createBlackRook();
         Piece piece3 = Piece.createWhiteRook();
         Piece piece4 = Piece.createWhiteRook();
 
-        addPiece("a8",piece1);
-        addPiece("h8",piece2);
-        addPiece("a1",piece3);
-        addPiece("h1",piece4);
+        addPiece("a8", piece1);
+        addPiece("h8", piece2);
+        addPiece("a1", piece3);
+        addPiece("h1", piece4);
 
         assertThat(board.findPiece(new Coordinate("a8"))).isEqualTo(piece1);
         assertThat(board.findPiece(new Coordinate("h8"))).isEqualTo(piece2);
@@ -82,7 +82,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("기본적인 Point 계산하는 테스트")
-    void caculcatePoint() throws Exception {
+    void caculcatePoint() {
         board.initializeEmpty();
 
         addPiece("b6", Piece.createBlackPawn());
@@ -102,7 +102,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("좀 더 많은 Point 계산하는 테스트")
-    void caculcatePoint2() throws Exception {
+    void caculcatePoint2() {
         board.initializeEmpty();
 
         addPiece("b6", Piece.createBlackPawn());
@@ -129,7 +129,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("기물 리스트 만들고 정렬되었는지 확인하는 테스트")
-    void sortTest() throws Exception {
+    void sortTest() {
         board.initializeEmpty();
         Piece piece2 = Piece.createBlackKnight();
         Piece piece1 = Piece.createBlackPawn();
@@ -141,44 +141,44 @@ public class BoardTest {
         addPiece("b6", piece1);
         addPiece("a7", piece3);
 
-        assertThat(game.makeAndSortPieceList(Piece.Color.BLACK,true)).isEqualTo(new ArrayList<>(List.of(piece1,piece2,piece3,piece4)));
-        assertThat(game.makeAndSortPieceList(Piece.Color.BLACK,false)).isEqualTo(new ArrayList<>(List.of(piece4,piece3,piece2,piece1)));
+        assertThat(game.makeAndSortPieceList(Piece.Color.BLACK, true)).isEqualTo(new ArrayList<>(List.of(piece1, piece2, piece3, piece4)));
+        assertThat(game.makeAndSortPieceList(Piece.Color.BLACK, false)).isEqualTo(new ArrayList<>(List.of(piece4, piece3, piece2, piece1)));
         System.out.println(chessView.showBoard());
     }
 
     @Test
     @DisplayName("Game이 각 기물의 이동 법칙에 맞게 움직일 수 있다.")
-    void Game의Move확인() throws Exception {
+    void Game의Move확인() {
         board.initialize();
         Game game = new Game(board);
-        Piece blackPawn = board.findPiece(new Coordinate(3,1));
-        Piece blackQueen = board.findPiece(new Coordinate(3,0));
-
+        Piece blackPawn = board.findPiece(new Coordinate(3, 1));
+        Piece blackQueen = board.findPiece(new Coordinate(3, 0));
+        Piece.Color color = blackQueen.getColor();
         // 폰 두칸전진
-        game.move("d2","d3");
-        game.move("d3","d4");
+        game.move(color, "d2", "d3");
+        game.move(color, "d3", "d4");
         // 퀸 이동
-        game.move("d1","d3");
-        game.move("d3","a6");
+        game.move(color, "d1", "d3");
+        game.move(color, "d3", "a6");
 
         //이동 안함
-        game.move("a6","a8");
+        game.move(color, "a6", "a8");
 
         // 이동함
-        game.move("a6","a7");
-        game.move("a7","a4");
+        game.move(color, "a6", "a7");
+        game.move(color, "a7", "a4");
 
         //이동 안함
-        game.move("a4","a2");
+        game.move(color, "a4", "a2");
 
         //d4는 폰, a7은 빈칸, a4는 퀸, a2는 폰이어야함.
-        assertThat(board.findPiece(new Coordinate(3,3)).getType()).isEqualTo(Piece.Type.PAWN);
-        assertThat(board.findPiece(new Coordinate(0,6)).getType()).isEqualTo(Piece.Type.NO_PIECE);
-        assertThat(board.findPiece(new Coordinate(0,3)).getType()).isEqualTo(Piece.Type.QUEEN);
-        assertThat(board.findPiece(new Coordinate(0,1)).getType()).isEqualTo(Piece.Type.PAWN);
+        assertThat(board.findPiece(new Coordinate(3, 3)).getType()).isEqualTo(Piece.Type.PAWN);
+        assertThat(board.findPiece(new Coordinate(0, 6)).getType()).isEqualTo(Piece.Type.NO_PIECE);
+        assertThat(board.findPiece(new Coordinate(0, 3)).getType()).isEqualTo(Piece.Type.QUEEN);
+        assertThat(board.findPiece(new Coordinate(0, 1)).getType()).isEqualTo(Piece.Type.PAWN);
 
         System.out.println(chessView.showBoard());
-        System.out.println(board.findPiece(new Coordinate(3,2)).getType());
+        System.out.println(board.findPiece(new Coordinate(3, 2)).getType());
     }
 
     private void addPiece(String position, Piece piece) {
