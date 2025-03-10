@@ -17,6 +17,19 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("임의의 위치에 기물이 잘 추가되는지 확인")
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        String position = "b5";
+        Piece piece = Piece.createBlack(Piece.Type.ROOK);
+        board.move(position, piece);
+
+        assertThat(board.findPiece(position)).isEqualTo(piece);
+        System.out.println(board.showBoard());
+    }
+
+    @Test
     @DisplayName("주어진 위치의 기물이 잘 조회되는지 확인")
     //Unit의 assertThat(A).isEqualTo(B)는 내부적으로 equals()를 자동 호출
     //equals()는 Piece.java에서 구현

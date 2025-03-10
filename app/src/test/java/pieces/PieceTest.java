@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
+//Type.PAWN말고 그냥 PAWN으로 사용할 수 있게 IMPORT하기.
 
 public class PieceTest {
     @Test
