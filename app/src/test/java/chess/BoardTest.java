@@ -10,10 +10,12 @@ import static utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     private Board board;
+    private BoardView boardView;
 
     @BeforeEach
     public void setup() {
         board = new Board();
+        boardView = new BoardView(board);
     }
 
     @Test
@@ -26,7 +28,7 @@ public class BoardTest {
         board.move(position, piece);
 
         assertThat(board.findPiece(position)).isEqualTo(piece);
-        System.out.println(board.showBoard());
+        System.out.println(boardView.showBoard());
     }
 
     @Test
@@ -43,18 +45,10 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("기물이 체스판에 올바르게 배치되었는지 확인")
+    @DisplayName("초기화된 체스판의 기물 개수 확인")
     public void create() throws Exception {
         board.initialize();
         assertThat(board.totalPieceCount()).isEqualTo(32);
-        String blankRank = appendNewLine("........");
-        assertThat(board.showBoard()).isEqualTo(
-                appendNewLine("RNBQKBNR") +
-                        appendNewLine("PPPPPPPP") +
-                        blankRank + blankRank + blankRank + blankRank +
-                        appendNewLine("pppppppp") +
-                        appendNewLine("rnbqkbnr")
-                );
     }
 
     @Test

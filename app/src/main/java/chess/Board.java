@@ -4,7 +4,6 @@ import pieces.Piece;
 import pieces.Piece.Type;
 import java.util.ArrayList;
 
-import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private final ArrayList<Rank> board = new ArrayList<>();
@@ -31,40 +30,35 @@ public class Board {
 
 
         for (int i = 0; i < 8; i++) {
-            setPiece(1, i, Piece.createBlack(Type.PAWN));
-            setPiece(6, i, Piece.createWhite(Type.PAWN));
+            setPiece(6, i, Piece.createBlack(Type.PAWN));
+            setPiece(1, i, Piece.createWhite(Type.PAWN));
         }
-        setPiece(0, 0, Piece.createBlack(Type.ROOK));
-        setPiece(7, 0, Piece.createWhite(Type.ROOK));
-        setPiece(0, 1, Piece.createBlack(Type.KNIGHT));
-        setPiece(7, 1, Piece.createWhite(Type.KNIGHT));
-        setPiece(0, 2, Piece.createBlack(Type.BISHOP));
-        setPiece(7, 2, Piece.createWhite(Type.BISHOP));
-        setPiece(0, 3, Piece.createBlack(Type.QUEEN));
-        setPiece(7, 3, Piece.createWhite(Type.QUEEN));
-        setPiece(0, 4, Piece.createBlack(Type.KING));
-        setPiece(7, 4, Piece.createWhite(Type.KING));
-        setPiece(0, 5, Piece.createBlack(Type.BISHOP));
-        setPiece(7, 5, Piece.createWhite(Type.BISHOP));
-        setPiece(0, 6, Piece.createBlack(Type.KNIGHT));
-        setPiece(7, 6, Piece.createWhite(Type.KNIGHT));
-        setPiece(0, 7, Piece.createBlack(Type.ROOK));
-        setPiece(7, 7, Piece.createWhite(Type.ROOK));
+        setPiece(0, 0, Piece.createWhite(Type.ROOK));
+        setPiece(7, 0, Piece.createBlack(Type.ROOK));
+        setPiece(0, 1, Piece.createWhite(Type.KNIGHT));
+        setPiece(7, 1, Piece.createBlack(Type.KNIGHT));
+        setPiece(0, 2, Piece.createWhite(Type.BISHOP));
+        setPiece(7, 2, Piece.createBlack(Type.BISHOP));
+        setPiece(0, 3, Piece.createWhite(Type.QUEEN));
+        setPiece(7, 3, Piece.createBlack(Type.QUEEN));
+        setPiece(0, 4, Piece.createWhite(Type.KING));
+        setPiece(7, 4, Piece.createBlack(Type.KING));
+        setPiece(0, 5, Piece.createWhite(Type.BISHOP));
+        setPiece(7, 5, Piece.createBlack(Type.BISHOP));
+        setPiece(0, 6, Piece.createWhite(Type.KNIGHT));
+        setPiece(7, 6, Piece.createBlack(Type.KNIGHT));
+        setPiece(0, 7, Piece.createWhite(Type.ROOK));
+        setPiece(7, 7, Piece.createBlack(Type.ROOK));
     }
 
     public void setPiece(int row, int col, Piece piece) {
         board.get(row).setPiece(col, piece);  //  Rank의 setPiece() 호출
     }
-    //showGame 클래스로 분리
-    //for 문 없이 rank8~1 출력하도록 수정해보기
-    public String showBoard() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 8; i++) {
-            sb.append(board.get(i).print());
-            sb.append(appendNewLine(""));
-        }
-        return sb.toString();
+
+    public Rank getRank(int index) {
+        return board.get(index);
     }
+
 
     public int pieceCount(Piece.Color color, Piece.Type type) {
         int cnt = 0;

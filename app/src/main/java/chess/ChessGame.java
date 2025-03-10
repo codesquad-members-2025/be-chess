@@ -11,8 +11,9 @@ public class ChessGame {
             String input = sc.nextLine();
             if (input.equals("start")) {
                 Board board = new Board();
+                BoardView boardView = new BoardView(board);
                 board.initialize();
-                System.out.println(board.showBoard());
+                System.out.println(boardView.showBoard());
             } else if (input.equals("end")) {
                 break;
             } else {
