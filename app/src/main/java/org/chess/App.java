@@ -3,23 +3,14 @@
  */
 package org.chess;
 
-import org.chess.domain.board.Board;
-import org.chess.console.Input;
-import org.chess.domain.board.Position;
-import org.chess.domain.game.Game;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class App {
 
     public static void main(String[] args) {
-        Input input = new Input();
-        Board board = Board.create();
-        Game game = Game.newGame(board, input);
-
-        if (!input.suggestGame()) {
-            return;
-        }
-
-        game.run();
+        SpringApplication.run(App.class, args);
     }
 
 }
