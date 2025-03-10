@@ -5,6 +5,8 @@ import pieces.Pawn;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.StringUtils.appendNewLine;
+
 public class Board {
     private List<Pawn> chessPiecesList;
 
@@ -67,14 +69,14 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < 8; i++){
             if(i == 1) {
-                sb.append(blackPawnsResult).append("\n");
+                sb.append(appendNewLine(blackPawnsResult));
                 continue;
             }
             if(i == 6) {
-                sb.append(whitePawnsResult).append("\n");
+                sb.append(appendNewLine(whitePawnsResult));
                 continue;
             }
-            sb.append("........").append("\n");
+            sb.append(appendNewLine("........"));
         }
         return sb.toString();
     }
