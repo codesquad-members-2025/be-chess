@@ -1,14 +1,14 @@
 package pieces;
 
 import pieces.Piece.Type;
-import pieces.Piece.Color;
+//import static pieces.Piece.Type.*; 사용해서 간결하게 하는게 좋은 방법?
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
-//Type.PAWN말고 그냥 PAWN으로 사용할 수 있게 IMPORT하기.
+
 
 public class PieceTest {
     @Test
@@ -44,3 +44,5 @@ public class PieceTest {
     }
 
 }
+
+
