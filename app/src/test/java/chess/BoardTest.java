@@ -1,36 +1,36 @@
 package chess;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pieces.Pawn;
+import pieces.Piece;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BoardTest {
 
     private Board board;
-    private Pawn white;
-    private Pawn black;
+    private Piece white;
+    private Piece black;
 
     @BeforeEach
     public void init(){
         board = new Board();
-        white = new Pawn(Pawn.WHITE_COLOR);
-        black = new Pawn(Pawn.BLACK_COLOR);
+        white = Piece.of(Piece.WHITE_COLOR, Piece.WHITE_REPRESENTATION);
+        black = Piece.of(Piece.BLACK_COLOR, Piece.BLACK_REPRESENTATION);
     }
 
 
     @Test
     public void create() throws Exception {
         board.add(white);
-        assertEquals(1, board.size());
-        assertEquals(white, board.findPawn(0));
+        assertThat(board.size()).isEqualTo(1);
+        assertThat(board.findPawn(0)).isEqualTo(white);
 
         board.add(black);
-        assertEquals(2, board.size());
-        assertEquals(black, board.findPawn(1));
+        assertThat(board.size()).isEqualTo(2);
+        assertThat(board.findPawn(1)).isEqualTo(black);
     }
 
     @Test
@@ -45,8 +45,8 @@ public class BoardTest {
     public void initialize() throws Exception {
         Board board = new Board();
         board.initialize();
-        assertEquals("pppppppp", board.getWhitePawnsResult());
-        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+        assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
+        assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
     }
 
     @Test

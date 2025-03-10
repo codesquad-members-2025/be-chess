@@ -1,6 +1,6 @@
 package chess;
 
-import pieces.Pawn;
+import pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +8,16 @@ import java.util.List;
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
-    private List<Pawn> chessPiecesList;
+    private List<Piece> chessPiecesList;
 
-    private List<Pawn> whitePawnsList;
-    private List<Pawn> blackPawnsList;
+    private List<Piece> whitePawnsList;
+    private List<Piece> blackPawnsList;
 //    private static final int TOTAL_PAWNS_PER_PLAYER = 8;
 
     private String whitePawnsResult;
     private String blackPawnsResult;
 
-
-    public void add(Pawn pawn){
+    public void add(Piece pawn){
         chessPiecesList.add(pawn);
     }
 
@@ -26,7 +25,7 @@ public class Board {
         return chessPiecesList.size();
     }
 
-    public Pawn findPawn(int pawnNumber){
+    public Piece findPawn(int pawnNumber){
         return chessPiecesList.get(pawnNumber);
     }
 
@@ -35,8 +34,8 @@ public class Board {
         blackPawnsList = new ArrayList<>();
 
         for(int i = 0; i < 8; i++){
-            whitePawnsList.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
-            blackPawnsList.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+            whitePawnsList.add(Piece.of(Piece.WHITE_COLOR, Piece.WHITE_REPRESENTATION));
+            blackPawnsList.add(Piece.of(Piece.BLACK_COLOR, Piece.BLACK_REPRESENTATION));
         }
 
         initializeWhitePawnsResult();

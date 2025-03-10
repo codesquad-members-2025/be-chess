@@ -1,8 +1,6 @@
 package pieces;
 
-import java.util.Stack;
-
-public class Pawn {
+public class Piece {
 
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
@@ -10,22 +8,18 @@ public class Pawn {
     public static final char WHITE_REPRESENTATION = 'p';
     public static final char BLACK_REPRESENTATION = 'P';
 
-    private String color;
-    private char representation;
+    private final String color;
+    private final char representation;
 
-    public Pawn(){
-        this.color = WHITE_COLOR;
-        this.representation = WHITE_REPRESENTATION;
-    }
-
-    public Pawn(String color) {
-        this.color = color;
-    }
-
-    public Pawn(String color, char representation) {
+    private Piece(String color, char representation){
         this.color = color;
         this.representation = representation;
     }
+
+    public static Piece of(String color, char representation){
+        return new Piece(color, representation);
+    }
+
     public String getColor() {
         return color;
     }
