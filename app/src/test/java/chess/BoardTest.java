@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import pieces.Piece;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static utils.StringUtils.appendNewLine;
 
 public class BoardTest {
 
@@ -18,34 +19,18 @@ public class BoardTest {
 
 
     @Test
+    @DisplayName("32개의 모든 기물의 위치가 초기화 되어야 한다.")
     public void create() throws Exception {
-//        board.initialize();
-//        assertEquals(32, board.pieceCount());
-//        String blankRank = appendNewLine("........");
-
-    }
-
-    @Test
-    @DisplayName("Pawn 객체만 추가되어야 한다.")
-    public void add(){
-        Board board = new Board();
-
-//        board.add(new Integer("7"));
-    }
-
-    @Test
-    public void initialize() throws Exception {
-        Board board = new Board();
         board.initialize();
-        assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
-        assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
-    }
+        assertThat(board.pieceCount()).isEqualTo(32);
 
-    @Test
-    public void print(){
-        Board board = new Board();
-        board.initialize();
-        System.out.println(board.print());
+        String blankRank = appendNewLine("........");
+        assertThat(board.showBoard())
+                .isEqualTo(appendNewLine("RNBQKBNR") +
+                        appendNewLine("PPPPPPPP") +
+                        blankRank + blankRank + blankRank + blankRank +
+                        appendNewLine("pppppppp") +
+                        appendNewLine("rnbqkbnr"));
     }
 
 

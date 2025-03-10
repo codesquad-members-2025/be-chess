@@ -28,12 +28,6 @@ public class PieceTest {
         assertThat(piece.getRepresentation()).isEqualTo(representation);
     }
 
-//    @Test
-//    public void create_기본생성자() throws Exception {
-//        Piece pawn = new Piece();
-//        assertEquals(Piece.WHITE_COLOR, pawn.getColor());
-//        assertEquals(Piece.WHITE_REPRESENTATION, pawn.getRepresentation());
-//    }
 
 
 

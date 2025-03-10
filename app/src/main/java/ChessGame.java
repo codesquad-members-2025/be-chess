@@ -13,7 +13,7 @@ public class ChessGame {
 
             if(command.equals("start")){
                 board.initialize();
-                String boardStatus = board.print();
+                String boardStatus = board.showBoard();
                 System.out.println(boardStatus);
             }
 
