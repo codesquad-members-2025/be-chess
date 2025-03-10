@@ -20,7 +20,7 @@ public class BoardTest {
     @DisplayName("기물이 체스판에 올바르게 배치되었는지 확인")
     public void create() throws Exception {
         board.initialize();
-        assertThat(board.pieceCount()).isEqualTo(32);
+        assertThat(board.totalPieceCount()).isEqualTo(32);
         String blankRank = appendNewLine("........");
         assertThat(board.showBoard()).isEqualTo(
                 appendNewLine("RNBQKBNR") +

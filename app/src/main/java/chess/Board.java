@@ -66,6 +66,18 @@ public class Board {
         }
         return cnt;
     }
+
+    public int totalPieceCount() {
+        int cnt = 0;
+        for (Rank row : board) {
+            for (Piece piece : row.getRow()) {
+                if (piece.getType() != Piece.Type.NO_PIECE) {
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
 }
 
 
