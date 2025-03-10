@@ -32,5 +32,10 @@ public class PieceTest {
         assertThat(piece.getRepresentation()).isEqualTo(representation);
     }
 
-
+    @Test
+    @DisplayName("기물의 색상이 흰색이거나 검은색이어야한다.")
+    void isWhiteAndBlack() throws Exception {
+        assertThat(Piece.createWhitePawn().isWhite());
+        assertThat(Piece.createBlackPawn().isBlack());
+    }
 }
