@@ -3,131 +3,215 @@ package chess;
 import chess.pieces.Piece;
 import chess.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+
+import static chess.pieces.Piece.*;
 
 public class Board {
-    private static final int WHITE_PAWN_RANK = 6;
-    private static final int BLACK_PAWN_RANK = 1;
-    private static final int MIN_PAWN_INDEX = 0;
-    private static final int MAX_PAWN_INDEX = 15;
-    private static final int MAX_PAWN_SIZE = 16;
+    private static final int MAX_PIECE_SIZE = 32;
     private static final int FILE_SIZE = 8;
-    private static final int RANK_SIZE = 8;
+
+    public static final int RANK_SIZE = 8;
     private final List<Piece> pieces = new ArrayList<>();
-    private final char[][] board = new char[RANK_SIZE][FILE_SIZE];
+    private final List<Rank> board = new ArrayList<>();
+
     public void initialize() {
         addPieces();
-        initializeEmptyBoard();
         initializeBoard();
     }
 
-    private void initializeBoard() {
-        for (int file = 0; file < FILE_SIZE; file++) {
-            board[BLACK_PAWN_RANK][file] = pieces.get(file*2+1).getRepresentation();
-            board[WHITE_PAWN_RANK][file] = pieces.get(file*2).getRepresentation();
-        }
-        int temp = 7;
-        int cnt = MAX_PAWN_SIZE;
-        for (int file = 0; file < 3; file++) {
-            board[0][file] = pieces.get(cnt++).getRepresentation();
-            board[0][temp - file] = pieces.get(cnt++).getRepresentation();
-            board[7][file] = pieces.get(cnt++).getRepresentation();
-            board[7][temp - file] = pieces.get(cnt++).getRepresentation();
-        }
-
-            board[0][3] = pieces.get(cnt++).getRepresentation();
-            board[0][4] = pieces.get(cnt++).getRepresentation();
-            board[7][3] = pieces.get(cnt++).getRepresentation();
-            board[7][4] = pieces.get(cnt).getRepresentation();
-    }
-
-    private void initializeEmptyBoard() {
+    public void initializeEmpty() {
+        Rank emptyRank = new Rank(createEmptyRank());
         for (int rank = 0; rank < RANK_SIZE; rank++) {
-            board[rank] = "........".toCharArray();
+            board.add(emptyRank);
         }
     }
 
-    private void addPieces() {
-        for (int i = 0; i < 8; i++) { // 폰
-            pieces.add(Piece.createWhitePawn());
-            pieces.add(Piece.createBlackPawn());
-        }
+    public void move(String position, Piece piece) {
+        Position pos = new Position(position);
 
-
-        pieces.add(Piece.createBlackRook());
-        pieces.add(Piece.createBlackRook());
-        pieces.add(Piece.createWhiteRook());
-        pieces.add(Piece.createWhiteRook());
-
-
-        pieces.add(Piece.createBlackKnight());
-        pieces.add(Piece.createBlackKnight());
-        pieces.add(Piece.createWhiteKnight());
-        pieces.add(Piece.createWhiteKnight());
-
-
-        pieces.add(Piece.createBlackBishop());
-        pieces.add(Piece.createBlackBishop());
-        pieces.add(Piece.createWhiteBishop());
-        pieces.add(Piece.createWhiteBishop());
-
-
-        pieces.add(Piece.createBlackQueen());
-        pieces.add(Piece.createBlackKing());
-        pieces.add(Piece.createWhiteQueen());
-        pieces.add(Piece.createWhiteKing());
+        Rank rank = board.get(pos.getY());
+        Rank updatedRank = rank.updatePiece(pos.getX(), piece);
+        board.set(pos.getY(), updatedRank);
     }
 
-    public void add(Piece piece) {
-        validatePawnSize();
-        pieces.add(piece);
-    }
     public int pieceCount() {
         return pieces.size();
     }
 
-    public Piece findPawn(int index) {
-        validateIndex(index);
-        return pieces.get(index);
-    }
-
-    public String getWhitePawnsResult() {
-        return getResult(WHITE_PAWN_RANK);
-    }
-    public String getBlackPawnsResult() {
-        return getResult(BLACK_PAWN_RANK);
+    public int getSpecificPieceCount(Type type, Color color) {
+        int count = 0;
+        for (Rank rank : board) {
+            for (int file = 0; file < FILE_SIZE; file++) {
+                Piece piece = rank.getPiece(file);
+                if (piece.getColor().equals(color) && piece.getType().equals(type)) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
+        for (int rank = RANK_SIZE; rank >= 1; rank--) {
+            sb.append(StringUtils.appendNewLine(board.get(rank-1).toString()));
+        }
+        return sb.toString();
+    }
+
+    public Piece findPiece(String position) {
+
+        Position pos = new Position(position);
+        return board.get(pos.getY()).getPiece(pos.getX());
+    }
+
+
+    private void initializeBoard() {
+
+        board.add(new Rank(createInitialOneRank()));
+        board.add(new Rank(createInitialTwoRank()));
+
+        Rank emptyRank = new Rank(createEmptyRank());
+        for (int rank = 6; rank > 2; rank--) { // 6~3 랭크
+            board.add(emptyRank);
+        }
+
+        board.add(new Rank(createInitialSevenRank()));
+        board.add(new Rank(createInitialEightRank()));
+
+    }
+
+    private List<Piece> createInitialSevenRank() {
+        List<Piece> initialSevenRank = new ArrayList<>();
+        for (int file = 0; file < FILE_SIZE; file++) {
+            initialSevenRank.add(pieces.get(file));
+        }
+        return initialSevenRank;
+    }
+
+
+    private List<Piece> createInitialEightRank() {
+        List<Piece> initialEightRank = new ArrayList<>();
+        for (int file = 0; file < FILE_SIZE; file++) {
+            initialEightRank.add(pieces.get(8+file));
+        }
+        return initialEightRank;
+    }
+    private List<Piece> createInitialTwoRank() {
+        List<Piece> initialTwoRank = new ArrayList<>();
+        for (int file = 0; file < FILE_SIZE; file++) {
+            initialTwoRank.add(pieces.get(24+file));
+        }
+        return initialTwoRank;
+    }
+
+    private List<Piece> createInitialOneRank() {
+        List<Piece> initialOneRank = new ArrayList<>();
+        for (int file = 0; file < FILE_SIZE; file++) {
+            initialOneRank.add(pieces.get(16 + file));
+        }
+        return initialOneRank;
+    }
+    private List<Piece> createEmptyRank() {
+        Piece blank = createBlank();
+        List<Piece> emptyRank = new ArrayList<>();
+        for (int file = 0; file < FILE_SIZE; file++) {
+            emptyRank.add(blank);
+        }
+        return emptyRank;
+    }
+
+    private void addPieces() {
+        for (int i = 0; i < 8; i++) { // 폰
+            add(createBlackPawn());
+        }
+
+        add(createBlackRook());
+        add(createBlackKnight());
+        add(createBlackBishop());
+        add(createBlackQueen());
+        add(createBlackKing());
+        add(createBlackBishop());
+        add(createBlackKnight());
+        add(createBlackRook());
+
+        add(createWhiteRook());
+        add(createWhiteKnight());
+        add(createWhiteBishop());
+        add(createWhiteQueen());
+        add(createWhiteKing());
+        add(createWhiteBishop());
+        add(createWhiteKnight());
+        add(createWhiteRook());
+
+        for (int i = 0; i < 8; i++) { // 폰
+            add(createWhitePawn());
+        }
+    }
+
+    private void add(Piece piece) {
+        validatePieceSize();
+        pieces.add(piece);
+    }
+
+    private void validatePieceSize() {
+        if (pieces.size() > MAX_PIECE_SIZE) {
+            throw new IllegalStateException("폰은 " + MAX_PIECE_SIZE + "개를 초과할 수 없습니다.");
+        }
+    }
+
+ 
+
+    public double calculatePoint(Color color) {
+        double point = 0.0;
+        List<Integer> pawnFileList = new ArrayList<>();
+
         for (int rank = 0; rank < RANK_SIZE; rank++) {
             for (int file = 0; file < FILE_SIZE; file++) {
-                sb.append(board[rank][file]);
+                Piece piece = board.get(rank).getPiece(file);
+                if (piece.getColor().equals(color)) {
+                    if(piece.getType().equals(Type.PAWN)){
+                        pawnFileList.add(file);
+                    }
+                    point += piece.getType().getDefaultPoint();
+                }
             }
-            sb = new StringBuilder(StringUtils.appendNewLine(sb.toString()));
         }
-        return sb.toString();
+        // 같은 세로줄 Pawn 점수 후처리
+        for (Integer file : new HashSet<>(pawnFileList)) {
+            int frequency = Collections.frequency(pawnFileList, file);
+            if (frequency >= 2) {
+                point -= (0.5 * frequency);
+            }
+        }
+        return point;
     }
 
-    private String getResult(int rank) {
-        StringBuilder sb = new StringBuilder();
-        for (int file = 0; file < FILE_SIZE; file++) {
-            sb.append(board[rank][file]);
-        }
-        return sb.toString();
+    public List<Piece> getSortedPiecesByPoint(Color color) {
+        List<Piece> specificColorPieces = getSpecificColorPieces(color);
+        specificColorPieces.sort(Comparator.comparingDouble(piece -> piece.getType().getDefaultPoint()));
+        return specificColorPieces;
     }
 
-    private void validatePawnSize() {
-        if (pieces.size() > MAX_PAWN_SIZE) {
-            throw new IllegalStateException("폰은 " + MAX_PAWN_SIZE + "개를 초과할 수 없습니다.");
-        }
+
+    public List<Piece> getSortedPiecesByPointReversed(Color color) {
+        List<Piece> specificColorPieces = getSpecificColorPieces(color);
+        specificColorPieces.sort(Comparator.comparingDouble(piece -> piece.getType().getDefaultPoint()));
+        return specificColorPieces.reversed();
     }
 
-    private void validateIndex(int index) {
-        if(MIN_PAWN_INDEX> index || index > MAX_PAWN_INDEX){
-            throw new IllegalStateException(index + "번의 폰은 없습니다. " + MIN_PAWN_INDEX + "부터 " + MAX_PAWN_INDEX + " 중 골라주세요.");
+    private List<Piece> getSpecificColorPieces(Color color) {
+        List<Piece> specificColorPieces = new ArrayList<>();
+        for (Rank rank : board) {
+            for (int file = 0; file < FILE_SIZE; file++) {
+                Piece piece = rank.getPiece(file);
+                if (piece.getColor().equals(color)) {
+                    specificColorPieces.add(piece);
+                }
+            }
         }
+        return specificColorPieces;
     }
 }
-
