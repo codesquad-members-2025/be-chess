@@ -2,7 +2,7 @@ package pieces;
 
 public class Piece {
     public enum Color {
-        WHITE, BLACK, NOCOLOR
+        WHITE, BLACK, NO_COLOR
     }
 
     public enum Type {
@@ -24,12 +24,11 @@ public class Piece {
         public char getRepresentation() {
             return representation;
         }
-    }
 
+    }
     private String name;
     private final Color color;
     private final Type type;
-
 
     public Piece(Color color, Type type) {
         this.color = color;
@@ -114,6 +113,12 @@ public class Piece {
         Piece whitePawn = new Piece(Color.BLACK, Type.KING);
         whitePawn.name = "king";
         return whitePawn;
+    }
+
+    public static Piece createBlank() {
+        Piece blank = new Piece(Color.NO_COLOR, Type.NO_PIECE);
+        blank.name = "blank";
+        return blank;
     }
 
     public boolean isWhite() {
