@@ -25,11 +25,11 @@ public class BoardTest {
 
         //Then
         String blankRank = appendNewLine("........");
-        String expectedBoard = appendNewLine("♜♞♝♛♚♝♞♜") +
-            appendNewLine("♟♟♟♟♟♟♟♟") +
+        String expectedBoard = appendNewLine("RNBQKBNR") +
+            appendNewLine("PPPPPPPP") +
             blankRank + blankRank + blankRank + blankRank +
-            appendNewLine("♙♙♙♙♙♙♙♙") +
-            appendNewLine("♖♘♗♕♔♗♘♖");
+            appendNewLine("pppppppp") +
+            appendNewLine("rnbqkbnr");
 
         assertThat(pieceCount).isEqualTo(32);
         assertThat(actualBoard).isEqualTo(expectedBoard);
