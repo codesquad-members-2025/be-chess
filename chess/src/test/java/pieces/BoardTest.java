@@ -14,6 +14,7 @@ public class BoardTest {
     private Pawn white;
     private Pawn black;
 
+    //중복 제거
     @Before
     public void setUp(){
         board = new Board();

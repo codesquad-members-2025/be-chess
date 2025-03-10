@@ -45,12 +45,13 @@ public class Board {
             }
         }
     }
-
+    //initializeBoard()의 중복 리펙토링
     public char getPawnRepresentation(int row, int col) {
         if (row == 1) return blackPawns.get(col).getRepresentation();
         if (row == 6) return whitePawns.get(col).getRepresentation();
         return '.';
     }
+    //폰의 리스트의 값들을 StringBuilder로 변환해줌
     public String getPawnsResult(List<Pawn> pawns) {
         StringBuilder sb = new StringBuilder();
         for (Pawn pawn : pawns) {
@@ -66,6 +67,8 @@ public class Board {
     public String getBlackPawnsResult() {
         return getPawnsResult(blackPawns);
     }
+
+    //체스판의 결과를 출력
     public String print() {
         StringBuilder board_sb = new StringBuilder();
         for (int i = 0; i < BOARD_SIZE; i++) {
