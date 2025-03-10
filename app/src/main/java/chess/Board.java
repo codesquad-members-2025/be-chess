@@ -45,10 +45,10 @@ public class Board {
 
 
 
-    public String print() {
+    public String showBoard() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 8; i++) {
-            sb.append(board.get(i).toString());
+            sb.append(board.get(i).print());
             sb.append(appendNewLine(""));
         }
         return sb.toString();
