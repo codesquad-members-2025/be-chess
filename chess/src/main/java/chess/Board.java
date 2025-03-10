@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private final ArrayList<Pawn> boardList = new ArrayList<>();
-    private final List<Pawn> whitePawns = new ArrayList<>();
-    private final List<Pawn> blackPawns = new ArrayList<>();
+    private final ArrayList<Piece> boardList = new ArrayList<>();
+    private final List<Piece> whitePawns = new ArrayList<>();
+    private final List<Piece> blackPawns = new ArrayList<>();
     private static final int BOARD_SIZE = 8; // 캡슐화 및 OOP 준수를 위해 private 적용
     char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
 
-    public void add(Pawn pawn) {
+    public void add(Piece pawn) {
         boardList.add(pawn);
     }
 
@@ -19,7 +19,7 @@ public class Board {
     }
 
     // 인덱스를 사용하여 Pawn 객체 찾기
-    public Pawn findPawn(int idx) {
+    public Piece findPawn(int idx) {
         if (isValidIndex(idx)) {
             return boardList.get(idx);
         }
@@ -33,8 +33,8 @@ public class Board {
 
     public void initializePawns() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            whitePawns.add(new Pawn());
-            blackPawns.add(new Pawn("black"));
+            whitePawns.add(new Piece(Color.WHITE, Type.PAWN));
+            blackPawns.add(new Piece(Color.BLACK, Type.PAWN));
         }
     }
 
@@ -47,15 +47,15 @@ public class Board {
     }
     //initializeBoard()의 중복 리펙토링
     public char getPawnRepresentation(int row, int col) {
-        if (row == 1) return blackPawns.get(col).getRepresentation();
-        if (row == 6) return whitePawns.get(col).getRepresentation();
+        if (row == 1) return blackPawns.get(col).getColor().getRepresentation();
+        if (row == 6) return whitePawns.get(col).getColor().getRepresentation();
         return '.';
     }
     //폰의 리스트의 값들을 StringBuilder로 변환해줌
-    public String getPawnsResult(List<Pawn> pawns) {
+    public String getPawnsResult(List<Piece> pawns) {
         StringBuilder sb = new StringBuilder();
-        for (Pawn pawn : pawns) {
-            sb.append(pawn.getRepresentation());
+        for (Piece pawn : pawns) {
+            sb.append(pawn.getColor().getRepresentation());
         }
         return sb.toString();
     }

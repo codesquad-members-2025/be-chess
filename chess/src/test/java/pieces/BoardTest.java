@@ -3,23 +3,24 @@ package pieces;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import chess.Board;
-import chess.Main;
-import chess.Pawn;
+import chess.Color;
+import chess.Piece;
+import chess.Type;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BoardTest {
 
     private Board board;
-    private Pawn white;
-    private Pawn black;
+    private Piece white;
+    private Piece black;
 
     //중복 제거
     @Before
     public void setUp(){
         board = new Board();
-        white = new Pawn(Pawn.WHITE_COLOR);
-        black = new Pawn(Pawn.BLACK_COLOR);
+        white = new Piece(Color.WHITE, Type.PAWN);
+        black = new Piece(Color.BLACK, Type.PAWN);
     }
 
     @Test
