@@ -2,6 +2,7 @@ package chess;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import pieces.Piece;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,5 +30,18 @@ public class BoardTest {
                         appendNewLine("rnbqkbnr")
                 );
     }
+
+    @Test
+    @DisplayName("특정 기물 개수 확인")
+    public void testPieceCount() {
+        board.initialize();
+        assertThat(board.pieceCount(Piece.Color.BLACK, Piece.Type.PAWN)).isEqualTo(8);
+        assertThat(board.pieceCount(Piece.Color.WHITE, Piece.Type.PAWN)).isEqualTo(8);
+
+        assertThat(board.pieceCount(Piece.Color.BLACK, Piece.Type.ROOK)).isEqualTo(2);
+        assertThat(board.pieceCount(Piece.Color.WHITE, Piece.Type.ROOK)).isEqualTo(2);
+    }
+
+
 }
 
