@@ -54,11 +54,11 @@ public class Board {
         return sb.toString();
     }
 
-    public int pieceCount() {
+    public int pieceCount(Piece.Color color, Piece.Type type) {
         int cnt = 0;
         for (Rank row : board) {
             for (Piece piece : row.getRow()) {
-                if  (piece.getType() != Type.NO_PIECE) {
+                if  (piece.getColor() == color&& piece.getType() == type) {
                     cnt ++;
                 }
             }
