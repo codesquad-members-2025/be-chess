@@ -126,6 +126,10 @@ public abstract class Piece implements Comparable<Piece>{
         return type.getDefaultPoint();
     }
 
+    public char getRepresentation() {
+        return color.equals(Color.WHITE) ? type.getWhiteRepresentation() : type.getBlackRepresentation();
+    }
+
     @Override
     public int compareTo(Piece other){
         return Double.compare(this.getPoint(),other.getPoint());
@@ -142,10 +146,6 @@ public abstract class Piece implements Comparable<Piece>{
     @Override
     public int hashCode() {
         return Objects.hash(color, type); // color와 type이 같으면 같은 hashCode 반환
-    }
-
-    public char getRepresentation() {
-        return color.equals(Color.WHITE) ? type.getWhiteRepresentation() : type.getBlackRepresentation();
     }
 
     public abstract boolean verifyMovePosition(Board board, Coordinate sourcePosition, Coordinate targetPosition);
