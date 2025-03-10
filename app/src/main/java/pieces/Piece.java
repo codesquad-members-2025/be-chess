@@ -1,5 +1,8 @@
 package pieces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Piece {
     public enum Color {
         WHITE, BLACK, NO_COLOR
@@ -43,73 +46,97 @@ public class Piece {
         return type.getRepresentation();
     }
 
-    public static Piece createWhitePawn() {
+    public static List<Piece> createWhite() {
+        List<Piece> whitePieces = new ArrayList<>();
+        whitePieces.add(createWhitePawn());
+        whitePieces.add(createWhiteRook());
+        whitePieces.add(createWhiteKnight());
+        whitePieces.add(createWhiteBishop());
+        whitePieces.add(createWhiteQueen());
+        whitePieces.add(createWhiteKing());
+
+        return whitePieces;
+    }
+
+    public static List<Piece> createBlack() {
+        List<Piece> blackPieces = new ArrayList<>();
+        blackPieces.add(createBlackPawn());
+        blackPieces.add(createBlackRook());
+        blackPieces.add(createBlackKnight());
+        blackPieces.add(createBlackBishop());
+        blackPieces.add(createBlackQueen());
+        blackPieces.add(createBlackKing());
+
+        return blackPieces;
+    }
+
+    private static Piece createWhitePawn() {
         Piece whitePawn = new Piece(Color.WHITE, Type.PAWN);
         whitePawn.name = "pawn";
         return whitePawn;
     }
 
-    public static Piece createBlackPawn() {
+    private static Piece createBlackPawn() {
         Piece whitePawn = new Piece(Color.BLACK, Type.PAWN);
         whitePawn.name = "pawn";
         return whitePawn;
     }
 
-    public static Piece createWhiteRook() {
+    private static Piece createWhiteRook() {
         Piece whitePawn = new Piece(Color.WHITE, Type.ROOK);
         whitePawn.name = "rook";
         return whitePawn;
     }
 
-    public static Piece createBlackRook() {
+    private static Piece createBlackRook() {
         Piece whitePawn = new Piece(Color.BLACK, Type.ROOK);
         whitePawn.name = "rook";
         return whitePawn;
     }
 
-    public static Piece createWhiteKnight() {
+    private static Piece createWhiteKnight() {
         Piece whitePawn = new Piece(Color.WHITE, Type.KNIGHT);
         whitePawn.name = "knight";
         return whitePawn;
     }
 
-    public static Piece createBlackKnight() {
+    private static Piece createBlackKnight() {
         Piece whitePawn = new Piece(Color.BLACK, Type.KNIGHT);
         whitePawn.name = "knight";
         return whitePawn;
     }
 
-    public static Piece createWhiteBishop() {
+    private static Piece createWhiteBishop() {
         Piece whitePawn = new Piece(Color.WHITE, Type.BISHOP);
         whitePawn.name = "bishop";
         return whitePawn;
     }
 
-    public static Piece createBlackBishop() {
+    private static Piece createBlackBishop() {
         Piece whitePawn = new Piece(Color.BLACK, Type.BISHOP);
         whitePawn.name = "bishop";
         return whitePawn;
     }
 
-    public static Piece createWhiteQueen() {
+    private static Piece createWhiteQueen() {
         Piece whitePawn = new Piece(Color.WHITE, Type.QUEEN);
         whitePawn.name = "queen";
         return whitePawn;
     }
 
-    public static Piece createBlackQueen() {
+    private static Piece createBlackQueen() {
         Piece whitePawn = new Piece(Color.BLACK, Type.QUEEN);
         whitePawn.name = "queen";
         return whitePawn;
     }
 
-    public static Piece createWhiteKing() {
+    private static Piece createWhiteKing() {
         Piece whitePawn = new Piece(Color.WHITE, Type.KING);
         whitePawn.name = "king";
         return whitePawn;
     }
 
-    public static Piece createBlackKing() {
+    private static Piece createBlackKing() {
         Piece whitePawn = new Piece(Color.BLACK, Type.KING);
         whitePawn.name = "king";
         return whitePawn;

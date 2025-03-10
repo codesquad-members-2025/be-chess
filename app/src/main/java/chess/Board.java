@@ -10,6 +10,8 @@ import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private List<Piece> pieces;
+    private List<Piece> whitePieces;
+    private List<Piece> blackPieces;
     private char[][] board;
     private int piecesIndex;
 
@@ -17,6 +19,8 @@ public class Board {
         this.pieces = new ArrayList<>();
         this.board = new char[8][8];
         this.piecesIndex = 0;
+        this.whitePieces = Piece.createWhite();
+        this.blackPieces = Piece.createBlack();
         for (char[] types : board) {
             Arrays.fill(types, Piece.Type.NO_PIECE.getRepresentation() );
         }
@@ -45,31 +49,31 @@ public class Board {
 
     public void addPawns() {
         for (int i = 0; i < board.length; ++i) {
-            pieces.add(Piece.createWhitePawn());
-            pieces.add(Piece.createBlackPawn());
+            pieces.add(whitePieces.getFirst());
+            pieces.add(blackPieces.getFirst());
         }
     }
 
     public void addWhitePieces() {
-        pieces.add(Piece.createWhiteRook());
-        pieces.add(Piece.createWhiteKnight());
-        pieces.add(Piece.createWhiteBishop());
-        pieces.add(Piece.createWhiteQueen());
-        pieces.add(Piece.createWhiteKing());
-        pieces.add(Piece.createWhiteBishop());
-        pieces.add(Piece.createWhiteKnight());
-        pieces.add(Piece.createWhiteRook());
+        pieces.add(whitePieces.get(1));
+        pieces.add(whitePieces.get(2));
+        pieces.add(whitePieces.get(3));
+        pieces.add(whitePieces.get(4));
+        pieces.add(whitePieces.get(5));
+        pieces.add(whitePieces.get(3));
+        pieces.add(whitePieces.get(2));
+        pieces.add(whitePieces.get(1));
     }
 
     public void addBlackPieces() {
-        pieces.add(Piece.createBlackRook());
-        pieces.add(Piece.createBlackKnight());
-        pieces.add(Piece.createBlackBishop());
-        pieces.add(Piece.createBlackQueen());
-        pieces.add(Piece.createBlackKing());
-        pieces.add(Piece.createBlackBishop());
-        pieces.add(Piece.createBlackKnight());
-        pieces.add(Piece.createBlackRook());
+        pieces.add(blackPieces.get(1));
+        pieces.add(blackPieces.get(2));
+        pieces.add(blackPieces.get(3));
+        pieces.add(blackPieces.get(4));
+        pieces.add(blackPieces.get(5));
+        pieces.add(blackPieces.get(3));
+        pieces.add(blackPieces.get(2));
+        pieces.add(blackPieces.get(1));
     }
 
     public void placePawn() {
