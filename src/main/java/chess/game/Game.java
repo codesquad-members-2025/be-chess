@@ -26,17 +26,25 @@ public class Game {
 
     public void move(String location, Piece piece){
         Position position = getPosition(location);
-        if(BoardPositionValidator.isWithinBoard(position)){
-            board[position.yPos()][position.xPos()] = piece;
+        if(!BoardPositionValidator.isWithinBoard(position)){
+            throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
         }
-        throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
+        board[position.yPos()][position.xPos()] = piece;
     }
 
     public void move(String sourcePotion, String targetPotion){
         Position sourcePosition = getPosition(sourcePotion);
         Position targetPosition = getPosition(targetPotion);
-        if(BoardPositionValidator.isWithinBoard(targetPosition)) throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
-        board[targetPosition.yPos()][targetPosition.xPos()] = board[sourcePosition.yPos()][sourcePosition.xPos()];
+        if(!BoardPositionValidator.isWithinBoard(targetPosition)) throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
+        validateAndChangePosition(sourcePosition, targetPosition);
+    }
+
+    private void validateAndChangePosition(Position sourcePosition, Position targetPosition) {
+        Piece sourePiece = board[sourcePosition.yPos()][sourcePosition.xPos()];
+        if(!sourePiece.canMove(targetPosition)){
+            throw new IllegalArgumentException("해당 위치로 이동할 수 없는 기물입니다.");
+        }
+        board[targetPosition.yPos()][targetPosition.xPos()] = sourePiece;
         board[sourcePosition.yPos()][sourcePosition.xPos()] = Piece.createBlank();
     }
 
@@ -66,6 +74,15 @@ public class Game {
         }
 
         return point;
+    }
+
+    public boolean isValidMove(String source,Color currentTurn) {
+        Piece piece = Board.findPiece(source);
+        if (piece == null) {
+            return false;
+        }
+
+        return piece.getColor() == currentTurn;
     }
 
 
