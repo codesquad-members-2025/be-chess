@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PieceTest {
@@ -17,6 +18,15 @@ public class PieceTest {
         verifyPiece(Piece.createWhiteBishop(), Piece.createBlackBishop(), Piece.Type.BISHOP);
         verifyPiece(Piece.createWhiteQueen(), Piece.createBlackQueen(), Piece.Type.QUEEN);
         verifyPiece(Piece.createWhiteKing(), Piece.createBlackKing(), Piece.Type.KING);
+    }
+
+    @Test
+    @DisplayName("빈칸이 생성되어야 한다.")
+    void create_blank() {
+        Piece blank = Piece.createBlank();
+        assertFalse(blank.isWhite());
+        assertFalse(blank.isBlack());
+        assertThat(blank.getType()).isEqualTo(Piece.Type.NO_PIECE.getRepresentation());
     }
 
     private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Piece.Type type) {
