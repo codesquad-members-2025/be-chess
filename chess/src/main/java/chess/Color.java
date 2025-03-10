@@ -2,7 +2,6 @@ package chess;
 
 public enum Color {
     WHITE("white",'p'), BLACK("black",'P');
-
     private final String colorName;
     private final char representation;
 

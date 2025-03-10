@@ -8,7 +8,6 @@ import chess.Piece;
 import chess.Type;
 import org.junit.Before;
 import org.junit.Test;
-
 public class BoardTest {
 
     private Board board;

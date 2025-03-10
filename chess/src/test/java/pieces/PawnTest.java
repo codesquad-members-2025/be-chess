@@ -6,7 +6,6 @@ import chess.Type;
 import org.junit.Test; //  No matching tests found in any candidate test task. 에러 해결
 
 import static org.junit.Assert.assertEquals;
-
 public class PawnTest {
     @Test
     public void create_기본생성자() throws Exception {

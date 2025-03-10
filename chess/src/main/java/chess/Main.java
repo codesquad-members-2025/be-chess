@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         Board board = new Board();
         System.out.println("start를 입력하면 게임이 시작됩니다");
         while(true){

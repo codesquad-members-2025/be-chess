@@ -10,6 +10,7 @@ public class Board {
     private static final int BOARD_SIZE = 8; // 캡슐화 및 OOP 준수를 위해 private 적용
     char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
 
+
     public void add(Piece pawn) {
         boardList.add(pawn);
     }
