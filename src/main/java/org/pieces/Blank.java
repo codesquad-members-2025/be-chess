@@ -2,8 +2,6 @@ package org.pieces;
 
 import org.chess.Board;
 import org.chess.Coordinate;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Blank extends Piece{
     public Blank(Color color){
