@@ -21,6 +21,10 @@ public class Rank {
         return row;
     }
 
+    public Piece getPiece(int index) {
+        return row.get(index);
+    }
+
     //row의 기물들을 문자열로 변환하여 반환
     public String print() {
         StringBuilder sb = new StringBuilder();
@@ -29,4 +33,5 @@ public class Rank {
         }
         return sb.toString();
     }
+
 }

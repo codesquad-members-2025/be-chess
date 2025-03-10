@@ -43,8 +43,6 @@ public class Board {
     }
 
 
-
-
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 8; i++) {
@@ -78,6 +76,12 @@ public class Board {
         }
         return cnt;
     }
+
+    public Piece findPiece(String position) {
+        Position pos = new Position(position);
+        return board.get(pos.getRow()).getPiece(pos.getCol());
+    }
+
 }
 
 

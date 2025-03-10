@@ -62,4 +62,14 @@ public class Piece {
     public boolean isBlack() {
         return color.equals(Color.BLACK);
     }
+
+    @Override
+    //Unit의 assertThat(A).isEqualTo(B)는 내부적으로 equals()를 자동 호출
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return color == piece.color && type == piece.type;
+    }
+
 }
