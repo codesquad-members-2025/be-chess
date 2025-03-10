@@ -34,8 +34,8 @@ public class Board {
         blackPawnsList = new ArrayList<>();
 
         for(int i = 0; i < 8; i++){
-            whitePawnsList.add(Piece.of(Piece.WHITE_COLOR, Piece.WHITE_REPRESENTATION));
-            blackPawnsList.add(Piece.of(Piece.BLACK_COLOR, Piece.BLACK_REPRESENTATION));
+            whitePawnsList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION));
+            blackPawnsList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION));
         }
 
         initializeWhitePawnsResult();
