@@ -106,4 +106,12 @@ public class Piece {
         whitePawn.name = "king";
         return whitePawn;
     }
+
+    public boolean isWhite() {
+       return color.equals(Piece.WHITE_COLOR);
+    }
+
+    public boolean isBlack() {
+        return color.equals(Piece.BLACK_COLOR);
+    }
 }
