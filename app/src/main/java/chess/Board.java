@@ -10,15 +10,15 @@ import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private List<Piece> pieces;
-    private char[][] board;
+    private Piece.Type[][] board;
     private int piecesIndex;
 
     public Board() {
         this.pieces = new ArrayList<>();
-        this.board = new char[8][8];
+        this.board = new Piece.Type[8][8];
         this.piecesIndex = 0;
-        for (char[] chars : board) {
-            Arrays.fill(chars, '.' );
+        for (Piece.Type[] types : board) {
+            Arrays.fill(types, Piece.Type.NO_PIECE );
         }
     }
 
@@ -129,10 +129,10 @@ public class Board {
 
     public String showBoard() {
         StringBuilder chessBoard = new StringBuilder();
-        for (char[] chars : board) {
+        for (Piece.Type[] types : board) {
             StringBuilder line = new StringBuilder();
             for (int j = 0; j < board.length; ++j) {
-                line.append(chars[j]);
+                line.append(types[j].getRepresentation());
             }
             line = new StringBuilder(appendNewLine(line.toString()));
             chessBoard.append(line);

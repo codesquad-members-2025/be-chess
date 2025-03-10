@@ -5,25 +5,39 @@ public class Piece {
         WHITE, BLACK, NOCOLOR
     }
 
-    public static final char WHITE_PAWN_REPRESENTATION = '♙';
-    public static final char BLACK_PAWN_REPRESENTATION = '♟';
-    public static final char WHITE_ROOK_REPRESENTATION = '♖';
-    public static final char BLACK_ROOK_REPRESENTATION = '♜';
-    public static final char WHITE_KNIGHT_REPRESENTATION = '♘';
-    public static final char BLACK_KNIGHT_REPRESENTATION = '♞';
-    public static final char WHITE_BISHOP_REPRESENTATION = '♗';
-    public static final char BLACK_BISHOP_REPRESENTATION = '♝';
-    public static final char WHITE_QUEEN_REPRESENTATION = '♕';
-    public static final char BLACK_QUEEN_REPRESENTATION = '♛';
-    public static final char WHITE_KING_REPRESENTATION = '♔';
-    public static final char BLACK_KING_REPRESENTATION = '♚';
+    public enum Type {
+        WHITE_PAWN('♙'),
+        BLACK_PAWN('♟'),
+        WHITE_ROOK('♖'),
+        BLACK_ROOK('♜'),
+        WHITE_KNIGHT('♘'),
+        BLACK_KNIGHT('♞'),
+        WHITE_BISHOP('♗'),
+        BLACK_BISHOP('♝'),
+        WHITE_QUEEN('♕'),
+        BLACK_QUEEN('♛'),
+        WHITE_KING('♔'),
+        BLACK_KING('♚'),
+        NO_PIECE('.')
+        ;
+
+        private char representation;
+
+        Type(char representation) {
+            this.representation = representation;
+        }
+
+        public char getRepresentation() {
+            return representation;
+        }
+    }
 
     private String name;
     private final Color color;
-    private final char representation;
+    private final Type representation;
 
 
-    public Piece(Color color, char representation) {
+    public Piece(Color color, Type representation) {
         this.color = color;
         this.representation = representation;
     }
@@ -32,78 +46,78 @@ public class Piece {
         return color;
     }
 
-    public char getRepresentation() {
+    public Type getRepresentation() {
         return representation;
     }
 
     public static Piece createWhitePawn() {
-        Piece whitePawn = new Piece(Color.WHITE, WHITE_PAWN_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.WHITE, Type.WHITE_PAWN);
         whitePawn.name = "pawn";
         return whitePawn;
     }
 
     public static Piece createBlackPawn() {
-        Piece whitePawn = new Piece(Color.BLACK, BLACK_PAWN_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.BLACK, Type.BLACK_PAWN);
         whitePawn.name = "pawn";
         return whitePawn;
     }
 
     public static Piece createWhiteRook() {
-        Piece whitePawn = new Piece(Color.WHITE, WHITE_ROOK_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.WHITE, Type.WHITE_ROOK);
         whitePawn.name = "rook";
         return whitePawn;
     }
 
     public static Piece createBlackRook() {
-        Piece whitePawn = new Piece(Color.BLACK, BLACK_ROOK_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.BLACK, Type.BLACK_ROOK);
         whitePawn.name = "rook";
         return whitePawn;
     }
 
     public static Piece createWhiteKnight() {
-        Piece whitePawn = new Piece(Color.WHITE, WHITE_KNIGHT_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.WHITE, Type.WHITE_KNIGHT);
         whitePawn.name = "knight";
         return whitePawn;
     }
 
     public static Piece createBlackKnight() {
-        Piece whitePawn = new Piece(Color.BLACK, BLACK_KNIGHT_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.BLACK, Type.BLACK_KNIGHT);
         whitePawn.name = "knight";
         return whitePawn;
     }
 
     public static Piece createWhiteBishop() {
-        Piece whitePawn = new Piece(Color.WHITE, WHITE_BISHOP_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.WHITE, Type.WHITE_BISHOP);
         whitePawn.name = "bishop";
         return whitePawn;
     }
 
     public static Piece createBlackBishop() {
-        Piece whitePawn = new Piece(Color.BLACK, BLACK_BISHOP_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.BLACK, Type.BLACK_BISHOP);
         whitePawn.name = "bishop";
         return whitePawn;
     }
 
     public static Piece createWhiteQueen() {
-        Piece whitePawn = new Piece(Color.WHITE, WHITE_QUEEN_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.WHITE, Type.WHITE_QUEEN);
         whitePawn.name = "queen";
         return whitePawn;
     }
 
     public static Piece createBlackQueen() {
-        Piece whitePawn = new Piece(Color.BLACK, BLACK_QUEEN_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.BLACK, Type.BLACK_QUEEN);
         whitePawn.name = "queen";
         return whitePawn;
     }
 
     public static Piece createWhiteKing() {
-        Piece whitePawn = new Piece(Color.WHITE, WHITE_KING_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.WHITE, Type.WHITE_KING);
         whitePawn.name = "king";
         return whitePawn;
     }
 
     public static Piece createBlackKing() {
-        Piece whitePawn = new Piece(Color.BLACK, BLACK_KING_REPRESENTATION);
+        Piece whitePawn = new Piece(Color.BLACK, Type.BLACK_KING);
         whitePawn.name = "king";
         return whitePawn;
     }
