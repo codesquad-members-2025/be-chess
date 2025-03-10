@@ -5,8 +5,9 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
     public static final String BLACK_COLOR = "black";
     public static final String WHITE_COLOR = "white";
     //Pawn 색에 따른 출력 문자 부여
-    public static final char WHITE_REPRESENTATION = 'p';
-    public static final char BLACK_REPRESENTATION ='P' ;
+    public static final char WHITE_PAWN_REPRESENTATION = 'p';
+    public static final char BLACK_PAWN_REPRESENTATION = 'P';
+
 
     private final Type type;
     private final Color color;
@@ -15,6 +16,14 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
     public Piece(Color color, Type type) {
         this.color= color;
         this.type = type;
+    }
+
+    public static Piece createWhitePawn() {
+        return new Piece(Color.WHITE, Type.PAWN);
+    }
+
+    public static Piece createBlackPawn() {
+        return new Piece(Color.BLACK, Type.PAWN);
     }
 
     //색이 없는 경우 기본으로 흰색(white)의 말을 생성
