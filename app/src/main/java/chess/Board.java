@@ -3,6 +3,7 @@ package chess;
 import chess.pieces.Piece;
 import chess.utils.StringUtils;
 
+
 import java.util.*;
 
 import static chess.pieces.Piece.*;
@@ -10,6 +11,7 @@ import static chess.pieces.Piece.*;
 public class Board {
     private static final int MAX_PIECE_SIZE = 32;
     private static final int FILE_SIZE = 8;
+
     public static final int RANK_SIZE = 8;
     private final List<Piece> pieces = new ArrayList<>();
     private final List<Rank> board = new ArrayList<>();
@@ -78,6 +80,7 @@ public class Board {
 
         board.add(new Rank(createInitialSevenRank()));
         board.add(new Rank(createInitialEightRank()));
+
     }
 
     private List<Piece> createInitialSevenRank() {
@@ -87,6 +90,7 @@ public class Board {
         }
         return initialSevenRank;
     }
+
 
     private List<Piece> createInitialEightRank() {
         List<Piece> initialEightRank = new ArrayList<>();
@@ -158,10 +162,12 @@ public class Board {
         }
     }
 
+ 
 
     public double calculatePoint(Color color) {
         double point = 0.0;
         List<Integer> pawnFileList = new ArrayList<>();
+
         for (int rank = 0; rank < RANK_SIZE; rank++) {
             for (int file = 0; file < FILE_SIZE; file++) {
                 Piece piece = board.get(rank).getPiece(file);
@@ -188,6 +194,7 @@ public class Board {
         specificColorPieces.sort(Comparator.comparingDouble(piece -> piece.getType().getDefaultPoint()));
         return specificColorPieces;
     }
+
 
     public List<Piece> getSortedPiecesByPointReversed(Color color) {
         List<Piece> specificColorPieces = getSpecificColorPieces(color);

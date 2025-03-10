@@ -5,11 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static chess.pieces.Piece.Color.*;
 import static chess.pieces.Piece.Type.*;
+
 import static chess.utils.StringUtils.appendNewLine;
 import static org.assertj.core.api.Assertions.*;
 

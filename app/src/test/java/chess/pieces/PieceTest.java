@@ -1,8 +1,10 @@
 package chess.pieces;
 import org.junit.jupiter.api.*;
 
+
 import static chess.pieces.Piece.*;
 import static chess.pieces.Piece.Type.*;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class PieceTest {
@@ -26,8 +28,10 @@ public class PieceTest {
     @DisplayName("흰색 말 테스트")
     public void whiteColor() throws Exception{
 
+
         Piece whiteBishop = createWhiteBishop();
         Piece whitePawn = createWhitePawn();
+
 
         assertThat(whiteBishop.isWhite()).isTrue();
         assertThat(whitePawn.isWhite()).isTrue();
@@ -38,14 +42,17 @@ public class PieceTest {
     @Test
     @DisplayName("검은 말 테스트")
     public void blackColor() throws Exception{
+
         Piece blackBishop = createBlackBishop();
         Piece blackPawn = createBlackPawn();
+
 
         assertThat(blackBishop.isBlack()).isTrue();
         assertThat(blackPawn.isBlack()).isTrue();
         assertThat(blackBishop.isWhite()).isFalse();
         assertThat(blackPawn.isWhite()).isFalse();
     }
+
 
     @Test
     @DisplayName("기물의 representation이 잘 할당 되었는지 테스트")

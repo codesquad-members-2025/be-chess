@@ -1,5 +1,6 @@
 package chess.pieces;
 
+
 import java.util.Objects;
 
 import static chess.pieces.Piece.Color.*;
@@ -64,6 +65,7 @@ public class Piece {
     }
 
     public char getRepresentation() {
+
         return this.color == WHITE ? this.type.getWhiteRepresentation() : this.type.getBlackRepresentation();
     }
     public boolean isBlack() {
@@ -113,6 +115,7 @@ public class Piece {
     @Override
     public int hashCode() {
         return Objects.hash(type, color);
+
     }
 }
 
