@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Piece {
+    private static final int PAWN_MAX_COUNT = 8;
+
     public enum Color {
         WHITE, BLACK, NO_COLOR
     }
@@ -48,24 +50,34 @@ public class Piece {
 
     public static List<Piece> createWhite() {
         List<Piece> whitePieces = new ArrayList<>();
-        whitePieces.add(createWhitePawn());
+        for (var i = 0; i < PAWN_MAX_COUNT; ++i) {
+            whitePieces.add(createWhitePawn());
+        }
         whitePieces.add(createWhiteRook());
         whitePieces.add(createWhiteKnight());
         whitePieces.add(createWhiteBishop());
         whitePieces.add(createWhiteQueen());
         whitePieces.add(createWhiteKing());
+        whitePieces.add(createWhiteBishop());
+        whitePieces.add(createWhiteKnight());
+        whitePieces.add(createWhiteRook());
 
         return whitePieces;
     }
 
     public static List<Piece> createBlack() {
         List<Piece> blackPieces = new ArrayList<>();
-        blackPieces.add(createBlackPawn());
+        for (var i = 0; i < PAWN_MAX_COUNT; ++i) {
+            blackPieces.add(createBlackPawn());
+        }
         blackPieces.add(createBlackRook());
         blackPieces.add(createBlackKnight());
         blackPieces.add(createBlackBishop());
         blackPieces.add(createBlackQueen());
         blackPieces.add(createBlackKing());
+        blackPieces.add(createBlackBishop());
+        blackPieces.add(createBlackKnight());
+        blackPieces.add(createBlackRook());
 
         return blackPieces;
     }
