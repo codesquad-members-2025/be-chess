@@ -90,9 +90,21 @@ public class Board {
         return board.get(pos.getRow()).getPiece(pos.getCol());
     }
 
-    public void move(String position, Piece piece) {
+    public void addPiece(String position, Piece piece) {
         Position pos = new Position(position);
         setPiece(pos.getRow(), pos.getCol(), piece);
+    }
+
+    public void removePiece(String position) {
+        Position pos = new Position(position);
+        setPiece(pos.getRow(), pos.getCol(), Piece.createBlank());
+    }
+
+    public void move(String sourcePosition, String targetPosition) {
+        Position targetPos = new Position(targetPosition);
+        Piece piece = findPiece(sourcePosition);
+        removePiece(sourcePosition);
+        setPiece(targetPos.getRow(), targetPos.getCol(), piece);
     }
 
 }

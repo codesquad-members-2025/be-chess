@@ -24,15 +24,15 @@ public class ScoreCalculatorTest {
     public void calculatePoint() throws Exception {
         board.initializeEmpty();
 
-        addPiece("b6", Piece.createBlack(Piece.Type.PAWN));
-        addPiece("e6", Piece.createBlack(Piece.Type.QUEEN));
-        addPiece("b8", Piece.createBlack(Piece.Type.KING));
-        addPiece("c8", Piece.createBlack(Piece.Type.ROOK));
+        board.addPiece("b6", Piece.createBlack(Piece.Type.PAWN));
+        board.addPiece("e6", Piece.createBlack(Piece.Type.QUEEN));
+        board.addPiece("b8", Piece.createBlack(Piece.Type.KING));
+        board.addPiece("c8", Piece.createBlack(Piece.Type.ROOK));
 
-        addPiece("f2", Piece.createWhite(Piece.Type.PAWN));
-        addPiece("g2", Piece.createWhite(Piece.Type.PAWN));
-        addPiece("e1", Piece.createWhite(Piece.Type.ROOK));
-        addPiece("f1", Piece.createWhite(Piece.Type.KING));
+        board.addPiece("f2", Piece.createWhite(Piece.Type.PAWN));
+        board.addPiece("g2", Piece.createWhite(Piece.Type.PAWN));
+        board.addPiece("e1", Piece.createWhite(Piece.Type.ROOK));
+        board.addPiece("f1", Piece.createWhite(Piece.Type.KING));
 
         assertThat(scoreCalculator.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
         assertThat(scoreCalculator.calculatePoint(Piece.Color.WHITE)).isEqualTo(7.0);
@@ -43,28 +43,25 @@ public class ScoreCalculatorTest {
     public void calculatePoint_pawnsInSameColumn() {
         board.initializeEmpty();
 
-        addPiece("a2", Piece.createWhite(Piece.Type.PAWN));
-        addPiece("a3", Piece.createWhite(Piece.Type.PAWN)); // 같은 col: 0.5+0.5
+        board.addPiece("a2", Piece.createWhite(Piece.Type.PAWN));
+        board.addPiece("a3", Piece.createWhite(Piece.Type.PAWN)); // 같은 col: 0.5+0.5
 
-        addPiece("b2", Piece.createWhite(Piece.Type.PAWN)); // 1.0
+        board.addPiece("b2", Piece.createWhite(Piece.Type.PAWN)); // 1.0
 
         assertThat(scoreCalculator.calculatePoint(Piece.Color.WHITE)).isEqualTo(2);
 
     }
-    
-    private void addPiece(String position, Piece piece) {
-        board.move(position, piece);
-    }
+
 
     @Test
     @DisplayName("체스판 내 기물 정렬")
     public void sortPiecesbyScore() {
         board.initializeEmpty();
 
-        addPiece("b6", Piece.createBlack(Piece.Type.PAWN));  // PAWN(1.0)
-        addPiece("e6", Piece.createBlack(Piece.Type.QUEEN));  // Queen (9.0)
-        addPiece("b8", Piece.createBlack(Piece.Type.KING));  // KING (0.0)
-        addPiece("c8", Piece.createBlack(Piece.Type.ROOK));  // Rook (5.0)
+        board.addPiece("b6", Piece.createBlack(Piece.Type.PAWN));  // PAWN(1.0)
+        board.addPiece("e6", Piece.createBlack(Piece.Type.QUEEN));  // Queen (9.0)
+        board.addPiece("b8", Piece.createBlack(Piece.Type.KING));  // KING (0.0)
+        board.addPiece("c8", Piece.createBlack(Piece.Type.ROOK));  // Rook (5.0)
 
         List<Piece> sortedBlackPieces = scoreCalculator.sortByScore(Piece.Color.BLACK, true);
 
@@ -73,10 +70,10 @@ public class ScoreCalculatorTest {
         assertThat(sortedBlackPieces.get(2).getType()).isEqualTo(Piece.Type.PAWN);
         assertThat(sortedBlackPieces.get(3).getType()).isEqualTo(Piece.Type.KING);
 
-        addPiece("f2", Piece.createWhite(Piece.Type.PAWN));  // PAWN(1.0)
-        addPiece("g2", Piece.createWhite(Piece.Type.PAWN));  //  PAWN(1.0)
-        addPiece("e1", Piece.createWhite(Piece.Type.ROOK));  //  Rook (5.0)
-        addPiece("f1", Piece.createWhite(Piece.Type.KING));  //  KING (0.0)
+        board.addPiece("f2", Piece.createWhite(Piece.Type.PAWN));  // PAWN(1.0)
+        board.addPiece("g2", Piece.createWhite(Piece.Type.PAWN));  //  PAWN(1.0)
+        board.addPiece("e1", Piece.createWhite(Piece.Type.ROOK));  //  Rook (5.0)
+        board.addPiece("f1", Piece.createWhite(Piece.Type.KING));  //  KING (0.0)
 
         List<Piece> sortedWhitePieces = scoreCalculator.sortByScore(Piece.Color.WHITE, true);
 

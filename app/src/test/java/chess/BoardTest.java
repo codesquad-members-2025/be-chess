@@ -3,6 +3,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import pieces.Piece;
+import pieces.Piece.Type;
+import pieces.Piece.Color;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,16 +21,15 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("임의의 위치에 기물이 잘 추가되는지 확인")
+    @DisplayName("기물이 현재 위치에서 다른 위치로 잘 이동하는지 확인")
     public void move() throws Exception {
-        board.initializeEmpty();
+        board.initialize();
 
-        String position = "b5";
-        Piece piece = Piece.createBlack(Piece.Type.ROOK);
-        board.move(position, piece);
-
-        assertThat(board.findPiece(position)).isEqualTo(piece);
-        System.out.println(boardView.showBoard());
+        String sourcePosition = "b2";
+        String targetPosition = "b3";
+        board.move(sourcePosition, targetPosition);
+        assertThat(board.findPiece(sourcePosition)).isEqualTo(Piece.createBlank());
+        assertThat(board.findPiece(targetPosition)).isEqualTo(Piece.createWhite(Type.PAWN));
     }
 
     @Test
@@ -37,10 +38,10 @@ public class BoardTest {
     //equals()는 Piece.java에서 구현
     public void findPiece() throws Exception {
         board.initialize();
-        assertThat(board.findPiece("a8")).isEqualTo(Piece.createBlack(Piece.Type.ROOK));
-        assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlack(Piece.Type.ROOK));
-        assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhite(Piece.Type.ROOK));
-        assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhite(Piece.Type.ROOK));
+        assertThat(board.findPiece("a8")).isEqualTo(Piece.createBlack(Type.ROOK));
+        assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlack(Type.ROOK));
+        assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhite(Type.ROOK));
+        assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhite(Type.ROOK));
 
     }
 
@@ -55,11 +56,11 @@ public class BoardTest {
     @DisplayName("특정 기물 개수 확인")
     public void testPieceCount() {
         board.initialize();
-        assertThat(board.pieceCount(Piece.Color.BLACK, Piece.Type.PAWN)).isEqualTo(8);
-        assertThat(board.pieceCount(Piece.Color.WHITE, Piece.Type.PAWN)).isEqualTo(8);
+        assertThat(board.pieceCount(Color.BLACK, Type.PAWN)).isEqualTo(8);
+        assertThat(board.pieceCount(Color.WHITE, Type.PAWN)).isEqualTo(8);
 
-        assertThat(board.pieceCount(Piece.Color.BLACK, Piece.Type.ROOK)).isEqualTo(2);
-        assertThat(board.pieceCount(Piece.Color.WHITE, Piece.Type.ROOK)).isEqualTo(2);
+        assertThat(board.pieceCount(Color.BLACK, Type.ROOK)).isEqualTo(2);
+        assertThat(board.pieceCount(Color.WHITE, Type.ROOK)).isEqualTo(2);
     }
 
 
