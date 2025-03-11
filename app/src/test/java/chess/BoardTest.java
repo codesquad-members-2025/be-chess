@@ -16,21 +16,19 @@ public class BoardTest {
 
     @Test
     public void create() throws Exception{
-        //Given
-        board.initialize();
-
-        //When
-        int pieceCount = board.pieceCount();
-        String actualBoard = board.showBoard();
-
-        //Then
+        //Given & When
         String blankRank = appendNewLine("........");
         String expectedBoard = appendNewLine("RNBQKBNR") +
             appendNewLine("PPPPPPPP") +
             blankRank + blankRank + blankRank + blankRank +
             appendNewLine("pppppppp") +
             appendNewLine("rnbqkbnr");
+        board.initialize();
+        int pieceCount = board.pieceCount();
+        String actualBoard = board.showBoard();
 
+
+        //Then
         assertThat(pieceCount).isEqualTo(32);
         assertThat(actualBoard).isEqualTo(expectedBoard);
     }
