@@ -10,22 +10,16 @@ import static utils.StringUtils.appendNewLine;
 public class Board {
     private static final int BOARD_SIZE = 8;
 
-    private List<Piece> pieces;
     private List<Piece> whitePieces;
     private List<Piece> blackPieces;
     private ArrayList<Rank> board;
     private int piecesIndex;
 
     public Board() {
-        this.pieces = new ArrayList<>();
         this.board = new ArrayList<>();
         this.piecesIndex = 0;
         this.whitePieces = Piece.createWhite();
         this.blackPieces = Piece.createBlack();
-    }
-
-    public void add(Piece piece) {
-        pieces.add(piece);
     }
 
     public int pieceCount() {
@@ -34,9 +28,6 @@ public class Board {
 
     public void initialize() {
         setEmptyBoard();
-        addPawns();
-        addBlackPieces();
-        addWhitePieces();
         placePawn();
         placeBlackPieces();
         placeWhitePieces();
@@ -47,43 +38,14 @@ public class Board {
             board.add(new Rank());
         }
     }
-    
-    public void addPawns() {
-        for (int i = 0; i < board.length; ++i) {
-            pieces.add(whitePieces.getFirst());
-            pieces.add(blackPieces.getFirst());
-        }
-    }
-
-    public void addWhitePieces() {
-        pieces.add(whitePieces.get(1));
-        pieces.add(whitePieces.get(2));
-        pieces.add(whitePieces.get(3));
-        pieces.add(whitePieces.get(4));
-        pieces.add(whitePieces.get(5));
-        pieces.add(whitePieces.get(3));
-        pieces.add(whitePieces.get(2));
-        pieces.add(whitePieces.get(1));
-    }
-
-    public void addBlackPieces() {
-        pieces.add(blackPieces.get(1));
-        pieces.add(blackPieces.get(2));
-        pieces.add(blackPieces.get(3));
-        pieces.add(blackPieces.get(4));
-        pieces.add(blackPieces.get(5));
-        pieces.add(blackPieces.get(3));
-        pieces.add(blackPieces.get(2));
-        pieces.add(blackPieces.get(1));
-    }
 
     public void placePawn() {
-        for (int i = 0; i < board.length; ++i) {
-            Piece blackPiece = pieces.get(piecesIndex);
-            Piece whitePiece = pieces.get(piecesIndex + 1);
-            board[1][i] = Character.toUpperCase(blackPiece.getType());
-            board[6][i] = whitePiece.getType();
-            piecesIndex += 2;
+        for (int i = 0; i < BOARD_SIZE; ++i) {
+            Piece blackPiece = blackPieces.get(piecesIndex);
+            Piece whitePiece = whitePieces.get(piecesIndex);
+            board.get(6).addPiece(blackPiece);
+            board.get(1).addPiece(whitePiece);
+            ++piecesIndex;
         }
     }
 
