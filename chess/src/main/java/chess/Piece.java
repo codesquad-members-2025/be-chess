@@ -33,7 +33,7 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
     }
 
     public enum Type {
-        PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE(' ');
+        PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
 
         private final char representation;
 

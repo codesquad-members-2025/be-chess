@@ -1,5 +1,6 @@
 package chess;
 
+import java.lang.ref.PhantomReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,14 +8,17 @@ import static utils.StringUtils.NEWLINE;
 
 public class Board {
     private final ArrayList<Piece> boardList = new ArrayList<>();
-    private final List<Piece> whitePawns = new ArrayList<>();
-    private final List<Piece> blackPawns = new ArrayList<>();
+    private final  ArrayList<Piece> whitePawns = new ArrayList<>();
+    private final ArrayList<Piece> blackPawns = new ArrayList<>();
 
-    private final List<Piece> whitePieces = new ArrayList<>();
-    private final List<Piece> blackPieces = new ArrayList<>();
+    private final ArrayList<Piece> whitePieces = new ArrayList<>();
+    private final ArrayList<Piece> blackPieces = new ArrayList<>();
+
+    private final ArrayList<Piece> blankPieces = new ArrayList<>();
     private static final int BOARD_SIZE = 8; // 캡슐화 및 OOP 준수를 위해 private 적용
-    char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
-
+    //char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
+    //보드 자료구선 개선
+    private final ArrayList<Rank> board = new ArrayList<>();
 
     public void add(Piece pawn) {
         boardList.add(pawn);
@@ -41,6 +45,7 @@ public class Board {
         for (int i = 0; i < BOARD_SIZE; i++) {
             whitePawns.add(new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
             blackPawns.add(new Piece(Piece.Color.BLACK, Piece.Type.PAWN));
+            blankPieces.add(new Piece(Piece.Color.NOCOLOR, Piece.Type.NO_PIECE));
         }
 
         whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.ROOK));
@@ -65,12 +70,15 @@ public class Board {
 
     public void initializeBoard() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                board[i][j] = getPawnRepresentation(i, j);
-            }
+            if(i == 0) board.add(new Rank(blackPieces));
+            else if(i == 1) board.add(new Rank(blackPawns));
+            else if(i == 6) board.add(new Rank(whitePawns));
+            else if(i == 7) board.add(new Rank(whitePieces));
+            else board.add(new Rank(blankPieces));
         }
     }
     //initializeBoard()의 중복 리펙토링
+    /*
     public char getPawnRepresentation(int row, int col) {
         if (row == 1) return blackPawns.get(col).getRepresentation();
         if (row == 6) return whitePawns.get(col).getRepresentation();
@@ -79,6 +87,8 @@ public class Board {
 
         return '.';
     }
+     */
+
     //폰의 리스트의 값들을 StringBuilder로 변환해줌
     public String getPawnsResult(List<Piece> pawns) {
         StringBuilder sb = new StringBuilder();
@@ -100,7 +110,7 @@ public class Board {
     public String print() {
         StringBuilder board_sb = new StringBuilder();
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board_sb.append(board[i]).append("\n");
+            board_sb.append(board.get(i)).append("\n");
         }
 
         return board_sb.toString();
@@ -110,7 +120,7 @@ public class Board {
         int cnt = 0;
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if(board[i][j] != '.') cnt++;
+                if(board.get(i).getPiece(j).getRepresentation() == '.') cnt++;
             }
         }
         return cnt;
@@ -120,10 +130,11 @@ public class Board {
         StringBuilder boardSb = new StringBuilder();
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                boardSb.append(board[i][j]);
+                boardSb.append(board.get(i).getPiece(j).getRepresentation());
             }
             boardSb.append(NEWLINE);
         }
         return boardSb.toString();
     }
+
 }
