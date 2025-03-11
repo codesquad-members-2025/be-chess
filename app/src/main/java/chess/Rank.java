@@ -16,7 +16,7 @@ public class Rank {
         }
     }
 
-    public void addPiece(Piece piece) {
-        rank.add(piece);
+    public void addPiece(int index, Piece piece) {
+        rank.set(index, piece);
     }
 }
