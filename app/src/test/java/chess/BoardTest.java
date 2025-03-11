@@ -15,7 +15,6 @@ public class BoardTest {
     @BeforeEach
     public void setup() {
         board = new Board();
-        boardView = new BoardView(board);
     }
 
 
