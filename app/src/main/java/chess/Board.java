@@ -37,12 +37,19 @@ public class Board {
     }
 
     public void initialize() {
-       addPawns();
-       addBlackPieces();
-       addWhitePieces();
-       placePawn();
-       placeBlackPieces();
-       placeWhitePieces();
+        setEmptyBoard();
+        addPawns();
+        addBlackPieces();
+        addWhitePieces();
+        placePawn();
+        placeBlackPieces();
+        placeWhitePieces();
+    }
+
+    private void setEmptyBoard() {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            board.add(new Rank());
+        }
     }
     
     public void addPawns() {
