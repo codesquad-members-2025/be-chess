@@ -50,4 +50,18 @@ public class BoardTest {
         //Then
         assertThat(actualCount).isEqualTo(expectedCount);
     }
+
+    @Test
+    @DisplayName("a8 위치에 검은색 룩이 존재해야한다.")
+    void searchPiece() {
+        //Given
+        board.initialize();
+        Piece expectedPiece = new Piece(Piece.Color.BLACK, Piece.Type.ROOK);
+
+        //When
+        Piece actualPiece = board.searchPiece("a8");
+
+        //Then
+        assertThat(actualPiece).isEqualTo(expectedPiece);
+    }
 }
