@@ -72,10 +72,6 @@ public class Board {
                 .count();
     }
 
-    public Piece findPiece(String position) {
-        Position pos = new Position(position);
-        return board.get(pos.getRow()).getPiece(pos.getCol());
-    }
 
     public void addPiece(String position, Piece piece) {
         Position pos = new Position(position);
@@ -87,12 +83,6 @@ public class Board {
         setPiece(pos.getRow(), pos.getCol(), Piece.createBlank());
     }
 
-    public void move(String sourcePosition, String targetPosition) {
-        Position targetPos = new Position(targetPosition);
-        Piece piece = findPiece(sourcePosition);
-        removePiece(sourcePosition);
-        setPiece(targetPos.getRow(), targetPos.getCol(), piece);
-    }
 
 }
 
