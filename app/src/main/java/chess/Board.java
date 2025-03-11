@@ -8,47 +8,45 @@ import java.util.ArrayList;
 public class Board {
     private final ArrayList<Rank> board = new ArrayList<>();
 
+    private static final int BOARD_SIZE = 8;
+    private static final int BLACK_PAWN_ROW = 6;
+    private static final int WHITE_PAWN_ROW = 1;
+    private static final int WHITE_ROW = 0;
+    private static final int BLACK_ROW = 7;
+
+
     public Board() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
             board.add(new Rank());
         }
     }
 
     public void initializeEmpty() {
         board.clear();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
             board.add(new Rank());
         }
     }
 
     public void initialize() {
+        Piece.Type[] pieceOrder = {Type.ROOK, Type.KNIGHT, Type.BISHOP, Type.QUEEN, Type.KING, Type.BISHOP, Type.KNIGHT, Type.ROOK};
         board.clear();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
             board.add(new Rank());  // Rank 객체를 다시 추가 -> clear()를 하면 체스판이 비어버림. 다시 Rank를 추가해줘야함.
         }
 
-
-        for (int i = 0; i < 8; i++) {
-            setPiece(6, i, Piece.createBlack(Type.PAWN));
-            setPiece(1, i, Piece.createWhite(Type.PAWN));
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            board.get(BLACK_PAWN_ROW).setPiece(i, Piece.createBlack(Type.PAWN));
+            board.get(WHITE_PAWN_ROW).setPiece(i, Piece.createWhite(Type.PAWN));
         }
-        setPiece(0, 0, Piece.createWhite(Type.ROOK));
-        setPiece(7, 0, Piece.createBlack(Type.ROOK));
-        setPiece(0, 1, Piece.createWhite(Type.KNIGHT));
-        setPiece(7, 1, Piece.createBlack(Type.KNIGHT));
-        setPiece(0, 2, Piece.createWhite(Type.BISHOP));
-        setPiece(7, 2, Piece.createBlack(Type.BISHOP));
-        setPiece(0, 3, Piece.createWhite(Type.QUEEN));
-        setPiece(7, 3, Piece.createBlack(Type.QUEEN));
-        setPiece(0, 4, Piece.createWhite(Type.KING));
-        setPiece(7, 4, Piece.createBlack(Type.KING));
-        setPiece(0, 5, Piece.createWhite(Type.BISHOP));
-        setPiece(7, 5, Piece.createBlack(Type.BISHOP));
-        setPiece(0, 6, Piece.createWhite(Type.KNIGHT));
-        setPiece(7, 6, Piece.createBlack(Type.KNIGHT));
-        setPiece(0, 7, Piece.createWhite(Type.ROOK));
-        setPiece(7, 7, Piece.createBlack(Type.ROOK));
+
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            board.get(WHITE_ROW).setPiece(i, Piece.createWhite(pieceOrder[i]));
+            board.get(BLACK_ROW).setPiece(i, Piece.createBlack(pieceOrder[i]));
+        }
+
     }
 
     public void setPiece(int row, int col, Piece piece) {
