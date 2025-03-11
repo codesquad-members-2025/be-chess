@@ -28,3 +28,23 @@ replay_pid*
 
 # Ignore Gradle build output directory
 build
+
+### JetBrains IDE 관련 파일 (IntelliJ, Android Studio)
+.idea/
+.idea/*
+
+### Gradle 관련 파일 (불필요한 파일 제외)
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar  # Gradle Wrapper는 포함
+gradle/wrapper/
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+
+### 로컬 환경 관련 파일
+local.properties
+*.iml
+.DS_Store
+Thumbs.db

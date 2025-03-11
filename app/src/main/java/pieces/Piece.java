@@ -1,88 +1,97 @@
 package pieces;
 
 
-public class Piece {
-    public static final String WHITE_COLOR = "white";
-    public static final String BLACK_COLOR = "black";
-    public static char WHITE_PAWN_REPRESENTATION = 'p';
-    public static char BLACK_PAWN_REPRESENTATION = 'P';
-    public static char WHITE_KNIGHT_REPRESENTATION = 'n';
-    public static char BLACK_KNIGHT_REPRESENTATION = 'N';
-    public static char WHITE_ROOK_REPRESENTATION = 'r';
-    public static char BLACK_ROOK_REPRESENTATION = 'R';
-    public static char WHITE_BISHOP_REPRESENTATION = 'b';
-    public static char BLACK_BISHOP_REPRESENTATION = 'B';
-    public static char WHITE_QUEEN_REPRESENTATION = 'q';
-    public static char BLACK_QUEEN_REPRESENTATION = 'Q';
-    public static char WHITE_KING_REPRESENTATION = 'k';
-    public static char BLACK_KING_REPRESENTATION = 'K';
+public class Piece implements Comparable<Piece>  {
+    private final Color color;
+    private final Type type;
 
-    private final String color;
-    private final char representation;
+    public enum Color {
+        WHITE, BLACK, NOCOLOR;
+    }
 
-    private Piece(String color, char representation) {
+    public enum Type {
+        PAWN('p', 1.0),
+        ROOK('r', 5.0),
+        KNIGHT('n', 2.5),
+        BISHOP('b', 3.0),
+        QUEEN('q', 9.0),
+        KING('k', 0.0),
+        NO_PIECE('.', 0.0);
+
+        private final char representation;
+        private final double defaultPoint;
+
+        Type(char representation, double defaultPoint) {
+            this.representation = representation;
+            this.defaultPoint = defaultPoint;
+        }
+
+        public double getDefaultPoint() {
+            return defaultPoint;
+        }
+
+        public char getWhiteRepresentation() {
+            return representation;
+        }
+
+        public char getBlackRepresentation() {
+            return Character.toUpperCase(representation);
+        }
+    }
+
+
+    private Piece(Color color, Type type)  {
         this.color = color;
-        this.representation = representation;
+        this.type = type;
+    }
+    public static Piece createWhite(Type type) {
+        return new Piece(Color.WHITE, type);
+    }
+    public static Piece createBlack(Type type) {
+        return new Piece(Color.BLACK, type);
+    }
+    public static Piece createBlank() {
+        return new Piece(Color.NOCOLOR, Type.NO_PIECE);
     }
 
-    public static Piece createWhitePawn() {
-        return new Piece(WHITE_COLOR, WHITE_PAWN_REPRESENTATION);
+
+    public char getRepresentation() {
+        return color == Color.WHITE? type.getWhiteRepresentation() : type.getBlackRepresentation();
     }
 
-    public static Piece createBlackPawn() {
-        return new Piece(BLACK_COLOR, BLACK_PAWN_REPRESENTATION);
-    }
-
-    public static Piece createWhiteKnight() {
-        return new Piece(WHITE_COLOR, WHITE_KNIGHT_REPRESENTATION);
-    }
-
-    public static Piece createBlackKnight() {
-        return new Piece(BLACK_COLOR, BLACK_KNIGHT_REPRESENTATION);
-    }
-
-    public static Piece createWhiteRook() {
-        return new Piece(WHITE_COLOR, WHITE_ROOK_REPRESENTATION);
-    }
-    public static Piece createBlackRook() {
-        return new Piece( BLACK_COLOR, BLACK_ROOK_REPRESENTATION);
-    }
-
-    public static Piece createWhiteBishop() {
-        return new Piece(WHITE_COLOR, WHITE_BISHOP_REPRESENTATION);
-    }
-
-    public static Piece createBlackBishop() {
-        return new Piece(BLACK_COLOR, BLACK_BISHOP_REPRESENTATION);
-    }
-
-    public static Piece createWhiteQueen() {
-        return new Piece(WHITE_COLOR, WHITE_QUEEN_REPRESENTATION);
-    }
-    public static Piece createBlackQueen() {
-        return new Piece(BLACK_COLOR, BLACK_QUEEN_REPRESENTATION);
-    }
-
-    public static Piece createWhiteKing() {
-        return new Piece(WHITE_COLOR, WHITE_KING_REPRESENTATION);
-    }
-    public static Piece createBlackKing() {
-        return new Piece(BLACK_COLOR, BLACK_KING_REPRESENTATION);
-    }
-
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public char getRepresentation() {
-        return representation;
+    public Type getType() {
+        return type;
     }
 
     public boolean isWhite() {
-        return color.equals(WHITE_COLOR);
+        return color.equals(Color.WHITE);
     }
 
     public boolean isBlack() {
-        return color.equals(BLACK_COLOR);
+        return color.equals(Color.BLACK);
     }
+
+    public double getDefaultPoint() {
+        return this.type.getDefaultPoint();
+    }
+
+    @Override
+    //Unit의 assertThat(A).isEqualTo(B)는 내부적으로 equals()를 자동 호출
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return color == piece.color && type == piece.type;
+    }
+
+    @Override
+    public int compareTo(Piece other) {
+        return Double.compare(other.getDefaultPoint(), this.getDefaultPoint());
+    }
+
 }
+
