@@ -32,7 +32,7 @@ public class Board {
         placePieces();
     }
 
-    private void setEmptyBoard() {
+    public void setEmptyBoard() {
         for (int i = 0; i < BOARD_SIZE; i++) {
             board.add(new Rank());
         }
@@ -92,5 +92,15 @@ public class Board {
         int yPos = Character.getNumericValue(y) - 1;
 
       return  board.get(yPos).getRank().get(xPos);
+    }
+
+    public void move(String position, Piece piece) {
+        char x = position.charAt(0);
+        int xPos = x - 'a';
+
+        char y = position.charAt(1);
+        int yPos = Character.getNumericValue(y) - 1;
+
+        board.get(yPos).getRank().set(xPos, piece);
     }
 }
