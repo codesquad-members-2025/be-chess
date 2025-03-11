@@ -62,6 +62,7 @@ public class BoardTest {
         Piece actualPiece = board.searchPiece("a8");
 
         //Then
-        assertThat(actualPiece).isEqualTo(expectedPiece);
+        assertThat(actualPiece.getType()).isEqualTo(expectedPiece.getType());
+        assertThat(actualPiece.getColor()).isEqualTo(expectedPiece.getColor());
     }
 }
