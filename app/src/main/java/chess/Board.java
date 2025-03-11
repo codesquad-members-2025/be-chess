@@ -83,4 +83,14 @@ public class Board {
     private boolean matches(Piece piece, Piece.Color color, Piece.Type type) {
         return piece.getColor() == color && piece.getType() == type.getRepresentation();
     }
+
+    public Piece searchPiece(String position) {
+        char x = position.charAt(0);
+        int xPos = x - 'a';
+
+        char y = position.charAt(1);
+        int yPos = Character.getNumericValue(y) - 1;
+
+      return  board.get(yPos).getRank().get(xPos);
+    }
 }
