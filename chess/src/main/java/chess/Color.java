@@ -1,3 +1,4 @@
+/*
 package chess;
 
 public enum Color {
@@ -38,3 +39,4 @@ public enum Color {
         return representation;
     }
 }
+ */

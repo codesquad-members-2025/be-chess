@@ -3,9 +3,8 @@ package pieces;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import chess.Board;
-import chess.Color;
 import chess.Piece;
-import chess.Type;
+
 import org.junit.Before;
 import org.junit.Test;
 import static utils.StringUtils.appendNewLine;

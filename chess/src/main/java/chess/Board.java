@@ -39,28 +39,28 @@ public class Board {
 
     public void initializePawns() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            whitePawns.add(new Piece(Color.WHITE_PAWN, Type.PAWN));
-            blackPawns.add(new Piece(Color.BLACK_PAWN, Type.PAWN));
+            whitePawns.add(new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
+            blackPawns.add(new Piece(Piece.Color.BLACK, Piece.Type.PAWN));
         }
 
-        whitePieces.add(new Piece(Color.WHITE_ROOK, Type.ROOK));
-        whitePieces.add(new Piece(Color.WHITE_KNIGHT, Type.KNIGHT));
-        whitePieces.add(new Piece(Color.WHITE_BISHOP, Type.BISHOP));
-        whitePieces.add(new Piece(Color.WHITE_QUEEN, Type.QUEEN));
-        whitePieces.add(new Piece(Color.WHITE_KING, Type.KING));
-        whitePieces.add(new Piece(Color.WHITE_BISHOP, Type.BISHOP));
-        whitePieces.add(new Piece(Color.WHITE_KNIGHT, Type.KNIGHT));
-        whitePieces.add(new Piece(Color.WHITE_ROOK, Type.ROOK));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.ROOK));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.KNIGHT));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.BISHOP));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.QUEEN));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.KING));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.BISHOP));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.KNIGHT));
+        whitePieces.add(new Piece(Piece.Color.WHITE, Piece.Type.ROOK));
 
 
-        blackPieces.add(new Piece(Color.BLACK_ROOK, Type.ROOK));
-        blackPieces.add(new Piece(Color.BLACK_KNIGHT, Type.KNIGHT));
-        blackPieces.add(new Piece(Color.BLACK_BISHOP, Type.BISHOP));
-        blackPieces.add(new Piece(Color.BLACK_QUEEN, Type.QUEEN));
-        blackPieces.add(new Piece(Color.BLACK_KING, Type.KING));
-        blackPieces.add(new Piece(Color.BLACK_BISHOP, Type.BISHOP));
-        blackPieces.add(new Piece(Color.BLACK_KNIGHT, Type.KNIGHT));
-        blackPieces.add(new Piece(Color.BLACK_ROOK, Type.ROOK));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.ROOK));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.KNIGHT));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.BISHOP));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.QUEEN));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.KING));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.BISHOP));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.KNIGHT));
+        blackPieces.add(new Piece(Piece.Color.BLACK, Piece.Type.ROOK));
     }
 
     public void initializeBoard() {
@@ -72,10 +72,10 @@ public class Board {
     }
     //initializeBoard()의 중복 리펙토링
     public char getPawnRepresentation(int row, int col) {
-        if (row == 1) return blackPawns.get(col).getColor().getRepresentation();
-        if (row == 6) return whitePawns.get(col).getColor().getRepresentation();
-        if (row == 0) return blackPieces.get(col).getColor().getRepresentation();
-        if (row == 7) return whitePieces.get(col).getColor().getRepresentation();
+        if (row == 1) return blackPawns.get(col).getRepresentation();
+        if (row == 6) return whitePawns.get(col).getRepresentation();
+        if (row == 0) return blackPieces.get(col).getRepresentation();
+        if (row == 7) return whitePieces.get(col).getRepresentation();
 
         return '.';
     }
@@ -83,7 +83,7 @@ public class Board {
     public String getPawnsResult(List<Piece> pawns) {
         StringBuilder sb = new StringBuilder();
         for (Piece pawn : pawns) {
-            sb.append(pawn.getColor().getRepresentation());
+            sb.append(pawn.getRepresentation());
         }
         return sb.toString();
     }
