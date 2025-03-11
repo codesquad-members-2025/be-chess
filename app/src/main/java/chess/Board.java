@@ -2,7 +2,6 @@ package chess;
 
 import pieces.Piece;
 
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class Board {
         }
     }
 
-    public void placePawn() {
+    private void placePawn() {
         for (int i = 0; i < BOARD_SIZE; ++i) {
             Piece blackPiece = blackPieces.get(piecesIndex);
             Piece whitePiece = whitePieces.get(piecesIndex);
@@ -49,7 +48,7 @@ public class Board {
         }
     }
 
-    public void placePieces() {
+    private void placePieces() {
         for (int i = 0; i < BOARD_SIZE; ++i) {
             board.getFirst().addPiece(i, whitePieces.get(piecesIndex));
             board.getLast().addPiece(i, blackPieces.get(piecesIndex));
