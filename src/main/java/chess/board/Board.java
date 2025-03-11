@@ -9,7 +9,7 @@ import chess.record.Position;
 public class Board {
 
     private static final int BOARD_SIZE = 8;
-    private final Piece[][] board = new Piece[BOARD_SIZE][BOARD_SIZE];
+    private static final Piece[][] board = new Piece[BOARD_SIZE][BOARD_SIZE];
 
     public Board() {
         initialize();
@@ -73,7 +73,7 @@ public class Board {
         return count;
     }
 
-    public Piece findPiece(String location){
+    public static Piece findPiece(String location){
         Position position = getPosition(location);
         return board[position.yPos()][position.xPos()];
     }
@@ -94,9 +94,6 @@ public class Board {
             }
         }
     }
-
-
-
 
 
     public Piece[][] getBoard() {

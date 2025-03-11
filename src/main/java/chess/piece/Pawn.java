@@ -39,7 +39,6 @@ public class Pawn extends Piece{
 
     @Override
     public boolean canMove(Position target) {
-        isWithinBoard(target);
         int dx = target.xPos() - currentPosition.xPos();
         int dy = target.yPos() - currentPosition.yPos();
 
@@ -51,9 +50,5 @@ public class Pawn extends Piece{
         return false;
     }
 
-    private boolean isWithinBoard(Position position) {
-        int x = position.xPos();
-        int y = position.yPos();
-        return x >= 0 && x < 8 && y >= 0 && y < 8;
-    }
+
 }

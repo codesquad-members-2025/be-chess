@@ -6,6 +6,8 @@ import chess.record.Position;
 
 import java.util.List;
 
+import static chess.util.BoardPositionValidator.isWithinBoard;
+
 public class Rook extends Piece {
 
     public Rook(Color color) {
@@ -53,9 +55,5 @@ public class Rook extends Piece {
         return false;
     }
 
-    private boolean isWithinBoard(Position position) {
-        int x = position.xPos();
-        int y = position.yPos();
-        return x >= 0 && x < 8 && y >= 0 && y < 8;
-    }
+
 }

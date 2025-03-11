@@ -1,12 +1,13 @@
 package chess.piece;
 
-import static org.junit.jupiter.api.Assertions.*;
+import chess.enums.Color;
+import chess.record.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import chess.enums.Color;
-import chess.record.Position;
-import chess.piece.Queen;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class QueenTest {
     private Queen queen;
