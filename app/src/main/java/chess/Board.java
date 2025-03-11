@@ -59,28 +59,17 @@ public class Board {
 
 
     public int pieceCount(Piece.Color color, Piece.Type type) {
-        int cnt = 0;
-        for (Rank row : board) {
-            for (Piece piece : row.getRow()) {
-                if  (piece.getColor() == color&& piece.getType() == type) {
-                    cnt ++;
-                }
-            }
-
-        }
-        return cnt;
+        return (int) board.stream()
+                .flatMap(rank -> rank.getRow().stream())
+                .filter(piece -> piece.getColor() == color && piece.getType() == type)
+                .count();
     }
 
     public int totalPieceCount() {
-        int cnt = 0;
-        for (Rank row : board) {
-            for (Piece piece : row.getRow()) {
-                if (piece.getType() != Piece.Type.NO_PIECE) {
-                    cnt++;
-                }
-            }
-        }
-        return cnt;
+        return (int) board.stream()
+                .flatMap(rank -> rank.getRow().stream())
+                .filter(piece -> piece.getType() != Type.NO_PIECE)
+                .count();
     }
 
     public Piece findPiece(String position) {
