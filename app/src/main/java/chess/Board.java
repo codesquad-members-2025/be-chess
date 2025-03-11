@@ -8,6 +8,8 @@ import java.util.List;
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
+    private static final int BOARD_SIZE = 8;
+
     private List<Piece> pieces;
     private List<Piece> whitePieces;
     private List<Piece> blackPieces;
@@ -42,7 +44,7 @@ public class Board {
        placeBlackPieces();
        placeWhitePieces();
     }
-
+    
     public void addPawns() {
         for (int i = 0; i < board.length; ++i) {
             pieces.add(whitePieces.getFirst());
