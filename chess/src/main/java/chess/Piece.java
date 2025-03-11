@@ -141,5 +141,8 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
        else return type.getWhiteRepresentation();
     }
 
+    public static Piece createBlank() {
+        return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+    }
 
 }
