@@ -1,7 +1,5 @@
 package org.chess;
 
-import java.util.List;
-
 import static org.utils.StringUtils.appendNewLine;
 
 public class ChessView {

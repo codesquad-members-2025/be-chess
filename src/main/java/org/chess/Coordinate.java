@@ -9,11 +9,12 @@ public class Coordinate {
     public Coordinate(int fileIndex, int rankIndex) {
         this.fileIndex = fileIndex;
         this.rankIndex = rankIndex;
-//        if (!isCoordinateOnBoard()) throw new IllegalArgumentException();
     }
 
     public Coordinate(String location) {
-        this(location.charAt(0) - 'a', Character.getNumericValue(location.charAt(1)) - 1);
+        if(!checkValidityInput(location)) throw new IllegalArgumentException("좌표 양식과 다릅니다.");
+        this.fileIndex = location.charAt(0) - 'a';
+        this.rankIndex = Character.getNumericValue(location.charAt(1)) - 1;
     }
 
     public boolean isCoordinateOnBoard() {
@@ -43,5 +44,12 @@ public class Coordinate {
 
     public int getFileIndex() {
         return fileIndex;
+    }
+
+    private boolean checkValidityInput(String location) {
+        if (location.length() !=2) return false;
+        if (location.charAt(0) < 'a' && location.charAt(0) > 'z') return false;
+        if (!Character.isDigit(location.charAt(1))) return false;
+        return true;
     }
 }
