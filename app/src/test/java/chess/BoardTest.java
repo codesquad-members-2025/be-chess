@@ -65,4 +65,21 @@ public class BoardTest {
         assertThat(actualPiece.getType()).isEqualTo(expectedPiece.getType());
         assertThat(actualPiece.getColor()).isEqualTo(expectedPiece.getColor());
     }
+
+    @Test
+    @DisplayName("검은색 룩이 b5로 위치해있어야한다.")
+    void move() throws Exception {
+        //Given
+        board.setEmptyBoard();
+        Piece piece = new Piece(Piece.Color.BLACK, Piece.Type.ROOK);
+        String position = "b5";
+
+        //When
+        board.move(position, piece);
+
+        //Then
+        assertThat(board.searchPiece(position).getColor()).isEqualTo(piece.getColor());
+        assertThat(board.searchPiece(position).getType()).isEqualTo(piece.getType());
+        System.out.println(board.showBoard());
+    }
 }
