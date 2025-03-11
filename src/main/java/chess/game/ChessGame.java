@@ -1,6 +1,6 @@
-package chess;
+package chess.game;
 
-import static chess.Board.MAX_BOARD;
+import static chess.game.Board.MAX_BOARD;
 
 import chess.pieces.Piece;
 import chess.pieces.Piece.Color;

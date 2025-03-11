@@ -1,4 +1,4 @@
-package chess;
+package chess.game;
 
 import chess.pieces.Piece;
 import chess.pieces.Piece.Type;

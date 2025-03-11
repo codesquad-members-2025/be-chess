@@ -1,10 +1,10 @@
 package chess.pieces;
 
-import static chess.Board.MAX_BOARD;
+import static chess.game.Board.MAX_BOARD;
 
-import chess.Direction;
-import chess.Position;
-import chess.Rank;
+import chess.game.Direction;
+import chess.game.Position;
+import chess.game.Rank;
 import java.util.List;
 import java.util.Objects;
 
