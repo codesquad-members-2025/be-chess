@@ -32,10 +32,6 @@ public class Board {
         return pieces.size();
     }
 
-    public Piece findPawn(int pawnNumber) {
-        return pieces.get(pawnNumber);
-    }
-
     public void initialize() {
         setEmptyBoard();
         addPawns();
@@ -103,26 +99,6 @@ public class Board {
             board[0][i] = Character.toUpperCase(pieces.get(piecesIndex).getType());
             ++piecesIndex;
         }
-    }
-
-    public String getWhitePawnResult() {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < board.length; ++i) {
-            sb.append(board[1][i]);
-        }
-
-        return sb.toString();
-    }
-
-    public String getBlackPawnResult() {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < board.length; ++i) {
-            sb.append(board[6][i]);
-        }
-
-        return sb.toString();
     }
 
     public void print() {
