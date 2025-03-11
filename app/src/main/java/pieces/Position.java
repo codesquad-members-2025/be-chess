@@ -1,19 +1,19 @@
 package pieces;
 
 public class Position {
-    private String position;
+    private static String position;
 
     public Position(String position){
         this.position = position;
     }
 
-    public static int getX(String location){
-        int x = location.charAt(0) - 'a';
+    public int getX(){
+        int x = position.charAt(0) - 'a';
         return x;
     }
 
-    public static int getY(String location){
-        int y = 8 - (location.charAt(1) - '0');
+    public int getY(){
+        int y = 8 - (position.charAt(1) - '0');
         return y;
     }
 }

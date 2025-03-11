@@ -1,8 +1,12 @@
 package pieces;
 
 public class Knight extends Piece {
-    public Knight(Color color, Type type, Position position) {
-        super(color, type, position);
+    private Knight(Color color, Position position) {
+        super(color, Type.KNIGHT, position);
+    }
+
+    public static Knight createKnight(Color color, Position position) {
+        return new Knight(color, position);
     }
 
     @Override

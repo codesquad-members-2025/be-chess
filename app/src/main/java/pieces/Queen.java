@@ -1,8 +1,12 @@
 package pieces;
 
 public class Queen extends Piece {
-    public Queen(Color color, Type type, Position position) {
-        super(color, type, position);
+    private Queen(Color color, Position position) {
+        super(color, Type.QUEEN, position);
+    }
+
+    public static Queen createQueen(Color color, Position position) {
+        return new Queen(color, position);
     }
 
     @Override

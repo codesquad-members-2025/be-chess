@@ -1,8 +1,12 @@
 package pieces;
 
 public class Bishop extends Piece{
-    public Bishop(Color color, Type type, Position position) {
-        super(color, type, position);
+    private Bishop(Color color, Position position) {
+        super(color, Type.BISHOP, position);
+    }
+
+    public static Bishop createBishop(Color color, Position position) {
+        return new Bishop(color, position);
     }
 
     @Override

@@ -1,8 +1,12 @@
 package pieces;
 
 public class King extends Piece {
-    public King(Color color, Type type, Position position) {
-        super(color, type, position);
+    private King(Color color, Position position) {
+        super(color, Type.KING, position);
+    }
+
+    public static King createKing(Color color, Position position) {
+        return new King(color, position);
     }
 
     @Override

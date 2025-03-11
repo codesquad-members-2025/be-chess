@@ -1,8 +1,12 @@
 package pieces;
 
 public class Pawn extends Piece {
-    public Pawn(Color color, Type type, Position position) {
-        super(color, type, position);
+    private Pawn(Color color, Position position) {
+        super(color, Type.PAWN, position);
+    }
+
+    public static Pawn createPawn(Color color, Position position) {
+        return new Pawn(color, position);
     }
 
     @Override

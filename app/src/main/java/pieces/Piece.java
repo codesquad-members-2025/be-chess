@@ -25,6 +25,18 @@ public abstract class Piece {
         }
     }
 
+    public static Piece create(Type type, Color color, Position position) {
+        switch (type) {
+            case ROOK -> { return Rook.createRook(color, position); }
+            case KNIGHT -> { return Knight.createKnight(color, position); }
+            case BISHOP -> { return Bishop.createBishop(color, position); }
+            case QUEEN -> { return Queen.createQueen(color, position); }
+            case KING -> { return King.createKing(color, position); }
+            case PAWN -> { return Pawn.createPawn(color, position); }
+            default -> { return Blank.createBlank(position); }
+        }
+    }
+
     public abstract boolean canMove(Position target);
 
     public boolean isWhite(){
@@ -50,6 +62,10 @@ public abstract class Piece {
         if (obj == null || getClass() != obj.getClass()) return false;
         Piece piece = (Piece) obj;
         return color == piece.color && type == piece.type;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     @Override
