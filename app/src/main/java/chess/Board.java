@@ -1,5 +1,6 @@
 package chess;
 
+
 import pieces.Piece;
 
 import java.util.ArrayList;
@@ -56,8 +57,8 @@ public class Board {
         initializeBlackPawnsResult();
         initializeWhitePiecesResult();
         initializeBlackPiecesResult();
-    }
 
+    }
 
     private void initializeWhitePawnsResult() {
         StringBuilder whitePawnSb = new StringBuilder();
@@ -127,11 +128,11 @@ public class Board {
         return sb.toString();
     }
 
+
     public Board() {
         chessPiecesList = new ArrayList<>();
     }
 
-
-
-
+  
+ 
 }
