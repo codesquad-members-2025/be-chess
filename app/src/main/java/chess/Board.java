@@ -69,4 +69,18 @@ public class Board {
         }
         return chessBoard.toString();
     }
+
+    public int countPiece(Piece.Color color, Piece.Type type) {
+        int count = 0;
+        for (var rowIndex = BOARD_SIZE - 1; rowIndex >= 0; --rowIndex) {
+            List<Piece> rank = board.get(rowIndex).getRank();
+            for (var columnIndex = 0; columnIndex < BOARD_SIZE; ++columnIndex) {
+                if (rank.get(columnIndex).getColor() == color &&
+                    rank.get(columnIndex).getType() == type.getRepresentation()) {
+                    ++count;
+                }
+            }
+        }
+        return count;
+    }
 }
