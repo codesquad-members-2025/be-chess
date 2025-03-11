@@ -42,44 +42,31 @@ public class Board {
         for (int i = 0; i < BOARD_SIZE; ++i) {
             Piece blackPiece = blackPieces.get(piecesIndex);
             Piece whitePiece = whitePieces.get(piecesIndex);
-            board.get(6).addPiece(blackPiece);
-            board.get(1).addPiece(whitePiece);
+            board.get(6).addPiece(i, blackPiece);
+            board.get(1).addPiece(i, whitePiece);
             ++piecesIndex;
         }
     }
 
     public void placePieces() {
         for (int i = 0; i < BOARD_SIZE; ++i) {
-            board.getFirst().addPiece(whitePieces.get(piecesIndex));
-            board.getLast().addPiece(blackPieces.get(piecesIndex));
+            board.getFirst().addPiece(i, whitePieces.get(piecesIndex));
+            board.getLast().addPiece(i, blackPieces.get(piecesIndex));
             ++piecesIndex;
         }
     }
 
-    public void print() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < board.length; ++i) {
-            String line = "";
-            for (int j = 0; j < board.length; ++j) {
-                line += (board[i][j]);
-            }
-            line = appendNewLine(line);
-            sb.append(line);
-        }
-        System.out.print(sb);
-    }
-
     public String showBoard() {
         StringBuilder chessBoard = new StringBuilder();
-        for (char[] chars : board) {
-            StringBuilder line = new StringBuilder();
-            for (int j = 0; j < board.length; ++j) {
-                line.append(chars[j]);
+        for (var rowIndex = BOARD_SIZE - 1; rowIndex >= 0; --rowIndex) {
+            List<Piece> rank = board.get(rowIndex).getRank();
+            StringBuilder row = new StringBuilder();
+            for (var columnIndex = 0; columnIndex < BOARD_SIZE; ++columnIndex) {
+                Piece piece = rank.get(columnIndex);
+                row.append((piece.isBlack()) ? Character.toUpperCase(piece.getType()) : piece.getType());
             }
-            line = new StringBuilder(appendNewLine(line.toString()));
-            chessBoard.append(line);
+            chessBoard.append(appendNewLine(row.toString()));
         }
         return chessBoard.toString();
     }
-
 }
