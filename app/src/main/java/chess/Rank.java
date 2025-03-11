@@ -19,4 +19,8 @@ public class Rank {
     public void addPiece(int index, Piece piece) {
         rank.set(index, piece);
     }
+
+    public ArrayList<Piece> getRank() {
+        return rank;
+    }
 }
