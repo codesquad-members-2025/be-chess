@@ -6,7 +6,9 @@ import chess.pieces.Piece.Type;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Rank {
     private final List<Piece> rank;
 

@@ -5,7 +5,9 @@ import static chess.game.Board.MAX_BOARD;
 import chess.pieces.Piece.Color;
 import chess.utils.StringUtils;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ChessView {
     private final List<Rank> chessBoard;
 

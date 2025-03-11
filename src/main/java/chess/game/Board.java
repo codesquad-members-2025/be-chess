@@ -4,7 +4,9 @@ import chess.pieces.Piece;
 import chess.pieces.Piece.Type;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Board {
     public static final int MAX_BOARD = 8;
     private final List<Rank> chessBoard;
