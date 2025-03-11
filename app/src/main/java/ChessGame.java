@@ -12,8 +12,8 @@ public class ChessGame {
             String command = sc.nextLine();
 
             if(command.equals("start")){
-                board.initialize();
-                String boardStatus = board.print();
+                board.initialize();      
+                String boardStatus = board.showBoard();
                 System.out.println(boardStatus);
             }
 
