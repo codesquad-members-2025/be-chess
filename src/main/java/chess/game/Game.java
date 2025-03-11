@@ -29,14 +29,22 @@ public class Game {
         if(!BoardPositionValidator.isWithinBoard(position)){
             throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
         }
+        piece.setCurrentPosition(position);
         board[position.yPos()][position.xPos()] = piece;
     }
 
     public void move(String sourcePotion, String targetPotion){
         Position sourcePosition = getPosition(sourcePotion);
         Position targetPosition = getPosition(targetPotion);
+        validateSameColor(sourcePosition, targetPosition);
         if(!BoardPositionValidator.isWithinBoard(targetPosition)) throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
         validateAndChangePosition(sourcePosition, targetPosition);
+    }
+
+    private void validateSameColor(Position sourcePosition, Position targetPosition){
+        if(board[sourcePosition.yPos()][sourcePosition.xPos()].getColor() == board[targetPosition.yPos()][targetPosition.xPos()].getColor()){
+            throw new IllegalArgumentException("같은 색상의 말로는 이동할 수 없습니다.");
+        }
     }
 
     private void validateAndChangePosition(Position sourcePosition, Position targetPosition) {
@@ -44,6 +52,7 @@ public class Game {
         if(!sourePiece.canMove(targetPosition)){
             throw new IllegalArgumentException("해당 위치로 이동할 수 없는 기물입니다.");
         }
+        sourePiece.setCurrentPosition(targetPosition);
         board[targetPosition.yPos()][targetPosition.xPos()] = sourePiece;
         board[sourcePosition.yPos()][sourcePosition.xPos()] = Piece.createBlank();
     }

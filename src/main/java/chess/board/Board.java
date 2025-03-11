@@ -23,8 +23,8 @@ public class Board {
         for (int col = 0; col < BOARD_SIZE; col++) {
             board[1][col] = PieceFactory.createPawn(Color.BLACK);
             board[6][col] = PieceFactory.createPawn(Color.WHITE);
-            board[1][col].setCurrentPosition(new chess.record.Position(col, 1));
-            board[6][col].setCurrentPosition(new chess.record.Position(col, 6));
+            board[1][col].setCurrentPosition(new Position(col, 1));
+            board[6][col].setCurrentPosition(new Position(col, 6));
         }
 
         // 기타 기물 배치
