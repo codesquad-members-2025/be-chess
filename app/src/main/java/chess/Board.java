@@ -2,6 +2,7 @@ package chess;
 
 import pieces.Piece;
 
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,15 +73,15 @@ public class Board {
 
     public int countPiece(Piece.Color color, Piece.Type type) {
         int count = 0;
-        for (var rowIndex = BOARD_SIZE - 1; rowIndex >= 0; --rowIndex) {
-            List<Piece> rank = board.get(rowIndex).getRank();
-            for (var columnIndex = 0; columnIndex < BOARD_SIZE; ++columnIndex) {
-                if (rank.get(columnIndex).getColor() == color &&
-                    rank.get(columnIndex).getType() == type.getRepresentation()) {
-                    ++count;
-                }
+        for (Rank rank : board) {
+            for (Piece piece : rank.getRank()) {
+                if(matches(piece, color, type)) ++count;
             }
         }
         return count;
+    }
+
+    private boolean matches(Piece piece, Piece.Color color, Piece.Type type) {
+        return piece.getColor() == color && piece.getType() == type.getRepresentation();
     }
 }
