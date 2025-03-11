@@ -23,7 +23,7 @@ public class Board {
     }
 
     public int pieceCount() {
-        return pieces.size();
+        return whitePieces.size() + blackPieces.size();
     }
 
     public void initialize() {
