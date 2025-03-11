@@ -29,8 +29,7 @@ public class Board {
     public void initialize() {
         setEmptyBoard();
         placePawn();
-        placeBlackPieces();
-        placeWhitePieces();
+        placePieces();
     }
 
     private void setEmptyBoard() {
@@ -49,16 +48,10 @@ public class Board {
         }
     }
 
-    public void placeWhitePieces() {
-        for (int i = 0; i < board.length; ++i) {
-            board[7][i] = pieces.get(piecesIndex).getType();
-            ++piecesIndex;
-        }
-    }
-
-    public void placeBlackPieces() {
-        for (int i = 0; i < board.length; ++i) {
-            board[0][i] = Character.toUpperCase(pieces.get(piecesIndex).getType());
+    public void placePieces() {
+        for (int i = 0; i < BOARD_SIZE; ++i) {
+            board.getFirst().addPiece(whitePieces.get(piecesIndex));
+            board.getLast().addPiece(blackPieces.get(piecesIndex));
             ++piecesIndex;
         }
     }
