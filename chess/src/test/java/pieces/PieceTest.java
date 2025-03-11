@@ -1,8 +1,12 @@
 package pieces;
 
+import chess.Color;
 import chess.Piece;
+import chess.Type;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class PieceTest {
     @Test
     public void create_piece() {
@@ -24,5 +28,9 @@ public class PieceTest {
     private void verifyPiece(final Piece piece, final String color, final char representation) {
         assertEquals(color, piece.getColor().getColorName());
         assertEquals(representation, piece.getColor().getRepresentation());
+
+        assertTrue(Piece.createPiece(Color.BLACK_PAWN, Type.PAWN).isBlack());
+        assertTrue(Piece.createPiece(Color.WHITE_PAWN, Type.PAWN).isWhite());
+
     }
 }

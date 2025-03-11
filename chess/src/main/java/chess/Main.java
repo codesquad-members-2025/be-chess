@@ -12,6 +12,7 @@ public class Main {
             if(input.equals("start")){
                 board.initializePawns();
                 board.initializeBoard();
+                System.out.println(board.showBoard());
             }
             else if(input.equals("end")){
                 System.out.println("게임이 종료됩니다");

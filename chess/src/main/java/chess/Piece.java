@@ -90,4 +90,16 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
     public static Piece createPiece(Color color, Type type) {
         return new Piece(color, type);
     }
+
+    public boolean isBlack() {
+        return this.getColor().getColorName().equals(BLACK_COLOR);
+    }
+
+    public boolean isWhite() {
+        return this.getColor().getColorName().equals(WHITE_COLOR);
+    }
+
+    //검은색 말과 흰색 말을 구분할 수 있는 메소드 추가
+
+
 }
