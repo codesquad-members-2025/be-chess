@@ -3,7 +3,6 @@ package chess;
 import pieces.Piece;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static utils.StringUtils.appendNewLine;
@@ -12,18 +11,15 @@ public class Board {
     private List<Piece> pieces;
     private List<Piece> whitePieces;
     private List<Piece> blackPieces;
-    private char[][] board;
+    private ArrayList<Rank> board;
     private int piecesIndex;
 
     public Board() {
         this.pieces = new ArrayList<>();
-        this.board = new char[8][8];
+        this.board = new ArrayList<>();
         this.piecesIndex = 0;
         this.whitePieces = Piece.createWhite();
         this.blackPieces = Piece.createBlack();
-        for (char[] types : board) {
-            Arrays.fill(types, Piece.Type.NO_PIECE.getRepresentation() );
-        }
     }
 
     public void add(Piece piece) {
