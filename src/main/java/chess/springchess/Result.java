@@ -1,5 +1,6 @@
 package chess.springchess;
 
+import chess.springchess.ChessDto.movePieceDto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"isSuccess", "message", "result"})
@@ -28,5 +29,9 @@ public class Result<T> {
 
     public static <T> Result<T> onSuccess(T result, String message){
         return new Result<T>(true, message, result);
+    }
+
+    public static <T> Result<T> onFailure(T result, String message) {
+        return new Result<T>(false, message, result);
     }
 }
