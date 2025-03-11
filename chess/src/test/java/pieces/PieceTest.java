@@ -19,6 +19,7 @@ public class PieceTest {
         assertFalse(blank.isWhite());
         assertFalse(blank.isBlack());
         assertEquals(Piece.Type.NO_PIECE, blank.getType());
+
     }
 
     private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Piece.Type type) {

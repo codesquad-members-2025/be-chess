@@ -145,4 +145,12 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
         return new Piece(Color.NOCOLOR, Type.NO_PIECE);
     }
 
+    //펙토리 메소드 리펙토링
+    private  Piece createWhite(Type type){
+        return new Piece(Color.WHITE, type);
+    }
+
+    private Piece createBlack(Type type){
+        return new Piece(Color.BLACK, type);
+    }
 }
