@@ -49,8 +49,8 @@ public class Piece {
         return color;
     }
 
-    public char getType() {
-        return type.getRepresentation();
+    public Type getType() {
+        return type;
     }
 
     public static List<Piece> createWhite() {

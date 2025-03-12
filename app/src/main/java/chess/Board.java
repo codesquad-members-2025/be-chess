@@ -63,7 +63,8 @@ public class Board {
             StringBuilder row = new StringBuilder();
             for (var columnIndex = 0; columnIndex < BOARD_SIZE; ++columnIndex) {
                 Piece piece = rank.get(columnIndex);
-                row.append((piece.isBlack()) ? Character.toUpperCase(piece.getType()) : piece.getType());
+                row.append((piece.isBlack()) ?
+                    Character.toUpperCase(piece.getType().getRepresentation()) : piece.getType());
             }
             chessBoard.append(appendNewLine(row.toString()));
         }
@@ -81,7 +82,8 @@ public class Board {
     }
 
     private boolean matches(Piece piece, Piece.Color color, Piece.Type type) {
-        return piece.getColor() == color && piece.getType() == type.getRepresentation();
+        return piece.getColor() == color &&
+            piece.getType().getRepresentation() == type.getRepresentation();
     }
 
     public Piece searchPiece(Position position) {
