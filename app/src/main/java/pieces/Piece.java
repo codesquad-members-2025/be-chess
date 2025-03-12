@@ -1,5 +1,8 @@
 package pieces;
 
+import chess.Position;
+import chess.Board;
+
 
 public class Piece implements Comparable<Piece>  {
     private final Color color;
@@ -93,5 +96,22 @@ public class Piece implements Comparable<Piece>  {
         return Double.compare(other.getDefaultPoint(), this.getDefaultPoint());
     }
 
+    public boolean canMove(Position source, Position target, Board board) {
+        if (this.type == Type.KING) {
+            return isValidKingMove(source, target, board);
+        }
+        return false;
+    }
+
+    private boolean isValidKingMove(Position source, Position target, Board board) {
+        int rowDiff = Math.abs(source.getRow() - target.getRow());
+        int colDiff = Math.abs(source.getCol() - target.getCol());
+
+        //King은 모든 방향으로 한 칸만 이동 가능
+        if (rowDiff > 1 || colDiff >1 ) {
+            return false;
+        }
+        return true;
+    }
 }
 

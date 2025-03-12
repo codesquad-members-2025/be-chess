@@ -17,8 +17,14 @@ public class Game {
     }
 
     public void move(String sourcePosition, String targetPosition) {
+        Position sourcePos = new Position(sourcePosition);
         Position targetPos = new Position(targetPosition);
         Piece piece = findPiece(sourcePosition);
+
+        if (!piece.canMove(sourcePos, targetPos, board)) {
+            return;
+        }
+
         board.removePiece(sourcePosition);
         board.setPiece(targetPos.getRow(), targetPos.getCol(), piece);
     }
