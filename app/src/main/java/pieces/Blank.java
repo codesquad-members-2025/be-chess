@@ -1,5 +1,8 @@
 package pieces;
 
+import chess.Board;
+import java.util.List;
+
 public class Blank extends Piece {
     private Blank(Position position) {
         super(Color.NOCOLOR, Type.NO_PIECE, position);
@@ -10,7 +13,12 @@ public class Blank extends Piece {
     }
 
     @Override
-    public boolean canMove(Position target) {
+    public boolean canMove(Position target, Board board) {
         return false;
+    }
+
+    @Override
+    public List<Direction> getDirections() {
+        return null;
     }
 }
