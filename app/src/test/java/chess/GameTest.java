@@ -21,6 +21,28 @@ public class GameTest {
     }
 
     @Test
+    @DisplayName("king이 잘 움직이는지 확인")
+    public void moveKing() {
+        board.initialize();
+
+        String sourcePosition = "e8";
+        String targetPosition = "d7";
+        game.move(sourcePosition, targetPosition);
+        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlack(Type.KING));
+        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlank());
+    }
+    @Test
+    @DisplayName("king 움직임 예외처리 - 한 칸씩만 이동 가능")
+    public void invalidKingMove() {
+        board.initialize();
+        String sourcePosition = "e8";
+        String targetPosition = "e3";
+        game.move(sourcePosition, targetPosition);
+        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlack(Type.KING));
+        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlank());
+    }
+
+    @Test
     @DisplayName("기물이 현재 위치에서 다른 위치로 잘 이동하는지 확인")
     public void move() throws Exception {
         board.initialize();
