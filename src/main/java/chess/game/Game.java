@@ -36,10 +36,19 @@ public class Game {
     public void move(String sourcePotion, String targetPotion){
         Position sourcePosition = getPosition(sourcePotion);
         Position targetPosition = getPosition(targetPotion);
-        validateSameColor(sourcePosition, targetPosition);
-        if(!BoardPositionValidator.isWithinBoard(targetPosition)) throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
-        if(!isPathClear(sourcePosition, targetPosition)) throw new IllegalArgumentException("중간에 기물을 통과할 수 없습니다.");
-        validateAndChangePosition(sourcePosition, targetPosition);
+        validateSuitableMove(sourcePosition, targetPosition);
+        validatePieceMoveAndChangePosition(sourcePosition, targetPosition);
+    }
+
+    private void validateSuitableMove(Position sourcePosition, Position targetPosition){
+        try{
+            validateTargetHasSameColor(sourcePosition, targetPosition);
+            isPathClear(sourcePosition, targetPosition);
+            if(!BoardPositionValidator.isWithinBoard(targetPosition))
+                throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
+        } catch (IllegalArgumentException e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     public boolean isPathClear(Position source, Position target) {
@@ -51,7 +60,7 @@ public class Game {
 
         while (x != target.xPos() || y != target.yPos()) {
             if (board[y][x] != null && board[y][x].getColor() != Color.NOCOLOR) {
-                return false; // 중간에 기물이 있으면 이동 불가
+                throw new IllegalArgumentException("중간에 기물을 통과할 수 없습니다."); // 중간에 기물이 있으면 이동 불가
             }
             x += dx;
             y += dy;
@@ -59,13 +68,13 @@ public class Game {
         return true;
     }
 
-    private void validateSameColor(Position sourcePosition, Position targetPosition){
+    private void validateTargetHasSameColor(Position sourcePosition, Position targetPosition){
         if(board[sourcePosition.yPos()][sourcePosition.xPos()].getColor() == board[targetPosition.yPos()][targetPosition.xPos()].getColor()){
             throw new IllegalArgumentException("같은 색상의 말로는 이동할 수 없습니다.");
         }
     }
 
-    private void validateAndChangePosition(Position sourcePosition, Position targetPosition) {
+    private void validatePieceMoveAndChangePosition(Position sourcePosition, Position targetPosition) {
         Piece sourePiece = board[sourcePosition.yPos()][sourcePosition.xPos()];
         if(!sourePiece.canMove(targetPosition)){
             throw new IllegalArgumentException("해당 위치로 이동할 수 없는 기물입니다.");
@@ -103,7 +112,7 @@ public class Game {
         return point;
     }
 
-    public boolean isValidMove(String source,Color currentTurn) {
+    public boolean isValidTurn(String source, Color currentTurn) {
         Piece piece = Board.findPiece(source);
         if (piece == null) {
             return false;

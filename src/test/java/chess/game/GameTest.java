@@ -96,18 +96,18 @@ class GameTest {
     @DisplayName("현재 플레이어의 말인지 확인할 수 있다")
     void testIsValidMove_ValidPiece() {
         game.move("e2", new Pawn(Color.WHITE));
-        assertThat(game.isValidMove("e2", Color.WHITE)).isTrue();
+        assertThat(game.isValidTurn("e2", Color.WHITE)).isTrue();
     }
 
     @Test
     @DisplayName("상대 플레이어의 말을 움직일 수 없다")
-    void testIsValidMove_InvalidPiece() {
-        assertThat(game.isValidMove("e2", Color.BLACK)).isFalse();
+    void testIsValidTurn_InvalidPiece() {
+        assertThat(game.isValidTurn("e2", Color.BLACK)).isFalse();
     }
 
     @Test
     @DisplayName("빈 위치를 선택하면 유효하지 않다")
-    void testIsValidMove_EmptyPosition() {
-        assertThat(game.isValidMove("d4", Color.WHITE)).isFalse();
+    void testIsValidTurn_EmptyPosition() {
+        assertThat(game.isValidTurn("d4", Color.WHITE)).isFalse();
     }
 }

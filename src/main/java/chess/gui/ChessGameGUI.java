@@ -15,6 +15,7 @@ public class ChessGameGUI extends JFrame {
     private Game game;
     private Color currentTurn = Color.WHITE;
     private JLabel statusLabel;
+    private JLabel scoreLabel;
     private String selectedSource = null;
 
     public ChessGameGUI() {
@@ -22,7 +23,7 @@ public class ChessGameGUI extends JFrame {
         game = new Game(board);
 
         setTitle("체스 게임");
-        setSize(600, 700);
+        setSize(600, 750);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -31,14 +32,24 @@ public class ChessGameGUI extends JFrame {
         initializeBoard(boardPanel);
         add(boardPanel, BorderLayout.CENTER);
 
-        // 상태 표시 라벨
-        statusLabel = new JLabel("현재 턴: 흰색(White)");
+        // 상태 표시 라벨 (현재 턴)
+        statusLabel = new JLabel("현재 턴: 흰색(White)", SwingConstants.CENTER);
         add(statusLabel, BorderLayout.NORTH);
+
+        // 점수 및 종료 버튼 패널 추가
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+
+        // 점수 표기 라벨
+        scoreLabel = new JLabel("", SwingConstants.CENTER);
+        updateScore(); // 초기 점수 설정
+        bottomPanel.add(scoreLabel, BorderLayout.NORTH);
 
         // 게임 종료 버튼
         JButton endButton = new JButton("게임 종료");
         endButton.addActionListener(e -> System.exit(0));
-        add(endButton, BorderLayout.SOUTH);
+        bottomPanel.add(endButton, BorderLayout.SOUTH);
+
+        add(bottomPanel, BorderLayout.SOUTH);
     }
 
     private void initializeBoard(JPanel boardPanel) {
@@ -70,7 +81,7 @@ public class ChessGameGUI extends JFrame {
         String position = convertToChessNotation(row, col);
         if (selectedSource == null) {
             // 첫 클릭: 이동할 기물 선택
-            if (game.isValidMove(position, currentTurn)) {
+            if (game.isValidTurn(position, currentTurn)) {
                 selectedSource = position;
                 statusLabel.setText("이동할 위치를 선택하세요.");
             } else {
@@ -81,6 +92,7 @@ public class ChessGameGUI extends JFrame {
             try {
                 game.move(selectedSource, position);
                 updateBoard();
+                updateScore(); // 점수 업데이트
                 switchTurn();
                 statusLabel.setText("현재 턴: " + (currentTurn == Color.WHITE ? "흰색(White)" : "검은색(Black)"));
             } catch (IllegalArgumentException ex) {
@@ -102,6 +114,12 @@ public class ChessGameGUI extends JFrame {
                 buttons[row][col].setText(piece.getColor() == Color.NOCOLOR ? "" : String.valueOf(piece.getSymbol()));
             }
         }
+    }
+
+    private void updateScore() {
+        double whiteScore = game.calculatePoint(Color.WHITE);
+        double blackScore = game.calculatePoint(Color.BLACK);
+        scoreLabel.setText(String.format("현재 점수 - 흰색: %.1f  |  검은색: %.1f", whiteScore, blackScore));
     }
 
     private String convertToChessNotation(int row, int col) {
