@@ -3,7 +3,6 @@ package chess;
 import pieces.*;
 import pieces.Piece.*;
 import java.util.*;
-import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private ArrayList<Rank> pieces = new ArrayList<>();
@@ -19,9 +18,15 @@ public class Board {
         pieces.add(createWhiteRanks());
     }
 
-    public Piece findPiece(String position) {
-        Position pos = new Position(position);
-        return pieces.get(pos.getY()).getPiece(pos.getX());
+    public void initializeEmpty(){
+        pieces.clear();
+        for(int i = 0; i < 8; i++){
+            pieces.add(createBlanks(i));
+        }
+    }
+
+    public Piece findPiece(Position position) {
+        return pieces.get(position.getY()).getPiece(position.getX());
     }
 
     private Rank createBlackRanks(){
@@ -29,7 +34,7 @@ public class Board {
     }
 
     private Rank createWhiteRanks(){
-        return createRanks(Color.WHITE, 0);
+        return createRanks(Color.WHITE, 1);
     }
 
     public Rank createWhitePawns(){
@@ -63,7 +68,6 @@ public class Board {
         return new Rank(pawns);
     }
 
-
     private Rank createBlanks(int row){
         ArrayList<Piece> blanks = new ArrayList<>();
         for (int i = 97; i < 105; i++){
@@ -73,54 +77,7 @@ public class Board {
         return new Rank(blanks);
     }
 
-//    public void initializeEmpty(){
-//        pieces.clear();
-//        for(int i = 0; i<8; i++){
-//            pieces.add(createBlank());
-//        }
-//    }
-
-    public void move(String sourcePosition, String targetPosition){
-        Position sorce = new Position(sourcePosition);
-        Position target = new Position(targetPosition);
-        pieces.get(target.getY()).setPiece(target.getX(), findPiece(sourcePosition));
-        pieces.get(sorce.getY()).setPiece(sorce.getX(), Blank.createBlank(new Position(sourcePosition)));
+    public ArrayList<Rank> getPieces(){
+        return pieces;
     }
-
-    public String showBoard(){
-        StringBuilder answer = new StringBuilder();
-
-        for (Rank rank : pieces){
-            answer.append(appendNewLine(rank.toString()));
-        }
-
-        return answer.toString();
-    }
-
-//    public double caculcatePoint(Color color){
-//        double score = 0.0;
-//        for (Rank rank : pieces){
-//            for(int i = 0; i < 8; i++){
-//                Piece piece = rank.getPiece(i);
-//                if (piece.getType() != Type.NO_PIECE && piece.getColor() == color){
-//                    score += piece.getType().getdefaultPoint();
-//                }
-//            }
-//        }
-//        return score;
-//    }
-
-//    public ArrayList<Piece> sortByScore(Color color, boolean ascending){
-//        ArrayList<Piece> pieceList = new ArrayList<>();
-//        for (Rank rank : pieces){
-//            for(int i = 0; i < 8; i++){
-//                Piece piece = rank.getPiece(i);
-//                if (piece.getType() != Type.NO_PIECE && piece.getColor() == color){
-//                    pieceList.add(piece);
-//                }
-//            }
-//        }
-//        pieceList.sort(Comparator.comparing(p -> ascending ? p.getType().getdefaultPoint() : -p.getType().getdefaultPoint()));
-//        return pieceList;
-//    }
 }
