@@ -107,4 +107,10 @@ public class ChessGame {
                 .mapToInt(rank -> rank.pieceCountPerColorAndType(color, type))
                 .sum();
     }
+
+    public void reset() {
+        // 턴 초기화
+        whiteTurn = true;
+        blackTurn = false;
+    }
 }

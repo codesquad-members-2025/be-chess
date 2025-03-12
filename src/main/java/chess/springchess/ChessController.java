@@ -30,7 +30,9 @@ public class ChessController {
 
     @GetMapping(value = "/api/start")
     public Result<ChessDto.initGameDto> startGame() {
-        board.initialize();
+        // 보드 초기화 후 게임 상태 초기화
+        board.initialize(); // 보드 초기화
+        chessGame.reset();  // ChessGame 상태 초기화
         return Result.onSuccess(ChessConverter.createInitGameDto(chessView.showBoard()), INIT_BOARD);
     }
 

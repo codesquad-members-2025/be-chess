@@ -74,4 +74,11 @@ public class Rank {
                 .sorted(Comparator.comparingDouble(Piece::getScore).reversed())
                 .collect(Collectors.toList());
     }
+
+    public void clear() {
+        // 모든 위치를 빈 칸으로 설정
+        for (int i = 0; i < rank.size(); i++) {
+            rank.set(i, Piece.createBlank());
+        }
+    }
 }
