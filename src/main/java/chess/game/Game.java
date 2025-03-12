@@ -38,7 +38,25 @@ public class Game {
         Position targetPosition = getPosition(targetPotion);
         validateSameColor(sourcePosition, targetPosition);
         if(!BoardPositionValidator.isWithinBoard(targetPosition)) throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
+        if(!isPathClear(sourcePosition, targetPosition)) throw new IllegalArgumentException("중간에 기물을 통과할 수 없습니다.");
         validateAndChangePosition(sourcePosition, targetPosition);
+    }
+
+    public boolean isPathClear(Position source, Position target) {
+        int dx = Integer.compare(target.xPos(), source.xPos()); // x 방향 이동 (-1, 0, 1)
+        int dy = Integer.compare(target.yPos(), source.yPos()); // y 방향 이동 (-1, 0, 1)
+
+        int x = source.xPos() + dx;
+        int y = source.yPos() + dy;
+
+        while (x != target.xPos() || y != target.yPos()) {
+            if (board[y][x] != null && board[y][x].getColor() != Color.NOCOLOR) {
+                return false; // 중간에 기물이 있으면 이동 불가
+            }
+            x += dx;
+            y += dy;
+        }
+        return true;
     }
 
     private void validateSameColor(Position sourcePosition, Position targetPosition){
