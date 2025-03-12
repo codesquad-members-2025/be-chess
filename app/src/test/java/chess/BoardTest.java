@@ -82,4 +82,24 @@ public class BoardTest {
         assertThat(board.searchPiece(position).getType()).isEqualTo(piece.getType());
         System.out.println(board.showBoard());
     }
+
+    @Test
+    @DisplayName("검은색 체스말의 점수는 15점, 흰색 체스말의 점수는 7점을 갖는다.")
+    void calculatePoint() throws Exception {
+        //Given
+        board.setEmptyBoard();
+        board.move(new Position("b6"), new Piece(Piece.Color.BLACK, Piece.Type.PAWN));
+        board.move(new Position("e6"), new Piece(Piece.Color.BLACK, Piece.Type.QUEEN));
+        board.move(new Position("b8"), new Piece(Piece.Color.BLACK, Piece.Type.KING));
+        board.move(new Position("c8"), new Piece(Piece.Color.BLACK, Piece.Type.ROOK));
+
+        board.move(new Position("f2"), new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
+        board.move(new Position("g2"), new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
+        board.move(new Position("e2"), new Piece(Piece.Color.WHITE, Piece.Type.ROOK));
+        board.move(new Position("f1"), new Piece(Piece.Color.WHITE, Piece.Type.KING));
+
+        //When & Then
+        assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
+        assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(7.0);
+    }
 }
