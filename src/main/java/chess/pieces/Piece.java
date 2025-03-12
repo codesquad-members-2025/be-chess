@@ -123,7 +123,7 @@ abstract public class Piece {
     abstract protected Direction findDirection(int dx, int dy);
 
     protected Direction getDirectionByCurrent(int dx, int dy) {
-        return Direction.everyDirection().stream()
+        return directionList.stream()
                 .filter(d -> (d.getXDegree() == Integer.signum(dx) && d.getYDegree() == Integer.signum(dy)))
                 .findFirst()
                 .orElse(null);
