@@ -31,17 +31,20 @@ public class ChessController {
     }
 
     @PostMapping("api/move")
-    public Result<ChessDto.movePieceDto> movePiece(@RequestBody ChessDto.movePieceDto request) {
+    public Result<ChessDto.movePieceDto> movePiece(@RequestBody ChessDto.movePieceRequestDto request) {
+        Piece move = Piece.createBlank();
         try {
-            Piece move = chessGame.move(request.getStartPos(), request.getEndPos());
+            move = chessGame.move(request.getStartPos(), request.getEndPos());
             boolean kingOnBoard = chessGame.checkKingOnBoard(move);
             if (!kingOnBoard)
-                return Result.onSuccess(ChessConverter.createmovePieceDto(request.getStartPos(), request.getEndPos()), CATCH_KING_SUCCESS);
-            return Result.onSuccess(ChessConverter.createmovePieceDto(request.getStartPos(), request.getEndPos()), MOVE_PIECE_SUCCESS);
+                return Result.onSuccess(ChessConverter.createmovePieceDto(request.getStartPos(), request.getEndPos(), move), CATCH_KING_SUCCESS);
+            return Result.onSuccess(ChessConverter.createmovePieceDto(request.getStartPos(), request.getEndPos(), move), MOVE_PIECE_SUCCESS);
         } catch (IllegalArgumentException e) {
             // 예외가 발생하면 Result 객체로 에러 메시지 반환
-            return Result.onFailure(request, e.getMessage());
+            return Result.onFailure(ChessConverter.createmovePieceDto(request.getStartPos(), request.getEndPos(), move), e.getMessage());
         }
     }
+
+
 
 }

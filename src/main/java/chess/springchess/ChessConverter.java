@@ -1,5 +1,6 @@
 package chess.springchess;
 
+import chess.pieces.Piece;
 import chess.springchess.ChessDto.initGameDto;
 import chess.springchess.ChessDto.movePieceDto;
 
@@ -8,7 +9,7 @@ public class ChessConverter {
         return new initGameDto(board);
     }
 
-    public static movePieceDto createmovePieceDto(String startPos, String endPos) {
-        return new movePieceDto(startPos, endPos);
+    public static movePieceDto createmovePieceDto(String startPos, String endPos, Piece movePiece) {
+        return new movePieceDto(startPos, endPos, movePiece);
     }
 }
