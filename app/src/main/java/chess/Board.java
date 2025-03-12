@@ -8,6 +8,9 @@ import java.util.List;
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
+
+    private ArrayList<ArrayList<Piece>> board;
+
     private List<Piece> chessPiecesList;
 
     private List<Piece> whiteChessPiecesList;
@@ -29,28 +32,28 @@ public class Board {
         whiteChessPiecesList = new ArrayList<>();
         blackChessPiecesList = new ArrayList<>();
 
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_ROOK_REPRESENTATION));
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_KNIGHT_REPRESENTATION));
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_BISHOP_REPRESENTATION));
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_QUEEN_REPRESENTATION));
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION));
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_BISHOP_REPRESENTATION));
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_KNIGHT_REPRESENTATION));
-        blackChessPiecesList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_ROOK_REPRESENTATION));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.ROOK));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KNIGHT));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.BISHOP));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.QUEEN));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KING));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.BISHOP));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KNIGHT));
+        blackChessPiecesList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.ROOK));
 
         for(int i = 0; i < 8; i++){
-            blackPawnsList.add(Piece.createPiece(Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION));
-            whitePawnsList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION));
+            blackPawnsList.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.PAWN));
+            whitePawnsList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.PAWN));
         }
 
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_ROOK_REPRESENTATION));
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_KNIGHT_REPRESENTATION));
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_BISHOP_REPRESENTATION));
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_QUEEN_REPRESENTATION));
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_KING_REPRESENTATION));
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_BISHOP_REPRESENTATION));
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_KNIGHT_REPRESENTATION));
-        whiteChessPiecesList.add(Piece.createPiece(Piece.WHITE_COLOR, Piece.WHITE_ROOK_REPRESENTATION));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.ROOK));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KNIGHT));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.BISHOP));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.QUEEN));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KING));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.BISHOP));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KNIGHT));
+        whiteChessPiecesList.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.ROOK));
 
         initializeWhitePawnsResult();
         initializeBlackPawnsResult();
@@ -63,7 +66,7 @@ public class Board {
         StringBuilder whitePawnSb = new StringBuilder();
 
         for (int i = 0; i < whitePawnsList.size(); i++){
-            whitePawnSb.append(whitePawnsList.get(i).getRepresentation());
+            whitePawnSb.append(whitePawnsList.get(i).getType().getWhiteRepresentation());
         }
 
         whitePawnsResult = whitePawnSb.toString();
@@ -73,7 +76,7 @@ public class Board {
         StringBuilder whitePiecesSb = new StringBuilder();
 
         for (int i = 0; i < whiteChessPiecesList.size(); i++){
-            whitePiecesSb.append(whiteChessPiecesList.get(i).getRepresentation());
+            whitePiecesSb.append(whiteChessPiecesList.get(i).getType().getWhiteRepresentation());
         }
 
         whitePiecesResult = whitePiecesSb.toString();
@@ -83,7 +86,7 @@ public class Board {
         StringBuilder blackPawnSb = new StringBuilder();
 
         for (int i = 0; i < blackPawnsList.size(); i++){
-            blackPawnSb.append(blackPawnsList.get(i).getRepresentation());
+            blackPawnSb.append(blackPawnsList.get(i).getType().getBlackRepresentation());
         }
 
         blackPawnsResult = blackPawnSb.toString();
@@ -93,7 +96,7 @@ public class Board {
         StringBuilder blackPiecesSb = new StringBuilder();
 
         for (int i = 0; i < blackChessPiecesList.size(); i++){
-            blackPiecesSb.append(blackChessPiecesList.get(i).getRepresentation());
+            blackPiecesSb.append(blackChessPiecesList.get(i).getType().getBlackRepresentation());
         }
 
         blackPiecesResult = blackPiecesSb.toString();
@@ -130,7 +133,6 @@ public class Board {
     public Board() {
         chessPiecesList = new ArrayList<>();
     }
-
 
 
 
