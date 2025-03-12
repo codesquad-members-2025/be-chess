@@ -1,12 +1,13 @@
 package pieces;
 
-import java.util.Objects;
+import chess.Board;
+import java.util.*;
 
 public abstract class Piece {
 
     private final Color color;
     private final Type type;
-    private final Position position;
+    private Position position;
     private final char representation;
 
     public enum Color {
@@ -37,7 +38,8 @@ public abstract class Piece {
         }
     }
 
-    public abstract boolean canMove(Position target);
+    public abstract boolean canMove(Position target, Board board);
+    public abstract List<Direction> getDirections();
 
     public boolean isWhite(){
         return color == Color.WHITE;
@@ -51,6 +53,13 @@ public abstract class Piece {
     }
     public Color getColor() { return color;}
 
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
     @Override
     public String toString() {
         return String.valueOf(representation);
@@ -62,10 +71,6 @@ public abstract class Piece {
         if (obj == null || getClass() != obj.getClass()) return false;
         Piece piece = (Piece) obj;
         return color == piece.color && type == piece.type;
-    }
-
-    public Position getPosition() {
-        return position;
     }
 
     @Override
