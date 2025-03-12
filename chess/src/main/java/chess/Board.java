@@ -137,4 +137,19 @@ public class Board {
         return boardSb.toString();
     }
 
+    public int getPiecesCnt(Piece.Color color, Piece.Type type){
+        int cnt = 0;
+        for(int i = 0; i<BOARD_SIZE; i++){
+            for(int j = 0; j<BOARD_SIZE; j++){
+                Piece piece = board.get(i).getPiece(j);
+                if (piece.getType().equals(type) && piece.getColor().equals(color)) {
+                    cnt++;
+                }
+            }
+        }
+
+        return cnt;
+    }
+
+
 }

@@ -7,6 +7,8 @@ import chess.Piece;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+
 import static utils.StringUtils.appendNewLine;
 
 import static org.junit.Assert.*;
@@ -17,12 +19,12 @@ public class BoardTest {
     @Before
     public void setup() {
         board = new Board();
+        board.initializePawns();
+        board.initializeBoard();
     }
 
     @Test
     public void create() throws Exception {
-        board.initializePawns();
-        board.initializeBoard();
         assertEquals(32, board.pieceCount());
         String blankRank = appendNewLine("........");
         assertEquals(
@@ -32,5 +34,16 @@ public class BoardTest {
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"),
                 board.showBoard());
+    }
+
+    @Test
+    @DisplayName("피스의 종류를 센다")
+    public void countPieces(){
+        assertEquals(1, board.getPiecesCnt(Piece.Color.WHITE, Piece.Type.QUEEN));
+        assertEquals(2, board.getPiecesCnt(Piece.Color.BLACK, Piece.Type.ROOK));
+        assertEquals(1, board.getPiecesCnt(Piece.Color.WHITE, Piece.Type.KING));
+        assertEquals(8, board.getPiecesCnt(Piece.Color.WHITE, Piece.Type.PAWN));
+        assertEquals(8, board.getPiecesCnt(Piece.Color.BLACK, Piece.Type.PAWN));
+
     }
 }
