@@ -20,7 +20,7 @@ public class ChessGame {
         this.chessBoard = chessBoard;
     }
 
-    public void move(String sourcePosition, String targetPosition) {
+    public Piece move(String sourcePosition, String targetPosition) {
         Position startPos= new Position(sourcePosition);
         Position endPos= new Position(targetPosition);
 
@@ -30,11 +30,23 @@ public class ChessGame {
         Piece sourcePiece = startRank.getPieceByPosition(startPos.getXPos());
         checkTurn(sourcePiece);
 
-        verifyPositionByPiece(startPos, endPos, sourcePiece, chessBoard);
+        sourcePiece.verifyMovePosition(startPos, endPos, sourcePiece, chessBoard);
         //기물을 옮긴 후 시작 위치를 공백으로 설정
         endRank.movePiece(endPos.getXPos(), sourcePiece);
         startRank.movePiece(startPos.getXPos(), Piece.createBlank());
         endTurn();
+        return sourcePiece;
+    }
+
+    public boolean checkKingOnBoard(Piece sourcePiece) {
+        Color color = Color.WHITE;
+        if (sourcePiece.isWhite()) color = Color.BLACK;
+
+        int count = 0;
+        for (Rank rank : chessBoard) {
+            count += rank.pieceCountPerColorAndType(color, Type.KING);
+        }
+        return count == 1;
     }
 
     private void checkTurn(Piece sourcePiece) {
@@ -47,16 +59,6 @@ public class ChessGame {
         whiteTurn = !whiteTurn;
         blackTurn = !blackTurn;
     }
-
-    private void verifyPositionByPiece(Position startPos, Position endPos, Piece sourcePiece, List<Rank> chessBoard) {
-        int startX = startPos.getXPos();
-        int startY= startPos.getYPos();
-        int endX = endPos.getXPos();
-        int endY = endPos.getYPos();
-
-        sourcePiece.verifyMovePosition(startPos, endPos, sourcePiece, chessBoard);
-    }
-
     public double calculatePoint(Color color) {
         double sum = chessBoard.stream()
                 .mapToDouble(rank -> rank.getPointByColor(color))
