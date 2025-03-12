@@ -4,9 +4,12 @@ import chess.game.Board;
 import chess.game.ChessGame;
 import chess.game.ChessView;
 import chess.pieces.Piece;
+import chess.pieces.Piece.Color;
+import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,6 +17,7 @@ public class ChessController {
     private static final String INIT_BOARD = "보드판이 초기화 되었습니다.";
     private static final String MOVE_PIECE_SUCCESS = "기물이 정상적으로 이동하였습니다.";
     private static final String CATCH_KING_SUCCESS = "킹을 잡았습니다.";
+    private static final String GAME_RESULT = "게임 결과입니다.";
     private final ChessGame chessGame;
     private final Board board;
     private final ChessView chessView;
@@ -45,6 +49,17 @@ public class ChessController {
         }
     }
 
+    @GetMapping(value = "/api/result")
+    public Result<ChessDto.GameResultDto> showResult(@RequestParam String color) {
+        Color winnerColor = Color.getColorByString(color);
+        Color loserColor = winnerColor.getEnemyColor();
 
+        double winnerScore = chessGame.calculatePoint(winnerColor);
+        double loserScore = chessGame.calculatePoint(loserColor);
+        List<Piece> winnerPieces = chessGame.sortPiece(winnerColor);
+        List<Piece> loserPieces = chessGame.sortPiece(loserColor);
+
+        return Result.onSuccess(ChessConverter.createGameResultDto(winnerColor, winnerScore, loserScore, winnerPieces, loserPieces), GAME_RESULT);
+    }
 
 }
