@@ -29,21 +29,57 @@ public class Game {
         if(!BoardPositionValidator.isWithinBoard(position)){
             throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
         }
+        piece.setCurrentPosition(position);
         board[position.yPos()][position.xPos()] = piece;
     }
 
     public void move(String sourcePotion, String targetPotion){
         Position sourcePosition = getPosition(sourcePotion);
         Position targetPosition = getPosition(targetPotion);
-        if(!BoardPositionValidator.isWithinBoard(targetPosition)) throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
-        validateAndChangePosition(sourcePosition, targetPosition);
+        validateSuitableMove(sourcePosition, targetPosition);
+        validatePieceMoveAndChangePosition(sourcePosition, targetPosition);
     }
 
-    private void validateAndChangePosition(Position sourcePosition, Position targetPosition) {
+    private void validateSuitableMove(Position sourcePosition, Position targetPosition){
+        try{
+            validateTargetHasSameColor(sourcePosition, targetPosition);
+            isPathClear(sourcePosition, targetPosition);
+            if(!BoardPositionValidator.isWithinBoard(targetPosition))
+                throw new IllegalArgumentException("체스 보드판의 범위를 벗어난 값을 입력했습니다.");
+        } catch (IllegalArgumentException e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public boolean isPathClear(Position source, Position target) {
+        int dx = Integer.compare(target.xPos(), source.xPos()); // x 방향 이동 (-1, 0, 1)
+        int dy = Integer.compare(target.yPos(), source.yPos()); // y 방향 이동 (-1, 0, 1)
+
+        int x = source.xPos() + dx;
+        int y = source.yPos() + dy;
+
+        while (x != target.xPos() || y != target.yPos()) {
+            if (board[y][x] != null && board[y][x].getColor() != Color.NOCOLOR) {
+                throw new IllegalArgumentException("중간에 기물을 통과할 수 없습니다."); // 중간에 기물이 있으면 이동 불가
+            }
+            x += dx;
+            y += dy;
+        }
+        return true;
+    }
+
+    private void validateTargetHasSameColor(Position sourcePosition, Position targetPosition){
+        if(board[sourcePosition.yPos()][sourcePosition.xPos()].getColor() == board[targetPosition.yPos()][targetPosition.xPos()].getColor()){
+            throw new IllegalArgumentException("같은 색상의 말로는 이동할 수 없습니다.");
+        }
+    }
+
+    private void validatePieceMoveAndChangePosition(Position sourcePosition, Position targetPosition) {
         Piece sourePiece = board[sourcePosition.yPos()][sourcePosition.xPos()];
         if(!sourePiece.canMove(targetPosition)){
             throw new IllegalArgumentException("해당 위치로 이동할 수 없는 기물입니다.");
         }
+        sourePiece.setCurrentPosition(targetPosition);
         board[targetPosition.yPos()][targetPosition.xPos()] = sourePiece;
         board[sourcePosition.yPos()][sourcePosition.xPos()] = Piece.createBlank();
     }
@@ -76,7 +112,7 @@ public class Game {
         return point;
     }
 
-    public boolean isValidMove(String source,Color currentTurn) {
+    public boolean isValidTurn(String source, Color currentTurn) {
         Piece piece = Board.findPiece(source);
         if (piece == null) {
             return false;

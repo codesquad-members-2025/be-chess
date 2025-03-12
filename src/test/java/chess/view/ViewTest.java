@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import static org.assertj.core.api.Assertions.*;
 
 class ViewTest {
+    private ChessView view;
     private Piece[][] board;
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -32,7 +33,7 @@ class ViewTest {
         board[6][4] = new Pawn(Color.WHITE); // e2에 폰 배치
         board[1][4] = new Pawn(Color.BLACK); // e7에 폰 배치
 
-        ChessView.printBoard(board);
+        view.printBoard(board);
         String expectedBoard =
                 "........\n" +
                         "....p...\n" +
@@ -50,7 +51,7 @@ class ViewTest {
     @Test
     @DisplayName("빈 체스판이 올바르게 출력되는지 확인")
     void testPrintEmptyBoard() {
-        ChessView.printBoard(board);
+        view.printBoard(board);
         String expectedEmptyBoard =
                 "........\n" +
                         "........\n" +
