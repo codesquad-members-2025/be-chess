@@ -1,6 +1,8 @@
 package chess;
 
+import java.io.IOException;
 import java.lang.ref.PhantomReference;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,4 +154,15 @@ public class Board {
     }
 
 
+    public Piece findPiece(String position) {
+        char x = position.charAt(0);
+        int xPos = x - 'a';
+
+        char y = position.charAt(1);
+        int yPos = Character.getNumericValue(y)-1;
+
+        //System.out.println("position: " + position + " -> xPos: " + xPos + ", yPos: " + yPos);
+        //System.out.println("board index: " + (7 - yPos));
+        return board.get(7-yPos).getPiece(xPos);
+    }
 }

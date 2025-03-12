@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Objects;
+
 public class Piece { //Pawn 클래스 이름을 Piece로 rename
 
     public static final String BLACK_COLOR = "black";
@@ -153,4 +155,21 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
     private Piece createBlack(Type type){
         return new Piece(Color.BLACK, type);
     }
+
+    // assertEquals()는 객체의 메모리 주소를 비교하므로
+    //초기화 된 체스판과 새로운 인스턴스를 비교하기 위해
+    //equals() 메서드를 Piece 클래스에 오버라이딩하여 내용 비교를 수행하도록 변경
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return this.type == piece.type && this.color == piece.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, color);
+    }
+
 }

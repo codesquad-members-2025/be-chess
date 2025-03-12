@@ -46,4 +46,13 @@ public class BoardTest {
         assertEquals(8, board.getPiecesCnt(Piece.Color.BLACK, Piece.Type.PAWN));
 
     }
+
+    @Test
+    @DisplayName("좌표를 통해 주어진 위치의 기물을 조회한다")
+    public void findPiece() throws Exception {
+        assertEquals(Piece.createBlackRook(), board.findPiece("a8"));
+        assertEquals(Piece.createBlackRook(), board.findPiece("h8"));
+        assertEquals(Piece.createWhiteRook(), board.findPiece("a1"));
+        assertEquals(Piece.createWhiteRook(), board.findPiece("h1"));
+    }
 }
