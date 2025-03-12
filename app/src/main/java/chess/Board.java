@@ -93,4 +93,17 @@ public class Board {
     public void move(Position position, Piece piece) {
         board.get(position.getY()).getRank().set(position.getX(), piece);
     }
+
+    public double calculatePoint(Piece.Color color) {
+        double point = 0;
+        for (Rank rank : board) {
+            for (Piece piece : rank.getRank()) {
+                if (piece.getColor() == color) {
+                    point += piece.getType().getDefaultPoint();
+                }
+            }
+        }
+        return point;
+    }
+
 }
