@@ -59,7 +59,7 @@ public class BoardTest {
         Piece expectedPiece = new Piece(Piece.Color.BLACK, Piece.Type.ROOK);
 
         //When
-        Piece actualPiece = board.searchPiece("a8");
+        Piece actualPiece = board.searchPiece(new Position("a8"));
 
         //Then
         assertThat(actualPiece.getType()).isEqualTo(expectedPiece.getType());
@@ -72,7 +72,7 @@ public class BoardTest {
         //Given
         board.setEmptyBoard();
         Piece piece = new Piece(Piece.Color.BLACK, Piece.Type.ROOK);
-        String position = "b5";
+        Position position = new Position("b5");
 
         //When
         board.move(position, piece);

@@ -13,7 +13,7 @@ public class ChessGame {
         String input = scanner.nextLine();
         while (input.equals("start")) {
             board.initialize();
-            board.print();
+            System.out.println(board.showBoard());
 
             System.out.println("계속 진행하시겠습니까?");
             input = scanner.nextLine();

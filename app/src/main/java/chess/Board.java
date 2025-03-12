@@ -84,23 +84,11 @@ public class Board {
         return piece.getColor() == color && piece.getType() == type.getRepresentation();
     }
 
-    public Piece searchPiece(String position) {
-        char x = position.charAt(0);
-        int xPos = x - 'a';
-
-        char y = position.charAt(1);
-        int yPos = Character.getNumericValue(y) - 1;
-
-      return  board.get(yPos).getRank().get(xPos);
+    public Piece searchPiece(Position position) {
+        return  board.get(position.getY()).getRank().get(position.getX());
     }
 
-    public void move(String position, Piece piece) {
-        char x = position.charAt(0);
-        int xPos = x - 'a';
-
-        char y = position.charAt(1);
-        int yPos = Character.getNumericValue(y) - 1;
-
-        board.get(yPos).getRank().set(xPos, piece);
+    public void move(Position position, Piece piece) {
+        board.get(position.getY()).getRank().set(position.getX(), piece);
     }
 }
