@@ -11,6 +11,14 @@ import java.util.Objects;
 abstract public class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
+
+        public static Color getColorByString(String color) {
+            return Color.valueOf(color.toUpperCase());
+        }
+        public Color getEnemyColor() {
+            if (this == WHITE) return BLACK;
+            return WHITE;
+        }
     }
 
     public enum Type {
