@@ -57,5 +57,40 @@ public class ChessDto {
         }
     }
 
+    public static class GameResultDto {
+        private Color winnerColor;
+        private double whiteScore;
+        private double loserScore;
+        private List<Piece> winnerPieces;
+        private List<Piece> loserPieces;
 
+        public GameResultDto(Color winnerColor, double whiteScore, double loserScore, List<Piece> winnerPieces,
+                             List<Piece> loserPieces) {
+            this.winnerColor = winnerColor;
+            this.whiteScore = whiteScore;
+            this.loserScore = loserScore;
+            this.winnerPieces = winnerPieces;
+            this.loserPieces = loserPieces;
+        }
+
+        public Color getWinnerColor() {
+            return winnerColor;
+        }
+
+        public double getWhiteScore() {
+            return whiteScore;
+        }
+
+        public double getLoserScore() {
+            return loserScore;
+        }
+
+        public List<Piece> getWinnerPieces() {
+            return winnerPieces;
+        }
+
+        public List<Piece> getLoserPieces() {
+            return loserPieces;
+        }
+    }
 }
