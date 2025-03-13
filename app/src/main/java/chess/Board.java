@@ -96,14 +96,38 @@ public class Board {
 
     public double calculatePoint(Piece.Color color) {
         double point = 0;
+
         for (Rank rank : board) {
-            for (Piece piece : rank.getRank()) {
+            ArrayList<Piece> pieces = rank.getRank();
+            for (int column = 0; column < BOARD_SIZE; column++) {
+                Piece piece = pieces.get(column);
                 if (piece.getColor() == color) {
-                    point += piece.getType().getDefaultPoint();
+                    if (piece.getType() == Piece.Type.PAWN) { // 폰인 경우 같은 세로줄에 중복되는 폰이 존재하는지 확인
+                        if (checkDuplicatedPawn(column)) {
+                            point += 0.5; // 중복될 경우 0.5점 부여
+                        } else {
+                            point += piece.getType().getDefaultPoint();
+                        }
+                    } else {
+                        point += piece.getType().getDefaultPoint();
+                    }
                 }
             }
         }
+
         return point;
+    }
+
+    private boolean checkDuplicatedPawn(int column) { // 같은 세로줄에 같은 색 중복되는 폰이 있는지 확인
+        int pawnCount = 0;
+
+        for (Rank rank : board) {
+            ArrayList<Piece> pieces = rank.getRank();
+            Piece piece = pieces.get(column);
+            if (piece.getType() == Piece.Type.PAWN) ++pawnCount;
+        }
+
+       return pawnCount > 1;
     }
 
 }
