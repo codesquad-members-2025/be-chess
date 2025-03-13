@@ -20,7 +20,7 @@ public class Board {
     private static final int BOARD_SIZE = 8; // 캡슐화 및 OOP 준수를 위해 private 적용
     //char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
     //보드 자료구선 개선
-    private final ArrayList<Rank> board = new ArrayList<>();
+    private ArrayList<Rank> board = new ArrayList<>();
 
     public void add(Piece pawn) {
         boardList.add(pawn);
@@ -161,8 +161,19 @@ public class Board {
         char y = position.charAt(1);
         int yPos = Character.getNumericValue(y)-1;
 
-        //System.out.println("position: " + position + " -> xPos: " + xPos + ", yPos: " + yPos);
-        //System.out.println("board index: " + (7 - yPos));
         return board.get(7-yPos).getPiece(xPos);
+    }
+
+    public void initializeEmpty() {
+        board = new ArrayList<>();
+        for(int i = 0; i<BOARD_SIZE; i++){
+            board.add(new Rank(blankPieces));
+        }
+    }
+
+    public void move(String position, Piece piece) {
+        Position pos = new Position(position);
+        board.get(pos.getY()).setPiece(pos.getX(), piece);
+
     }
 }

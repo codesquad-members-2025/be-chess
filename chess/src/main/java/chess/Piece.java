@@ -172,4 +172,5 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
         return Objects.hash(type, color);
     }
 
+
 }

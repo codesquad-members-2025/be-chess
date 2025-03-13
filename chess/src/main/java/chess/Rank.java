@@ -7,7 +7,7 @@ public class Rank {
     private final ArrayList<Piece> pieces;
 
     public Rank(ArrayList<Piece> pieces) {
-        this.pieces = pieces;
+        this.pieces = new ArrayList<>(pieces);
     }
 
     public Piece getPiece(int col) {
@@ -23,5 +23,8 @@ public class Rank {
     }
 
 
-
+    //기존의 Piece를 제거하고 새로운 Piece로 변경하는 경우
+    public void setPiece(int x, Piece piece) {
+        pieces.set(x, piece);
+    }
 }
