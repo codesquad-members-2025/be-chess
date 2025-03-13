@@ -1,9 +1,8 @@
 package chess;
 
-import java.io.IOException;
-import java.lang.ref.PhantomReference;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static utils.StringUtils.NEWLINE;
@@ -200,5 +199,57 @@ public class Board {
         }
 
         return false;
+    }
+
+    public void sortPieces(){
+        List<Piece> whiteList = new ArrayList<>();
+        List<Piece> blackList = new ArrayList<>();
+
+        for(Rank rank : board){
+            for(int i = 0; i<rank.size(); i++){
+                Piece piece = rank.getPiece(i);
+                if(piece.getColor() == Piece.Color.WHITE){
+                    whiteList.add(piece);
+                }
+                else if(piece.getColor() == Piece.Color.BLACK){
+                    blackList.add(piece);
+                }
+            }
+        }
+
+        // 점수가 높은 순 (내림차순)
+        Collections.sort(whiteList, new Comparator<Piece>() {
+            @Override
+            public int compare(Piece o1, Piece o2) {
+                return Double.compare(o2.getDefaultPoint(), o1.getDefaultPoint());
+            }
+        });
+
+        // 점수가 낮은 순 (오름차순)
+        Collections.sort(whiteList, new Comparator<Piece>() {
+            @Override
+            public int compare(Piece o1, Piece o2) {
+                return Double.compare(o1.getDefaultPoint(), o2.getDefaultPoint()); // 점수가 낮은 순 (오름차순)
+            }
+        });
+
+        // 점수가 높은 순 (내림차순)
+        Collections.sort(blackList, new Comparator<Piece>() {
+            @Override
+            public int compare(Piece o1, Piece o2) {
+                return Double.compare(o2.getDefaultPoint(), o1.getDefaultPoint());
+            }
+        });
+
+        // 점수가 낮은 순 (오름차순)
+        Collections.sort(blackList, new Comparator<Piece>() {
+            @Override
+            public int compare(Piece o1, Piece o2) {
+                return Double.compare(o1.getDefaultPoint(), o2.getDefaultPoint()); // 점수가 낮은 순 (오름차순)
+            }
+        });
+
+
+
     }
 }

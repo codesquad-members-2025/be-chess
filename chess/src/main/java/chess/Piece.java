@@ -20,6 +20,7 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
     public static final char WHITE_KING_REPRESENTATION = 'k';
     public static final char BLACK_KING_REPRESENTATION = 'K';
 
+
     public enum Color{
         WHITE("white"), BLACK("black"), NOCOLOR("");
 
@@ -44,7 +45,7 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
         KING('k', 0.0),
         NO_PIECE('.', 0.0);
         private final char representation;
-        private double defaultPoint;
+        private final double defaultPoint;
 
         Type(char representation, double defaultPoint) {
             this.representation = representation;
@@ -66,7 +67,7 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
         }
 
         public double getDefaultPoint(){
-            return defaultPoint;
+            return this.defaultPoint;
         }
 
     }
@@ -182,6 +183,11 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
     @Override
     public int hashCode() {
         return Objects.hash(type, color);
+    }
+
+
+    public double getDefaultPoint() {
+        return this.type.getDefaultPoint();
     }
 
 
