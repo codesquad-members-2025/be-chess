@@ -1,39 +1,37 @@
 package pieces;
 
+import chess.Board;
+import chess.ChessView;
+import chess.Game;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
-import pieces.Piece.*;
 
 public class PieceTest {
     @Test
     @DisplayName("각 Refresentation당 모양이 일치해야한다.")
     public void getRepresentationPerPiece() throws Exception {
-        assertThat(Piece.Type.PAWN.getWhiteRepresentation()).isEqualTo('p');
-        assertThat(Piece.Type.PAWN.getBlackRepresentation()).isEqualTo('P');
+        assertThat(Type.PAWN.getWhiteRepresentation()).isEqualTo('p');
+        assertThat(Type.PAWN.getBlackRepresentation()).isEqualTo('P');
     }
 
     @Test
     @DisplayName("기물의 색이 달라도 타입은 일치해야한다.")
     public void create_piece() {
-        verifyPiece(Piece.createWhitePawn(), Piece.createBlackPawn(), Type.PAWN);
-        verifyPiece(Piece.createWhiteKnight(), Piece.createBlackKnight(), Type.KNIGHT);
-        verifyPiece(Piece.createWhiteRook(), Piece.createBlackRook(), Type.ROOK);
-        verifyPiece(Piece.createWhiteBishop(), Piece.createBlackBishop(), Type.BISHOP);
-        verifyPiece(Piece.createWhiteQueen(), Piece.createBlackQueen(), Type.QUEEN);
-        verifyPiece(Piece.createWhiteKing(), Piece.createBlackKing(), Type.KING);
+        verifyPiece(Piece.create(Type.PAWN, Piece.Color.WHITE, new Position("a7")), Piece.create(Type.PAWN, Piece.Color.BLACK, new Position("d2")), Type.PAWN);
+        verifyPiece(Piece.create(Type.QUEEN, Piece.Color.WHITE, new Position("d1")), Piece.create(Type.QUEEN, Piece.Color.BLACK, new Position("d8")), Type.QUEEN);
+        verifyPiece(Piece.create(Type.KING, Piece.Color.WHITE, new Position("e1")), Piece.create(Type.KING, Piece.Color.BLACK, new Position("e8")), Type.KING);
 
-        Piece blank = Piece.createBlank();
-        assertFalse(blank.isWhite());
-        assertFalse(blank.isBlack());
+        Piece blank = Piece.create(Type.NO_PIECE, Piece.Color.NOCOLOR, new Position("a5"));
+        assertThat(blank.isBlack()).isFalse();
+        assertThat(blank.isWhite()).isFalse();
         assertThat(blank.getType()).isEqualTo(Type.NO_PIECE);
     }
 
     private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Type type) {
-        assertTrue(whitePiece.isWhite());
+        assertThat(whitePiece.isWhite()).isTrue();
         assertThat(type).isEqualTo(whitePiece.getType());
 
-        assertTrue(blackPiece.isBlack());
+        assertThat(blackPiece.isBlack()).isTrue();
         assertThat(type).isEqualTo(blackPiece.getType());
     }
 }
