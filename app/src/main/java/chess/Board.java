@@ -19,6 +19,13 @@ public class Board {
     private final List<Piece> whitePawnsList;
     private final List<Piece> blackPawnsList;
 
+    public Board() {
+        board = new ArrayList<>();
+        whitePawnsList = new ArrayList<>();
+        blackPawnsList = new ArrayList<>();
+        whiteChessPiecesList = new ArrayList<>();
+        blackChessPiecesList = new ArrayList<>();
+    }
 
     public void initialize(){
         setPieces();
@@ -79,6 +86,18 @@ public class Board {
         return whiteChessPiecesList.size() + blackChessPiecesList.size() + whitePawnsList.size() + blackPawnsList.size();
     }
 
+    public int getPiecesCount(Piece.Color pieceColor, Piece.Type pieceType){
+        int piecesCount = 0;
+        for (Rank rank : board) {
+            for(Piece piece : rank.getPieces()){
+                if(piece.getColor().equals(pieceColor) && piece.getType().equals(pieceType)){
+                    piecesCount++;
+                }
+            }
+        }
+        return piecesCount;
+    }
+
     public String showBoard(){
         StringBuilder sb = new StringBuilder();
         for (Rank rank : board) {
@@ -87,13 +106,7 @@ public class Board {
         return sb.toString();
     }
 
-    public Board() {
-        board = new ArrayList<>();
-        whitePawnsList = new ArrayList<>();
-        blackPawnsList = new ArrayList<>();
-        whiteChessPiecesList = new ArrayList<>();
-        blackChessPiecesList = new ArrayList<>();
-    }
+
 
 
 

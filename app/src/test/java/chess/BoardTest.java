@@ -15,13 +15,13 @@ public class BoardTest {
     @BeforeEach
     public void init(){
         board = new Board();
+        board.initialize();
     }
 
 
     @Test
     @DisplayName("32개의 모든 기물의 위치가 초기화 되어야 한다.")
     public void create() throws Exception {
-        board.initialize();
         assertThat(board.pieceCount()).isEqualTo(32);
 
         String blankRank = appendNewLine("........");
@@ -31,6 +31,14 @@ public class BoardTest {
                         blankRank + blankRank + blankRank + blankRank +
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"));
+    }
+
+    @Test
+    @DisplayName("입력으로 들어온 색과 종류의 기물의 개수가 출력되어야 한다.")
+    public void calculatePiecesCount() {
+        assertThat(board.getPiecesCount(Piece.Color.BLACK, Piece.Type.PAWN)).isEqualTo(8);
+        assertThat(board.getPiecesCount(Piece.Color.WHITE, Piece.Type.PAWN)).isEqualTo(8);
+        assertThat(board.getPiecesCount(Piece.Color.NOCOLOR, Piece.Type.NO_PIECE)).isEqualTo(32);
     }
 
 

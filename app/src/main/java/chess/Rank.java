@@ -12,6 +12,10 @@ public class Rank {
         this.pieces = pieces;
     }
 
+    public List<Piece> getPieces() {
+        return pieces;
+    }
+
     public String getRankStatus(){
         StringBuilder rankStatus = new StringBuilder();
         for (Piece piece : pieces) {
