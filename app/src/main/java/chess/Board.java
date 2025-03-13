@@ -59,7 +59,7 @@ public class Board {
 
     }
 
-    private void initializeEmptyBoard(){
+    public void initializeEmptyBoard(){
         for(int i = 0; i < rankCount; i++){
             List<Piece> pieces = new ArrayList<>();
             for(int j = 0; j < 8; j++){
@@ -102,6 +102,12 @@ public class Board {
         Position piecePosition = new Position(PositionInfo);
         List<Piece> pieces = board.get(piecePosition.getY()).getPieces();
         return pieces.get(piecePosition.getX());
+    }
+
+    public void move(String positionInfo, Piece piece){
+        Position position = new Position(positionInfo);
+        List<Piece> pieces = board.get(position.getY()).getPieces();
+        pieces.set(position.getX(), piece);
     }
 
 
