@@ -17,7 +17,6 @@ public class ChessGame {
                 board.initialize();
                 String boardStatus = board.showBoard();
                 System.out.println(boardStatus);
-                System.out.println(board.getPiecesCount(Piece.Color.BLACK, Piece.Type.PAWN));
             }
 
             else if(command.equals("end")) break;

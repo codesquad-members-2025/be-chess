@@ -71,10 +71,10 @@ public class Board {
     }
 
     private void setPiecesOnBoard(){
-        int BLACK_PIECES_INDEX = 0;
-        int BLACK_PAWNS_INDEX = 1;
-        int WHITE_PAWNS_INDEX = 6;
-        int WHITE_PIECES_INDEX = 7;
+        int BLACK_PIECES_INDEX = 7;
+        int BLACK_PAWNS_INDEX = 6;
+        int WHITE_PAWNS_INDEX = 1;
+        int WHITE_PIECES_INDEX = 0;
 
         board.set(BLACK_PIECES_INDEX, new Rank(blackChessPiecesList));
         board.set(BLACK_PAWNS_INDEX, new Rank(blackPawnsList));
@@ -98,10 +98,17 @@ public class Board {
         return piecesCount;
     }
 
+    public Piece findPiece(String PositionInfo){
+        Position piecePosition = new Position(PositionInfo);
+        List<Piece> pieces = board.get(piecePosition.getY()).getPieces();
+        return pieces.get(piecePosition.getX());
+    }
+
+
     public String showBoard(){
         StringBuilder sb = new StringBuilder();
-        for (Rank rank : board) {
-            sb.append(appendNewLine(rank.getRankStatus()));
+        for (int rankIndex = board.size() - 1; rankIndex >= 0; rankIndex --) {
+            sb.append(appendNewLine(board.get(rankIndex).getRankStatus()));
         }
         return sb.toString();
     }

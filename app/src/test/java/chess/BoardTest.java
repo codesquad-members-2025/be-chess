@@ -35,11 +35,21 @@ public class BoardTest {
 
     @Test
     @DisplayName("입력으로 들어온 색과 종류의 기물의 개수가 출력되어야 한다.")
-    public void calculatePiecesCount() {
+    public void getPiecesCount() {
         assertThat(board.getPiecesCount(Piece.Color.BLACK, Piece.Type.PAWN)).isEqualTo(8);
         assertThat(board.getPiecesCount(Piece.Color.WHITE, Piece.Type.PAWN)).isEqualTo(8);
         assertThat(board.getPiecesCount(Piece.Color.NOCOLOR, Piece.Type.NO_PIECE)).isEqualTo(32);
     }
+
+    @Test
+    public void findPiece() throws Exception {
+        assertThat(board.findPiece("a8")).isEqualTo(Piece.createBlackRook());
+        assertThat(board.findPiece("h8")).isEqualTo(Piece.createBlackRook());
+        assertThat(board.findPiece("a1")).isEqualTo(Piece.createWhiteRook());
+        assertThat(board.findPiece("h1")).isEqualTo(Piece.createWhiteRook());
+    }
+
+
 
 
 }
