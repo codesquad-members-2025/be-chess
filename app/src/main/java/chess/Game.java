@@ -16,6 +16,8 @@ public class Game {
         this.sc = new Scanner(System.in);
     }
 
+    // Todo : king 잡히면 끝
+
     public void start() {
         while (true) {
             System.out.print("Do you want to start the game? [ Yes: 1, No: 2 ] \n >");
@@ -33,13 +35,22 @@ public class Game {
             } else {
                 System.out.println("Invalid input. Please enter 1 or 2.");
             }
+
+            if (!board.isKingAlive(Piece.Color.WHITE)) {
+                System.out.println("흰색 킹이 잡혔습니다. 게임 종료!");
+                break;
+            }
+            if (!board.isKingAlive(Piece.Color.BLACK)) {
+                System.out.println("검은색 킹이 잡혔습니다. 게임 종료!");
+                break;
+            }
         }
     }
 
     private boolean playGame() {
         System.out.println("Game Start!");
         board.initialize();
-        chessView.showBoard();
+        System.out.println(chessView.showBoard());
 
         while (true) {
             System.out.print("Enter your move (ex a2 a3) or 'exit' to quit: \n > ");
@@ -82,6 +93,6 @@ public class Game {
         board.getPieces().get(target.getY()).setPiece(target.getX(), piece);
         board.getPieces().get(source.getY()).setPiece(source.getX(), Blank.createBlank(new Position(sourcePosition)));
         round++;
-        chessView.showBoard();
+        System.out.println(chessView.showBoard());
     }
 }
