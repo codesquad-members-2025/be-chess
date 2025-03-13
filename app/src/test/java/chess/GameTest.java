@@ -3,6 +3,7 @@ package chess;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.*;
 import pieces.Piece;
 import pieces.Piece.Type;
 
@@ -24,6 +25,7 @@ public class GameTest {
     @DisplayName("king이 잘 움직이는지 확인")
     public void moveKing() {
         board.initialize();
+        board.removePiece("d7");
 
         String sourcePosition = "e8";
         String targetPosition = "d7";
@@ -37,9 +39,13 @@ public class GameTest {
         board.initialize();
         String sourcePosition = "e8";
         String targetPosition = "e3";
-        game.move(sourcePosition, targetPosition);
-        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlack(Type.KING));
-        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlank());
+        try {
+            game.move(sourcePosition, targetPosition);
+            // 예외가 발생해야 함. 발생하지 않으면 실패
+            fail("움직임 예외 처리 안됨 - 한 칸씩만 이동 가능");
+        } catch (RuntimeException e) {
+            assertThat(e.getMessage()).isEqualTo("Cannot move to this location.");
+        }
     }
 
     @Test
@@ -60,9 +66,13 @@ public class GameTest {
         board.initialize();
         String sourcePosition = "e8";
         String targetPosition = "a3";
-        game.move(sourcePosition, targetPosition);
-        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlack(Type.QUEEN));
-        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlank());
+        try {
+            game.move(sourcePosition, targetPosition);
+            // 예외가 발생해야 함. 발생하지 않으면 실패
+            fail("움직임 예외 처리 안됨 - 직선으로만 이동 가능");
+        } catch (RuntimeException e) {
+            assertThat(e.getMessage()).isEqualTo("Cannot move to this location.");
+        }
     }
 
     @Test
@@ -71,24 +81,14 @@ public class GameTest {
         board.initialize();
         String sourcePosition = "e8";
         String targetPosition = "e7";
-        game.move(sourcePosition, targetPosition);
-        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlack(Type.QUEEN));
-        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlack(Type.PAWN));
+        try {
+            game.move(sourcePosition, targetPosition);
+            // 예외가 발생해야 함. 발생하지 않으면 실패
+            fail("같은 색의 말이 있는 곳으로 이동했음에도 예외 발생 안함.");
+        } catch (RuntimeException e) {
+            assertThat(e.getMessage()).isEqualTo("Cannot move to pieces of the same color.");
+        }
     }
-
-
-
-//    @Test
-//    @DisplayName("기물이 현재 위치에서 다른 위치로 잘 이동하는지 확인")
-//    public void move() throws Exception {
-//        board.initialize();
-//
-//        String sourcePosition = "b2";
-//        String targetPosition = "b3";
-//        game.move(sourcePosition, targetPosition);
-//        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlank());
-//        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createWhite(Type.PAWN));
-//    }
 
     @Test
     @DisplayName("주어진 위치의 기물이 잘 조회되는지 확인")
