@@ -27,4 +27,8 @@ public class Rank {
     public void setPiece(int x, Piece piece) {
         pieces.set(x, piece);
     }
+
+    public int size(){
+        return pieces.size();
+    }
 }

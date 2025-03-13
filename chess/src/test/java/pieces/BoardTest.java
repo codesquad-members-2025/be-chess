@@ -11,8 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 
 import static utils.StringUtils.appendNewLine;
 
-import static org.junit.Assert.*;
-
 public class BoardTest {
     private Board board;
 
@@ -67,5 +65,30 @@ public class BoardTest {
 
         assertEquals(piece, board.findPiece(position));
         System.out.println(board.showBoard());
+    }
+
+    @Test
+    public void caculcatePoint() throws Exception {
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        //0.01 오차 범위 내에는 같은 걸로 쳐준다
+        assertEquals(15.0, board.caculcatePoint(Piece.Color.BLACK), 0.01);
+        assertEquals(7.0, board.caculcatePoint(Piece.Color.WHITE), 0.01);
+
+        System.out.println(board.showBoard());
+    }
+
+    private void addPiece(String position, Piece piece) {
+        board.move(position, piece);
     }
 }

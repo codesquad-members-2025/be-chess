@@ -22,7 +22,7 @@ public class PieceTest {
 
     }
 
-    private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Piece.Type type) {
+    private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final  Piece.Type type) {
         assertTrue(whitePiece.isWhite());
         assertEquals(type, whitePiece.getType());
 

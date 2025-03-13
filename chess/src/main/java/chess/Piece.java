@@ -34,13 +34,21 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
         }
     }
 
+
     public enum Type {
-        PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
-
+        PAWN('p', 1.0),
+        ROOK('r', 5.0),
+        KNIGHT('n', 2.5),
+        BISHOP('b', 3.0),
+        QUEEN('q', 9.0),
+        KING('k', 0.0),
+        NO_PIECE('.', 0.0);
         private final char representation;
+        private double defaultPoint;
 
-        Type(char representation) {
+        Type(char representation, double defaultPoint) {
             this.representation = representation;
+            this.defaultPoint = defaultPoint;
         }
 
         //블랙 -> 대문자 representation, 화이트 -> 소문자 representation
@@ -55,6 +63,10 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
         public char getRepresentation(Color color){
             if(color.equals(Color.BLACK)) return Character.toUpperCase(this.representation);
             else return this.representation;
+        }
+
+        public double getDefaultPoint(){
+            return defaultPoint;
         }
 
     }
@@ -138,11 +150,11 @@ public class Piece { //Pawn 클래스 이름을 Piece로 rename
         return this.getColor().equals(Color.WHITE);
     }
 
+
     public char getRepresentation(){
        if(this.color.equals(Color.BLACK)) return type.getBlackRepresentation();
        else return type.getWhiteRepresentation();
     }
-
     public static Piece createBlank() {
         return new Piece(Color.NOCOLOR, Type.NO_PIECE);
     }

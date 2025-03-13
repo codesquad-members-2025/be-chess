@@ -79,17 +79,6 @@ public class Board {
             else board.add(new Rank(blankPieces));
         }
     }
-    //initializeBoard()의 중복 리펙토링
-    /*
-    public char getPawnRepresentation(int row, int col) {
-        if (row == 1) return blackPawns.get(col).getRepresentation();
-        if (row == 6) return whitePawns.get(col).getRepresentation();
-        if (row == 0) return blackPieces.get(col).getRepresentation();
-        if (row == 7) return whitePieces.get(col).getRepresentation();
-
-        return '.';
-    }
-     */
 
     //폰의 리스트의 값들을 StringBuilder로 변환해줌
     public String getPawnsResult(List<Piece> pawns) {
@@ -175,5 +164,41 @@ public class Board {
         Position pos = new Position(position);
         board.get(pos.getY()).setPiece(pos.getX(), piece);
 
+    }
+
+    public double caculcatePoint(Piece.Color color) {
+        double score = 0;
+        for(Rank rank : board){
+            for(int i = 0; i<rank.size(); i++){
+                Piece piece = rank.getPiece(i);
+
+                if(piece.getColor() == color){
+                   double pieceScore = piece.getType().getDefaultPoint();
+
+                   if(piece.getType() == Piece.Type.PAWN && samePawnInColumn(i, color)){
+                       pieceScore = 0.5;
+                   }
+                   score += pieceScore;
+                }
+
+            }
+        }
+
+        return score;
+    }
+
+    private boolean samePawnInColumn(int column, Piece.Color color) {
+        int cnt = 0;
+        for(Rank rank : board){
+            Piece piece = rank.getPiece(column);
+            if(piece.getType() == Piece.Type.PAWN && piece.getColor() == color){
+                cnt++;
+                if(cnt > 1){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
