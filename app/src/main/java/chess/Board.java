@@ -3,6 +3,7 @@ package chess;
 import pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static utils.StringUtils.appendNewLine;
@@ -124,4 +125,17 @@ public class Board {
        return pawnCount == 1 ? 0 : pawnCount; // 하나가 카운트 된 것은 중복이 된 거이 아니기때문에 0을 반환
     }
 
+    public List<Piece> sortPiecesByPointInDESC(Piece.Color color) {
+        List<Piece> sortedPieces = new ArrayList<>();
+
+        for (Rank rank : board) {
+            for (Piece piece : rank.getRank()) {
+                if (piece.getColor() == color) sortedPieces.add(piece);
+            }
+        }
+
+        return  sortedPieces.stream()
+            .sorted(Comparator.comparing((Piece piece) -> piece.getType().getDefaultPoint()).reversed())
+            .toList();
+    }
 }
