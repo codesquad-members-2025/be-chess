@@ -16,7 +16,7 @@ public class Pawn extends Piece {
     public boolean canMove(Position target, Board board) {
         //Todo: 끝까지가면 다른 기물로 변환
 
-        if (validGoTwoStep(target)) {
+        if (validGoTwoStep(target, board)) {
             return true;
         }
 
@@ -28,10 +28,12 @@ public class Pawn extends Piece {
                     if (next.equals(target)) {
                         return isMatchForward(next, board);
                     }
+                    break;
                 case SOUTHEAST, SOUTHWEST, NORTHEAST, NORTHWEST:
                     if (next.equals(target)) {
                         return isMatchDiagonal(next, board);
                     }
+                    break;
             }
         }
         return false;
@@ -52,16 +54,23 @@ public class Pawn extends Piece {
                 position.getY() >= 0 && position.getY() < 8;
     }
 
-    private boolean validGoTwoStep(Position target) {
+    private boolean validGoTwoStep(Position target, Board board) {
         Position cur = getPosition();
-        //Todo: 이거 2인경우 -2를 해도 될 가능성이 있음 이거 그냥 범위만 잘 해주면 될듯?
         int dy = cur.getY() - target.getY();
         int row = isWhite() ? 6 : 1;
+
         if (Math.abs(dy) == 2 && cur.getY() == row && isValid(target)) {
-            return true;
+            int midY = isWhite() ? cur.getY() - 1 : cur.getY() + 1;
+            Position midPosition = new Position("" + (char) ('a' + cur.getX()) + (8 - midY));
+
+            if (!board.findPiece(midPosition).getType().equals(Type.NO_PIECE)) {
+                return false;
+            }
+            return board.findPiece(target).getType().equals(Type.NO_PIECE);
         }
         return false;
     }
+
 
     @Override
     public List<Direction> getDirections() {

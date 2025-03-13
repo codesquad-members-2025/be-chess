@@ -45,7 +45,7 @@ public class Bishop extends Piece{
 
     private boolean isMatchPosition(Position target, Board board){
         Piece targetPiece = board.findPiece(target);
-        return targetPiece.getType().equals(Type.NO_PIECE) || !targetPiece.getColor().equals(this.getColor());
+        return !targetPiece.getColor().equals(this.getColor());
     }
 
     @Override

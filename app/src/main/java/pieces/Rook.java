@@ -16,7 +16,6 @@ public class Rook extends Piece {
     public boolean canMove(Position target, Board board) {
         for (Direction dir : getDirections()) {
             Position cur = getPosition();
-
             while (true) {
                 Position next = cur.move(dir);
                 if (!isValid(next)) {
@@ -27,7 +26,7 @@ public class Rook extends Piece {
                     return isMatchPosition(target, board);
                 }
 
-                if (!next.equals(getPosition()) && board.findPiece(next).getType() != Type.NO_PIECE) {
+                if (board.findPiece(next).getType() != Type.NO_PIECE) {
                     break;
                 }
 
@@ -44,7 +43,7 @@ public class Rook extends Piece {
 
     private boolean isMatchPosition(Position target, Board board) {
         Piece targetPiece = board.findPiece(target);
-        return targetPiece.getType().equals(Type.NO_PIECE) || !targetPiece.getColor().equals(this.getColor());
+        return !targetPiece.getColor().equals(this.getColor());
     }
 
     @Override
