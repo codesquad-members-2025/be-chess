@@ -97,37 +97,31 @@ public class Board {
     public double calculatePoint(Piece.Color color) {
         double point = 0;
 
-        for (Rank rank : board) {
-            ArrayList<Piece> pieces = rank.getRank();
-            for (int column = 0; column < BOARD_SIZE; column++) {
-                Piece piece = pieces.get(column);
-                if (piece.getColor() == color) {
-                    if (piece.getType() == Piece.Type.PAWN) { // 폰인 경우 같은 세로줄에 중복되는 폰이 존재하는지 확인
-                        if (checkDuplicatedPawn(column)) {
-                            point += 0.5; // 중복될 경우 0.5점 부여
-                        } else {
-                            point += piece.getType().getDefaultPoint();
-                        }
-                    } else {
-                        point += piece.getType().getDefaultPoint();
-                    }
-                }
+        for (Rank rank : board) { // 색상이 일치하는 모든 말의 점수를 합산한다.
+            for (Piece piece : rank.getRank()) {
+                if (piece.getColor() == color) point += piece.getType().getDefaultPoint();
             }
         }
 
-        return point;
+        int duplicatedPawnCount = 0;
+
+        for (int columnIndex = 0; columnIndex < BOARD_SIZE; columnIndex++) {
+            duplicatedPawnCount += checkDuplicatedPawn(columnIndex, color);
+        }
+
+        return point - (duplicatedPawnCount * 0.5); // 폰이 중복되는 만큼 점수를 뺀다.
     }
 
-    private boolean checkDuplicatedPawn(int column) { // 같은 세로줄에 같은 색 중복되는 폰이 있는지 확인
+    private int checkDuplicatedPawn(int column, Piece.Color color) { // 같은 세로줄에 같은 색 중복되는 폰이 있는지 확인
         int pawnCount = 0;
 
         for (Rank rank : board) {
             ArrayList<Piece> pieces = rank.getRank();
             Piece piece = pieces.get(column);
-            if (piece.getType() == Piece.Type.PAWN) ++pawnCount;
+            if (piece.getType() == Piece.Type.PAWN && piece.getColor() == color) ++pawnCount;
         }
 
-       return pawnCount > 1;
+       return pawnCount == 1 ? 0 : pawnCount; // 하나가 카운트 된 것은 중복이 된 거이 아니기때문에 0을 반환
     }
 
 }
