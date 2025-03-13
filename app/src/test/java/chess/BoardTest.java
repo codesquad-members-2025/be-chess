@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import pieces.Piece;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -119,7 +118,7 @@ public class BoardTest {
         Piece queen = new Piece(Piece.Color.BLACK, Piece.Type.QUEEN);
         Piece king = new Piece(Piece.Color.BLACK, Piece.Type.KING);
         Piece rook = new Piece(Piece.Color.BLACK, Piece.Type.ROOK);
-        
+
         board.move(new Position("b6"), pawn);
         board.move(new Position("e6"), queen);
         board.move(new Position("b8"), king);
