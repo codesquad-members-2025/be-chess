@@ -3,14 +3,13 @@ package pieces;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import chess.Board;
-import chess.Color;
 import chess.Piece;
-import chess.Type;
+
 import org.junit.Before;
 import org.junit.Test;
-import static utils.StringUtils.appendNewLine;
+import org.junit.jupiter.api.DisplayName;
 
-import static org.junit.Assert.*;
+import static utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     private Board board;
@@ -18,12 +17,12 @@ public class BoardTest {
     @Before
     public void setup() {
         board = new Board();
+        board.initializePawns();
+        board.initializeBoard();
     }
 
     @Test
     public void create() throws Exception {
-        board.initializePawns();
-        board.initializeBoard();
         assertEquals(32, board.pieceCount());
         String blankRank = appendNewLine("........");
         assertEquals(
@@ -33,5 +32,63 @@ public class BoardTest {
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"),
                 board.showBoard());
+    }
+
+    @Test
+    @DisplayName("피스의 종류를 센다")
+    public void countPieces(){
+        assertEquals(1, board.getPiecesCnt(Piece.Color.WHITE, Piece.Type.QUEEN));
+        assertEquals(2, board.getPiecesCnt(Piece.Color.BLACK, Piece.Type.ROOK));
+        assertEquals(1, board.getPiecesCnt(Piece.Color.WHITE, Piece.Type.KING));
+        assertEquals(8, board.getPiecesCnt(Piece.Color.WHITE, Piece.Type.PAWN));
+        assertEquals(8, board.getPiecesCnt(Piece.Color.BLACK, Piece.Type.PAWN));
+
+    }
+
+    @Test
+    @DisplayName("좌표를 통해 주어진 위치의 기물을 조회한다")
+    public void findPiece() throws Exception {
+        assertEquals(Piece.createBlackRook(), board.findPiece("a8"));
+        assertEquals(Piece.createBlackRook(), board.findPiece("h8"));
+        assertEquals(Piece.createWhiteRook(), board.findPiece("a1"));
+        assertEquals(Piece.createWhiteRook(), board.findPiece("h1"));
+    }
+
+    @Test
+    @DisplayName("임의의 기물을 체스판 위에 추가한다")
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        String position = "b5";
+        Piece piece = Piece.createBlackRook();
+        board.move(position, piece);
+
+        assertEquals(piece, board.findPiece(position));
+        System.out.println(board.showBoard());
+    }
+
+    @Test
+    public void caculcatePoint() throws Exception {
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        //0.01 오차 범위 내에는 같은 걸로 쳐준다
+        assertEquals(15.0, board.caculcatePoint(Piece.Color.BLACK), 0.01);
+        assertEquals(7.0, board.caculcatePoint(Piece.Color.WHITE), 0.01);
+
+        System.out.println(board.showBoard());
+    }
+
+    private void addPiece(String position, Piece piece) {
+        board.move(position, piece);
     }
 }
