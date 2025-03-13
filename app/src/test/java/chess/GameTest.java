@@ -42,6 +42,29 @@ public class GameTest {
         assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlank());
     }
 
+    @Test
+    @DisplayName("Queen 이 잘 움직이는지 확인")
+    public void moveQueen() {
+        board.initialize();
+
+        String sourcePosition = "d8";
+        String targetPosition = "d4";
+        game.move(sourcePosition, targetPosition);
+        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlank());
+        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlack(Type.QUEEN));
+    }
+
+    @Test
+    @DisplayName("Queen 움직임 예외처리 - 직선으로만 이동 가능")
+    public void invalidKingMove() {
+        board.initialize();
+        String sourcePosition = "e8";
+        String targetPosition = "a3";
+        game.move(sourcePosition, targetPosition);
+        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlack(Type.KING));
+        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlank());
+    }
+
 //    @Test
 //    @DisplayName("기물이 현재 위치에서 다른 위치로 잘 이동하는지 확인")
 //    public void move() throws Exception {
