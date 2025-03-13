@@ -5,6 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pieces.Piece;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static utils.StringUtils.appendNewLine;
 
@@ -93,13 +97,16 @@ public class BoardTest {
         board.move(new Position("b8"), new Piece(Piece.Color.BLACK, Piece.Type.KING));
         board.move(new Position("c8"), new Piece(Piece.Color.BLACK, Piece.Type.ROOK));
 
-        board.move(new Position("f2"), new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
         board.move(new Position("g2"), new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
+        board.move(new Position("g2"), new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
+        board.move(new Position("a2"), new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
+        board.move(new Position("b2"), new Piece(Piece.Color.WHITE, Piece.Type.PAWN));
         board.move(new Position("e2"), new Piece(Piece.Color.WHITE, Piece.Type.ROOK));
         board.move(new Position("f1"), new Piece(Piece.Color.WHITE, Piece.Type.KING));
 
         //When & Then
         assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
-        assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(7.0);
+        assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(8.0);
     }
+
 }
