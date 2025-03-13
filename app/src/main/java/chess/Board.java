@@ -37,7 +37,7 @@ public class Board {
         return createRanks(Color.WHITE, 1);
     }
 
-    public Rank createWhitePawns(){
+    private Rank createWhitePawns(){
         return createPawns(Color.WHITE, 2);
     }
 
@@ -59,7 +59,7 @@ public class Board {
         return new Rank(horses);
     }
 
-    public Rank createPawns(Color color, int row) {
+    private Rank createPawns(Color color, int row) {
         ArrayList<Piece> pawns = new ArrayList<>();
         for (int i = 97; i < 105; i++) {
             String position = (char) i + String.valueOf(row);
@@ -79,5 +79,17 @@ public class Board {
 
     public ArrayList<Rank> getPieces(){
         return pieces;
+    }
+
+    public boolean isKingAlive(Piece.Color color) {
+        for (Rank rank : pieces) {
+            for (int i = 0; i < 8; i++) {
+                Piece piece = rank.getPiece(i);
+                if (piece.getType() == Type.KING && piece.getColor() == color) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
