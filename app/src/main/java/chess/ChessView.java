@@ -10,12 +10,12 @@ public class ChessView {
         this.board = board;
     }
 
-    public void showBoard(){
+    public String showBoard(){
         StringBuilder answer = new StringBuilder();
 
         for (int i = 0; i < RANK_SIZE; i++) {
 
-            answer.append(board.getPieces().get(i).toString()).append("   ").append(appendNewLine(""+ (RANK_SIZE-i)));
+            answer.append(board.getPieces().get(i).toString()).append("    ").append(appendNewLine(""+ (RANK_SIZE-i)));
         }
 
         answer.append(appendNewLine(""));
@@ -25,6 +25,6 @@ public class ChessView {
             answer.append(position + " ");
         }
 
-        System.out.println(answer);
+        return answer.toString();
     }
 }
