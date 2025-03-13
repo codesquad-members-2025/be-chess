@@ -11,6 +11,7 @@ public class ChessGame {
             Scanner sc = new Scanner(System.in);
             String command = sc.nextLine();
 
+            // start가 2번 이상 입력 될 때 예외 처리 필요
             if(command.equals("start")){
                 board.initialize();
                 String boardStatus = board.showBoard();

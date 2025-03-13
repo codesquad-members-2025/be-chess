@@ -107,6 +107,8 @@ public class Piece {
         return new Piece(Color.NOCOLOR, Type.NO_PIECE);
     }
 
+    public Color getColor(){return color;}
+
     public Type getType(){
         return type;
     }
