@@ -100,6 +100,9 @@ public class Piece implements Comparable<Piece>  {
         if (this.type == Type.KING) {
             return isValidKingMove(source, target, board);
         }
+        if (this.type == Type.QUEEN) {
+            return isValidQueenMove(source, target, board);
+        }
         return false;
     }
 
@@ -118,6 +121,18 @@ public class Piece implements Comparable<Piece>  {
         if (rowDiff > 1 || colDiff >1 ) {
             throw new RuntimeException("Cannot move to this location.");
         }
+        isSameColorPiece(target, board);
+        return true;
+    }
+
+    private boolean isValidQueenMove(Position source, Position target, Board board) {
+        int rowDiff = Math.abs(source.getRow() - target.getRow());
+        int colDiff =  Math.abs(source.getCol() - target.getCol());
+
+        if (rowDiff != 0 && colDiff != 0) {
+            throw new RuntimeException("Cannot move to this location.");
+        }
+
         isSameColorPiece(target, board);
         return true;
     }
