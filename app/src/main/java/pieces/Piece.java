@@ -4,9 +4,9 @@ import chess.Position;
 import chess.Board;
 
 
-public class Piece implements Comparable<Piece>  {
-    private final Color color;
-    private final Type type;
+public abstract class Piece implements Comparable<Piece>  {
+    protected final Color color;
+    protected final Type type;
 
     public enum Color {
         WHITE, BLACK, NOCOLOR;
@@ -43,20 +43,10 @@ public class Piece implements Comparable<Piece>  {
     }
 
 
-    private Piece(Color color, Type type)  {
+    protected Piece(Color color, Type type)  {
         this.color = color;
         this.type = type;
     }
-    public static Piece createWhite(Type type) {
-        return new Piece(Color.WHITE, type);
-    }
-    public static Piece createBlack(Type type) {
-        return new Piece(Color.BLACK, type);
-    }
-    public static Piece createBlank() {
-        return new Piece(Color.NOCOLOR, Type.NO_PIECE);
-    }
-
 
     public char getRepresentation() {
         return color == Color.WHITE? type.getWhiteRepresentation() : type.getBlackRepresentation();
@@ -96,46 +86,39 @@ public class Piece implements Comparable<Piece>  {
         return Double.compare(other.getDefaultPoint(), this.getDefaultPoint());
     }
 
-    public boolean canMove(Position source, Position target, Board board) {
-        if (this.type == Type.KING) {
-            return isValidKingMove(source, target, board);
-        }
-        if (this.type == Type.QUEEN) {
-            return isValidQueenMove(source, target, board);
-        }
-        return false;
-    }
+    //추상 메서드: 하위 클래스(King, Queen 등)에서 반드시 구현해야 함.
+    public abstract boolean canMove(Position source, Position target, Board board);
 
-    protected void isSameColorPiece(Position target, Board board) {
+    protected boolean isSameColorPiece(Position target, Board board) {
         Piece targetPiece = board.getRank(target.getRow()).getPiece(target.getCol());
-        if (targetPiece.getColor() == this.color) {
-            throw new RuntimeException("Cannot move to pieces of the same color.");
-        }
+        return targetPiece.getColor() == this.color;
+
     }
 
-    private boolean isValidKingMove(Position source, Position target, Board board) {
-        int rowDiff = Math.abs(source.getRow() - target.getRow());
-        int colDiff = Math.abs(source.getCol() - target.getCol());
+//    private boolean isValidKingMove(Position source, Position target, Board board) {
+//        int rowDiff = Math.abs(source.getRow() - target.getRow());
+//        int colDiff = Math.abs(source.getCol() - target.getCol());
+//
+//        //King은 모든 방향으로 한 칸만 이동 가능
+//        if (rowDiff > 1 || colDiff >1 ) {
+//            throw new RuntimeException("Cannot move to this location.");
+//        }
+//        isSameColorPiece(target, board);
+//        return true;
+//    }
 
-        //King은 모든 방향으로 한 칸만 이동 가능
-        if (rowDiff > 1 || colDiff >1 ) {
-            throw new RuntimeException("Cannot move to this location.");
-        }
-        isSameColorPiece(target, board);
-        return true;
-    }
+//    private boolean isValidQueenMove(Position source, Position target, Board board) {
+//        int rowDiff = Math.abs(source.getRow() - target.getRow());
+//        int colDiff =  Math.abs(source.getCol() - target.getCol());
+//
+//        if (rowDiff != 0 && colDiff != 0) {
+//            throw new RuntimeException("Cannot move to this location.");
+//        }
+//
+//        isSameColorPiece(target, board);
+//        return true;
+//    }
 
-    private boolean isValidQueenMove(Position source, Position target, Board board) {
-        int rowDiff = Math.abs(source.getRow() - target.getRow());
-        int colDiff =  Math.abs(source.getCol() - target.getCol());
-
-        if (rowDiff != 0 && colDiff != 0) {
-            throw new RuntimeException("Cannot move to this location.");
-        }
-
-        isSameColorPiece(target, board);
-        return true;
-    }
 
 }
 
