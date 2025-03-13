@@ -109,4 +109,31 @@ public class BoardTest {
         assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(8.0);
     }
 
+    @Test
+    @DisplayName("체스판 위에 검은색 체스말들이 높은 점수순으로 정렬된다.")
+    void sortPiecesByPointInDESC() {
+        //Given
+        board.setEmptyBoard();
+        
+        Piece pawn = new Piece(Piece.Color.BLACK, Piece.Type.PAWN);
+        Piece queen = new Piece(Piece.Color.BLACK, Piece.Type.QUEEN);
+        Piece king = new Piece(Piece.Color.BLACK, Piece.Type.KING);
+        Piece rook = new Piece(Piece.Color.BLACK, Piece.Type.ROOK);
+        
+        board.move(new Position("b6"), pawn);
+        board.move(new Position("e6"), queen);
+        board.move(new Position("b8"), king);
+        board.move(new Position("c8"), rook);
+
+        List<Piece> expectedBlackPieces = new ArrayList<>(List.of(queen, rook, pawn, king));
+
+        //When
+        List<Piece> actualBlackPieces = board.sortPiecesByPointInDESC(Piece.Color.BLACK);
+
+        //Then
+        for (int i = 0; i < expectedBlackPieces.size(); i++) {
+            assertThat(actualBlackPieces.get(i)).isEqualTo(expectedBlackPieces.get(i));
+        }
+    }
+
 }
