@@ -103,15 +103,24 @@ public class Piece implements Comparable<Piece>  {
         return false;
     }
 
+    protected void isSameColorPiece(Position target, Board board) {
+        Piece targetPiece = board.getRank(target.getRow()).getPiece(target.getCol());
+        if (targetPiece.getColor() == this.color) {
+            throw new RuntimeException("Cannot move to pieces of the same color.");
+        }
+    }
+
     private boolean isValidKingMove(Position source, Position target, Board board) {
         int rowDiff = Math.abs(source.getRow() - target.getRow());
         int colDiff = Math.abs(source.getCol() - target.getCol());
 
         //King은 모든 방향으로 한 칸만 이동 가능
         if (rowDiff > 1 || colDiff >1 ) {
-            return false;
+            throw new RuntimeException("Cannot move to this location.");
         }
+        isSameColorPiece(target, board);
         return true;
     }
+
 }
 
