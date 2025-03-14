@@ -14,6 +14,7 @@ interface GameState {
     white: number;
     black: number;
   };
+  status: boolean;  // 게임 종료 여부
 }
 
 const ChessGame = () => {
@@ -24,7 +25,8 @@ const ChessGame = () => {
     scores: {
       white: 38,
       black: 38
-    }
+    },
+    status: false
   });
 
   const resetGame = async () => {
@@ -50,7 +52,8 @@ const ChessGame = () => {
         scores: {
           white: 38,
           black: 38
-        }
+        },
+        status: false
       });
     } catch (error) {
       console.error('게임 초기화 실패:', error);
@@ -58,6 +61,9 @@ const ChessGame = () => {
   };
 
   const onPieceDrop = (sourceSquare: Square, targetSquare: Square, piece: Piece) => {
+    if (gameState.status) {
+      return false;  // 게임이 종료되면 움직임을 막습니다
+    }
     makeMove(sourceSquare as string, targetSquare as string);
     return true;
   };
@@ -139,7 +145,7 @@ const ChessGame = () => {
         const newState = {
           position: fenPosition,
           currentTurn: currentTurn,
-          gameStatus: prevState.gameStatus,
+          gameStatus: result.status ? `${currentTurn === 'WHITE' ? '검은색' : '흰색'} 승리!` : '게임 진행 중',
           lastMove: {
             from: result.lastMoveFrom,
             to: result.lastMoveTo
@@ -147,7 +153,8 @@ const ChessGame = () => {
           scores: {
             white: result.whiteScore,
             black: result.blackScore
-          }
+          },
+          status: result.status
         };
         console.log('이전 상태:', prevState);
         console.log('새로운 상태:', newState);
@@ -188,12 +195,13 @@ const ChessGame = () => {
         }}>
           <div style={{ 
             padding: '10px', 
-            backgroundColor: '#e6ffe6',
+            backgroundColor: gameState.status ? '#ffeb3b' : '#e6ffe6',
             borderRadius: '5px',
             marginBottom: '10px',
-            width: 'fit-content'
+            width: 'fit-content',
+            fontWeight: gameState.status ? 'bold' : 'normal'
           }}>
-            현재 차례: {gameState.currentTurn === 'WHITE' ? '흰색' : '검은색'}
+            {gameState.status ? gameState.gameStatus : `현재 차례: ${gameState.currentTurn === 'WHITE' ? '흰색' : '검은색'}`}
           </div>
           <div style={{
             display: 'flex',
