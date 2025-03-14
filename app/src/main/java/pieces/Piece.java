@@ -2,6 +2,9 @@ package pieces;
 
 import chess.Position;
 import chess.Board;
+import chess.Direction;
+
+import java.util.List;
 
 
 public abstract class Piece implements Comparable<Piece>  {
@@ -95,30 +98,28 @@ public abstract class Piece implements Comparable<Piece>  {
 
     }
 
-//    private boolean isValidKingMove(Position source, Position target, Board board) {
-//        int rowDiff = Math.abs(source.getRow() - target.getRow());
-//        int colDiff = Math.abs(source.getCol() - target.getCol());
-//
-//        //King은 모든 방향으로 한 칸만 이동 가능
-//        if (rowDiff > 1 || colDiff >1 ) {
-//            throw new RuntimeException("Cannot move to this location.");
-//        }
-//        isSameColorPiece(target, board);
-//        return true;
-//    }
+    //이동 경로에 장애물이 있는지 확인
+    protected boolean isPathClear(Position source, Position target, Board board) {
+        int rowDiff = Math.abs(source.getRow() - target.getRow());
+        int colDiff =  Math.abs(source.getCol() - target.getCol());
 
-//    private boolean isValidQueenMove(Position source, Position target, Board board) {
-//        int rowDiff = Math.abs(source.getRow() - target.getRow());
-//        int colDiff =  Math.abs(source.getCol() - target.getCol());
-//
-//        if (rowDiff != 0 && colDiff != 0) {
-//            throw new RuntimeException("Cannot move to this location.");
-//        }
-//
-//        isSameColorPiece(target, board);
-//        return true;
-//    }
+        int steps = Math.max(rowDiff, colDiff);
+        int rowStep = Integer.signum(rowDiff); // -1, 0, 1 중 하나
+        int colStep = Integer.signum(colDiff); // -1, 0, 1 중 하나
 
+        int currentRow = source.getRow();
+        int currentCol = source.getCol();
 
+        for (int i = 1; i < steps; i++) { // 중간 경로 확인
+            currentRow += rowStep;
+            currentCol += colStep;
+
+            if (!board.getPiece(currentRow, currentCol).getType().equals(Type.NO_PIECE)) {
+                return false; // 중간에 기물이 있음
+            }
+        }
+        return true; // 경로가 비어 있음
+
+    }
 }
 
