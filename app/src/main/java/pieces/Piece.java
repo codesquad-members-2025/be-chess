@@ -1,73 +1,45 @@
 package pieces;
 
-import java.util.Objects;
+import chess.Board;
+import java.util.*;
 
-public class Piece {
+public abstract class Piece {
 
     private final Color color;
     private final Type type;
+    private Position position;
     private final char representation;
 
     public enum Color {
         WHITE, BLACK, NOCOLOR;
     }
 
-    public enum Type {
-        PAWN('p', 1.0),
-        ROOK('r', 5.0),
-        KNIGHT('n', 2.5),
-        BISHOP('b', 3.0),
-        QUEEN('q', 9.0),
-        KING('k',0.0),
-        NO_PIECE('.', 0.0);
-
-        private char representation;
-        private double defaultPoint;
-
-        Type(char representation, double defaultPoint) {
-            this.representation = representation;
-            this.defaultPoint = defaultPoint;
-        }
-
-        public char getWhiteRepresentation(){
-            return representation;
-        }
-        public char getBlackRepresentation(){
-            return Character.toUpperCase(representation);
-        }
-        public double getdefaultPoint(){ return defaultPoint; }
-    }
-
-    private Piece(Color color, Type type) {
+    protected Piece(Color color, Type type, Position position) {
         this.color = color;
         this.type = type;
+        this.position = position;
 
-        char repre = type.representation;
-        if (color == Color.BLACK) { repre = type.getBlackRepresentation(); }
-        this.representation = repre;
+        if (color == Color.BLACK) {
+            this.representation = type.getBlackRepresentation();
+        } else {
+            this.representation = type.getWhiteRepresentation();
+        }
     }
 
-    private static Piece createWhite(Type type) {
-        return new Piece(Color.WHITE, type);
+    public static Piece create(Type type, Color color, Position position) {
+        switch (type) {
+            case ROOK -> { return Rook.createRook(color, position); }
+            case KNIGHT -> { return Knight.createKnight(color, position); }
+            case BISHOP -> { return Bishop.createBishop(color, position); }
+            case QUEEN -> { return Queen.createQueen(color, position); }
+            case KING -> { return King.createKing(color, position); }
+            case PAWN -> { return Pawn.createPawn(color, position); }
+            default -> { return Blank.createBlank(position); }
+        }
     }
-    private static Piece createBlack(Type type) {
-        return new Piece(Color.BLACK, type);
-    }
-    public static Piece createWhitePawn(){ return createWhite(Type.PAWN); }
-    public static Piece createBlackPawn(){ return createBlack(Type.PAWN);}
-    public static Piece createWhiteRook(){ return createWhite(Type.ROOK); }
-    public static Piece createBlackRook(){ return createBlack(Type.ROOK); }
-    public static Piece createWhiteKnight(){ return createWhite(Type.KNIGHT); }
-    public static Piece createBlackKnight(){ return createBlack(Type.KNIGHT); }
-    public static Piece createWhiteBishop(){ return createWhite(Type.BISHOP); }
-    public static Piece createBlackBishop(){ return createBlack(Type.BISHOP); }
-    public static Piece createWhiteQueen(){ return createWhite(Type.QUEEN); }
-    public static Piece createBlackQueen(){ return createBlack(Type.QUEEN); }
-    public static Piece createWhiteKing(){ return createWhite(Type.KING); }
-    public static Piece createBlackKing(){ return createBlack(Type.KING); }
-    public static Piece createBlank(){
-        return new Piece(Color.NOCOLOR,Type.NO_PIECE);
-    }
+
+    public abstract boolean canMove(Position target, Board board);
+    public abstract List<Direction> getDirections();
 
     public boolean isWhite(){
         return color == Color.WHITE;
@@ -81,7 +53,17 @@ public class Piece {
     }
     public Color getColor() { return color;}
 
+    public Position getPosition() {
+        return position;
+    }
 
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+    @Override
+    public String toString() {
+        return String.valueOf(representation);
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -93,6 +75,6 @@ public class Piece {
 
     @Override
     public int hashCode() {
-        return Objects.hash(color, type);
+        return Objects.hash(color, type, position);
     }
 }

@@ -3,127 +3,93 @@ package chess;
 import pieces.*;
 import pieces.Piece.*;
 import java.util.*;
-import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private ArrayList<Rank> pieces = new ArrayList<>();
 
-
     public void initialize(){
         pieces.clear();
-        pieces.add(createBlackRank());
-        pieces.add(createBlackPawn());
-        for(int i = 0; i<4; i++){
-            pieces.add(createBlank());
+        pieces.add(createBlackRanks());
+        pieces.add(createBlackPawns());
+        for(int i = 2; i <= 5; i++){
+            pieces.add(createBlanks(i));
         }
-        pieces.add(createWhitePawn());
-        pieces.add(createWhiteRank());
-    }
-
-    public Piece findPiece(String position){
-        //piece 객체잡고 리턴해주면 될듯
-        int x = position.charAt(0) - 'a';
-        int y = 8 - (position.charAt(1) - '0');
-        return pieces.get(y).getPiece(x);
-    }
-
-    private Rank createBlackRank(){
-        ArrayList<Piece> horses = new ArrayList<>();
-        horses.add(Piece.createBlackRook());
-        horses.add(Piece.createBlackKnight());
-        horses.add(Piece.createBlackBishop());
-        horses.add(Piece.createBlackQueen());
-        horses.add(Piece.createBlackKing());
-        horses.add(Piece.createBlackBishop());
-        horses.add(Piece.createBlackKnight());
-        horses.add(Piece.createBlackRook());
-        return new Rank(horses);
-    }
-
-    private Rank createWhiteRank(){
-        ArrayList<Piece> horses = new ArrayList<>();
-        horses.add(Piece.createWhiteRook());
-        horses.add(Piece.createWhiteKnight());
-        horses.add(Piece.createWhiteBishop());
-        horses.add(Piece.createWhiteQueen());
-        horses.add(Piece.createWhiteKing());
-        horses.add(Piece.createWhiteBishop());
-        horses.add(Piece.createWhiteKnight());
-        horses.add(Piece.createWhiteRook());
-        return new Rank(horses);
-    }
-
-    private Rank createWhitePawn(){
-        ArrayList<Piece> pawns = new ArrayList<>();
-        for (int i = 0; i < 8; i++){
-            pawns.add(Piece.createWhitePawn());
-        }
-        return new Rank(pawns);
-    }
-
-    private Rank createBlackPawn(){
-        ArrayList<Piece> pawns = new ArrayList<>();
-        for (int i = 0; i < 8; i++){
-            pawns.add(Piece.createBlackPawn());
-        }
-        return new Rank(pawns);
-    }
-
-    private Rank createBlank(){
-        ArrayList<Piece> blanks = new ArrayList<>();
-        for (int i = 0; i < 8; i++){
-            blanks.add(Piece.createBlank());
-        }
-        return new Rank(blanks);
+        pieces.add(createWhitePawns());
+        pieces.add(createWhiteRanks());
     }
 
     public void initializeEmpty(){
         pieces.clear();
-        for(int i = 0; i<8; i++){
-            pieces.add(createBlank());
+        for(int i = 0; i < 8; i++){
+            pieces.add(createBlanks(i));
         }
     }
 
-    public void move(String position, Piece piece){
-        int x = position.charAt(0) - 'a';
-        int y = 8 - (position.charAt(1) - '0');
-        pieces.get(y).setPiece(x, piece);
+    public Piece findPiece(Position position) {
+        return pieces.get(position.getY()).getPiece(position.getX());
     }
 
-    public String showBoard(){
-        StringBuilder answer = new StringBuilder();
+    private Rank createBlackRanks(){
+        return createRanks(Color.BLACK, 8);
+    }
 
-        for (Rank rank : pieces){
-            answer.append(appendNewLine(rank.toString()));
+    private Rank createWhiteRanks(){
+        return createRanks(Color.WHITE, 1);
+    }
+
+    private Rank createWhitePawns(){
+        return createPawns(Color.WHITE, 2);
+    }
+
+    private Rank createBlackPawns(){
+        return createPawns(Color.BLACK, 7);
+    }
+
+    private Rank createRanks(Color color, int col){
+        ArrayList<Piece> horses = new ArrayList<>();
+        String colNum = String.valueOf(col);
+        horses.add(Piece.create(Type.ROOK, color, new Position("a"+colNum)));
+        horses.add(Piece.create(Type.KNIGHT, color, new Position("b"+colNum)));
+        horses.add(Piece.create(Type.BISHOP, color, new Position("c"+colNum)));
+        horses.add(Piece.create(Type.QUEEN, color, new Position("d"+colNum)));
+        horses.add(Piece.create(Type.KING, color, new Position("e"+colNum)));
+        horses.add(Piece.create(Type.BISHOP, color, new Position("f"+colNum)));
+        horses.add(Piece.create(Type.KNIGHT, color, new Position("g"+colNum)));
+        horses.add(Piece.create(Type.ROOK, color, new Position("h"+colNum)));
+        return new Rank(horses);
+    }
+
+    private Rank createPawns(Color color, int row) {
+        ArrayList<Piece> pawns = new ArrayList<>();
+        for (int i = 97; i < 105; i++) {
+            String position = (char) i + String.valueOf(row);
+            pawns.add(Piece.create(Type.PAWN, color, new Position(position)));
         }
-
-        return answer.toString();
+        return new Rank(pawns);
     }
 
-    public double caculcatePoint(Color color){
-        double score = 0.0;
-        for (Rank rank : pieces){
-            for(int i = 0; i < 8; i++){
+    private Rank createBlanks(int row){
+        ArrayList<Piece> blanks = new ArrayList<>();
+        for (int i = 97; i < 105; i++){
+            String position = (char) i + String.valueOf(row);
+            blanks.add(Blank.createBlank(new Position(position)));
+        }
+        return new Rank(blanks);
+    }
+
+    public ArrayList<Rank> getPieces(){
+        return pieces;
+    }
+
+    public boolean isKingAlive(Piece.Color color) {
+        for (Rank rank : pieces) {
+            for (int i = 0; i < 8; i++) {
                 Piece piece = rank.getPiece(i);
-                if (piece.getType() != Type.NO_PIECE && piece.getColor() == color){
-                    score += piece.getType().getdefaultPoint();
+                if (piece.getType() == Type.KING && piece.getColor() == color) {
+                    return true;
                 }
             }
         }
-        return score;
-    }
-
-    public ArrayList<Piece> sortByScore(Color color, boolean ascending){
-        ArrayList<Piece> pieceList = new ArrayList<>();
-        for (Rank rank : pieces){
-            for(int i = 0; i < 8; i++){
-                Piece piece = rank.getPiece(i);
-                if (piece.getType() != Type.NO_PIECE && piece.getColor() == color){
-                    pieceList.add(piece);
-                }
-            }
-        }
-        pieceList.sort(Comparator.comparing(p -> ascending ? p.getType().getdefaultPoint() : -p.getType().getdefaultPoint()));
-        return pieceList;
+        return false;
     }
 }
