@@ -12,16 +12,11 @@ public class Rook extends Piece {
 
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        List<Direction> allowedDirections = Direction.linearDirection(); // 룩은 직선 이동만 가능
-
-        for (Direction direction : allowedDirections) {
-            int rowDiff = target.getRow() - source.getRow();
-            int colDiff = target.getCol() - source.getCol();
-
-            if (rowDiff % direction.getYDegree() == 0 && colDiff % direction.getXDegree() == 0) {
-                return isPathClear(source, target, board) && !isSameColorPiece(target, board);
+        for (Direction direction : Direction.linearDirection()) { // 룩은 직선 이동만 가능
+            if (canMoveRecursive(source, target, direction, board)) {
+                return true;
             }
         }
-        return false; // 이동 불가능한 경우
+        return false;
     }
 }
