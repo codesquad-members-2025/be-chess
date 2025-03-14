@@ -63,8 +63,6 @@ public class Board {
     }
 
 
-
-
     public int pieceCount(Piece.Color color, Piece.Type type) {
         return (int) board.stream()
                 .flatMap(rank -> rank.getRow().stream())
@@ -88,6 +86,12 @@ public class Board {
     public void removePiece(String position) {
         Position pos = new Position(position);
         setPiece(pos.getRow(), pos.getCol(), createBlank());
+    }
+
+    public boolean isValidPosition(Position position) {
+        int row = position.getRow();
+        int col = position.getCol();
+        return row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE;
     }
 
 
