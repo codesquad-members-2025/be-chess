@@ -43,13 +43,4 @@ public class ChessController {
         return game.move(from, to);
     }
 
-    @GetMapping("/status")
-    public String status() {
-        return "Status";
-    }
-
-    @GetMapping("/score")
-    public String score() {
-        return "Score";
-    }
 }
