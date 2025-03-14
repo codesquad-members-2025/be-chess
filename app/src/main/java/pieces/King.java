@@ -19,7 +19,10 @@ public class King extends Piece {
             return false;
         }
 
-        isSameColorPiece(target, board);
+        if (isSameColorPiece(target, board)) {
+            return false;
+
+        }
         return true;
     }
 }
