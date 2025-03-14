@@ -10,6 +10,10 @@ interface GameState {
     from: string;
     to: string;
   };
+  scores: {
+    white: number;
+    black: number;
+  };
 }
 
 const ChessGame = () => {
@@ -17,6 +21,10 @@ const ChessGame = () => {
     position: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',  // 초기 FEN
     currentTurn: 'WHITE',
     gameStatus: '게임 진행 중',
+    scores: {
+      white: 38,
+      black: 38
+    }
   });
 
   const resetGame = async () => {
@@ -39,6 +47,10 @@ const ChessGame = () => {
         position: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
         currentTurn: 'WHITE',
         gameStatus: '게임 진행 중',
+        scores: {
+          white: 38,
+          black: 38
+        }
       });
     } catch (error) {
       console.error('게임 초기화 실패:', error);
@@ -131,6 +143,10 @@ const ChessGame = () => {
           lastMove: {
             from: result.lastMoveFrom,
             to: result.lastMoveTo
+          },
+          scores: {
+            white: result.whiteScore,
+            black: result.blackScore
           }
         };
         console.log('이전 상태:', prevState);
@@ -178,6 +194,29 @@ const ChessGame = () => {
             width: 'fit-content'
           }}>
             현재 차례: {gameState.currentTurn === 'WHITE' ? '흰색' : '검은색'}
+          </div>
+          <div style={{
+            display: 'flex',
+            gap: '20px',
+            marginBottom: '10px'
+          }}>
+            <div style={{
+              padding: '5px 10px',
+              backgroundColor: '#ffffff',
+              borderRadius: '5px',
+              border: '1px solid #ddd'
+            }}>
+              흰색 점수: {gameState.scores.white.toFixed(2)}
+            </div>
+            <div style={{
+              padding: '5px 10px',
+              backgroundColor: '#000000',
+              color: '#ffffff',
+              borderRadius: '5px',
+              border: '1px solid #ddd'
+            }}>
+              검은색 점수: {gameState.scores.black.toFixed(2)}
+            </div>
           </div>
           <div>게임 상태: {gameState.gameStatus}</div>
         </div>
