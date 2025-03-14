@@ -7,7 +7,7 @@ import chess.Direction;
 import java.util.List;
 
 
-public abstract class Piece implements Comparable<Piece>  {
+public abstract class Piece implements Comparable<Piece> {
     protected final Color color;
     protected final Type type;
 
@@ -46,13 +46,13 @@ public abstract class Piece implements Comparable<Piece>  {
     }
 
 
-    protected Piece(Color color, Type type)  {
+    protected Piece(Color color, Type type) {
         this.color = color;
         this.type = type;
     }
 
     public char getRepresentation() {
-        return color == Color.WHITE? type.getWhiteRepresentation() : type.getBlackRepresentation();
+        return color == Color.WHITE ? type.getWhiteRepresentation() : type.getBlackRepresentation();
     }
 
     public Color getColor() {
@@ -98,28 +98,32 @@ public abstract class Piece implements Comparable<Piece>  {
 
     }
 
-    //이동 경로에 장애물이 있는지 확인
-    protected boolean isPathClear(Position source, Position target, Board board) {
-        int rowDiff = Math.abs(source.getRow() - target.getRow());
-        int colDiff =  Math.abs(source.getCol() - target.getCol());
+    protected boolean isPathClear(Position position, Board board) {
+        return board.getPiece(position.getRow(), position.getCol()).getType().equals(Type.NO_PIECE);
+    }
 
-        int steps = Math.max(rowDiff, colDiff);
-        int rowStep = Integer.signum(rowDiff); // -1, 0, 1 중 하나
-        int colStep = Integer.signum(colDiff); // -1, 0, 1 중 하나
+    protected boolean canMoveRecursive(Position current, Position target, Direction direction, Board board) {
+        // 한 칸 이동한 새로운 위치 계산
+        Position nextPosition = new Position(
+                current.getRow() + direction.getYDegree(),
+                current.getCol() + direction.getXDegree()
+        );
 
-        int currentRow = source.getRow();
-        int currentCol = source.getCol();
 
-        for (int i = 1; i < steps; i++) { // 중간 경로 확인
-            currentRow += rowStep;
-            currentCol += colStep;
-
-            if (!board.getPiece(currentRow, currentCol).getType().equals(Type.NO_PIECE)) {
-                return false; // 중간에 기물이 있음
-            }
+        if (!board.isValidPosition(nextPosition)) {
+            return false;
         }
-        return true; // 경로가 비어 있음
 
+        // 목표 위치에 도달했으면 같은 색 기물인지 확인 후 이동 가능 여부 반환 -> true
+        if (nextPosition.equals(target)) {
+            return !isSameColorPiece(target, board);
+        }
+
+        // 중간에 기물이 있으면 이동 불가
+        if (!isPathClear(nextPosition, board)) {
+            return false;
+        }
+
+        return canMoveRecursive(nextPosition, target, direction, board);
     }
 }
-
