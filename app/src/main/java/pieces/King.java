@@ -13,29 +13,13 @@ public class King extends Piece {
 
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        for (Direction direction : Direction.everyDirection()) {
-            if (canMoveRecursive(source, target, direction, board)) {
-                return true;
-            }
+        int rowDiff = Math.abs(target.getRow() - source.getRow());
+        int colDiff = Math.abs(target.getCol() - source.getCol());
+
+        if (rowDiff <= 1 && colDiff <= 1) {
+            return isPathClear(target, board) && !isSameColorPiece(target, board);
         }
+
         return false;
     }
-
 }
-
-//    @Override
-//    public boolean canMove(Position source, Position target, Board board) {
-//        int rowDiff = Math.abs(source.getRow() - target.getRow());
-//        int colDiff = Math.abs(source.getCol() - target.getCol());
-//
-//        if (rowDiff > 1 || colDiff > 1) {
-//            return false;
-//        }
-//
-//        if (isSameColorPiece(target, board)) {
-//            return false;
-//
-//        }
-//        return true;
-//    }
-//}

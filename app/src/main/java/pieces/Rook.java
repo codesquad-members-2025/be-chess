@@ -12,7 +12,7 @@ public class Rook extends Piece {
 
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        for (Direction direction : Direction.linearDirection()) { // 룩은 직선 이동만 가능
+        for (Direction direction : Direction.linearDirection()) {
             if (canMoveRecursive(source, target, direction, board)) {
                 return true;
             }
