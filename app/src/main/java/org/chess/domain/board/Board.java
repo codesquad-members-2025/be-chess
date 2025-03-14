@@ -1,13 +1,17 @@
 package org.chess.domain.board;
 
+import lombok.Getter;
 import org.chess.domain.piece.Color;
 import org.chess.domain.piece.Piece;
 import org.chess.domain.piece.PieceFactory;
 import org.chess.domain.piece.impl.Blank;
 import org.chess.utils.StringUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
+@Getter
 public class Board {
 
     private static final int BOARD_SIZE = 8;
