@@ -23,8 +23,12 @@ public class ChessGame {
                 break;
             }
             if (input.startsWith("move")) {
-                movePiece(game, input);
-                System.out.println(boardView.showBoard());
+                try {
+                    movePiece(game, input);
+                    System.out.println(boardView.showBoard());
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
                 continue;
             }
 
