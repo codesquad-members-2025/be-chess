@@ -20,7 +20,6 @@ public class Pawn extends Piece {
 
         // 직선 이동 (앞으로 한 칸 또는 두 칸 이동 가능)
         if (colDiff == 0) { // 가로 이동 X (직진만)
-            int maxMove = isFirstMove(source) ? 2 : 1; // 첫 이동이면 2칸 가능
             if (rowDiff == moveDirection * 1 || (rowDiff == moveDirection * 2 && isFirstMove(source))) {
                 return isPathClear(target, board);
             }
