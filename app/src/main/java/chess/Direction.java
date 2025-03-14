@@ -12,6 +12,7 @@ public enum Direction {
     WEST(-1, 0),
     NORTHWEST(-1, 1),
 
+    //Knight 이동 방향
     NNE(1, 2),
     NNW(-1, 2),
     SSE(1, -2),

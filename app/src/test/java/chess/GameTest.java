@@ -4,9 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
-import pieces.Piece;
-import pieces.Piece.Type;
-
+import pieces.Piece.*;
+import static pieces.PieceFactory.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,8 +29,8 @@ public class GameTest {
         String sourcePosition = "e8";
         String targetPosition = "d7";
         game.move(sourcePosition, targetPosition);
-        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlank());
-        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlack(Type.KING));
+        assertThat(game.findPiece(sourcePosition)).isEqualTo(createBlank());
+        assertThat(game.findPiece(targetPosition)).isEqualTo(createBlack(Type.KING));
     }
     @Test
     @DisplayName("king 움직임 예외처리 - 한 칸씩만 이동 가능")
@@ -56,8 +55,8 @@ public class GameTest {
         String sourcePosition = "d8";
         String targetPosition = "d4";
         game.move(sourcePosition, targetPosition);
-        assertThat(game.findPiece(sourcePosition)).isEqualTo(Piece.createBlank());
-        assertThat(game.findPiece(targetPosition)).isEqualTo(Piece.createBlack(Type.QUEEN));
+        assertThat(game.findPiece(sourcePosition)).isEqualTo(createBlank());
+        assertThat(game.findPiece(targetPosition)).isEqualTo(createBlack(Type.QUEEN));
     }
 
     @Test
@@ -96,10 +95,10 @@ public class GameTest {
     //equals()는 Piece.java에서 구현
     public void findPiece() throws Exception {
         board.initialize();
-        assertThat(game.findPiece("a8")).isEqualTo(Piece.createBlack(Type.ROOK));
-        assertThat(game.findPiece("h8")).isEqualTo(Piece.createBlack(Type.ROOK));
-        assertThat(game.findPiece("a1")).isEqualTo(Piece.createWhite(Type.ROOK));
-        assertThat(game.findPiece("h1")).isEqualTo(Piece.createWhite(Type.ROOK));
+        assertThat(game.findPiece("a8")).isEqualTo(createBlack(Type.ROOK));
+        assertThat(game.findPiece("h8")).isEqualTo(createBlack(Type.ROOK));
+        assertThat(game.findPiece("a1")).isEqualTo(createWhite(Type.ROOK));
+        assertThat(game.findPiece("h1")).isEqualTo(createWhite(Type.ROOK));
 
     }
 }

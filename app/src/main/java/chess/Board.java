@@ -1,6 +1,7 @@
 package chess;
 
 import pieces.Piece;
+import static pieces.PieceFactory.*;
 import pieces.Piece.Type;
 import java.util.ArrayList;
 
@@ -37,25 +38,31 @@ public class Board {
         }
 
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board.get(BLACK_PAWN_ROW).setPiece(i, Piece.createBlack(Type.PAWN));
-            board.get(WHITE_PAWN_ROW).setPiece(i, Piece.createWhite(Type.PAWN));
+            board.get(BLACK_PAWN_ROW).setPiece(i, createBlack(Type.PAWN));
+            board.get(WHITE_PAWN_ROW).setPiece(i, createWhite(Type.PAWN));
         }
 
 
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board.get(WHITE_ROW).setPiece(i, Piece.createWhite(pieceOrder[i]));
-            board.get(BLACK_ROW).setPiece(i, Piece.createBlack(pieceOrder[i]));
+            board.get(WHITE_ROW).setPiece(i, createWhite(pieceOrder[i]));
+            board.get(BLACK_ROW).setPiece(i, createBlack(pieceOrder[i]));
         }
 
     }
 
     public void setPiece(int row, int col, Piece piece) {
-        board.get(row).setPiece(col, piece);  //  Rank의 setPiece() 호출
+        board.get(row).setPiece(col, piece);//  Rank의 setPiece() 호출
     }
 
+    public Piece getPiece(int row, int col){
+        return board.get(row).getPiece(col);
+
+    }
     public Rank getRank(int index) {
         return board.get(index);
     }
+
+
 
 
     public int pieceCount(Piece.Color color, Piece.Type type) {
@@ -80,7 +87,7 @@ public class Board {
 
     public void removePiece(String position) {
         Position pos = new Position(position);
-        setPiece(pos.getRow(), pos.getCol(), Piece.createBlank());
+        setPiece(pos.getRow(), pos.getCol(), createBlank());
     }
 
 

@@ -1,7 +1,7 @@
 package pieces;
 
 import pieces.Piece.Type;
-//import static pieces.Piece.Type.*; 사용해서 간결하게 하는게 좋은 방법?
+import static pieces.PieceFactory.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,14 +21,14 @@ public class PieceTest {
     @Test
     @DisplayName("모든 기물의 색과 출력문자를 검증한다")
     public void create_piece() {
-        verifyPiece(Piece.createWhite(Type.PAWN), Piece.createBlack(Type.PAWN), Type.PAWN);
-        verifyPiece(Piece.createWhite(Type.KNIGHT), Piece.createBlack(Type.KNIGHT), Type.KNIGHT);
-        verifyPiece(Piece.createWhite(Type.ROOK), Piece.createBlack(Type.ROOK), Type.ROOK);
-        verifyPiece(Piece.createWhite(Type.BISHOP), Piece.createBlack(Type.BISHOP), Type.BISHOP);
-        verifyPiece(Piece.createWhite(Type.QUEEN), Piece.createBlack(Type.QUEEN), Type.QUEEN);
-        verifyPiece(Piece.createWhite(Type.KING), Piece.createBlack(Type.KING), Type.KING);
+        verifyPiece(createWhite(Type.PAWN), createBlack(Type.PAWN), Type.PAWN);
+        verifyPiece(createWhite(Type.KNIGHT), createBlack(Type.KNIGHT), Type.KNIGHT);
+        verifyPiece(createWhite(Type.ROOK), createBlack(Type.ROOK), Type.ROOK);
+        verifyPiece(createWhite(Type.BISHOP), createBlack(Type.BISHOP), Type.BISHOP);
+        verifyPiece(createWhite(Type.QUEEN), createBlack(Type.QUEEN), Type.QUEEN);
+        verifyPiece(createWhite(Type.KING), createBlack(Type.KING), Type.KING);
 
-        Piece blank = Piece.createBlank();
+        Piece blank = createBlank();
         assertFalse(blank.isWhite());
         assertFalse(blank.isBlack());
         assertThat(blank.getType()).isEqualTo(Type.NO_PIECE);

@@ -1,6 +1,7 @@
 package chess;
 
 import pieces.Piece;
+import static pieces.PieceFactory.*;
 import java.util.ArrayList;
 
 public class Rank {
@@ -8,7 +9,7 @@ public class Rank {
 
     public Rank() {
         for (int i=0; i < 8; i++) {
-            row.add(Piece.createBlank());
+            row.add(createBlank());
         }
     }
 

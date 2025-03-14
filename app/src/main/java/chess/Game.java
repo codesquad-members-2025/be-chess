@@ -1,7 +1,6 @@
 package chess;
 
 import pieces.Piece;
-import pieces.Piece.Type;
 
 //move 관련 로직
 public class Game {
