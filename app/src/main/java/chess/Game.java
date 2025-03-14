@@ -21,7 +21,7 @@ public class Game {
         Piece piece = findPiece(sourcePosition);
 
         if (!piece.canMove(sourcePos, targetPos, board)) {
-            return;
+            throw new IllegalStateException("Invalid move: " + sourcePosition + " -> " + targetPosition);
         }
 
         board.removePiece(sourcePosition);
