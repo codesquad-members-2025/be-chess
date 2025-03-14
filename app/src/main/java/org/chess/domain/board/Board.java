@@ -5,6 +5,7 @@ import org.chess.domain.piece.Color;
 import org.chess.domain.piece.Piece;
 import org.chess.domain.piece.PieceFactory;
 import org.chess.domain.piece.impl.Blank;
+import org.chess.domain.piece.impl.King;
 import org.chess.domain.piece.impl.Pawn;
 import org.chess.utils.StringUtils;
 import org.springframework.stereotype.Service;
@@ -109,6 +110,12 @@ public class Board {
         }
 
         return total;
+    }
+
+    public boolean isKingDead(Color color) {
+        return board.values().stream()
+            .filter(piece -> piece.belongsTo(color))
+            .noneMatch(piece -> piece instanceof King);
     }
 
     public boolean isOccupied(Position pos) {

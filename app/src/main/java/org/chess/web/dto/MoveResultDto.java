@@ -12,9 +12,10 @@ public class MoveResultDto {
     private final String FEN; // FEN 문자열
     private final double whiteScore; // 흰색 점수
     private final double blackScore; // 검은색 점수
+    private final boolean status; // 게임 상태
 
     private MoveResultDto(String currentTurn,
-                         String lastMoveFrom, String lastMoveTo, boolean isValidMove, String FEN, double whiteScore, double blackScore) {
+                         String lastMoveFrom, String lastMoveTo, boolean isValidMove, String FEN, double whiteScore, double blackScore, boolean status) {
         this.currentTurn = currentTurn;
         this.lastMoveFrom = lastMoveFrom;
         this.lastMoveTo = lastMoveTo;
@@ -22,9 +23,10 @@ public class MoveResultDto {
         this.FEN = FEN;
         this.whiteScore = whiteScore;
         this.blackScore = blackScore;
+        this.status = status;
     }
 
-    public static MoveResultDto of(Position from, Position to, String currentTurn, boolean isValidMove, String FEN, double whiteScore, double blackScore) {
+    public static MoveResultDto of(Position from, Position to, String currentTurn, boolean isValidMove, String FEN, double whiteScore, double blackScore, boolean status) {
         return new MoveResultDto(
             currentTurn,
             from.toString(),
@@ -32,7 +34,8 @@ public class MoveResultDto {
             isValidMove,
             FEN,
             whiteScore,
-            blackScore
+            blackScore,
+            status
         );
     }
 }
