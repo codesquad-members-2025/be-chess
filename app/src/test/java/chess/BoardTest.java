@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.within;
 import static utils.StringUtils.appendNewLine;
 
+
 public class BoardTest {
 
     private Board board;
@@ -20,7 +21,6 @@ public class BoardTest {
     public void init(){
         board = new Board();
     }
-
 
     @Test
     @DisplayName("32개의 모든 기물의 위치가 초기화 되어야 한다.")
@@ -177,9 +177,6 @@ public class BoardTest {
 
     }
 
-
-
-
-
-
+  
 }
+

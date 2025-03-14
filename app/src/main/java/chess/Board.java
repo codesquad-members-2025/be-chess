@@ -1,5 +1,6 @@
 package chess;
 
+
 import pieces.Piece;
 
 import java.util.*;
@@ -40,7 +41,7 @@ public class Board {
             blackChessPiecesList.add(Piece.createBlackPawn());
             whiteChessPiecesList.add(Piece.createWhitePawn());
         }
-
+      
         whiteChessPiecesList.add(Piece.createWhiteRook());
         whiteChessPiecesList.add(Piece.createWhiteKnight());
         whiteChessPiecesList.add(Piece.createWhiteBishop());
@@ -61,6 +62,7 @@ public class Board {
             Rank rank = new Rank(pieces);
             board.add(rank);
         }
+
     }
 
     private void setPiecesOnBoard(){
@@ -168,9 +170,5 @@ public class Board {
         }
         return sb.toString();
     }
-
-
-
-
 
 }

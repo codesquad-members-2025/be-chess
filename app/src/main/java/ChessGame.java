@@ -14,7 +14,7 @@ public class ChessGame {
 
             // start가 2번 이상 입력 될 때 예외 처리 필요
             if(command.equals("start")){
-                board.initialize();
+                board.initialize();      
                 String boardStatus = board.showBoard();
                 System.out.println(boardStatus);
             }
