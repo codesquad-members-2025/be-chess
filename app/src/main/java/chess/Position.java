@@ -30,4 +30,13 @@ public class Position {
         int rowNum = row + 1; // 0-based index → 1-based
         return String.valueOf(colChar) + rowNum;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Position position = (Position) obj;
+        return row == position.row && col == position.col;
+    }
+
 }
