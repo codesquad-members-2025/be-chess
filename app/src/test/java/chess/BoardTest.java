@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pieces.Piece;
 
+import java.util.Comparator;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.within;
 import static utils.StringUtils.appendNewLine;
@@ -94,6 +97,84 @@ public class BoardTest {
 
     private void addPiece(String position, Piece piece) {
         board.move(position, piece);
+    }
+
+    @Test
+    @DisplayName("기물의 점수가 내림차순으로 정렬되어야 한다.")
+    public void sortPiecesDescending(){
+
+        board.initializeEmptyBoard();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        List<Piece> reverseSortedBlackPiecesList = board.sortPiecesDescending(Piece.Color.BLACK);
+        List<Piece> reverseSortedWhitePiecesList = board.sortPiecesDescending(Piece.Color.WHITE);
+
+        assertThat(reverseSortedBlackPiecesList)
+                .extracting(Piece::getColor)
+                .containsOnly(Piece.Color.BLACK);
+
+        assertThat(reverseSortedBlackPiecesList)
+                .extracting(piece -> piece.getType().getDefaultPoint())
+                .isSortedAccordingTo(Comparator.reverseOrder());
+
+        assertThat(reverseSortedWhitePiecesList)
+                .extracting(Piece::getColor)
+                .containsOnly(Piece.Color.WHITE);
+
+        assertThat(reverseSortedWhitePiecesList)
+                .extracting(piece -> piece.getType().getDefaultPoint())
+                .isSortedAccordingTo(Comparator.reverseOrder());
+
+
+
+    }
+
+
+    @Test
+    @DisplayName("기물의 점수가 오름차순으로 정렬되어야 한다.")
+    public void sortPiecesAscending(){
+
+        board.initializeEmptyBoard();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        List<Piece> sortedBlackPiecesList = board.sortPiecesAscending(Piece.Color.BLACK);
+        List<Piece> sortedWhitePiecesList = board.sortPiecesAscending(Piece.Color.WHITE);
+
+        assertThat(sortedBlackPiecesList)
+                .extracting(Piece::getColor)
+                .containsOnly(Piece.Color.BLACK);
+
+        assertThat(sortedBlackPiecesList)
+                .extracting(piece -> piece.getType().getDefaultPoint())
+                .isSortedAccordingTo(Comparator.naturalOrder());
+
+        assertThat(sortedWhitePiecesList)
+                .extracting(Piece::getColor)
+                .containsOnly(Piece.Color.WHITE);
+
+        assertThat(sortedWhitePiecesList)
+                .extracting(piece -> piece.getType().getDefaultPoint())
+                .isSortedAccordingTo(Comparator.naturalOrder());
+
+
     }
 
 

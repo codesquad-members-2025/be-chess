@@ -2,10 +2,7 @@ package chess;
 
 import pieces.Piece;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static utils.StringUtils.appendNewLine;
 
@@ -130,9 +127,39 @@ public class Board {
                 }
             }
         }
-
         return points;
     }
+
+    public List<Piece> sortPiecesAscending(Piece.Color pieceColor){
+        List<Piece> pieces = new ArrayList<>();
+
+        for(Rank rank : board){
+            for(Piece piece : rank.getPieces()){
+                if(piece.getColor().equals(pieceColor)){
+                    pieces.add(piece);
+                }
+            }
+        }
+
+        pieces.sort(Comparator.comparing((Piece p) -> p.getType().getDefaultPoint()));
+        return pieces;
+    }
+
+    public List<Piece> sortPiecesDescending(Piece.Color pieceColor){
+        List<Piece> pieces = new ArrayList<>();
+
+        for(Rank rank : board){
+            for(Piece piece : rank.getPieces()){
+                if(piece.getColor().equals(pieceColor)){
+                    pieces.add(piece);
+                }
+            }
+        }
+
+        pieces.sort(Comparator.comparing((Piece p) -> p.getType().getDefaultPoint()).reversed());
+        return pieces;
+    }
+
 
     public String showBoard(){
         StringBuilder sb = new StringBuilder();
