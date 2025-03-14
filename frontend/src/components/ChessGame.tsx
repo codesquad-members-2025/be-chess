@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Chessboard } from 'react-chessboard';
-import { Square, Piece } from 'react-chessboard/dist/chessboard/types';
+import { Square } from 'react-chessboard/dist/chessboard/types';
 
 interface GameState {
   position: string;  // FEN 문자열
@@ -60,7 +60,7 @@ const ChessGame = () => {
     }
   };
 
-  const onPieceDrop = (sourceSquare: Square, targetSquare: Square, piece: Piece) => {
+  const onPieceDrop = (sourceSquare: Square, targetSquare: Square) => {
     if (gameState.status) {
       return false;  // 게임이 종료되면 움직임을 막습니다
     }
