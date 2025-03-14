@@ -3,7 +3,9 @@ package chess;
 import pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static utils.StringUtils.appendNewLine;
 
@@ -108,6 +110,34 @@ public class Board {
         Position position = new Position(positionInfo);
         List<Piece> pieces = board.get(position.getY()).getPieces();
         pieces.set(position.getX(), piece);
+    }
+
+    public double calculatePoint(Piece.Color color){
+        Map<Integer, Integer> pawnCountMap = new HashMap<>();
+        double points = 0;
+
+        for(Rank rank : board){
+            for(int file = 0; file < rank.getPieces().size(); file++){
+                if(rank.getPieces().get(file).getType().equals(Piece.Type.PAWN) && rank.getPieces().get(file).getColor().equals(color)){
+                    pawnCountMap.put(file, pawnCountMap.getOrDefault(file, 0) + 1);
+                }
+            }
+        }
+
+        for(Integer pawnCount : pawnCountMap.values()){
+            if(pawnCount >= 2) points += pawnCount * 0.5;
+            else points += pawnCount * 1.0;
+        }
+
+        for (Rank rank : board) {
+            for(Piece piece : rank.getPieces()){
+                if(piece.getColor().equals(color) && !piece.getType().equals(Piece.Type.PAWN)){
+                    points += piece.getType().getDefaultPoint();
+                }
+            }
+        }
+
+        return points;
     }
 
 

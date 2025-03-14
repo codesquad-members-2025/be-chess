@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import pieces.Piece;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.within;
 import static utils.StringUtils.appendNewLine;
 
 public class BoardTest {
@@ -66,6 +67,36 @@ public class BoardTest {
         assertThat(board.findPiece(position)).isEqualTo(piece);
         System.out.println(board.showBoard());
     }
+
+    @Test
+    @DisplayName("각 기물별 점수가 더해져야 하며 PAWN의 경우 같은 세로줄에 있을 때 0.5점으로 계산되어야 한다.")
+    public void calculatePoint() throws Exception {
+        board.initializeEmptyBoard();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        assertThat(board.calculatePoint(Piece.Color.BLACK))
+                .isCloseTo(15.0, within(0.01));
+
+        assertThat(board.calculatePoint(Piece.Color.WHITE))
+                .isCloseTo(7.0, within(0.01));
+
+        System.out.println(board.showBoard());
+    }
+
+    private void addPiece(String position, Piece piece) {
+        board.move(position, piece);
+    }
+
+
 
 
 
