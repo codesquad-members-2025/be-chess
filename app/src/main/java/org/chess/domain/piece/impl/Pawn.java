@@ -31,6 +31,10 @@ public class Pawn implements Piece {
             // 대각선 캡처: 한 칸 대각선 (dx == 1, dy == -1)이고, 상대 기물이 있어야 함
             if (dx == 1 && dy == -1) {
                 Piece toPiece = board.getPiece(to);
+                if (toPiece instanceof Blank) {
+                    return false;
+                }
+
                 return toPiece != null && !toPiece.belongsTo(this.color);
             }
         } else {
@@ -46,7 +50,11 @@ public class Pawn implements Piece {
             // 대각선 캡처
             if (dx == 1 && dy == 1) {
                 Piece toPiece = board.getPiece(to);
-                return toPiece != null && !toPiece.belongsTo(this.color);
+                if (toPiece instanceof Blank) {
+                    return false;
+                }
+
+                return !toPiece.belongsTo(this.color);
             }
         }
 
