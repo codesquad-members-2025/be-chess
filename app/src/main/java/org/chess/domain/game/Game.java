@@ -37,10 +37,10 @@ public class Game {
             board.movePiece(from, to);
             toggleTurn();
 
-            return MoveResultDto.of(from, to, currentTurn.toString(), true, board.toString());
+            return MoveResultDto.of(from, to, currentTurn.toString(), true, board.toString(), board.calculateScore(Color.WHITE), board.calculateScore(Color.BLACK));
         } catch (IllegalArgumentException e) {
             log.error("Failed to move piece: {}", e.getMessage());
-            return MoveResultDto.of(from, to, currentTurn.toString(), false, board.toString());
+            return MoveResultDto.of(from, to, currentTurn.toString(), false, board.toString(), board.calculateScore(Color.WHITE), board.calculateScore(Color.BLACK));
         }
     }
 

@@ -5,6 +5,7 @@ import org.chess.domain.piece.Color;
 import org.chess.domain.piece.Piece;
 import org.chess.domain.piece.PieceFactory;
 import org.chess.domain.piece.impl.Blank;
+import org.chess.domain.piece.impl.Pawn;
 import org.chess.utils.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -81,9 +82,29 @@ public class Board {
 
     public double calculateScore(Color color) {
         double total = 0.0;
-        for (Piece piece : board.values()) {
-            if (piece != null && piece.belongsTo(color)) {
-                total += piece.getScore();
+        // 파일(a부터 h까지) 별로 순회
+        for (char file = 'a'; file <= 'h'; file++) {
+            int pawnCount = 0;
+            // 파일에 해당하는 모든 랭크(8~1) 순회하여 Pawn 개수를 카운트
+            for (int rank = 8; rank >= 1; rank--) {
+                Position pos = Position.of("" + file + rank); // ex: "a8", "a7", ..., "a1"
+                Piece piece = board.get(pos);
+                if (piece != null && piece.belongsTo(color) && piece instanceof Pawn) {
+                    pawnCount++;
+                }
+            }
+            // 같은 파일 내에서 점수 합산
+            for (int rank = 8; rank >= 1; rank--) {
+                Position pos = Position.of("" + file + rank);
+                Piece piece = board.get(pos);
+                if (piece != null && piece.belongsTo(color)) {
+                    if (piece instanceof Pawn) {
+                        // 같은 파일에 Pawn이 여러 개이면 각 Pawn은 0.5점, 아니면 원래 getScore() 값
+                        total += (pawnCount > 1) ? 0.5 : piece.getScore();
+                    } else {
+                        total += piece.getScore();
+                    }
+                }
             }
         }
 
