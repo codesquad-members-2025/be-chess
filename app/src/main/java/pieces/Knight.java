@@ -12,14 +12,9 @@ public class Knight extends Piece {
 
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        List<Direction> allowedDirections = Direction.knightDirection();
-
-        for (Direction direction : allowedDirections) {
-            int rowDiff = target.getRow() - source.getRow();
-            int colDiff = target.getCol() - source.getCol();
-
-            if (rowDiff == direction.getYDegree() && colDiff == direction.getXDegree()) {
-                return !isSameColorPiece(target, board);
+        for (Direction direction : Direction.knightDirection()) {
+            if (canMoveRecursive(source, target, direction, board)) {
+                return true;
             }
         }
         return false;
