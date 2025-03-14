@@ -14,17 +14,11 @@ public class Board {
     private static final int rankCount = 8;
 
     private final List<Rank> board;
-
     private final List<Piece> whiteChessPiecesList;
     private final List<Piece> blackChessPiecesList;
 
-    private final List<Piece> whitePawnsList;
-    private final List<Piece> blackPawnsList;
-
     public Board() {
         board = new ArrayList<>();
-        whitePawnsList = new ArrayList<>();
-        blackPawnsList = new ArrayList<>();
         whiteChessPiecesList = new ArrayList<>();
         blackChessPiecesList = new ArrayList<>();
     }
@@ -46,8 +40,8 @@ public class Board {
         blackChessPiecesList.add(Piece.createBlackRook());
 
         for(int i = 0; i < 8; i++){
-            blackPawnsList.add(Piece.createBlackPawn());
-            whitePawnsList.add(Piece.createWhitePawn());
+            blackChessPiecesList.add(Piece.createBlackPawn());
+            whiteChessPiecesList.add(Piece.createWhitePawn());
         }
 
         whiteChessPiecesList.add(Piece.createWhiteRook());
@@ -78,14 +72,14 @@ public class Board {
         int WHITE_PAWNS_INDEX = 1;
         int WHITE_PIECES_INDEX = 0;
 
-        board.set(BLACK_PIECES_INDEX, new Rank(blackChessPiecesList));
-        board.set(BLACK_PAWNS_INDEX, new Rank(blackPawnsList));
-        board.set(WHITE_PAWNS_INDEX, new Rank(whitePawnsList));
-        board.set(WHITE_PIECES_INDEX, new Rank(whiteChessPiecesList));
+        board.set(BLACK_PIECES_INDEX, new Rank(blackChessPiecesList.subList(0, 8)));
+        board.set(BLACK_PAWNS_INDEX, new Rank(blackChessPiecesList.subList(8, 16)));
+        board.set(WHITE_PAWNS_INDEX, new Rank(whiteChessPiecesList.subList(0, 8)));
+        board.set(WHITE_PIECES_INDEX, new Rank(whiteChessPiecesList.subList(8, 16)));
     }
 
     public int pieceCount(){
-        return whiteChessPiecesList.size() + blackChessPiecesList.size() + whitePawnsList.size() + blackPawnsList.size();
+        return whiteChessPiecesList.size() + blackChessPiecesList.size();
     }
 
     public int getPiecesCount(Piece.Color pieceColor, Piece.Type pieceType){
@@ -139,7 +133,6 @@ public class Board {
 
         return points;
     }
-
 
     public String showBoard(){
         StringBuilder sb = new StringBuilder();
