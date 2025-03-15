@@ -7,6 +7,7 @@ import java.util.*;
 
 public class ScoreCalculator {
     private final Board board;
+    private static final int BOARD_SIZE = 8;
 
     public ScoreCalculator(Board board) {
         this.board = board;
@@ -14,10 +15,10 @@ public class ScoreCalculator {
 
     public double calculatePoint(Piece.Color color) {
         double totalScore = 0.0;
-        int[] pawnScores = new int[8];
+        int[] pawnScores = new int[BOARD_SIZE];
 
-        for (int row = 0; row < 8; row++) {  // 세로줄(column) 기준으로 반복
-            for (int col = 0; col < 8; col++) {  // 가로줄(row) 순회
+        for (int row = 0; row < BOARD_SIZE; row++) {  // 세로줄(column) 기준으로 반복
+            for (int col = 0; col < BOARD_SIZE; col++) {  // 가로줄(row) 순회
                 Piece piece = board.getRank(row).getPiece(col);
 
                 if (piece.getColor() == color) {  // 해당 색상의 기물인 경우만 계산
@@ -44,8 +45,8 @@ public class ScoreCalculator {
     public List<Piece> sortByScore(Piece.Color color, boolean desending) {
         List<Piece> sortedPieces = new ArrayList<>();
 
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
                 Piece piece = board.getRank(row).getPiece(col);
                 if (piece.getColor() == color) {
                     sortedPieces.add(piece);

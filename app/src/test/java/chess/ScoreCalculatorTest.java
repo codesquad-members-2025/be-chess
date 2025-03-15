@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pieces.Piece;
+import pieces.Piece.*;
+import static pieces.PieceFactory.*;
 
 import java.util.List;
 
@@ -24,18 +26,18 @@ public class ScoreCalculatorTest {
     public void calculatePoint() throws Exception {
         board.initializeEmpty();
 
-        addPiece("b6", Piece.createBlack(Piece.Type.PAWN));
-        addPiece("e6", Piece.createBlack(Piece.Type.QUEEN));
-        addPiece("b8", Piece.createBlack(Piece.Type.KING));
-        addPiece("c8", Piece.createBlack(Piece.Type.ROOK));
+        board.addPiece("b6", createBlack(Type.PAWN));
+        board.addPiece("e6", createBlack(Type.QUEEN));
+        board.addPiece("b8", createBlack(Type.KING));
+        board.addPiece("c8", createBlack(Type.ROOK));
 
-        addPiece("f2", Piece.createWhite(Piece.Type.PAWN));
-        addPiece("g2", Piece.createWhite(Piece.Type.PAWN));
-        addPiece("e1", Piece.createWhite(Piece.Type.ROOK));
-        addPiece("f1", Piece.createWhite(Piece.Type.KING));
+        board.addPiece("f2", createWhite(Type.PAWN));
+        board.addPiece("g2", createWhite(Type.PAWN));
+        board.addPiece("e1", createWhite(Type.ROOK));
+        board.addPiece("f1", createWhite(Type.KING));
 
-        assertThat(scoreCalculator.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
-        assertThat(scoreCalculator.calculatePoint(Piece.Color.WHITE)).isEqualTo(7.0);
+        assertThat(scoreCalculator.calculatePoint(Color.BLACK)).isEqualTo(15.0);
+        assertThat(scoreCalculator.calculatePoint(Color.WHITE)).isEqualTo(7.0);
     }
 
     @Test
@@ -43,47 +45,44 @@ public class ScoreCalculatorTest {
     public void calculatePoint_pawnsInSameColumn() {
         board.initializeEmpty();
 
-        addPiece("a2", Piece.createWhite(Piece.Type.PAWN));
-        addPiece("a3", Piece.createWhite(Piece.Type.PAWN)); // 같은 col: 0.5+0.5
+        board.addPiece("a2", createWhite(Type.PAWN));
+        board.addPiece("a3", createWhite(Type.PAWN)); // 같은 col: 0.5+0.5
 
-        addPiece("b2", Piece.createWhite(Piece.Type.PAWN)); // 1.0
+        board.addPiece("b2", createWhite(Type.PAWN)); // 1.0
 
-        assertThat(scoreCalculator.calculatePoint(Piece.Color.WHITE)).isEqualTo(2);
+        assertThat(scoreCalculator.calculatePoint(Color.WHITE)).isEqualTo(2);
 
     }
-    
-    private void addPiece(String position, Piece piece) {
-        board.move(position, piece);
-    }
+
 
     @Test
     @DisplayName("체스판 내 기물 정렬")
     public void sortPiecesbyScore() {
         board.initializeEmpty();
 
-        addPiece("b6", Piece.createBlack(Piece.Type.PAWN));  // PAWN(1.0)
-        addPiece("e6", Piece.createBlack(Piece.Type.QUEEN));  // Queen (9.0)
-        addPiece("b8", Piece.createBlack(Piece.Type.KING));  // KING (0.0)
-        addPiece("c8", Piece.createBlack(Piece.Type.ROOK));  // Rook (5.0)
+        board.addPiece("b6", createBlack(Type.PAWN));  // PAWN(1.0)
+        board.addPiece("e6", createBlack(Type.QUEEN));  // Queen (9.0)
+        board.addPiece("b8", createBlack(Type.KING));  // KING (0.0)
+        board.addPiece("c8", createBlack(Type.ROOK));  // Rook (5.0)
 
-        List<Piece> sortedBlackPieces = scoreCalculator.sortByScore(Piece.Color.BLACK, true);
+        List<Piece> sortedBlackPieces = scoreCalculator.sortByScore(Color.BLACK, true);
 
-        assertThat(sortedBlackPieces.get(0).getType()).isEqualTo(Piece.Type.QUEEN);
-        assertThat(sortedBlackPieces.get(1).getType()).isEqualTo(Piece.Type.ROOK);
-        assertThat(sortedBlackPieces.get(2).getType()).isEqualTo(Piece.Type.PAWN);
-        assertThat(sortedBlackPieces.get(3).getType()).isEqualTo(Piece.Type.KING);
+        assertThat(sortedBlackPieces.get(0).getType()).isEqualTo(Type.QUEEN);
+        assertThat(sortedBlackPieces.get(1).getType()).isEqualTo(Type.ROOK);
+        assertThat(sortedBlackPieces.get(2).getType()).isEqualTo(Type.PAWN);
+        assertThat(sortedBlackPieces.get(3).getType()).isEqualTo(Type.KING);
 
-        addPiece("f2", Piece.createWhite(Piece.Type.PAWN));  // PAWN(1.0)
-        addPiece("g2", Piece.createWhite(Piece.Type.PAWN));  //  PAWN(1.0)
-        addPiece("e1", Piece.createWhite(Piece.Type.ROOK));  //  Rook (5.0)
-        addPiece("f1", Piece.createWhite(Piece.Type.KING));  //  KING (0.0)
+        board.addPiece("f2", createWhite(Type.PAWN));  // PAWN(1.0)
+        board.addPiece("g2", createWhite(Type.PAWN));  //  PAWN(1.0)
+        board.addPiece("e1", createWhite(Type.ROOK));  //  Rook (5.0)
+        board.addPiece("f1", createWhite(Type.KING));  //  KING (0.0)
 
         List<Piece> sortedWhitePieces = scoreCalculator.sortByScore(Piece.Color.WHITE, true);
 
-        assertThat(sortedWhitePieces.get(0).getType()).isEqualTo(Piece.Type.ROOK);
-        assertThat(sortedWhitePieces.get(1).getType()).isEqualTo(Piece.Type.PAWN);
-        assertThat(sortedWhitePieces.get(2).getType()).isEqualTo(Piece.Type.PAWN);
-        assertThat(sortedWhitePieces.get(3).getType()).isEqualTo(Piece.Type.KING);
+        assertThat(sortedWhitePieces.get(0).getType()).isEqualTo(Type.ROOK);
+        assertThat(sortedWhitePieces.get(1).getType()).isEqualTo(Type.PAWN);
+        assertThat(sortedWhitePieces.get(2).getType()).isEqualTo(Type.PAWN);
+        assertThat(sortedWhitePieces.get(3).getType()).isEqualTo(Type.KING);
 
     }
 

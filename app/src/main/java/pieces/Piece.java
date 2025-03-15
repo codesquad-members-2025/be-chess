@@ -1,9 +1,15 @@
 package pieces;
 
+import chess.Position;
+import chess.Board;
+import chess.Direction;
 
-public class Piece implements Comparable<Piece>  {
-    private final Color color;
-    private final Type type;
+import java.util.List;
+
+
+public abstract class Piece implements Comparable<Piece> {
+    protected final Color color;
+    protected final Type type;
 
     public enum Color {
         WHITE, BLACK, NOCOLOR;
@@ -40,23 +46,13 @@ public class Piece implements Comparable<Piece>  {
     }
 
 
-    private Piece(Color color, Type type)  {
+    protected Piece(Color color, Type type) {
         this.color = color;
         this.type = type;
     }
-    public static Piece createWhite(Type type) {
-        return new Piece(Color.WHITE, type);
-    }
-    public static Piece createBlack(Type type) {
-        return new Piece(Color.BLACK, type);
-    }
-    public static Piece createBlank() {
-        return new Piece(Color.NOCOLOR, Type.NO_PIECE);
-    }
-
 
     public char getRepresentation() {
-        return color == Color.WHITE? type.getWhiteRepresentation() : type.getBlackRepresentation();
+        return color == Color.WHITE ? type.getWhiteRepresentation() : type.getBlackRepresentation();
     }
 
     public Color getColor() {
@@ -93,5 +89,41 @@ public class Piece implements Comparable<Piece>  {
         return Double.compare(other.getDefaultPoint(), this.getDefaultPoint());
     }
 
-}
+    //추상 메서드: 하위 클래스(King, Queen 등)에서 반드시 구현해야 함.
+    public abstract boolean canMove(Position source, Position target, Board board);
 
+    protected boolean isSameColorPiece(Position target, Board board) {
+        Piece targetPiece = board.getRank(target.getRow()).getPiece(target.getCol());
+        return targetPiece.getColor() == this.color;
+
+    }
+
+    protected boolean isPathClear(Position position, Board board) {
+        return board.getPiece(position.getRow(), position.getCol()).getType().equals(Type.NO_PIECE);
+    }
+
+    protected boolean canMoveRecursive(Position current, Position target, Direction direction, Board board) {
+        // 한 칸 이동한 새로운 위치 계산
+        Position nextPosition = new Position(
+                current.getRow() + direction.getYDegree(),
+                current.getCol() + direction.getXDegree()
+        );
+
+
+        if (!board.isValidPosition(nextPosition)) {
+            return false;
+        }
+
+        // 목표 위치에 도달했으면 같은 색 기물인지 확인 후 이동 가능 여부 반환 -> true
+        if (nextPosition.equals(target)) {
+            return !isSameColorPiece(target, board);
+        }
+
+        // 중간에 기물이 있으면 이동 불가
+        if (!isPathClear(nextPosition, board)) {
+            return false;
+        }
+
+        return canMoveRecursive(nextPosition, target, direction, board);
+    }
+}
